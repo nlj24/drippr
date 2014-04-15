@@ -1,0 +1,46 @@
+body {
+	background-color: #E0DFD9;
+	font-family: Helvetica Neue;
+	color: #6D6E70;
+}
+
+#dripprdiv {
+	height: 100px;
+	width: 100px;
+}
+
+#footer {
+	text-align: center;
+	bottom: 0;
+	height: 60px;
+	position: absolute;
+	margin-left: 110px;
+	margin-right: 110px;
+}
+
+.bubble {
+	background-color: #82C6ED;
+	display: inline-block;
+	color: #6D6E70;
+}
+
+#mainbub {
+	height: 600px;
+	width: 650px;
+	border-radius: 10%;
+	padding: -200px;
+}
+
+.fitimage {
+	max-width:60%;
+    max-height:60%;
+    vertical-align: middle;
+}
+
+#leftbub {
+	float: left;
+	margin-left: 200px;
+	height: 300px
+	width: 300px;
+	border-radius: 100%;
+}
