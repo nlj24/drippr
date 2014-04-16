@@ -1,9 +1,9 @@
 {
   "version": "0.0.0",
   "private": true,
-  "name": "angular-phonecat",
-  "description": "A tutorial application for AngularJS",
-  "repository": "https://github.com/angular/angular-phonecat",
+  "name": "drippr",
+  "description": "News made [boy] fun!",
+  "repository": "https://github.com/nlj24/drippr",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
