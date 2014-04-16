@@ -1,16 +1,16 @@
 
-
-
-
- <ul  >
+ <ul>
 
   <li ng-repeat="article in articles">
   	<div class="info">
-  	<a href = "{{article.url}}">{{article.headline}}<br>
-    <img ng-src="{{article.imageUrl}}"> </a>
+  	<p>{{article.source}}</p><a href = "{{article.url}}">{{article.headline}}<br>
+	<img ng-src="{{article.imageUrl}}"> </a>
+	<button ng-click="like()">Like</button>
+  	<button ng-click="dislike()">Dislike</button>
+    <p>Likes: {{article.numLikes}}</p>
+    <p>Dislikes: {{article.numDislikes}}</p>
   	</div>
 
   </li>
 
   </ul>
-
