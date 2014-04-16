@@ -1,6 +1,16 @@
-<ul>
+
+
+
+
+ <ul>
+
   <li ng-repeat="article in articles">
-  	<a href = "{{article.url}}">{{article.headline}}</a><br>
-    <img ng-src="{{article.imageUrl}}"></a>
+  	<div class="info">
+  	<a href = "{{article.url}}">{{article.headline}}<br>
+    <img ng-src="{{article.imageUrl}}"> </a>
+  	</div>
+
   </li>
-</ul>
+
+  </ul>
+

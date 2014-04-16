@@ -1,0 +1,35 @@
+{
+  "name": "Sequence",
+  "homepage": "http://sequencejs.com/",
+  "authors": [
+    "Ian Lunn <hello@ianlunn.co.uk>"
+  ],
+  "description": "The Responsive Slider with Advanced CSS3 Transitions",
+  "main": "scripts/jquery.sequence.js",
+  "keywords": [
+    "sequence",
+    "sequence.js",
+    "slider",
+    "carousel",
+    "css3",
+    "slider"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "ed7ff8cb19",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "ed7ff8cb19ccfe2ebb807ee5d79ae895bc6c8ee9"
+  },
+  "_source": "git://github.com/IanLunn/Sequence.git",
+  "_target": "*",
+  "_originalSource": "sequencejs",
+  "_direct": true
+}
