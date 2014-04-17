@@ -91,11 +91,12 @@ if (Meteor.isServer) {
 
     Meteor.methods({
         addLike : function(id) {
-            var toChange = Articles.findOne(id);
-            console.log("the id on server is: " + id);
-            console.log(toChange["name"].numLikes);
-            Articles.update(toChange["name"], {$inc: {numLikes : 1}});
-            return "cunt";  
+            // var toChange = Articles.findOne(id);
+            // console.log("the id on server is: " + id);
+            // console.log(toChange["name"].numLikes);
+            // Articles.update(toChange["name"], {$inc: {numLikes : 1}});
+            Articles.update(id, {$inc: {name["numLikes"] : 1}});
+            return "cunt"; 
         }
     });
 
