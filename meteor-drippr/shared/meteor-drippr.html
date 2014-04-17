@@ -1,0 +1,37 @@
+<head>
+  <title>meteor-drippr</title>
+</head>
+
+<body>
+  {{> articles}}
+
+</body>
+
+
+<template name="articles">
+  {{#each articleList}}
+    <strong>{{name.headline}}: </strong>
+    <strong>{{name.numLikes}}</strong><br>
+    <input type="button" class="inc" value="like" />
+  {{/each}}
+  	<br><input type="button" class="set_session" value="set_session">
+
+
+<!-- {{#if selected_article}}
+  <div class="details">
+    <div class="name">{{selected_article}}</div>
+    
+  </div>
+  {{else}}
+  <div class="none">Click a player to select</div>
+  {{/if}}
+ -->
+</template>
+
+<template name="article">
+  <div class="article {{selected}}">
+    <span class="name">{{name.headline}}</span>
+    <span class="score">{{name.numLikes}}</span>
+
+  </div>
+</template>   

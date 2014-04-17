@@ -11,14 +11,52 @@ dripprControllers.controller('generateCtrl', ['$scope', '$http',
    		});
 
 	var like = 0;
-   	$scope.like = function() {
-		like = like + 1;
-		console.log(like);  //link to database
+   	$scope.like = function(article) {
+   		//actually be database
+   		article.numLikes++;
+		console.log(article.numLikes);  //link to database
 	};
 
-	var dislike = 0;
-	$scope.dislike = function() {
-		dislike = dislike + 1;
-		console.log(dislike);  //link to database
+	$scope.dislike = function(article) {
+   		//actually be database
+   		article.numDislikes++;
+		console.log(article.numDislikes);  //link to database
+	};
+	
+	$scope.login = function() {
+		console.log("login");  //link to database
+	};
+	
+	$scope.signup = function() {
+		console.log("signup");  //link to database
+	};
+}]);
+
+
+dripprControllers.controller('inboxCtrl', ['$scope', '$http',
+	function($scope, $http) {
+		$http.get('json/inbox.json').success(function(data) {
+			$scope.articles = data;
+   		});
+
+	var like = 0;
+   	$scope.like = function(article) {
+   		//actually be database
+   		article.numLikes++;
+		console.log(article.numLikes);  //link to database
+	};
+
+	$scope.dislike = function(article) {
+   		//actually be database
+   		article.numDislikes++;
+		console.log(article.numDislikes);  //link to database
+	};
+	
+	$scope.login = function() {
+		console.log("login");  //link to database
+	};
+	
+	$scope.signup = function() {
+		console.log("signup");  //link to database
 	};
 }]);

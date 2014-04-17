@@ -14,7 +14,11 @@ dripprApp.config(['$routeProvider',
         templateUrl: 'partials/generate.html',
         controller: 'generateCtrl'
       }).
+      when('/inbox', {
+        templateUrl: 'partials/inbox.html',
+        controller: 'inboxCtrl'
+      }).
       otherwise({
-        redirectTo: '/generate'
+        redirectTo: '/inbox'
       });
   }]);
