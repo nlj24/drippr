@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "flexslider": {}
+    },
+    "packages": {
+      "flexslider": {
+        "git": "https://github.com/timmyg/meteor-flexslider.git",
+        "tag": "v0.0.2",
+        "commit": "6f7fd9b46939ee0cde715793292050929fbe5b76"
+      }
+    }
+  }
+}

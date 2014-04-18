@@ -10,28 +10,36 @@
 
 <template name="articles">
   {{#each articleList}}
-    <strong>{{name.headline}}: </strong>
-    <strong>{{name.numLikes}}</strong><br>
-    <input type="button" class="inc" value="like" />
-  {{/each}}
-  	<br><input type="button" class="set_session" value="set_session">
-
-
-<!-- {{#if selected_article}}
-  <div class="details">
-    <div class="name">{{selected_article}}</div>
-    
+  <div>
+    {{headline}}:
+    {{numLikes}}<br>
+    <input type="button" class="inc" id={{_id}} value="like" />
+    {{numDislikes}}<br>
+    <input type="button" class="inc2" id={{_id}} value="dislike" />
+    <input type="button" class="inc3" id={{_id}} value="dipp" />
   </div>
-  {{else}}
-  <div class="none">Click a player to select</div>
-  {{/if}}
- -->
+  {{/each}}
 </template>
 
-<template name="article">
-  <div class="article {{selected}}">
-    <span class="name">{{name.headline}}</span>
-    <span class="score">{{name.numLikes}}</span>
 
-  </div>
-</template>   
+<!-- <template name="imagesSlider">
+    <div id="slider" class="flexslider">
+        <ul class="slides">
+        {{#each articleList}}
+            <li>
+                <img src="{{imageUrl}}"/>
+            </li>
+        {{/each}}
+        </ul>
+    </div>
+    <div id="carousel" class="flexslider">
+        <ul class="slides">
+            {{#each articleList}}
+                <li>
+                    <img src="{{imageUrl}}">
+                </li>
+            {{/each}}          
+        </ul>
+    </div>
+</template>
+ -->
