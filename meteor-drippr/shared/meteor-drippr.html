@@ -1,45 +1,37 @@
 <head>
   <title>meteor-drippr</title>
+  <script type="text/javascript">
+$(window).load(function() {
+    $('#slider').nivoSlider();
+});
+</script>
 </head>
 
 <body>
   {{> articles}}
-
 </body>
 
 
 <template name="articles">
-  {{#each articleList}}
-  <div>
-    {{headline}}:
-    {{numLikes}}<br>
-    <input type="button" class="inc" id={{_id}} value="like" />
-    {{numDislikes}}<br>
-    <input type="button" class="inc2" id={{_id}} value="dislike" />
-    <input type="button" class="inc3" id={{_id}} value="dipp" />
-  </div>
-  {{/each}}
-</template>
+    {{> loginButtons}}
+
+    {{#each articleList}}
+    <div>
+        {{headline}}:
+        {{numLikes}}<br>
+        <input type="button" class="inc" id={{_id}} value="like" />
+        {{numDislikes}}<br>
+        <input type="button" class="inc2" id={{_id}} value="dislike" />
+        <input type="button" class="inc3" id={{_id}} value="dripp" />
+    </div>
+    {{/each}}
+
+<div id="slider" class="nivoSlider">
+    <img src="http://a.espncdn.com/combiner/i?img=%2fi%2fcolumnists%2frafael_dan_m.jpg&w=35&h=48" alt="" />
+    <a href="http://dev7studios.com"><img src="http://a.espncdn.com/photo/2013/1029/box_hopkins_d1_110x62.jpg" alt="" title="#htmlcaption" /></a>
+    <img src="http://a.espncdn.com/photo/2014/0419/box_g_porter-malignaggi1_mb_110x62.jpg" alt="" title="This is an example of a caption" />
+    <img src="http://a.espncdn.com/photo/2014/0418/box_red3_cr_110x62.jpg" alt="" />
+</div>
 
 
-<!-- <template name="imagesSlider">
-    <div id="slider" class="flexslider">
-        <ul class="slides">
-        {{#each articleList}}
-            <li>
-                <img src="{{imageUrl}}"/>
-            </li>
-        {{/each}}
-        </ul>
-    </div>
-    <div id="carousel" class="flexslider">
-        <ul class="slides">
-            {{#each articleList}}
-                <li>
-                    <img src="{{imageUrl}}">
-                </li>
-            {{/each}}          
-        </ul>
-    </div>
 </template>
- -->

@@ -24,9 +24,8 @@ if (Meteor.isClient) {
 
     Template.articles.events({
         'click input.inc3': function (event) {
-            alert("dripp popup");
-            // Meteor.call('addDislike', event.target.id, function(e, r) {
-            // });
+            var receive = prompt("dripp popup");
+            console.log(receive);
         }
     });
 
@@ -35,6 +34,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+
     if (Articles.find().count() === 0) {
       var names = [ 
     {
@@ -83,7 +83,8 @@ if (Meteor.isServer) {
         addDislike : function(id) {
             var toChange = Articles.findOne(id);
             Articles.update(toChange, {$inc: {numDislikes : 1}});            
-        }
+        } 
+       
     });
 
   });

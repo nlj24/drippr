@@ -2,13 +2,13 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "flexslider": {}
+      "nivo": {}
     },
     "packages": {
-      "flexslider": {
-        "git": "https://github.com/timmyg/meteor-flexslider.git",
-        "tag": "v0.0.2",
-        "commit": "6f7fd9b46939ee0cde715793292050929fbe5b76"
+      "nivo": {
+        "git": "https://github.com/kidovate/meteor-nivo.git",
+        "tag": "v0.1.2",
+        "commit": "15f43bf335cb53e84eab68d7d42ce0133046dc37"
       }
     }
   }
