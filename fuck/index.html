@@ -8,13 +8,51 @@
     <script type="text/javascript" src="/scripts/handlebars.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/scripts/scripts.js"></script>
+	<script>var Slider = function() { this.initialize.apply(this, arguments) }
+  		Slider.prototype = {
+ 
+	    initialize: function(slider) {
+	      this.ul = slider.children[0]
+	      this.li = this.ul.children
+	 
+	      // make <ul> as large as all <li>’s
+	      this.ul.style.width = (this.li[0].clientWidth * this.li.length) + 'px'
+	 
+	      this.currentIndex = 0
+	    },
+	 
+	    goTo: function(index) {
+	      // filter invalid indices
+	      if (index < 0 || index > this.li.length - 1)
+	        return
+	 
+	      // move <ul> left
+	      this.ul.style.left = '-' + (100 * index) + '%'
+	 
+	      this.currentIndex = index
+	    },
+	 
+	    goToPrev: function() {
+	      this.goTo(this.currentIndex - 1)
+	    },
+	 
+	    goToNext: function() {
+	      this.goTo(this.currentIndex + 1)
+	    }
+	  }
+	</script>
 </head>
     <body>
+        <center>
         <div id="my-container" class="table-responsive">
         </div>
         <!--Handlebar templates start-->
-        <script id="article-template" type="text/x-handlebars-template">
+        <script id="article-template" type="text/x-handlebars-template"> 
+        <div id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
+          <div class="slider">
+            <ul>
             {{#each articles}}
+                <li>
                 <div class = "mainBubble">
                 {{ this.source }}: <a href = "{{ this.url }}"> {{ this.headline }} </a>
                 <a href = "{{ this.url }}"> <img class = "fitimage" src = "{{ this.imageUrl }}" > </a>
@@ -23,12 +61,24 @@
                 <button class="like" article="{{this.articleID}}">Like</button>
                 <button class="dislike" article="{{this.articleID}}">Dislike</button>
                 </div>
+                </li> 
             {{/each}}
-        </script>
+            </ul>
+            </div>
+            <script>
+			  var sliders = []
+			  $('.slider').each(function() {
+			    sliders.push(new Slider(this))
+			  })
+			</script>
+       </script>
         <!--Handlebar templates end-->
         <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="/scripts/handlebars.js"></script>
         <script src="/scripts/scripts.js"></script> -->
+
+<a href = "javascript:sliders[0].goToNext()">Next</a>
+<a href = "javascript:sliders[0].goToPrev()">Previous</a>
 
 <div id="fb-root"></div>
 	<script>
@@ -108,6 +158,7 @@
 	  present a graphical Login button that triggers the FB.login() function when clicked. -->
 
 	<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+	    </center>
 	    </body>
 	</html>
 
