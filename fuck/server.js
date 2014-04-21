@@ -2,7 +2,7 @@ var pg = require('pg');
 var express = require("express");
 var app = express();
  
-var conString = "postgres://darshanpatel:@localhost:5432/cumdumpster";
+var conString = "postgres://postgres:drippr@localhost:5432/drippr";
 
 var client = new pg.Client(conString);
 
@@ -10,7 +10,7 @@ client.connect(function(err) {
   if(err) {
     return console.error('could not connect to postgres', err);
   }
-  client.query('SELECT * FROM james', function(err, result) {
+  client.query('SELECT * FROM Articles', function(err, result) {
     if(err) {
       return console.error('error running query', err);
     }
