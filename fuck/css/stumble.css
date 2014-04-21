@@ -1,0 +1,13 @@
+.mainBubble {
+	border-radius: 10%;
+	background-color: #82C6ED;
+	height: 500px;
+	width: 500px;
+	display: inline-block;
+	color: #6D6E70;
+}
+
+.fitimage {
+	max-width:95%;
+    max-height:95%;
+}

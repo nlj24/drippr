@@ -3,6 +3,8 @@
 
 if (Meteor.isClient) {
 
+    console.log(Meteor.user());
+
     Template.articles.articleList = function() {
         var x =Articles.find();//, { sort: { time: -1 }});
         return x;
