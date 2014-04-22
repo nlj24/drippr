@@ -1,8 +1,6 @@
 import feedparser, urllib2, csv
 
-rss = ["http://feeds.foxnews.com/foxnews/latest",'http://sports.espn.go.com/espn/rss/news']
-rss2 = ['http://hosted2.ap.org/atom/APDEFAULT/3d281c11a96b4ad082fe88aa0db04305']
-
+rss = ["http://rss.nytimes.com/services/xml/rss/nyt/World.xml"]
 
 
 with open('Articles.csv', 'wb') as f:

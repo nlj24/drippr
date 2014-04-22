@@ -2,7 +2,7 @@ var ARTICLE_METHOD ={
  
         handlerData:function(resJSON){
  
-            var templateSource   = $("#choose-template").html(),
+            var templateSource   = $("#settings-template").html(),
  
                 template = Handlebars.compile(templateSource),
  

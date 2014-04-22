@@ -133,54 +133,74 @@
         </div>
         <!--Handlebar templates start-->
         <script id="article-template" type="text/x-handlebars-template"> 
-        <div id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
-          <div class="slider">
-            <ul>
-            {{#each articles}}
-                <li>
-                <div class = "mainBubble">
-                <h3> {{ this.source }}: </h3> <a id = "headline" href = "{{ this.url }}"> <h2>{{ this.headline }} </h2></a>
-                <a href = "{{ this.url }}"> <img class = "fitimage" src = "{{ this.imageUrl }}" > </a>
-                <div class = "opinion"> <img src = "images/readLater.svg" class="readLater" article="{{this.articleID}}"> </div>
-                <div class = "opinion"> <img src = "images/like.svg" class="like" article="{{this.articleID}}"> </div>
-                <p class="opinion" article="{{this.articleID}}">{{ this.numLikes }}</p>
-                <div class = "opinion"> <img src = "images/dislike.svg" class="dislike" article="{{this.articleID}}"> </div>
-                <p class="opinion" article="{{this.articleID}}">{{ this.numDislikes }}</p>
-                <div class = "opinion"> <img src = "images/drop.svg" class="dripp" article="{{this.articleID}}"> </div>
-                </div>
-                </li> 
-            {{/each}}
-            </ul>
-            </div>
-            <div class = "opinion"><a href = "javascript:sliders[0].goToPrev()"><img src = "/images/arrow.svg"></a></div>
-			<div class = "opinion"><a href = "javascript:sliders[0].goToNext()"><img src = "/images/revArrow.svg"></a></div>
-            <script>
-			  var sliders = [];
-			  $('.slider').each(function() {
-			    sliders.push(new Slider(this))
-			  });
+        	<div id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
+	          <div class="slider">
+	            <ul>
+	            {{#each articles}}
+	                <li>
+	                <div class = "mainBubble">
+	                <h3> {{ this.source }}: </h3> <a id = "headline" href = "{{ this.url }}" target="_blank"> <h2>{{ this.headline }} </h2></a>
+	                <a href = "{{ this.url }}" target="_blank"> <img class = "fitimage" src = "{{ this.imageUrl }}" > </a>
+	                <div class = "opinion"> <img src = "images/readLater.svg" class="readLater" article="{{this.articleID}}"> </div>
+	                <div class = "opinion"> <img src = "images/like.svg" class="like" article="{{this.articleID}}"> </div>
+	                <p class="opinion" article="{{this.articleID}}">{{ this.numLikes }}</p>
+	                <div class = "opinion"> <img src = "images/dislike.svg" class="dislike" article="{{this.articleID}}"> </div>
+	                <p class="opinion" article="{{this.articleID}}">{{ this.numDislikes }}</p>
+	                <div class = "opinion"> <img src = "images/drop.svg" class="dripp" article="{{this.articleID}}"> </div>
+	                </div>
+	                </li> 
+	            {{/each}}
+	            </ul>
+	            </div>
+	            <div class = "opinion"><a href = "javascript:sliders[0].goToPrev()"><img src = "/images/arrow.svg"></a></div>
+				<div class = "opinion"><a href = "javascript:sliders[0].goToNext()"><img src = "/images/revArrow.svg"></a></div>
+	            <script>
+				  var sliders = [];
+				  $('.slider').each(function() {
+				    sliders.push(new Slider(this))
+				  });
 			</script>
-       </script>
+       	</script>
 
         <script id="homepage-template" type="text/x-handlebars-template">
-	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
-			<a href = "http://funtime.com"> <div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/Paper.svg"></div> </a>
-			<a href = "http://funtime.com"> <div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/Bucket.svg"> </div> </a>
-			<a href = "http://funtime.com"> <div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/Settings.svg"> </div> </a>
+	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/logo.svg"> </a></div>
+			<a href = "http://funtime.com"> <div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/paper.svg"></div> </a>
+			<a href = "http://funtime.com"> <div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/bucket.svg"> </div> </a>
+			<a href = "http://funtime.com"> <div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/settings.svg"> </div> </a>
 			<br>
 			<a onclick="FB.logout();">Logout</a> 
 			<div class = "header" id = "fb"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></div>
        	</script>
 
        	<script id="choose-template" type="text/x-handlebars-template">
-	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
-			<div class = "bubble"> <h1> dripps </h1> <br><img class = "fitHPimg" src = "images/Paper.svg"></div> 
-			<div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/Bucket.svg"> </div>
-			<div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/Settings.svg"> </div>
-			<div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/Paper.svg"></div> 
+	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/logo.svg"> </a></div>
+			<div class = "bubble"> <h1> dripps </h1> <br><img class = "fitHPimg" src = "images/paper.svg"></div> 
+			<div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/bucket.svg"> </div>
+			<div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/settings.svg"> </div>
+			<div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/paper.svg"></div> 
 			<br>
 			<div class = "header" id = "fb"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></div>
-       </script>
+       	</script>
+
+       	<script id="bucket-template" type="text/x-handlebars-template">
+	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/logo.svg"> </a></div>
+			<div class = "bubble"> <h1> dripps </h1> <br><img class = "fitHPimg" src = "images/paper.svg"></div> 
+			<div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/bucket.svg"> </div>
+			<div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/settings.svg"> </div>
+			<div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/paper.svg"></div> 
+			<br>
+			<div class = "header" id = "fb"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></div>
+       	</script>
+
+       	<script id="settings-template" type="text/x-handlebars-template">
+	     	<div class = "header" id = "dripprdiv"> <a href = "http://drippr.me"> <img src = "images/Logo.svg"> </a></div>
+			<div class = "bubble"> <h1> dripps </h1> <br><img class = "fitHPimg" src = "images/paper.svg"></div> 
+			<div class = "bubble"> <h1> bucket </h1> <img class = "fitHPimg" src = "images/bucket.svg"> </div>
+			<div class = "bubble"> <h1> settings </h1> <img class = "fitHPimg" src = "images/settings.svg"> </div>
+			<div class = "bubble"> <h1> dripps </h1> <img class = "fitHPimg" src = "images/paper.svg"></div> 
+			<br>
+			<div class = "header" id = "fb"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></div>
+       	</script>
 
       	</center>
 	</body>
