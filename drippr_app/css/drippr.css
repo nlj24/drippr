@@ -1,0 +1,51 @@
+body {
+	background-color: #E0DFD9;
+	font-family: Helvetica Neue;
+	color: #6D6E70;
+}
+
+#dripprdiv {
+	height: 100px;
+	width: 100px;
+}
+
+.bubble {
+	border-radius: 100%;
+	background-color: #82C6ED;
+	height: 300px;
+	width: 300px;
+	display: inline-block;
+	color: #6D6E70;
+}
+
+#rightbub {
+	float: right;
+	margin-right: 200px;
+}
+
+#leftbub {
+	float: left;
+	margin-left: 200px;
+}
+
+#centerbub {
+	position: relative;
+}
+
+#footer {
+	text-align: center;
+	bottom: 0;
+	height: 60px;
+	position: absolute;
+	margin-left: 110px;
+	margin-right: 110px;
+}
+
+.inc {
+  cursor: pointer;
+}
+
+.test {
+	background-color: green;
+	border: 2px solid black;
+}
