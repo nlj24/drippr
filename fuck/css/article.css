@@ -1,8 +1,8 @@
 .mainBubble {
 	border-radius: 10%;
 	background-color: #82C6ED;
-	height: 500px;
-	width: 500px;
+	height: 550px;
+	width: 600px;
 	color: #6D6E70;
 }
 
@@ -12,8 +12,8 @@
 }
 
 .slider {
-  width: 500px; height: 500px;
-  overflow: show;
+  width: 700px; height: 600px;
+  overflow: hidden;
 }
 
 .slider > ul {
@@ -30,5 +30,20 @@
     
 .slider > ul > li {
       float: left;
-      width: 500px; height: 500px;
+      width: 700px; height: 600px;
     }
+
+#headline {
+	color: #6D6E70;
+}
+
+.opinion {
+	height: 50px;
+	width: 50px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#fb {
+  float: right;
+}

@@ -1,0 +1,8 @@
+.bubble2 {
+	border-radius: 100%;
+	background-color: #82C6ED;
+	height: 300px;
+	width: 300px;
+	color: #6D6E70;
+	display: inline-block;
+}

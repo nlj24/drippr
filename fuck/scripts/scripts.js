@@ -2,7 +2,7 @@ var ARTICLE_METHOD ={
  
         handlerData:function(resJSON){
  
-            var templateSource   = $("#article-template").html(),
+            var templateSource   = $("#choose-template").html(),
  
                 template = Handlebars.compile(templateSource),
  
@@ -24,6 +24,18 @@ var ARTICLE_METHOD ={
 				console.log($(e.target).attr("article"));
 				//ajax request to add this like, if the user hasn't liked it before
 			});
+
+            $(".dripp").click(function(e){
+            // e.preventDefault();
+                alert("add ability to send");
+                //ajax request to add this like, if the user hasn't liked it before
+            });
+
+            $(".readLater").click(function(e){
+            // e.preventDefault();
+                alert("add ability to read later");
+                //ajax request to add this like, if the user hasn't liked it before
+            });
              
         },
         loadArticleData : function(){

@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 91.581 108.478" style="enable-background:new 0 0 91.581 108.478;" xml:space="preserve">
+	 viewBox="0 0 54.756 26.248" style="enable-background:new 0 0 54.756 26.248;" xml:space="preserve">
 <style type="text/css">
 <![CDATA[
 @font-face{font-family:'Bauhaus93';src:url("data:;base64,\
@@ -443,9 +443,13 @@ G0pqYTgfVvekB3n7DQX7kin3pAZ5+w0F+5JIBjisYcykoJKYmx6bmJunmrYIDvqUFPr1FQAAAA==")}
 ]]>
 </style>
 <g id="Layer_1_1_">
-	<text transform="matrix(0.8583 0 0 1 1.649857e-04 39.9808)"><tspan x="0" y="0" style="fill:#6D6E71; font-family:'Bauhaus93'; font-size:40;">dr</tspan><tspan x="35.976" y="0" style="fill:#1C75BB; font-family:'Bauhaus93'; font-size:40;">i</tspan><tspan x="47.578" y="0" style="fill:#6D6E71; font-family:'Bauhaus93'; font-size:40;">ppr</tspan></text>
-	<path style="fill:#1D76BB;" d="M39.804,13.944l-4.087-7.863l-4.055,7.863c-0.811,2.752,1.822,4.934,4.071,4.934
-		C37.982,18.878,40.745,16.735,39.804,13.944z"/>
+	<g id="Layer_1_3_">
+		<text transform="matrix(0.8583 0 0 1 -1.861155e-04 20.269)" style="fill:#6D6E71; font-family:'Bauhaus93'; font-size:23.9164;">dr</text>
+		<text transform="matrix(0.8583 0 0 1 18.4617 20.269)" style="fill:#1C75BB; font-family:'Bauhaus93'; font-size:23.9164;">i</text>
+		<text transform="matrix(0.8583 0 0 1 24.4159 20.269)" style="fill:#6D6E71; font-family:'Bauhaus93'; font-size:23.9164;">ppr</text>
+		<path style="fill:#1D76BB;" d="M23.799,4.701L21.355,0l-2.425,4.701c-0.485,1.645,1.089,2.95,2.434,2.95
+			C22.709,7.651,24.361,6.37,23.799,4.701z"/>
+	</g>
 </g>
 <g id="Layer_1">
 </g>
