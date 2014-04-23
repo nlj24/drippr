@@ -1,6 +1,6 @@
 import feedparser, urllib2, csv
 
-rss = ["http://rss.nytimes.com/services/xml/rss/nyt/World.xml"]
+rss = ["http://rssfeeds.usatoday.com/usatoday-NewsTopStories"]
 
 
 with open('Articles.csv', 'wb') as f:
@@ -11,7 +11,7 @@ with open('Articles.csv', 'wb') as f:
 		lst = feed['items']
 		source = feed[ "channel" ][ "title" ]
 		for a in lst:
-			title = a['title']
+			title = a['title'].encode('utf-8')
 			url = a['link']
 			date = a['published']
 			request = urllib2.Request(url)
