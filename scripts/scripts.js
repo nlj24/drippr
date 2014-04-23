@@ -2,7 +2,7 @@ var ARTICLE_METHOD ={
  
         handlerData:function(resJSON){
  
-            var templateSource   = $("#settings-template").html(),
+            var templateSource   = $("#bucket-template").html(),
  
                 template = Handlebars.compile(templateSource),
  

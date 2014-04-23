@@ -4,16 +4,19 @@
 	height: 550px;
 	width: 600px;
 	color: #6D6E70;
+  margin: 0 auto;
+  float: none;
 }
 
 .fitimage {
-	max-width:95%;
-    max-height:95%;
+  max-width: 100%;
 }
 
 .slider {
   width: 700px; height: 600px;
   overflow: hidden;
+  margin: 0 auto;
+  float: none;
 }
 
 .slider > ul {
@@ -23,7 +26,6 @@
     -moz-transition: 0.5s left;
     -ms-transition: 0.5s left;
     -o-transition: 0.5s left;
- 
     list-style: none;
     margin: 0; padding: 0;
   }
@@ -35,15 +37,49 @@
 
 #headline {
 	color: #6D6E70;
+  text-align: center;
 }
 
 .opinion {
 	height: 50px;
 	width: 50px;
-	display: inline-block;
 	cursor: pointer;
+  float: right;
 }
 
 #fb {
   float: right;
+}
+
+.arrow {
+  width: 50px;
+  height: 600px;
+  cursor: pointer;
+  line-height: 600px;
+}
+
+#prevArrow {
+  float: right;
+}
+
+#nextArrow {
+  float: left;
+}
+
+#source {
+  text-align: center;
+}
+
+#articleOp {
+  max-width: 90%;
+  float: none;
+  margin: 0 auto;
+}
+
+.headlineDiv {
+  height: 70px;
+}
+
+.imageDiv {
+  height: 360px;
 }

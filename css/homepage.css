@@ -7,6 +7,8 @@ body {
 #dripprdiv {
 	height: 50px;
 	width: 100px;
+	margin: 0 auto;
+	float: none;
 }
 
 .bubble {
@@ -15,7 +17,6 @@ body {
 	height: 300px;
 	width: 300px;
 	color: #6D6E70;
-	display: inline-block;
 }
 
 .fitHPimg {

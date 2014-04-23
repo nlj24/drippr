@@ -1,0 +1,36 @@
+.bucketCard {
+	border-radius: 5%;
+	background-color: #82C6ED;
+	height: 700px;
+	color: #6D6E70;
+  	margin: 0 auto;
+  	float: none;
+}
+
+#messages {
+	height: 700px;
+}
+
+#disMess {
+	height: 700px;
+}
+
+#artInfo{
+	height: 300px;
+}
+
+#convo {
+	height: 400px;
+}
+
+#disHead {
+	height: 50px;
+}
+
+#disImage {
+	height: 200px;
+}
+
+#disOp {
+	height: 50px;
+}
