@@ -1,24 +1,35 @@
-var pg = require('pg');
+var mysql = require('mysql');
 var express = require("express");
 var app = express();
- 
-var conString = "postgres://postgres:drippr@localhost:5432/drippr";
 
-var client = new pg.Client(conString);
-
-client.connect(function(err) {
-  if(err) {
-    return console.error('could not connect to postgres', err);
-  }
-  client.query('SELECT * FROM Articles', function(err, result) {
-    if(err) {
-      return console.error('error running query', err);
-    }
-    console.log(result.rows[0]);
-    //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
-    client.end();
+function db_connect(res) {
+  var connection = mysql.createConnection({
+    host  : '54.86.82.21', 
+    user:'root',
+    password:'drippr',
+    database:'drippr_db'
   });
-});
+
+  connection.connect(function(err) {
+    console.log(err);
+  });
+
+  connection.query('SELECT * FROM tbl', function(err,rows,fields) {
+    if(err) throw err;
+
+    console.log(rows);
+    res.send(rows);
+  });
+
+  connection.end();
+}
+
+/* testing mysql ajax */
+ app.get("/data", function(req, res) {
+
+    db_connect(res);
+
+ });
 
 
  /* serves main page */
