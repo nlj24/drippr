@@ -29,8 +29,35 @@
 
 #disImage {
 	height: 200px;
+	position: relative;
 }
 
 #disOp {
 	height: 50px;
+}
+
+#disImageSize {
+	max-height: 100%;
+	max-width: 100%;
+	position:absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    margin:auto;
+}
+
+#bucketSel {
+	height: 50px;
+}
+
+#messageSlider {
+	height: 650px;
+	overflow-y: scroll;
+	border-right: 1px solid #6D6E70;
+}
+
+#eachMess {
+	height: 100px;
+	border-top: 1px solid #6D6E70;
 }

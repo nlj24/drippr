@@ -1,8 +1,11 @@
 var ARTICLE_METHOD ={
  
         handlerData:function(resJSON){
- 
-            var templateSource   = $("#bucket-template").html(),
+            localStorage.setItem('testObject', JSON.stringify(resJSON));
+            var retrievedObject = localStorage.getItem('testObject');
+            console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+            var templateSource   = $("#article-template").html(),
  
                 template = Handlebars.compile(templateSource),
  
@@ -38,13 +41,36 @@ var ARTICLE_METHOD ={
             });
              
         },
+
+        handlerPrefData:function(resJSON){
+            localStorage.setItem('prefObject', JSON.stringify(resJSON));
+            var PrefObject = localStorage.getItem('prefObject');
+            console.log('PrefObject: ', JSON.parse(PrefObject));
+
+            var templateSource   = $("#article-template").html(),
+ 
+                template = Handlebars.compile(templateSource),
+ 
+                prefHTML = template(resJSON);
+
+                $('#my-container').html(prefHTML);
+        },
+
         loadArticleData : function(){
  
             $.ajax({
                 url:"/json/articles.json",
                 method:'get',
                 success:this.handlerData
+            })
+        },
+
+        loadPrefData : function(){
  
+            $.ajax({
+                url:"/json/prefs.json",
+                method:'get',
+                success:this.handlerPrefData
             })
         }
 };
@@ -52,5 +78,6 @@ var ARTICLE_METHOD ={
 $(document).ready(function(){
  
     ARTICLE_METHOD.loadArticleData();
+    ARTICLE_METHOD.loadPrefData();
 });
 

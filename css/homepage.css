@@ -6,9 +6,13 @@ body {
 
 #dripprdiv {
 	height: 50px;
-	width: 100px;
-	margin: 0 auto;
-	float: none;
+	margin: 10px auto auto 10px;
+	float: left;
+}
+
+#logo {
+	max-height: 50px;
+	max-width: 100px;
 }
 
 .bubble {
@@ -17,9 +21,75 @@ body {
 	height: 300px;
 	width: 300px;
 	color: #6D6E70;
+	margin: auto;
+	float: none;
 }
 
 .fitHPimg {
-	max-width:65%;
-    max-height:65%;
+	max-width:190px;
+    max-height:190px;
+    position:absolute;
+    top:30px;
+    bottom:0;
+    right: 0;
+    left: 0;
+    margin:auto;
+}
+
+.HPheadings {
+	text-align: center;
+	padding-top: 15px;
+}
+
+.menu1
+{
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu2
+{
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.menu3
+{
+    display: none;
+}
+
+.menu4 a 
+{
+    display: block;
+    text-decoration: none;
+    color: #6D6E70;
+    background-color: #82C6ED;
+    border-top: 1px solid #6D6E70;
+    padding-left: 5px;
+}
+
+.menu5 a:hover 
+{
+    background: #617F8A;
+}
+.menu6:hover ol
+{
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.menu7:hover li
+{
+    float: none;
+    font-size: 25px;
+}
+
+.dropDown {
+	height: 50px;
+	width: 100%;
 }
