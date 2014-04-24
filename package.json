@@ -10,10 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-	"awsbox":"*"
+    "awsbox": "*"
   },
   "dependencies": {
-    "express":"*",
-    "pg": "^3.0.3"
+    "express": "*",
+    "pg": "^3.0.3",
+    "node-mysql": "~0.3.7"
   }
 }
