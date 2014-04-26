@@ -4,7 +4,7 @@ import MySQLdb
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 
-rss = ["http://rssfeeds.usatoday.com/usatoday-NewsTopStories"]
+rss = ["http://sports.espn.go.com/espn/rss/news"]
 
 articlesToAdd = []
 
@@ -27,16 +27,15 @@ for sources in rss:
 			image_result = data[beg:end]
 		except:
 			image = 'Stock Photo'
-		articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':'ESPN','date':date_result,'category':'Sports'})
+		articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':'ESPN','date':'2013-11-13 12:12:12','category':'Sports'})
 
-sql = """INSERT INTO Articles (headline, imageUrl, url, source, date, category) values ()"""
-print sql
-# for article in articlesToAdd:
-# 	try:
-# 		# execute SQL query using execute() method.
-# 		cursor.execute("""INSERT INTO Articles (headline, imageUrl, url, source, date, category) values ()""")
-# 		db.commit()
-# 	except:
-# 		db.rollback()
+for article in articlesToAdd:
+	try:
+		# execute SQL query using execute() method.
+		sql = "INSERT INTO Articles (headline, imgUrl, url, source, date, category) VALUES (\'" + article['headline'] + "\',\'" + article['image'] + "\',\'" + article['url'] + "\',\'" + article['source'] + "\',\'" + article['date'] + "\',\'" + article['category'] + "\')"
+		cursor.execute(sql)
+		db.commit()
+	except:
+		db.rollback()
 
-# db.close()
+db.close()
