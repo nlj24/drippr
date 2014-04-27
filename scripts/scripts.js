@@ -13,6 +13,7 @@ var ARTICLE_METHOD ={
                 articleHTML = template(resJSON);
  
            $('#my-container').html(articleHTML);
+           
            	$(".like").click(function(e){
 			// e.preventDefault();
 				console.log($(e.target).attr("article"));
