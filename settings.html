@@ -19,42 +19,152 @@
         <div id="my-container" class="table-responsive">
         </div>
         <!--Handlebar templates start-->
+		<script id="article-template" type="text/x-handlebars-template"> 
+        	<div class = "container-fluid">
+	        	<div class = "row">
+		        	<div class = "menuBar col-md-3">
+			        	<div class = "row">
+				        	<div id = "dripprdiv">
+				        		<a href = "http://drippr.me"> 
+				        			<img id = "logo" src = "images/logo.svg">
+				        		</a>
+				        	</div>
+			        	</div>
+			        	<div class = "dropDown">
+							<ul class = "menu1">
+								<li class = "menu2 menu4 menu5 menu6 menu7">
+									preferences
+								</li>
+							</ul>
+			        	</div>
+			        	<div class = "mainCatDiv">
+				        	{{#each prefs}}
+				        		<div class = "categ">
+				        			{{this.Cat}}
+				        		</div>
+				        	{{/each}}
+				        </div>
+		        	</div>
+		        	<div class = "col-md-9">
+		        		<div class = "row">
+		        			<div class = "col-md-1">
+		        				<a href = "/dripps.html">
+			        				<div class = "headBub">
+			        					<img class = "headBubImg" src = "/images/drop.svg">
+			        				</div>
+		        				</a>
+		        			</div>
+		        			<div class = "col-md-1">
+		        				<a href = "/bucket.html">
+			        				<div class = "headBub">
+			        					<img class = "headBubImg" src = "/images/bucket.svg">
+			        				</div>
+		        				</a>
+		        			</div>
+		        			<div class = "col-md-1">
+		        				<a href = "/settings.html">
+			        				<div class = "headBub">
+			        					<img class = "headBubImg" src = "/images/settings.svg">
+			        				</div>
+			        			</a>
+		        			</div>
+		        			<div class = "col-md-6">
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<div class = "header" id = "fb">
+									<fb:login-button show-faces="true" width="200" max-rows="1">
+									</fb:login-button>
+								</div>
+		        			</div>
+		        		</div>
+		        		<div class = "row">
+			        		<div class = "col-md-2">
+					        	<div class = "arrow" id = "prevArrow">
+					        		<a href = "javascript:sliders[0].goToPrev()">
+					        			<img src = "/images/arrow.svg">
+									</a>
+								</div>
+							</div>
+							<div class = "col-md-8">
+								<div class="slider">
+						            <ul>
+						            	{{#each articles}}
+						                	<li>
+								                <div class = "mainBubble">
+													<h3 id = "source"> 
+														{{ this.source }}
+													</h3> 
+									                
+									                <div class = "headlineDiv">
+									                <a id = "headline" href = "{{ this.url }}" target="_blank">
+									                	<h2>
+									                		{{ this.headline }}
+									                	</h2>
+								                	</a>
+								                	</div>
 
-       	<script id="settings-template" type="text/x-handlebars-template">
-	     	<div class = "header" id = "dripprdiv">
-	     		<a href = "http://drippr.me">
-	     			<img src = "images/logo.svg">
-     			</a>
- 			</div>
-			<div class = "bubble">
-				<h1> 
-					dripps
-				</h1>
-				<img class = "fitHPimg" src = "images/paper.svg">
-			</div> 
-			<div class = "bubble">
-				<h1>
-					bucket
-				</h1>
-				<img class = "fitHPimg" src = "images/bucket.svg">
+								                	<div id = "imageDiv">
+										                <a href = "{{ this.url }}" target="_blank">
+										                	<img id = "fitimage" src = "{{ this.imgUrl }}" >
+									                	</a>
+								                	</div>
+
+									                <div class = "row" id = "articleOp">
+										                <div class = "col-md-2">
+															<div class = "opinion">
+																<img src = "images/readLater.svg" class="opinion" article="{{this.id}}">
+															</div>
+									                	</div>
+									                	<div class = "col-md-3">
+															<div class = "opinion">
+																<img src = "images/like.svg" class="like" article="{{this.id}}">
+															</div>
+														</div>
+														<div class = "col-md-1">
+															<p article="{{this.id}}">
+																{{ this.numLikes }}
+															</p>
+									                	</div>
+									                	<div class = "col-md-3">
+															<div class = "opinion">
+																<img src = "images/dislike.svg" class="dislike" article="{{this.id}}">
+															</div>
+														</div>
+										                <div class = "col-md-1">
+															<p article="{{this.id}}">
+																{{ this.numDislikes }}
+															</p>
+														</div>
+														<div class = "col-md-2">
+															<div class = "number">
+																<img src = "images/drop.svg" class="opinion" article="{{this.id}}">
+															</div>
+														</div>
+									                </div>
+								                </div>
+						                	</li> 
+						            	{{/each}}
+						            </ul>
+				            	</div>
+				            </div>
+							<div class = "col-md-2">
+								<div class = "arrow" id = "nextArrow">
+									<a href = "javascript:sliders[0].goToNext()">
+										<img src = "/images/revArrow.svg">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class = "bubble">
-				<h1>
-					settings
-				</h1>
-				<img class = "fitHPimg" src = "images/settings.svg">
-			</div>
-			<div class = "bubble">
-				<h1>
-					dripps
-				</h1>
-				<img class = "fitHPimg" src = "images/paper.svg">
-			</div> 
-			<div class = "header" id = "fb">
-				<fb:login-button show-faces="true" width="200" max-rows="1">
-				</fb:login-button>
-			</div>
-       	</script>
+			<script>
+				var sliders = [];
+				$('.slider').each(function() {
+				sliders.push(new Slider(this))
+				});
+			</script>
+		</script>
 
 	</body>
 </html>

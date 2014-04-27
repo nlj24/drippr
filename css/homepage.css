@@ -62,7 +62,7 @@ body {
     display: none;
 }
 
-.menu4 a 
+.menu4 
 {
     display: block;
     text-decoration: none;
@@ -76,7 +76,7 @@ body {
 {
     background: #617F8A;
 }
-.menu6:hover ol
+.menu6:hover ul
 {
     display: block;
     position: absolute;
