@@ -10,7 +10,7 @@ var ARTICLE_METHOD ={
  
                 template = Handlebars.compile(templateSource),
  
-                articleHTML = template(resJSON);
+                articleHTML = template({"articles":resJSON});
  
            $('#my-container').html(articleHTML);
            
@@ -48,7 +48,8 @@ var ARTICLE_METHOD ={
  
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/data',
+                url:'http://localhost:5000/articles',
+                data: {user: 1},
                 method:'get',
                 success:this.handlerData
             })
