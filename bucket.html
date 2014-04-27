@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>drippr</title>
+	    <link rel="shortcut icon" href="images/drop.svg">
+	    <link rel="stylesheet" href="css/bootstrap.css">
+	    <link rel="stylesheet" href="css/homepage.css">
+	    <link rel="stylesheet" href="css/article.css">
+	    <link rel="stylesheet" href="css/choose.css">
+	    <link rel="stylesheet" href="css/bucket.css">
+	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script type="text/javascript" src="/scripts/scripts.js"></script>
+		<script type="text/javascript" src="/scripts/slider.js"></script>
+		<script type="text/javascript" src="/scripts/facebook.js"></script>
+	</head>
+    <body>
+    	<div id="fb-root"></div>
+        <div id="my-container" class="table-responsive">
+        </div>
+        <!--Handlebar templates start-->
+
+       	<script id="bucket-template" type="text/x-handlebars-template">
+	     	<div class = "header" id = "dripprdiv">
+	     		<a href = "http://drippr.me">
+	     			<img src = "images/logo.svg">
+     			</a>
+ 			</div>
+ 			<div class = "row">
+ 				<div class = "col-md-1">
+ 				</div>
+				<div class = "bucketCard col-md-10">
+					<div class = "row">
+						<div class = "col-md-4" id = "messages">
+							<div id = "bucketSel">
+							</div>
+							<div id = "messageSlider">
+								{{#each inbox}}
+									<div id = "eachMess">
+										{{this.To}}
+									</div>
+								{{/each}}
+							</div>
+						</div>
+						<div class = "col-md-8" id = "disMess">
+							<div id = "artInfo">
+								<div id = "disHead">
+								</div>
+								<div id = "disImage">
+									<img id = "disImageSize" src = "https://yt3.ggpht.com/-nIXy7s7oY2U/AAAAAAAAAAI/AAAAAAAAAAA/UX73pp3dT30/s88-c-k-no/photo.jpg">
+								</div>
+								<div id = "disOp">
+								</div>
+							</div>
+							<div id = "convo">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class = "col-md-1">
+				</div>
+       	</script>
+
+	</body>
+</html>

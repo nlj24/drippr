@@ -17,7 +17,7 @@ var ARTICLE_METHOD ={
            	$(".like").click(function(e){
 			// e.preventDefault();
 				console.log($(e.target).attr("article"));
-				//ajax request to add this like, if the user hasn't liked it before
+                //ajax request to add this like, if the user hasn't liked it before
 				resJSON.articles[0].numLikes++;
 				articleHTML = template(resJSON);
  

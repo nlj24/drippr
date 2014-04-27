@@ -34,7 +34,7 @@ function db_connect(res) {
 
  /* serves main page */
  app.get("/", function(req, res) {
-    res.sendfile(__dirname+'/index.html')
+    res.sendfile(__dirname+'/dripps.html')
  });
  
   app.post("/user/add", function(req, res) { 
