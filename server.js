@@ -14,11 +14,11 @@ function db_connect(res) {
     console.log(err);
   });
 
-  connection.query('SELECT * FROM tbl', function(err,rows,fields) {
+  connection.query('SELECT * FROM Articles', function(err,rows,fields) {
     if(err) throw err;
-
-    console.log(rows);
-    res.send(rows);
+    var obj = {};
+    obj['articles'] = rows;
+    res.send(obj);
   });
 
   connection.end();

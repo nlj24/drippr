@@ -1,6 +1,7 @@
 var ARTICLE_METHOD ={
  
         handlerData:function(resJSON){
+            console.log(resJSON);
             localStorage.setItem('testObject', JSON.stringify(resJSON));
             var retrievedObject = localStorage.getItem('testObject');
             console.log('retrievedObject: ', JSON.parse(retrievedObject));
@@ -42,42 +43,18 @@ var ARTICLE_METHOD ={
              
         },
 
-        handlerPrefData:function(resJSON){
-            localStorage.setItem('prefObject', JSON.stringify(resJSON));
-            var PrefObject = localStorage.getItem('prefObject');
-            console.log('PrefObject: ', JSON.parse(PrefObject));
-
-            var templateSource   = $("#article-template").html(),
- 
-                template = Handlebars.compile(templateSource),
- 
-                prefHTML = template(resJSON);
-
-                $('#my-container').html(prefHTML);
-        },
-
         loadArticleData : function(){
  
             $.ajax({
-                url:"/json/articles.json",
+                // url:'json/articles.json',
+                url:'http://localhost:5000/data',
                 method:'get',
                 success:this.handlerData
             })
         },
-
-        loadPrefData : function(){
- 
-            $.ajax({
-                url:"/json/prefs.json",
-                method:'get',
-                success:this.handlerPrefData
-            })
-        }
 };
  
 $(document).ready(function(){
- 
     ARTICLE_METHOD.loadArticleData();
-    ARTICLE_METHOD.loadPrefData();
 });
 
