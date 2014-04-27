@@ -40,10 +40,10 @@ var connection;
 
  });
 
- app.update("/articles", function(req, res) {
+ // app.update("/articles", function(req, res) {
     
 
- });
+ // });
 
  /* serves main page */
  app.get("/", function(req, res) {
