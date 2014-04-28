@@ -40,6 +40,37 @@ var connection;
 
  });
 
+/* sends a list of bucket contents */
+app.get("/buckets", function(req, res){
+    var userId = req.param('user');
+
+    var get_bucket_articles = "SELECT * FROM Buckets WHERE userId=" + userId;
+    connection.query(get_bucket_articles, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(rows);
+    });
+
+});
+
+/* sends a list of (from name, headline, conversationId ) ordered by time */
+app.get("/dripps", function(req, res){
+    var userId = req.param('user');
+
+    var get_inbox_articles_query = "SELECT fName, headline, conversationId FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    connection.query(get_inbox_articles_query, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(rows);
+    });
+});
+
+
+
+
+
+
+
+
+/* -----------------------------------------------*/
 app.get("/likes", function(req, res) {
     var userId = req.param('user');
     var articleId = req.query.article;
@@ -101,6 +132,7 @@ app.get("/dislikes", function(req, res) {
     }); 
     // res.send(200);
 });
+/* -----------------------------------------------*/
 
  /* serves main page */
  app.get("/", function(req, res) {
