@@ -24,15 +24,14 @@ var ARTICLE_METHOD ={
                     url:'http://localhost:5000/likes',
                     data: {user: 1, article: articleId},
                     type:'get',
-                    success:function(){
+                    success:function(data2){
                         console.log('it worked?');
+                        this.numLikes++;
+        				articleHTML = template(data2);
+         
+                   		$('#my-container').html(articleHTML);
                     }
                 });
-
-				resJSON.articles[0].numLikes++;
-				articleHTML = template(resJSON);
- 
-           		$('#my-container').html(articleHTML);
 			});
 
 			$(".dislike").click(function(e){
