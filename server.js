@@ -40,7 +40,7 @@ var connection;
 
  });
 
-  app.get("/likes", function(req, res) {
+app.get("/likes", function(req, res) {
     var userId = req.param('user');
     var articleId = req.query.article;
 
@@ -70,6 +70,37 @@ var connection;
     }); 
     // res.send(200);
  });
+
+app.get("/dislikes", function(req, res) {
+    var userId = req.param('user');
+    var articleId = req.query.article;
+
+    var set_dislikes_query = 'INSERT INTO Dislikes (userId, articleId) VALUES (' +userId + ',' +  articleId + ')';
+    console.log(set_dislikes_query);
+    connection.query(set_dislikes_query, function(err,rows,fields) {
+            if (err) throw err;
+            console.log("Inserted into Dislike table that user " + userId + " disliked article " + articleId);
+    });
+
+    var get_article_query = 'SELECT numDislikes FROM Articles WHERE id=' + articleId;
+    console.log(get_article_query);
+    connection.query(get_article_query, function(err,rows,fields) {
+        if (err) throw err;
+        console.log("Article had " + rows[0].numDislikes);
+        var numDislikes = rows[0].numDislikes;
+        numDislikes++;
+        var update_article_query = 'UPDATE Articles SET numDislikes=' + numDislikes + ' WHERE id=' + articleId;
+
+        console.log(update_article_query);
+        connection.query(update_article_query, function(err,rows,fields) {
+            if (err) throw err;
+            console.log("Article now has " + numDislikes );
+            res.send(200);
+        });
+
+    }); 
+    // res.send(200);
+});
 
  /* serves main page */
  app.get("/", function(req, res) {
