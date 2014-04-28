@@ -117,6 +117,17 @@
 }
 
 .mainCatDiv {
-  overflow-y: scroll;
-  height: 700px;
+  overflow-y: auto;
+  /*height: 700px;*/
 }
+
+@font-face
+{
+font-family: bauhaus;
+src: url(../bauhas.ttf);
+}
+
+.coolFont{
+  font-family: bauhaus;
+}
+

@@ -40,7 +40,7 @@ var connection;
 
  });
 
- /* app.post("/likes", function(req, res) {
+  app.get("/likes", function(req, res) {
     var userId = req.param('user');
     var articleId = req.query.article;
 
@@ -52,7 +52,7 @@ var connection;
     });
 
     var get_article_query = 'SELECT numLikes FROM Articles WHERE id=' + articleId;
-
+    console.log(get_article_query);
     connection.query(get_article_query, function(err,rows,fields) {
 		if (err) throw err;
 		console.log("Article had " + rows[0].numLikes);
@@ -61,15 +61,15 @@ var connection;
 	    var update_article_query = 'UPDATE Articles SET numLikes=' + numLikes + ' WHERE id=' + articleId;
 
 	    console.log(update_article_query);
-	    // connection.query(update_article_query, function(err,rows,fields) {
-	    // 	if err throw err;
-	    // 	console.log("Article now has " + numLikes );
+	    connection.query(update_article_query, function(err,rows,fields) {
+	    	if (err) throw err;
+	    	console.log("Article now has " + numLikes );
 	    	res.send(200);
-	    // });
+	    });
 
     }); 
-
- });*/
+    // res.send(200);
+ });
 
  /* serves main page */
  app.get("/", function(req, res) {

@@ -23,7 +23,7 @@ var ARTICLE_METHOD ={
                 $.ajax({
                     url:'http://localhost:5000/likes',
                     data: {user: 1, article: articleId},
-                    type:'post',
+                    type:'get',
                     success:function(){
                         console.log('it worked?');
                     }
