@@ -20,10 +20,10 @@ var connection;
         }
 
         //now do other query for likes
-        connection.query(like_query, function(err,rows,fields) {
+        connection.query(like_query, function(err,inner_rows,fields) {
             if(err) throw err;
-            for(var jj=0; jj < rows.length; jj++){
-                articles_dict[rows[jj].articleId]["userLiked"] = true;
+            for(var jj=0; jj < inner_rows.length; jj++){
+                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
             }         
             console.log(articles_dict);
 
@@ -40,10 +40,36 @@ var connection;
 
  });
 
- // app.update("/articles", function(req, res) {
-    
+ /* app.post("/likes", function(req, res) {
+    var userId = req.param('user');
+    var articleId = req.query.article;
 
- // });
+    var set_likes_query = 'INSERT INTO Likes (userId, articleId) VALUES (' +userId + ',' +  articleId + ')';
+    console.log(set_likes_query);
+    connection.query(set_likes_query, function(err,rows,fields) {
+    		if (err) throw err;
+    		console.log("Inserted into Like table that user " + userId + " liked article " + articleId);
+    });
+
+    var get_article_query = 'SELECT numLikes FROM Articles WHERE id=' + articleId;
+
+    connection.query(get_article_query, function(err,rows,fields) {
+		if (err) throw err;
+		console.log("Article had " + rows[0].numLikes);
+		var numLikes = rows[0].numLikes;
+	    numLikes++;
+	    var update_article_query = 'UPDATE Articles SET numLikes=' + numLikes + ' WHERE id=' + articleId;
+
+	    console.log(update_article_query);
+	    // connection.query(update_article_query, function(err,rows,fields) {
+	    // 	if err throw err;
+	    // 	console.log("Article now has " + numLikes );
+	    	res.send(200);
+	    // });
+
+    }); 
+
+ });*/
 
  /* serves main page */
  app.get("/", function(req, res) {

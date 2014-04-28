@@ -16,8 +16,19 @@ var ARTICLE_METHOD ={
            
            	$(".like").click(function(e){
 			// e.preventDefault();
-				console.log($(e.target).attr("article"));
+                var articleId = $(e.target).attr("article");
+				console.log(articleId);
                 //ajax request to add this like, if the user hasn't liked it before
+
+                $.ajax({
+                    url:'http://localhost:5000/likes',
+                    data: {user: 1, article: articleId},
+                    type:'post',
+                    success:function(){
+                        console.log('it worked?');
+                    }
+                });
+
 				resJSON.articles[0].numLikes++;
 				articleHTML = template(resJSON);
  
@@ -52,7 +63,7 @@ var ARTICLE_METHOD ={
                 data: {user: 1},
                 method:'get',
                 success:this.handlerData
-            })
+            });
         },
 };
  
