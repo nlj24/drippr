@@ -58,7 +58,7 @@ var BUCKET_METHOD ={
  
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/buckets',
+                url:'http://localhost:5000/dripps',
                 data: {user: 1},
                 method:'get',
                 success:this.handlerData
