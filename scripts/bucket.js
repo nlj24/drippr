@@ -1,6 +1,6 @@
 var BUCKET_METHOD ={
  
-        handlerData:function(resJSON){
+        handlerDrippsData:function(resJSON){
             console.log(resJSON);
             
             localStorage.setItem('testObject', JSON.stringify(resJSON));
@@ -54,6 +54,12 @@ var BUCKET_METHOD ={
 			});   
         },
 
+        handlerBucketData:function(resJSON){
+            console.log(resJSON);
+            
+           
+        },
+
         loadBucketData : function(){
  
             $.ajax({
@@ -61,7 +67,15 @@ var BUCKET_METHOD ={
                 url:'http://localhost:5000/dripps',
                 data: {user: 1},
                 method:'get',
-                success:this.handlerData
+                success:this.handlerDrippsData
+            });
+
+            $.ajax({
+                // url:'json/articles.json',
+                url:'http://localhost:5000/buckets',
+                data: {user: 1},
+                method:'get',
+                success:this.handlerBucketData
             });
         },
 };
