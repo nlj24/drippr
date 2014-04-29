@@ -44,7 +44,7 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.param('user');
 
-    var get_bucket_articles = "SELECT bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.articleId WHERE userId=" + userId;
+    var get_bucket_articles = "SELECT bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id WHERE userId=" + userId;
     connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
             res.send(rows);

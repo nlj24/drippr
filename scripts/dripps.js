@@ -1,6 +1,10 @@
+var article_results;
+
 var ARTICLE_METHOD ={
+
  
         handlerData:function(resJSON){
+            article_results = resJSON;
             console.log(resJSON);
             localStorage.setItem('testObject', JSON.stringify(resJSON));
             var retrievedObject = localStorage.getItem('testObject');
@@ -17,6 +21,8 @@ var ARTICLE_METHOD ={
            	$(".like").click(function(e){
 			// e.preventDefault();
                 var articleId = $(e.target).attr("article");
+                console.log("article results...");
+                console.log(article_results);
 				console.log(articleId);
 
                 $.ajax({
