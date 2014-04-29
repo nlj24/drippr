@@ -44,7 +44,7 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.param('user');
 
-    var get_bucket_articles = "SELECT * FROM Buckets WHERE userId=" + userId;
+    var get_bucket_articles = "SELECT bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.articleId WHERE userId=" + userId;
     connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
             res.send(rows);
@@ -56,8 +56,7 @@ app.get("/buckets", function(req, res){
 app.get("/dripps", function(req, res){
     var userId = req.param('user');
 
-    var get_inbox_articles_query = "SELECT fName, headline, conversationId, content FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId INNER JOIN Conversations ON Dripps.conversationId = Conversations.conversationId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
-
+    var get_inbox_articles_query = "SELECT fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
             if (err) throw err;
             res.send(rows);
