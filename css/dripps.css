@@ -96,7 +96,7 @@ body {
 
 #dripprdiv {
   height: 50px;
-  margin: 10px auto auto 10px;
+  margin: 25px auto auto 10px;
   float: left;
 }
 
@@ -107,6 +107,13 @@ body {
 
 #categories {
 
+}
+
+#selPage {
+  display: inline-block;
+  font-size: 30px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 #fb {
@@ -121,20 +128,18 @@ body {
   color: #6D6E70;
   text-align: center;
 }
-#imageDiv {
-  height: 360px;
-  line-height: 360px;
-  text-align: center;
-}
+
 
 #imageDiv {
   height: 360px;
   line-height: 360px;
   text-align: center;
+  background-color: black;
 }
 
 #fitimage {
   max-width: 100%;
+  max-height: 100%;
   vertical-align: middle;
 }
 
@@ -142,4 +147,5 @@ body {
   max-width: 90%;
   float: none;
   margin: 0 auto;
+  padding-top: 10px;
 }
