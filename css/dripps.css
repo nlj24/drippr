@@ -1,0 +1,145 @@
+body {
+  background-color: #E0DFD9;
+  font-family: Helvetica Neue;
+  color: #6D6E70;
+}
+
+.mainCatDiv {
+  overflow-y: scroll;
+  max-height: 639px;
+}
+
+.categ {
+  height: 100px;
+  border-top: 1px solid #6D6E70;
+  background-color: #82C6ED; 
+}
+
+.headBub {
+  border-radius: 100%;
+  background-color: #82C6ED;
+  height: 70px;
+  width: 70px;
+  color: #6D6E70;
+  margin: 10px auto;
+  float: none
+  display: table-cell;
+  line-height: 70px;
+  text-align: center;
+  display: inline-block;
+}
+
+.headBubImg {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.arrow {
+  width: 50px;
+  height: 600px;
+  cursor: pointer;
+  line-height: 600px;
+}
+
+#prevArrow {
+  float: right;
+}
+
+#nextArrow {
+  float: left;
+}
+
+.slider {
+  width: 700px; height: 600px;
+  overflow: hidden;
+  margin: 0 auto;
+  float: none;
+}
+
+.slider > ul {
+    /* styled by JS to match the added width and height of all <li>’s */
+    position: relative;
+    -webkit-transition: 0.5s left;
+    -moz-transition: 0.5s left;
+    -ms-transition: 0.5s left;
+    -o-transition: 0.5s left;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+    
+.slider > ul > li {
+      float: left;
+      width: 700px; height: 600px;
+}
+
+.mainBubble {
+  border-radius: 10%;
+  background-color: #82C6ED;
+  height: 550px;
+  width: 600px;
+  color: #6D6E70;
+  margin: 0 auto;
+  float: none;
+}
+
+.headlineDiv {
+  height: 70px;
+}
+
+.opinion {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  float: none;
+  margin: 0 auto;
+}
+
+#dripprdiv {
+  height: 50px;
+  margin: 10px auto auto 10px;
+  float: left;
+}
+
+#logo {
+  max-height: 50px;
+  max-width: 100px;
+}
+
+#categories {
+
+}
+
+#fb {
+  float: right;
+}
+
+#source {
+  text-align: center;
+}
+
+#headline {
+  color: #6D6E70;
+  text-align: center;
+}
+#imageDiv {
+  height: 360px;
+  line-height: 360px;
+  text-align: center;
+}
+
+#imageDiv {
+  height: 360px;
+  line-height: 360px;
+  text-align: center;
+}
+
+#fitimage {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+#articleOp {
+  max-width: 90%;
+  float: none;
+  margin: 0 auto;
+}

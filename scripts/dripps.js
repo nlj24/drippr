@@ -7,7 +7,7 @@ var ARTICLE_METHOD ={
             console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
             var templateSource   = $("#article-template").html(),
- 
+                
                 template = Handlebars.compile(templateSource),
  
                 articleHTML = template({"articles":resJSON});
@@ -18,26 +18,38 @@ var ARTICLE_METHOD ={
 			// e.preventDefault();
                 var articleId = $(e.target).attr("article");
 				console.log(articleId);
-                //ajax request to add this like, if the user hasn't liked it before
 
                 $.ajax({
                     url:'http://localhost:5000/likes',
                     data: {user: 1, article: articleId},
                     type:'get',
-                    success:function(data2){
+                    success:function(){
                         console.log('it worked?');
-                        this.numLikes++;
-        				articleHTML = template(data2);
+                        
+        				//articleHTML = template(data2);
          
-                   		$('#my-container').html(articleHTML);
+                   		//$('#my-container').html(articleHTML);
                     }
                 });
 			});
 
 			$(".dislike").click(function(e){
 			// e.preventDefault();
-				console.log($(e.target).attr("article"));
-				//ajax request to add this like, if the user hasn't liked it before
+				var articleId = $(e.target).attr("article");
+                console.log($(e.target).attr("article"));
+
+                $.ajax({
+                    url:'http://localhost:5000/dislikes',
+                    data: {user: 1, article: articleId},
+                    type:'get',
+                    success:function(){
+                        console.log('it dis worked?');
+                        
+                        //articleHTML = template(data2);
+         
+                        //$('#my-container').html(articleHTML);
+                    }
+                });
 			});
 
             $(".dripp").click(function(e){
