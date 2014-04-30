@@ -1,0 +1,9 @@
+Things To Do
+------------
+
+-conversations
+	-data representation
+	-sockets and triggers
+	-inbox, sent (inbox/sent ordered by unread messages/articles)
+
+-

@@ -27,13 +27,19 @@
 			        	</div>
 		        	</div>
 		        	<div class = "col-md-6">
+		        		<div class = "row">
         				<a href = "/dripps.html">
-	        				<div class = "headBub">
-	        					<img class = "headBubImg" src = "/images/drop.svg">
+	        				<div class = "choosenHeadBub">
+	        					<div class = "col-md-3">
+		        					<img class = "choosenHeadBubImg" src = "/images/drop.svg">
+		        				</div>
+		        				<div class = "col-md-9">
+		        					<p id = "selPage">
+	        							dripps
+	        						</p>
+        						</div>
 	        				</div>
         				</a>
-        				<div id = "selPage">
-        					dripps
         				</div>
         				<a href = "/bucket.html">
 	        				<div class = "headBub">
@@ -60,38 +66,38 @@
 			        	</div>
 			        	<div class = "mainCatDiv">
 			        		<div class = "categ">
-			        			<p class = "word">all </p>
+			        			<p class = "word">all <img class = "catImg" src = "/images/infinity.svg"> </p>
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	world </p>
+			        			<p class = "word">	world <img class = "catImg" src = "/images/world.svg"> </p>
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	politics </p>
+			        			<p class = "word">	politics <img class = "catImg" src = "/images/government.svg"> </p> 
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	sports </p>
+			        			<p class = "word">	sports <img class = "catImg" src = "/images/sports.svg"> </p>
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	entertainment </p>
+			        			<p class = "word">	entertainment <img class = "catImg" src = "/images/fashion.svg"> </p>
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	usa </p>
+			        			<p class = "word">	usa <img class = "catImg" src = "/images/government.svg"> </p>
 			        		</div>
 			        		<div class = "categ">
-			        			<p class = "word">	tech </p>
+			        			<p class = "word">	tech <img class = "catImg" src = "/images/government.svg"> </p>
 			        		</div>
 				        </div>
 		        	</div>
 		        	<div class = "col-md-9">
 		        		<div class = "row">
-			        		<div class = "col-md-2">
+			        		<div class = "col-md-1">
 					        	<div class = "arrow" id = "prevArrow">
 					        		<a href = "javascript:sliders[0].goToPrev()">
 					        			<img src = "/images/arrow.svg">
 									</a>
 								</div>
 							</div>
-							<div class = "col-md-8">
+							<div class = "col-md-10">
 								<div class="slider">
 						            <ul>
 						            	{{#each articles}}
@@ -102,9 +108,7 @@
 													</h3>
 									                <div class = "headlineDiv">
 									                	<a id = "headline" href = "{{ this.url }}" target="_blank">
-										                	<h2>
-										                		{{ this.headline }}
-										                	</h2>
+										                	{{ this.headline }}
 								                		</a>
 								                	</div>
 								                	<div id = "imageDiv">
@@ -150,7 +154,7 @@
 						            </ul>
 				            	</div>
 				            </div>
-							<div class = "col-md-2">
+							<div class = "col-md-1">
 								<div class = "arrow" id = "nextArrow">
 									<a href = "javascript:sliders[0].goToNext()">
 										<img src = "/images/revArrow.svg">

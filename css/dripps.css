@@ -6,16 +6,16 @@ body {
 
 .mainCatDiv {
   overflow-y: scroll;
-  max-height: 639px;
+  height: 639px;
+  background-color: white;
 }
 
 .categ {
   height: 70px;
   background-color: white;
   font-size: 24px;
-  margin-top: 4px;
-  border-radius: 9px;
   line-height: 70px;
+  border-bottom: 1px solid #6D6E70;
 }
 
 .headBub {
@@ -32,16 +32,34 @@ body {
   display: inline-block;
 }
 
+.choosenHeadBub {
+  border-radius: 50px;
+  background-color: #82C6ED;
+  height: 70px;
+  width: 200px;
+  color: #6D6E70;
+  margin: 10px auto;
+  float: none
+  display: table-cell;
+  line-height: 70px;
+  text-align: center;
+  display: inline-block;
+}
+
 .headBubImg {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.choosenHeadBubImg {
   max-width: 40px;
   max-height: 40px;
 }
 
 .arrow {
   width: 50px;
-  height: 600px;
   cursor: pointer;
-  line-height: 600px;
+  line-height: 700px;
 }
 
 #prevArrow {
@@ -53,7 +71,7 @@ body {
 }
 
 .slider {
-  width: 700px; height: 600px;
+  width: 850px; height: 700px;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -72,29 +90,35 @@ body {
     
 .slider > ul > li {
       float: left;
-      width: 700px; height: 600px;
+      width: 850px; height: 700px;
 }
 
 .mainBubble {
-  border-radius: 10%;
-  /*background-color: #E0DFD9;*/
-  height: 550px;
-  width: 600px;
+  height: 650px;
+  width: 800px;
   color: #6D6E70;
   margin: 0 auto;
   float: none;
 }
 
 .headlineDiv {
-  height: 70px;
+  height: 33px;
+  text-align: center;
+  font-size: 40px;
+  line-height: 33px;
+}
+
+#headline {
+  text-decoration: none;
+  color: #6D6E70;
 }
 
 .opinion {
-  height: 50px;
+  height: 80px;
   width: 50px;
   cursor: pointer;
   float: none;
-  margin: 0 auto;
+  line-height: 80px;
 }
 
 #dripprdiv {
@@ -111,14 +135,12 @@ body {
 #categories {
   height: 50px;
   width: 100%;
-  font-size: 24px;
-  background-color: white;
+  font-size: 30px;
   border-radius: 9px;
   line-height: 50px;
 }
 
 #selPage {
-  display: inline-block;
   font-size: 30px;
   padding-right: 10px;
   padding-left: 10px;
@@ -132,17 +154,10 @@ body {
   text-align: center;
 }
 
-#headline {
-  color: #6D6E70;
-  text-align: center;
-}
-
-
 #imageDiv {
-  height: 360px;
-  line-height: 360px;
+  height: 500px;
+  line-height: 500px;
   text-align: center;
-/*  background-color: black;*/
 }
 
 #fitimage {
@@ -152,10 +167,11 @@ body {
 }
 
 #articleOp {
-  max-width: 90%;
+  max-width: 100%;
   float: none;
+  background-color: #82C6ED;
   margin: 0 auto;
-  padding-top: 10px;
+  height: 80px;
 }
 
 .word {
@@ -163,9 +179,14 @@ body {
 }
 
 .menuBar {
-  padding-top: 20px;
+  padding-left: 0px;
 }
 
 .header {
   background-color: white;
+}
+
+.catImg {
+  max-width: 30%;
+  max-height: 70%;
 }
