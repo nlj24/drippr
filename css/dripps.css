@@ -1,5 +1,5 @@
 body {
-  background-color: #E0DFD9;
+  background-color: #e9eaed;
   font-family: Helvetica Neue;
   color: #6D6E70;
 }
@@ -10,9 +10,12 @@ body {
 }
 
 .categ {
-  height: 100px;
-  border-top: 1px solid #6D6E70;
-  background-color: #82C6ED; 
+  height: 70px;
+  background-color: white;
+  font-size: 24px;
+  margin-top: 4px;
+  border-radius: 9px;
+  line-height: 70px;
 }
 
 .headBub {
@@ -74,7 +77,7 @@ body {
 
 .mainBubble {
   border-radius: 10%;
-  background-color: #82C6ED;
+  /*background-color: #E0DFD9;*/
   height: 550px;
   width: 600px;
   color: #6D6E70;
@@ -106,7 +109,12 @@ body {
 }
 
 #categories {
-
+  height: 50px;
+  width: 100%;
+  font-size: 24px;
+  background-color: white;
+  border-radius: 9px;
+  line-height: 50px;
 }
 
 #selPage {
@@ -134,7 +142,7 @@ body {
   height: 360px;
   line-height: 360px;
   text-align: center;
-  background-color: black;
+/*  background-color: black;*/
 }
 
 #fitimage {
@@ -148,4 +156,16 @@ body {
   float: none;
   margin: 0 auto;
   padding-top: 10px;
+}
+
+.word {
+  text-align: center;
+}
+
+.menuBar {
+  padding-top: 20px;
+}
+
+.header {
+  background-color: white;
 }

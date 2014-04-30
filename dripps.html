@@ -18,7 +18,7 @@
         <!--Handlebar templates start-->
 		<script id="article-template" type="text/x-handlebars-template"> 
         	<div class = "container-fluid">
-	        	<div class = "row">
+	        	<div class = "row header">
 	        		<div class = "col-md-1">
 			        	<div id = "dripprdiv">
 			        		<a href = "http://drippr.me"> 
@@ -56,14 +56,30 @@
 	        	<div class = "row">
 		        	<div class = "menuBar col-md-3">
 			        	<div id = "categories">
-							categories
+							<p class = "word">categories<p>
 			        	</div>
 			        	<div class = "mainCatDiv">
-				        	{{#each prefs}}
-				        		<div class = "categ">
-				        			{{this.Cat}}
-				        		</div>
-				        	{{/each}}
+			        		<div class = "categ">
+			        			<p class = "word">all </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	world </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	politics </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	sports </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	entertainment </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	usa </p>
+			        		</div>
+			        		<div class = "categ">
+			        			<p class = "word">	tech </p>
+			        		</div>
 				        </div>
 		        	</div>
 		        	<div class = "col-md-9">
