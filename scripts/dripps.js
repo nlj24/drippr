@@ -6,17 +6,50 @@ var ARTICLE_METHOD ={
         handlerData:function(resJSON){
             article_results = resJSON;
             console.log(resJSON);
-            localStorage.setItem('testObject', JSON.stringify(resJSON));
-            var retrievedObject = localStorage.getItem('testObject');
-            console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
-            var templateSource   = $("#article-template").html(),
-                
-                template = Handlebars.compile(templateSource),
- 
-                articleHTML = template({"articles":resJSON});
- 
-           $('#my-container').html(articleHTML);
+            var sports = [];
+            var world = [];
+
+            for (var i=0;i<resJSON.length;i++) {
+                switch (resJSON[i]["category"]) {
+                    case "World":
+                        world.push(resJSON[i]);
+                        break;
+                    case "Sports":
+                        sports.push(resJSON[i]);
+                        break;
+                }
+            }
+
+            var feed = resJSON;
+
+            var templateSource = $("#article-template").html(),
+            template = Handlebars.compile(templateSource),
+            articleHTML = template({"articles":feed});
+            $('#my-container').html(articleHTML);
+
+            document.getElementById("all").style.background="#82C6ED";
+
+            $("#all").click(function(){
+                feed = resJSON;
+                articleHTML = template({"articles":feed});
+                $('#my-container').html(articleHTML);
+                document.getElementById("all").style.background="#82C6ED";
+            });
+
+            $("#world").click(function(){
+                feed = world;
+                articleHTML = template({"articles":feed});
+                $('#my-container').html(articleHTML);
+                document.getElementById("world").style.background="#82C6ED";
+            });
+
+            $("#sports").click(function(){
+                feed = sports;
+                articleHTML = template({"articles":feed});
+                $('#my-container').html(articleHTML);
+                document.getElementById("sports").style.background="#82C6ED";
+            });
            
            	$(".like").click(function(e){
 			// e.preventDefault();
@@ -24,6 +57,7 @@ var ARTICLE_METHOD ={
                 console.log("article results...");
                 console.log(article_results);
 				console.log(articleId);
+                document.getElementById("sports").style.background="#82C6ED";
 
                 $.ajax({
                     url:'http://localhost:5000/likes',
@@ -31,10 +65,6 @@ var ARTICLE_METHOD ={
                     type:'get',
                     success:function(){
                         console.log('it worked?');
-                        
-        				//articleHTML = template(data2);
-         
-                   		//$('#my-container').html(articleHTML);
                     }
                 });
 			});
@@ -50,10 +80,6 @@ var ARTICLE_METHOD ={
                     type:'get',
                     success:function(){
                         console.log('it dis worked?');
-                        
-                        //articleHTML = template(data2);
-         
-                        //$('#my-container').html(articleHTML);
                     }
                 });
 			});

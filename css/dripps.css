@@ -8,17 +8,15 @@ body {
   /*overflow-y: scroll;*/
   height: 639px;
   background-color: white;
-  
   border-top-right-radius:10px;
--webkit-border-top-right-radius:10px;
+  -webkit-border-top-right-radius:10px;
 
 }
-#all{
-   
+.topCat{
   border-top-right-radius:10px;
--webkit-border-top-right-radius:10px;
-
+  -webkit-border-top-right-radius:10px;
 }
+
 .categ {
   height: 70px;
   background-color: white;
@@ -27,6 +25,7 @@ body {
   border-bottom: 1px solid #e9eaed;
   width: 100%;
   margin: 0;
+  cursor: pointer;
 }
 
 .headBub {
@@ -44,7 +43,7 @@ body {
   margin-right: 13px;
 }
 
-.choosenHeadBub {
+.chosenHeadBub {
   border-radius: 50px;
   background-color: #82C6ED;
   height: 70px;
@@ -68,7 +67,7 @@ body {
 .arrow {
   width: 50px;
   cursor: pointer;
-  line-height: 700px;
+  line-height: 675px;
 }
 
 #prevArrow {
@@ -80,7 +79,7 @@ body {
 }
 
 .slider {
-  width: 850px; height: 700px;
+  width: 850px; height: 675px;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -99,7 +98,7 @@ body {
     
 .slider > ul > li {
       float: left;
-      width: 850px; height: 700px;
+      width: 850px; height: 675px;
 }
 
 .mainBubble {
@@ -123,8 +122,8 @@ body {
 }
 
 .opinion {
-  height: 60px;
-  width: 50px;
+  height: 55px;
+  width: 70px;
   cursor: pointer;
 }
 
@@ -170,7 +169,7 @@ body {
 
 #fitimage {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
 }
@@ -223,6 +222,10 @@ body {
 }
 
 .number {
-  font-size: 25px;
+  font-size: 40px;
   float: left;
+}
+
+.right {
+  margin-left: 40px;
 }
