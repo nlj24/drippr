@@ -16,7 +16,6 @@
         <div id="my-container" class="table-responsive">
         </div>
         <!--Handlebar templates start-->
-		<script id="article-template" type="text/x-handlebars-template"> 
         	<div class = "container-fluid">
 	        	<div class = "row header">
 		        	<div class = "col-md-2 headingPad">
@@ -65,9 +64,9 @@
 							<p class = "word">categories<p>
 			        	</div>
 			        	<div class = "mainCatDiv">
-			        		<div id = "all" class = "categ row topCat">
+			        		<div  class = "categ row topCat" category="All">
 			        			<div class = "col-md-9">
-			        				<p class = "word">all</p>
+			        				<p id="All" class = "word">all</p>
 			        			</div>
 			        			<div class = "col-md-3">
 			        				<img class = "catImg" src = "/images/infinity.svg">
@@ -81,17 +80,17 @@
 			        				<img class = "catImg" src = "/images/government.svg">
 			        			</div>
 			        		</div>
-			        		<div class = "categ row" id = "sports">
+			        		<div class = "categ row" category="Sports">
 			        			<div class = "col-md-9">
-			        				<p class = "word">sports</p>
+			        				<p id="Sports" class = "word">sports</p>
 			        			</div>
 			        			<div class = "col-md-3">
 			        				<img class = "catImg" src = "/images/sports.svg">
 			        			</div>
 			        		</div>
-			        		<div class = "categ row" id = "world">
+			        		<div class = "categ row" category="World">
 			        			<div class = "col-md-9">
-			        				<p class = "word">world</p>
+			        				<p id="World" class = "word">world</p>
 			        			</div>
 			        			<div class = "col-md-3">
 			        				<img class = "catImg" src = "/images/world.svg">
@@ -123,6 +122,9 @@
 			        		</div>
 				        </div>
 		        	</div>
+		        	<div id="articles">
+		        	</div>
+		<script id="article-template" type="text/x-handlebars-template"> 
 		        	<div class = "col-md-9">
 		        		<div class = "row">
 			        		<div class = "col-md-1">

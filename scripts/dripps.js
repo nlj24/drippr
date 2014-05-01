@@ -7,18 +7,18 @@ var ARTICLE_METHOD ={
             article_results = resJSON;
             console.log(resJSON);
 
-            var sports = [];
-            var world = [];
+
+            var articlesData = {};
+            articlesData["All"] = [];
+            var cat;
 
             for (var i=0;i<resJSON.length;i++) {
-                switch (resJSON[i]["category"]) {
-                    case "World":
-                        world.push(resJSON[i]);
-                        break;
-                    case "Sports":
-                        sports.push(resJSON[i]);
-                        break;
+                cat = resJSON[i].category;
+                if(!(cat in articlesData)){
+                    articlesData[cat] = [];
                 }
+                    articlesData[cat].push(resJSON[i]);
+                    articlesData["All"].push(resJSON[i]);
             }
 
             var feed = resJSON;
@@ -26,30 +26,41 @@ var ARTICLE_METHOD ={
             var templateSource = $("#article-template").html(),
             template = Handlebars.compile(templateSource),
             articleHTML = template({"articles":feed});
-            $('#my-container').html(articleHTML);
+            $('#articles').html(articleHTML);
 
-            document.getElementById("all").style.background="#82C6ED";
+            $(".topCat").css("background", "#82C6ED");
 
-            $("#all").click(function(){
-                feed = resJSON;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("all").style.background="#82C6ED";
+            $('.categ').click(function(e){
+                 //get category based on what you clicked
+                 
+                 
+                 //get feed based on category
+                 var id = $(e.target).parents('.categ').attr("category");
+                 feed = articlesData[id];
+                 articleHTML = template({"articles":feed});
+                 $('#articles').html(articleHTML);
+        
+                 $('.categ').css("background", "white");
+                 $(e.target).parents('.categ').css("background", "#82C6ED");
+
+
             });
 
-            $("#world").click(function(){
-                feed = world;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("world").style.background="#82C6ED";
-            });
+            // $("#all").click(function(){
+            //     feed = resJSON;
+            //     articleHTML = template({"articles":feed});
+            //     $('#articles').html(articleHTML);
+            //     document.getElementById("all").style.background="#82C6ED";
+            // });
 
-            $("#sports").click(function(){
-                feed = sports;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("sports").style.background="#82C6ED";
-            });
+            // $("#world").click(function(){
+            //     feed = world;
+            //     articleHTML = template({"articles":feed});
+            //     $('#articles').html(articleHTML);
+            //     document.getElementById("world").style.background="#82C6ED";
+            // });
+
+            
            
            	$(".like").click(function(e){
 			// e.preventDefault();
@@ -57,7 +68,6 @@ var ARTICLE_METHOD ={
                 console.log("article results...");
                 console.log(article_results);
 				console.log(articleId);
-                document.getElementById("sports").style.background="#82C6ED";
 
                 $.ajax({
                     url:'http://localhost:5000/likes',
