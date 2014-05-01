@@ -32,42 +32,20 @@ var ARTICLE_METHOD ={
 
             $('.categ').click(function(e){
                  //get category based on what you clicked
-                 
-                 
                  //get feed based on category
                  var id = $(e.target).parents('.categ').attr("category");
                  feed = articlesData[id];
                  articleHTML = template({"articles":feed});
                  $('#articles').html(articleHTML);
-        
                  $('.categ').css("background", "white");
                  $(e.target).parents('.categ').css("background", "#82C6ED");
-
-
             });
-
-            // $("#all").click(function(){
-            //     feed = resJSON;
-            //     articleHTML = template({"articles":feed});
-            //     $('#articles').html(articleHTML);
-            //     document.getElementById("all").style.background="#82C6ED";
-            // });
-
-            // $("#world").click(function(){
-            //     feed = world;
-            //     articleHTML = template({"articles":feed});
-            //     $('#articles').html(articleHTML);
-            //     document.getElementById("world").style.background="#82C6ED";
-            // });
-
             
-           
            	$(".like").click(function(e){
-			// e.preventDefault();
                 var articleId = $(e.target).attr("article");
-                console.log("article results...");
-                console.log(article_results);
-				console.log(articleId);
+                //console.log($(e.target));
+				//console.log(articleId);
+                console.log(document.getElementById(".up")innerHTML);
 
                 $.ajax({
                     url:'http://localhost:5000/likes',

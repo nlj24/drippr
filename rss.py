@@ -4,7 +4,8 @@ import MySQLdb
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 
-rss = ["http://sports.espn.go.com/espn/rss/news"]
+cursor.execute("Truncate table Articles")
+rss = ["http://sports.espn.go.com/espn/rss/news","http://feeds.foxnews.com/foxnews/latest","http://rss.cnn.com/rss/cnn_topstories.rss"]
 
 articlesToAdd = []
 
@@ -27,7 +28,17 @@ for sources in rss:
 			image_result = data[beg:end]
 		except:
 			image = 'Stock Photo'
-		articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':'ESPN','date':'2013-11-13 12:12:12','category':'Sports'})
+
+		if sources == "http://sports.espn.go.com/espn/rss/news":
+			cat = "Sports"
+		elif sources == "http://feeds.foxnews.com/foxnews/latest":
+			cat = "World"
+		else:
+			cat = "Politics"
+
+
+
+		articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':'ESPN','date':'2013-11-13 12:12:12','category':cat})
 
 for article in articlesToAdd:
 	try:
