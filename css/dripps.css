@@ -5,17 +5,28 @@ body {
 }
 
 .mainCatDiv {
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   height: 639px;
   background-color: white;
-}
+  
+  border-top-right-radius:10px;
+-webkit-border-top-right-radius:10px;
 
+}
+#all{
+   
+  border-top-right-radius:10px;
+-webkit-border-top-right-radius:10px;
+
+}
 .categ {
   height: 70px;
   background-color: white;
   font-size: 24px;
   line-height: 70px;
-  border-bottom: 1px solid #6D6E70;
+  border-bottom: 1px solid #e9eaed;
+  width: 100%;
+  margin: 0;
 }
 
 .headBub {
@@ -30,6 +41,7 @@ body {
   line-height: 70px;
   text-align: center;
   display: inline-block;
+  margin-right: 13px;
 }
 
 .choosenHeadBub {
@@ -38,22 +50,19 @@ body {
   height: 70px;
   width: 200px;
   color: #6D6E70;
-  margin: 10px auto;
-  float: none
-  display: table-cell;
+  margin-top: 10px;
+  margin-left: 20px;
   line-height: 70px;
-  text-align: center;
-  display: inline-block;
 }
 
 .headBubImg {
-  max-width: 40px;
-  max-height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .choosenHeadBubImg {
-  max-width: 40px;
-  max-height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .arrow {
@@ -114,17 +123,15 @@ body {
 }
 
 .opinion {
-  height: 80px;
+  height: 60px;
   width: 50px;
   cursor: pointer;
-  float: none;
-  line-height: 80px;
 }
 
 #dripprdiv {
   height: 50px;
-  margin: 25px auto auto 10px;
-  float: left;
+  margin-top: 25px;
+  text-align: center;
 }
 
 #logo {
@@ -141,7 +148,8 @@ body {
 }
 
 #selPage {
-  font-size: 30px;
+  font-size: 40px;
+  color:#6D6E70;
   padding-right: 10px;
   padding-left: 10px;
 }
@@ -164,6 +172,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   vertical-align: middle;
+  border-radius: 10px;
 }
 
 #articleOp {
@@ -172,10 +181,13 @@ body {
   background-color: #82C6ED;
   margin: 0 auto;
   height: 80px;
+  border-radius: 50px;
+  line-height: 80px;
 }
 
 .word {
   text-align: center;
+  margin-bottom: 0px;
 }
 
 .menuBar {
@@ -187,6 +199,30 @@ body {
 }
 
 .catImg {
-  max-width: 30%;
+  max-width: 100%;
   max-height: 70%;
+}
+
+.headingPad {
+  padding-right: 4px;
+  padding-left: 0px;
+}
+
+.catImgDiv {
+  
+  height: 70px;
+  line-height: 70px;
+}
+
+.len {
+  padding-right: 0;
+}
+
+.opDiv {
+  text-align: center;
+}
+
+.number {
+  font-size: 25px;
+  float: left;
 }

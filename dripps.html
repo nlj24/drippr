@@ -19,15 +19,8 @@
 		<script id="article-template" type="text/x-handlebars-template"> 
         	<div class = "container-fluid">
 	        	<div class = "row header">
-	        		<div class = "col-md-1">
-			        	<div id = "dripprdiv">
-			        		<a href = "http://drippr.me"> 
-			        			<img id = "logo" src = "images/logo.svg">
-			        		</a>
-			        	</div>
-		        	</div>
-		        	<div class = "col-md-6">
-		        		<div class = "row">
+	        		
+		        	<div class = "col-md-2 headingPad">
         				<a href = "/dripps.html">
 	        				<div class = "choosenHeadBub">
 	        					<div class = "col-md-3">
@@ -40,7 +33,8 @@
         						</div>
 	        				</div>
         				</a>
-        				</div>
+        			</div>
+        			<div class = "col-md-3 headingPad">
         				<a href = "/bucket.html">
 	        				<div class = "headBub">
 	        					<img class = "headBubImg" src = "/images/bucket.svg">
@@ -52,6 +46,13 @@
 	        				</div>
 	        			</a>
         			</div>
+        			<div class = "col-md-2">
+			        	<div id = "dripprdiv">
+			        		<a href = "http://drippr.me"> 
+			        			<img id = "logo" src = "images/logo.svg">
+			        		</a>
+			        	</div>
+		        	</div>
         			<div class = "col-md-5">
         				<div id = "fb">
 							<fb:login-button show-faces="true" width="200" max-rows="1">
@@ -65,26 +66,61 @@
 							<p class = "word">categories<p>
 			        	</div>
 			        	<div class = "mainCatDiv">
-			        		<div class = "categ">
-			        			<p class = "word">all <img class = "catImg" src = "/images/infinity.svg"> </p>
+			        		<div id="all" class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">all</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/infinity.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	world <img class = "catImg" src = "/images/world.svg"> </p>
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">politics</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/government.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	politics <img class = "catImg" src = "/images/government.svg"> </p> 
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">sports</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/sports.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	sports <img class = "catImg" src = "/images/sports.svg"> </p>
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">world</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/world.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	entertainment <img class = "catImg" src = "/images/fashion.svg"> </p>
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">entertainment</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/fashion.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	usa <img class = "catImg" src = "/images/government.svg"> </p>
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">tech</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/infinity.svg">
+			        			</div>
 			        		</div>
-			        		<div class = "categ">
-			        			<p class = "word">	tech <img class = "catImg" src = "/images/government.svg"> </p>
+			        		<div class = "categ row">
+			        			<div class = "col-md-9">
+			        				<p class = "word">usa</p>
+			        			</div>
+			        			<div class = "col-md-3">
+			        				<img class = "catImg" src = "/images/infinity.svg">
+			        			</div>
 			        		</div>
 				        </div>
 		        	</div>
@@ -117,33 +153,33 @@
 									                	</a>
 								                	</div>
 									                <div class = "row" id = "articleOp">
-										                <div class = "col-md-2">
-															<div class = "opinion">
+										                <div class = "col-md-4">
+															<div class = "opDiv">
 																<img src = "images/readLater.svg" class="opinion" article="{{this.id}}">
 															</div>
 									                	</div>
-									                	<div class = "col-md-3">
-															<div class = "opinion">
-																<img src = "images/like.svg" class="like" article="{{this.id}}">
+									                	<div class = "col-md-1">
+															<div class = "opDiv">
+																<img src = "images/like.svg" class="like opinion" article="{{this.id}}">
 															</div>
 														</div>
-														<div class = "col-md-1">
-															<p article="{{this.id}}">
+														<div class = "col-md-2">
+															<p class = "number" article="{{this.id}}">
 																{{ this.numLikes }}
 															</p>
 									                	</div>
-									                	<div class = "col-md-3">
-															<div class = "opinion">
-																<img src = "images/dislike.svg" class="dislike" article="{{this.id}}">
+									                	<div class = "col-md-1">
+															<div class = "opDiv">
+																<img src = "images/dislike.svg" class="dislike opinion" article="{{this.id}}">
 															</div>
 														</div>
-										                <div class = "col-md-1">
-															<p article="{{this.id}}">
+														<div class = "col-md-2">
+															<p class = "number" article="{{this.id}}">
 																{{ this.numDislikes }}
 															</p>
 														</div>
 														<div class = "col-md-2">
-															<div>
+															<div class = "opDiv">
 																<img src = "images/drop.svg" class="opinion" article="{{this.id}}">
 															</div>
 														</div>
