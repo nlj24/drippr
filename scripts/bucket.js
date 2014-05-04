@@ -2,100 +2,40 @@ var bucket_results;
 
 var BUCKET_METHOD ={
 
- 
-        handlerData:function(resJSON){
-            bucket_results = resJSON;
-            console.log(resJSON);
+        compileBuckets:function(dripps_data, buckets_data){
 
-            var sports = [];
-            var world = [];
+            dripps_results = dripps_data;
 
-            for (var i=0;i<resJSON.length;i++) {
-                switch (resJSON[i]["category"]) {
-                    case "World":
-                        world.push(resJSON[i]);
-                        break;
-                    case "Sports":
-                        sports.push(resJSON[i]);
-                        break;
-                }
-            }
+            bucket_results = buckets_data;
+            console.log(buckets_data);
 
-            var feed = resJSON;
+            var feed = buckets_data;
 
             var templateSource = $("#bucket-template").html(),
             template = Handlebars.compile(templateSource),
-            articleHTML = template({"dripps":feed});
+            articleHTML = template({"buckets":feed});
             $('#my-container').html(articleHTML);
 
-            document.getElementById("all").style.background="#82C6ED";
+            $('.messageItem').click(function(e){
+                var id = $(e.target);
+                console.log(id);
+                // feed = articlesData[id];
+                // articleHTML = template({"articles":feed});
+                // $('#articles').html(articleHTML);
+            });
+        },
 
-            $("#all").click(function(){
-                feed = resJSON;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("all").style.background="#82C6ED";
+        handlerData:function(dripps_data){
+
+            $.ajax({
+                // url:'json/articles.json',
+                url:'http://localhost:5000/buckets',
+                data: {user: 1},
+                method:'get',
+                success:this.compileBuckets(dripps_data, buckets_data)
             });
 
-            $("#world").click(function(){
-                feed = world;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("world").style.background="#82C6ED";
-            });
 
-            $("#sports").click(function(){
-                feed = sports;
-                articleHTML = template({"articles":feed});
-                $('#my-container').html(articleHTML);
-                document.getElementById("sports").style.background="#82C6ED";
-            });
-           
-            $(".like").click(function(e){
-            // e.preventDefault();
-                var articleId = $(e.target).attr("article");
-                console.log("article results...");
-                console.log(article_results);
-                console.log(articleId);
-                document.getElementById("sports").style.background="#82C6ED";
-
-                $.ajax({
-                    url:'http://localhost:5000/likes',
-                    data: {user: 1, article: articleId},
-                    type:'get',
-                    success:function(){
-                        console.log('it worked?');
-                    }
-                });
-            });
-
-            $(".dislike").click(function(e){
-            // e.preventDefault();
-                var articleId = $(e.target).attr("article");
-                console.log($(e.target).attr("article"));
-
-                $.ajax({
-                    url:'http://localhost:5000/dislikes',
-                    data: {user: 1, article: articleId},
-                    type:'get',
-                    success:function(){
-                        console.log('it dis worked?');
-                    }
-                });
-            });
-
-            $(".dripp").click(function(e){
-            // e.preventDefault();
-                alert("add ability to send");
-                //ajax request to add this like, if the user hasn't liked it before
-            });
-
-            $(".readLater").click(function(e){
-            // e.preventDefault();
-                alert("add ability to read later");
-                //ajax request to add this like, if the user hasn't liked it before
-            });
-             
         },
 
         loadArticleData : function(){
@@ -108,13 +48,7 @@ var BUCKET_METHOD ={
                 success:this.handlerData
             });
 
-         $.ajax({
-                // url:'json/articles.json',
-                url:'http://localhost:5000/buckets',
-                data: {user: 1},
-                method:'get',
-                success:this.handlerBucketData
-            });
+            
         },
 };
  

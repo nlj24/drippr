@@ -1,3 +1,8 @@
+/*lightBlue: #82C6ED
+darkBlue: #1C75BB
+lightGrey: #e9eaed
+darkGrey: #6D6E70*/
+
 body {
   background-color: #e9eaed;
   font-family: Helvetica Neue;
@@ -5,16 +10,9 @@ body {
 }
 
 .mainCatDiv {
-  /*overflow-y: scroll;*/
-  height: 639px;
+  height: 689px;
   background-color: white;
-  border-top-right-radius:10px;
-  -webkit-border-top-right-radius:10px;
-
-}
-.topCat{
-  border-top-right-radius:10px;
-  -webkit-border-top-right-radius:10px;
+  overflow: scroll;
 }
 
 .categ {
@@ -22,15 +20,16 @@ body {
   background-color: white;
   font-size: 24px;
   line-height: 70px;
-  border-bottom: 1px solid #e9eaed;
+  border-bottom: 1px solid #e5e5e5;
   width: 100%;
   margin: 0;
   cursor: pointer;
+  border-right: 1px solid #e5e5e5;
 }
 
 .headBub {
   border-radius: 100%;
-  background-color: #82C6ED;
+  background-color: #6D6E70;
   height: 70px;
   width: 70px;
   color: #6D6E70;
@@ -40,17 +39,15 @@ body {
   line-height: 70px;
   text-align: center;
   display: inline-block;
-  margin-right: 13px;
 }
 
 .chosenHeadBub {
   border-radius: 50px;
-  background-color: #82C6ED;
+  background-color: #6D6E70;
   height: 70px;
-  width: 200px;
+  width: 165px;
   color: #6D6E70;
   margin-top: 10px;
-  margin-left: 20px;
   line-height: 70px;
 }
 
@@ -65,21 +62,22 @@ body {
 }
 
 .arrow {
-  width: 50px;
+  width: 90px;
   cursor: pointer;
-  line-height: 675px;
+  line-height: 575px;
 }
 
-#prevArrow {
-  float: right;
+.arrow:hover {
+  background-color: black;
 }
 
-#nextArrow {
-  float: left;
+.arrowDiv {
+  padding: 0px;
+  width: 90px;
 }
 
 .slider {
-  width: 850px; height: 675px;
+  width: 850px; height: 575px;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -98,11 +96,11 @@ body {
     
 .slider > ul > li {
       float: left;
-      width: 850px; height: 675px;
+      width: 850px; height: 575px;
 }
 
 .mainBubble {
-  height: 650px;
+  height: 550px;
   width: 800px;
   color: #6D6E70;
   margin: 0 auto;
@@ -128,14 +126,14 @@ body {
 }
 
 #dripprdiv {
-  height: 50px;
-  margin-top: 25px;
+  height: 70px;
+  line-height: 90px;
   text-align: center;
 }
 
 #logo {
-  max-height: 50px;
-  max-width: 100px;
+  max-height: 75px;
+  max-width: 125px;
 }
 
 #categories {
@@ -147,10 +145,9 @@ body {
 }
 
 #selPage {
-  font-size: 40px;
-  color:#6D6E70;
-  padding-right: 10px;
-  padding-left: 10px;
+  font-size: 25px;
+  color:white;
+  text-align: center;
 }
 
 #fb {
@@ -175,7 +172,7 @@ body {
 }
 
 #articleOp {
-  max-width: 100%;
+  width: 800px;
   float: none;
   background-color: #82C6ED;
   margin: 0 auto;
@@ -191,10 +188,11 @@ body {
 
 .menuBar {
   padding-left: 0px;
+  padding-right: 0px;
 }
 
 .header {
-  background-color: white;
+  background-color: #A3DCFF;
 }
 
 .catImg {
@@ -203,8 +201,19 @@ body {
 }
 
 .headingPad {
-  padding-right: 4px;
   padding-left: 0px;
+}
+
+.headingPad1 {
+  width: 175px
+}
+
+.headingPad2 {
+  width: 80px
+}
+
+.headingPad3 {
+  width: 80px
 }
 
 .catImgDiv {
@@ -228,4 +237,12 @@ body {
 
 .right {
   margin-left: 40px;
+}
+
+.display {
+  display: none;
+}
+
+.sliderWidth {
+  width: 880px;
 }

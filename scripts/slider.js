@@ -1,3 +1,4 @@
+
 var Slider = function() { this.initialize.apply(this, arguments) }
 	  		Slider.prototype = {
 	 
@@ -9,6 +10,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					this.ul.style.width = (this.li[0].clientWidth * this.li.length) + 'px';
 
 					this.currentIndex = 0;
+					window.curArticle = this.li[this.currentIndex].id; 
+					document.getElementById('up').innerHTML =  this.li[this.currentIndex].getAttribute("numlikes");
+					document.getElementById('down').innerHTML =  this.li[this.currentIndex].getAttribute("numdislikes");
 			    },
 			 
 			    goTo: function(index) {
@@ -20,6 +24,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					this.ul.style.left = '-' + (100 * index) + '%';
 
 					this.currentIndex = index;
+
+					window.curArticle = this.li[this.currentIndex].id; 
+					document.getElementById('up').innerHTML =  this.li[this.currentIndex].getAttribute("numlikes");
+					document.getElementById('down').innerHTML =  this.li[this.currentIndex].getAttribute("numdislikes");
 			    },
 			 
 			    goToPrev: function() {
@@ -28,5 +36,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			 
 			    goToNext: function() {
 					this.goTo(this.currentIndex + 1);
+
 				}
 			}

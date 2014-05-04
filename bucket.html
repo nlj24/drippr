@@ -14,42 +14,52 @@
     	<div id="fb-root"></div>
         <div id="my-container" class="table-responsive">
         </div>
+        <script id="bucket-template" type="text/x-handlebars-template">
         <!--Handlebar templates start-->
-		<script id="bucket-template" type="text/x-handlebars-template"> 
         	<div class = "container-fluid">
 	        	<div class = "row header">
-        			<div class = "col-md-1 headingPad">
-        				<a href = "/bucket.html">
-	        				<div class = "headBub">
-	        					<img class = "headBubImg" src = "/images/bucket.svg">
-	        				</div>
-        				</a>
-        			</div>
-		        	<div class = "col-md-2">
-        				<a href = "/dripps.html">
-	        				<div class = "chosenHeadBub">
-	        					<div class = "col-md-3">
-		        					<img class = "choosenHeadBubImg" src = "/images/drop.svg">
+		        	
+	        		<div class = "col-md-5 headingPad">
+
+			        	<div class = "col-md-2 headingPad2">
+	        				<a href = "/dripps.html">
+		        				<div class = "headBub">
+		        					<img class = "headBubImg" src = "/images/drop.svg">
 		        				</div>
-		        				<div class = "col-md-9">
-		        					<p id = "selPage">
-	        							dripps
-	        						</p>
-        						</div>
-	        				</div>
-        				</a>
-        			</div>
-        			<div class = "col-md-1 headingPad">
-        				<a href = "/settings.html">
-	        				<div class = "headBub">
-	        					<img class = "headBubImg" src = "/images/settings.svg">
-	        				</div>
-	        			</a>
-        			</div>
+	        				</a>
+	        			</div>
+			        	<div class = "col-md-4 headingPad1">
+	        				<a href = "/dripps.html">
+		        				<div class = "chosenHeadBub">
+		        					<div class = "col-md-3">
+			        					<img class = "choosenHeadBubImg" src = "/images/bucket.svg">
+			        				</div>
+			        				<div class = "col-md-9">
+			        					<p id = "selPage">
+		        							bucket
+		        						</p>
+	        						</div>
+		        				</div>
+	        				</a>
+	        			</div>
+
+	        			<div class = "col-md-2 headingPad3">
+	        				<a href = "/settings.html">
+		        				<div class = "headBub">
+		        					<img class = "headBubImg" src = "/images/settings.svg">
+		        				</div>
+		        			</a>
+	        			</div>
+	        			<div class = "col-md-4">
+	        			</div>
+        			
+	        		</div>
+
+        			
         			<div class = "col-md-2">
 			        	<div id = "dripprdiv">
 			        		<a href = "http://drippr.me"> 
-			        			<img id = "logo" src = "images/logo.svg">
+			        			<img id = "logo" src = "images/logo.png">
 			        		</a>
 			        	</div>
 		        	</div>
@@ -62,113 +72,71 @@
 				</div>
 	        	<div class = "row">
 		        	<div class = "menuBar col-md-3">
-			        	<div class = "dropDown">
-							<ul class = "menu1">
-								<li class = "menu2 menu4 menu5 menu6 menu7">
-									inbox
-									<ul class = "menu1 menu3">
-										<li class = "menu2 menu4 menu5">
-											<a href="">
-												sent
-											</a>
-										</li>
-										<li class = "menu2 menu4 menu5">
-											<a href="">
-												read it later
-											</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-			        	</div>
+			        	
 			        	<div class = "mainCatDiv">
-			        		<div id = "all" class = "categ row topCat">
-			        			<div class = "col-md-9">
-			        				<p class = "word">all</p>
+			        		{{#each buckets}}
+			        			<div class = "messageItem">
+			        				{{headline}}
 			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/infinity.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row">
-			        			<div class = "col-md-9">
-			        				<p class = "word">politics</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/government.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row" id = "sports">
-			        			<div class = "col-md-9">
-			        				<p class = "word">sports</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/sports.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row" id = "world">
-			        			<div class = "col-md-9">
-			        				<p class = "word">world</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/world.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row">
-			        			<div class = "col-md-9">
-			        				<p class = "word">entertainment</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/fashion.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row">
-			        			<div class = "col-md-9">
-			        				<p class = "word">tech</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/infinity.svg">
-			        			</div>
-			        		</div>
-			        		<div class = "categ row">
-			        			<div class = "col-md-9">
-			        				<p class = "word">usa</p>
-			        			</div>
-			        			<div class = "col-md-3">
-			        				<img class = "catImg" src = "/images/infinity.svg">
-			        			</div>
-			        		</div>
+			        		{{/each}}
 				        </div>
 		        	</div>
-		        	<div class = "col-md-9">
+
+		        	<div id="message">
 		        		<div class = "row">
-			        		<div class = "col-md-1">
-					        	<div class = "arrow" id = "prevArrow">
-					        		<a href = "javascript:sliders[0].goToPrev()">
-					        			<img src = "/images/arrow.svg">
-									</a>
+		        			place headline here
+		        		</div>
+		        		
+		        	</div>
+				 
+		        	<div class = "col-md-9">
+		        		
+						
+
+
+						<div class = "row">
+							<div class = "col-md-2">
+							</div>
+			                <div class = "col-md-2">
+								<div class = "opDiv">
+									<img src = "images/readLater.svg" class="opinion" article="{{this.id}}">
+								</div>
+		                	</div>
+		                	<div class = "col-md-2">
+								<div class = "opDiv">
+									<img src = "images/like.svg" class="opinion  like" article="{{this.id}}">
 								</div>
 							</div>
-							<div class = "col-md-10">
-								
-						            <ul>
-						            	{{#each dripps}}
-						                	<li>{{fName}} </li>
-						            	{{/each}}
-						            </ul>
-				            	
-				            </div>
-							<div class = "col-md-1">
-								<div class = "arrow" id = "nextArrow">
-									<a href = "javascript:sliders[0].goToNext()">
-										<img src = "/images/revArrow.svg">
-									</a>
+							<div class = "col-md-0">
+								<p class = "number" article="{{this.id}}" id = "up">
+									{{ this.numLikes }}
+								</p>
+		                	</div>
+		                	<div class = "col-md-2">
+								<div class = "opDiv">
+									<img src = "images/dislike.svg" class="opinion  dislike" article="{{this.id}}">
 								</div>
 							</div>
-						</div>
+							<div class = "col-md-0">
+								<p class = "number" article="{{this.id}}" id = "down">
+									{{ this.numDislikes }}
+								</p>
+							</div>
+							<div class = "col-md-2">
+								<div class = "opDiv">
+									<img src = "images/dropOp.svg" class = "opinion" article="{{this.id}}">
+								</div>
+							</div>
+							<div class = "col-md-2">
+							</div>
+		                </div>
+
+
+
 					</div>
 				</div>
 			</div>
+
 			<script>
 				var sliders = [];
 				$('.slider').each(function() {

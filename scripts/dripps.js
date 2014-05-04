@@ -19,7 +19,9 @@ var ARTICLE_METHOD ={
                 }
                     articlesData[cat].push(resJSON[i]);
                     articlesData["All"].push(resJSON[i]);
+                    articlesData[resJSON[i].id] = resJSON[i];
             }
+
 
             var feed = resJSON;
 
@@ -27,48 +29,59 @@ var ARTICLE_METHOD ={
             template = Handlebars.compile(templateSource),
             articleHTML = template({"articles":feed});
             $('#articles').html(articleHTML);
+            
+            $('.white').each(function(){
+                $(this).addClass('display');
+            });
 
-            $(".topCat").css("background", "#82C6ED");
+            $(".topCat").css("background", "#6D6E70");
+            $('.topCat').css("color", "white");
+            $(".topCatImg.grey").attr("class", 'topCatImg catImg grey display');
+            $(".topCatImg.white").attr("class", 'topCatImg catImg white');
 
             $('.categ').click(function(e){
-                 //get category based on what you clicked
-                 //get feed based on category
-                 var id = $(e.target).parents('.categ').attr("category");
-                 feed = articlesData[id];
-                 articleHTML = template({"articles":feed});
-                 $('#articles').html(articleHTML);
-                 $('.categ').css("background", "white");
-                 $(e.target).parents('.categ').css("background", "#82C6ED");
+                var id = $(e.target).parents('.categ').attr("category");
+                feed = articlesData[id];
+                articleHTML = template({"articles":feed});
+                $('#articles').html(articleHTML);
+                $('.categ').css("background", "white");
+                $('.categ').css("color", "#6D6E70");
+                $(e.target).parents('.categ').css("background", "#6D6E70");
+                $(e.target).parents('.categ').css("color", "white");
+                
+                $('.white').each(function(){
+                    $(this).attr("class", 'catImg white display');
+                });
+
+                $('.grey').each(function(){
+                    $(this).attr("class", 'catImg grey');
+                });
+
+                $(e.target).parents('.categ').find('.grey').attr("class", 'catImg grey display');
+                $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
             });
             
+
+
            	$(".like").click(function(e){
-                var articleId = $(e.target).attr("article");
-                //console.log($(e.target));
-				//console.log(articleId);
-                console.log(document.getElementById(".up")innerHTML);
+                var articleId = window.curArticle;
+                $("#up").text(++articlesData[articleId].numLikes);
 
                 $.ajax({
                     url:'http://localhost:5000/likes',
                     data: {user: 1, article: articleId},
-                    type:'get',
-                    success:function(){
-                        console.log('it worked?');
-                    }
+                    type:'get'
                 });
 			});
 
 			$(".dislike").click(function(e){
-			// e.preventDefault();
-				var articleId = $(e.target).attr("article");
-                console.log($(e.target).attr("article"));
+                var articleId = window.curArticle;
+                $("#down").text(++articlesData[articleId].numDislikes);
 
                 $.ajax({
                     url:'http://localhost:5000/dislikes',
                     data: {user: 1, article: articleId},
-                    type:'get',
-                    success:function(){
-                        console.log('it dis worked?');
-                    }
+                    type:'get'
                 });
 			});
 
