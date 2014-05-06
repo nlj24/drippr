@@ -36,6 +36,9 @@ xfbml      : true  // parse XFBML
 			FB.login();
 		}
 	});
+FB.logout(function(response) {
+  // user is now logged out
+});
 };
 
 // Load the SDK asynchronously
@@ -56,10 +59,6 @@ FB.api('/me', function(response) {
 });
 };
 
-FB.logout(function(response) {
-  // user is now logged out
-});
-
 // Gets Facebook friends as an array of Objects 
 function getFriends() {
 	FB.api( "/me/friends",
@@ -71,3 +70,4 @@ function getFriends() {
 		}
 	);
 }
+

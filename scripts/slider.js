@@ -28,6 +28,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id; 
 					document.getElementById('up').innerHTML =  this.li[this.currentIndex].getAttribute("numlikes");
 					document.getElementById('down').innerHTML =  this.li[this.currentIndex].getAttribute("numdislikes");
+					$(".grey2").removeClass("hide");
+                	$(".blue").addClass("hide");
 			    },
 			 
 			    goToPrev: function() {

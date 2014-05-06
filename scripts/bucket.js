@@ -2,26 +2,61 @@ var bucket_results;
 
 var BUCKET_METHOD ={
 
-        compileBuckets:function(dripps_data, buckets_data){
+        compileBuckets:function(dripps_data, readItLater_data){
 
-            dripps_results = dripps_data;
-
-            bucket_results = buckets_data;
-            console.log(buckets_data);
-
-            var feed = buckets_data;
-
-            var templateSource = $("#bucket-template").html(),
+            var feed = dripps_data;
+            var selItem = []
+            selItem.push(feed[0]);
+            
+            var templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
-            articleHTML = template({"buckets":feed});
-            $('#my-container').html(articleHTML);
+            itemHTML = template({"buckets":feed});
+            $('#items').html(itemHTML);
+
+            var templateSource = $("#selItem-template").html(),
+            template = Handlebars.compile(templateSource),
+            readItLaterHTML = template({"selItems":selItem});
+            $('#selItem').html(readItLaterHTML);
+
+            $('.selBucket').click(function(e){
+                
+                if ($(e.target).attr('bucketIdentifier') === 'dripps') {
+                    feed = dripps_data;
+                    var templateSource = $("#selDripp-template").html(),
+                    template = Handlebars.compile(templateSource),
+                    drippsHTML = template({"selItems":selItem});
+                    $('#selDripp').html(drippsHTML);
+                    readItLaterHTML = template();
+                    $('#selItem').html(readItLaterHTML);
+                }
+
+                if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
+                    feed = readItLater_data;
+                    var templateSource = $("#selItem-template").html(),
+                    template = Handlebars.compile(templateSource),
+                    readItLaterHTML = template({"selItems":selItem});
+                    $('#selItem').html(readItLaterHTML);
+
+                }
+                
+                templateSource = $("#items-template").html(),
+                template = Handlebars.compile(templateSource),
+                itemHTML = template({"buckets":feed});
+                $('#items').html(itemHTML);
+            });
 
             $('.messageItem').click(function(e){
-                var id = $(e.target);
-                console.log(id);
-                // feed = articlesData[id];
-                // articleHTML = template({"articles":feed});
-                // $('#articles').html(articleHTML);
+                console.log('f');
+                selItem = [];
+                console.log(feed);
+                var id = $(e.target).attr('id');
+                for (var i=0;i<feed.length;i++) {
+                    if (parseInt(id) === feed[i]['id']) {
+                        selItem.push(feed[i]);
+                    }
+                }
+                drippsHTML = template({"selItems":selItem});
+                    $('#selDripp').html(drippsHTML);
             });
         },
 
@@ -32,7 +67,9 @@ var BUCKET_METHOD ={
                 url:'http://localhost:5000/buckets',
                 data: {user: 1},
                 method:'get',
-                success:this.compileBuckets(dripps_data, buckets_data)
+                success: function(data){
+                    BUCKET_METHOD.compileBuckets(dripps_data, data);
+                }
             });
 
 

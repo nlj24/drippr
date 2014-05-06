@@ -29,14 +29,10 @@ var ARTICLE_METHOD ={
             template = Handlebars.compile(templateSource),
             articleHTML = template({"articles":feed});
             $('#articles').html(articleHTML);
-            
-            $('.white').each(function(){
-                $(this).addClass('display');
-            });
 
             $(".topCat").css("background", "#6D6E70");
             $('.topCat').css("color", "white");
-            $(".topCatImg.grey").attr("class", 'topCatImg catImg grey display');
+            $(".topCatImg.grey").attr("class", 'topCatImg catImg grey hide');
             $(".topCatImg.white").attr("class", 'topCatImg catImg white');
 
             $('.categ').click(function(e){
@@ -50,22 +46,43 @@ var ARTICLE_METHOD ={
                 $(e.target).parents('.categ').css("color", "white");
                 
                 $('.white').each(function(){
-                    $(this).attr("class", 'catImg white display');
+                    $(this).attr("class", 'catImg white hide');
                 });
 
                 $('.grey').each(function(){
                     $(this).attr("class", 'catImg grey');
                 });
 
-                $(e.target).parents('.categ').find('.grey').attr("class", 'catImg grey display');
+                $(e.target).parents('.categ').find('.grey').attr("class", 'catImg grey hide');
                 $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
             });
             
 
-
-           	$(".like").click(function(e){
+            
+           	$(".like").click(function(){
                 var articleId = window.curArticle;
-                $("#up").text(++articlesData[articleId].numLikes);
+
+                if($('.like.grey2').hasClass('hide')) {
+                    $("#up").text(--articlesData[articleId].numLikes);
+                    $(".like.grey2").attr("class", 'opinion like grey2');
+                    $(".like.blue").attr("class", 'opinion like blue hide');
+                    return;
+                };
+
+                if ($(".dislike.grey2").hasClass("hide")) {
+                    $(".dislike.grey2").attr("class", 'opinion dislike grey2');
+                    $(".dislike.blue").attr("class", 'opinion dislike blue hide');
+                    $("#down").text(--articlesData[articleId].numDislikes);
+                };
+
+                if($('.like.blue').hasClass('hide')) {
+                    $("#up").text(++articlesData[articleId].numLikes);
+                    $(".like.grey2").attr("class", 'opinion like grey2 hide')
+                    $(".like.blue").attr("class", 'opinion like blue');
+                };
+
+               
+                
 
                 $.ajax({
                     url:'http://localhost:5000/likes',
@@ -74,9 +91,27 @@ var ARTICLE_METHOD ={
                 });
 			});
 
-			$(".dislike").click(function(e){
+			$(".dislike").click(function(){
                 var articleId = window.curArticle;
-                $("#down").text(++articlesData[articleId].numDislikes);
+
+                if($('.dislike.grey2').hasClass('hide')) {
+                    $("#down").text(--articlesData[articleId].numDislikes);
+                    $(".dislike.grey2").attr("class", 'opinion dislike grey2');
+                    $(".dislike.blue").attr("class", 'opinion dislike blue hide');
+                    return;
+                };
+
+                if ($(".like.grey2").hasClass("hide")) {
+                    $(".like.grey2").attr("class", 'opinion like grey2');
+                    $(".like.blue").attr("class", 'opinion like blue hide');
+                    $("#up").text(--articlesData[articleId].numLikes);
+                };
+
+                if($('.dislike.blue').hasClass('hide')) {
+                    $("#down").text(++articlesData[articleId].numDislikes);
+                    $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide');
+                    $(".dislike.blue").attr("class", 'opinion dislike blue');
+                };
 
                 $.ajax({
                     url:'http://localhost:5000/dislikes',
@@ -85,16 +120,13 @@ var ARTICLE_METHOD ={
                 });
 			});
 
-            $(".dripp").click(function(e){
-            // e.preventDefault();
+            $(".dripp").click(function(){
                 alert("add ability to send");
-                //ajax request to add this like, if the user hasn't liked it before
             });
 
-            $(".readLater").click(function(e){
-            // e.preventDefault();
-                alert("add ability to read later");
-                //ajax request to add this like, if the user hasn't liked it before
+            $(".readLater").click(function(){
+                $(".readLater.grey2").attr("class", 'opinion readLater grey2 hide');
+                $(".readLater.blue").attr("class", 'opinion readLater blue');
             });
              
         },
@@ -102,7 +134,6 @@ var ARTICLE_METHOD ={
         loadArticleData : function(){
  
             $.ajax({
-                // url:'json/articles.json',
                 url:'http://localhost:5000/articles',
                 data: {user: 1},
                 method:'get',

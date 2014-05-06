@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>drippr</title>
-	    <link rel="shortcut icon" href="images/drop.svg">
+	    <title>bucket</title>
+	    <link rel="shortcut icon" href="images/dropBlue.svg">
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/bucket.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
@@ -12,137 +12,98 @@
 	</head>
     <body>
     	<div id="fb-root"></div>
-        <div id="my-container" class="table-responsive">
-        </div>
-        <script id="bucket-template" type="text/x-handlebars-template">
-        <!--Handlebar templates start-->
-        	<div class = "container-fluid">
-	        	<div class = "row header">
-		        	
-	        		<div class = "col-md-5 headingPad">
-
-			        	<div class = "col-md-2 headingPad2">
-	        				<a href = "/dripps.html">
-		        				<div class = "headBub">
-		        					<img class = "headBubImg" src = "/images/drop.svg">
+    	<div class = "container-fluid">
+        	<div class = "row header">
+        		<div class = "col-md-5 headingPad">
+		        	<div class = "col-md-2 headingPad2">
+        				<a href = "/dripps.html">
+	        				<div class = "headBub">
+	        					<img class = "headBubImg" src = "/images/dropWhite.svg">
+	        				</div>
+        				</a>
+        			</div>
+		        	<div class = "col-md-4 headingPad1">
+        				<a href = "/bucket.html">
+	        				<div class = "chosenHeadBub">
+	        					<div class = "col-md-3">
+		        					<img class = "choosenHeadBubImg" src = "/images/bucket.svg">
 		        				</div>
-	        				</a>
-	        			</div>
-			        	<div class = "col-md-4 headingPad1">
-	        				<a href = "/dripps.html">
-		        				<div class = "chosenHeadBub">
-		        					<div class = "col-md-3">
-			        					<img class = "choosenHeadBubImg" src = "/images/bucket.svg">
-			        				</div>
-			        				<div class = "col-md-9">
-			        					<p id = "selPage">
-		        							bucket
-		        						</p>
-	        						</div>
-		        				</div>
-	        				</a>
-	        			</div>
-
-	        			<div class = "col-md-2 headingPad3">
-	        				<a href = "/settings.html">
-		        				<div class = "headBub">
-		        					<img class = "headBubImg" src = "/images/settings.svg">
-		        				</div>
-		        			</a>
-	        			</div>
-	        			<div class = "col-md-4">
-	        			</div>
-        			
-	        		</div>
-
-        			
-        			<div class = "col-md-2">
-			        	<div id = "dripprdiv">
-			        		<a href = "http://drippr.me"> 
-			        			<img id = "logo" src = "images/logo.png">
-			        		</a>
-			        	</div>
+		        				<div class = "col-md-9">
+		        					<p id = "selPage">
+	        							bucket
+	        						</p>
+        						</div>
+	        				</div>
+        				</a>
+        			</div>
+        			<div class = "col-md-2 headingPad2">
+        				<a href = "/settings.html">
+	        				<div class = "headBub">
+	        					<img class = "headBubImg" src = "/images/settings.svg">
+	        				</div>
+	        			</a>
+        			</div>
+        			<div class = "col-md-4">
+        			</div>
+        		</div>
+    			<div class = "col-md-2">
+		        	<div id = "dripprdiv">
+		        		<a href = "http://drippr.me">
+		        			<img id = "logo" src = "images/logo.png">
+		        		</a>
 		        	</div>
-        			<div class = "col-md-5">
-        				<div id = "fb">
-							<fb:login-button show-faces="true" width="200" max-rows="1">
-							</fb:login-button>
-						</div>
+	        	</div>
+    			<div class = "col-md-5">
+    				<div id = "fb">
+						<fb:login-button show-faces="true" width="200" max-rows="1">
+						</fb:login-button>
 					</div>
 				</div>
-	        	<div class = "row">
-		        	<div class = "menuBar col-md-3">
-			        	
+			</div>
+        	<div class = "row">
+        		<div class = "menuBar col-md-3">
+        			<div class = "selBucket" bucketIdentifier = "dripps">
+        				dripps
+        			</div>
+        			<div class = "selBucket" bucketIdentifier = "readItLater">
+        				read it later
+        			</div>
+	        		<div id="items">
+	        		</div>
+		        	<script id="items-template" type="text/x-handlebars-template">
 			        	<div class = "mainCatDiv">
 			        		{{#each buckets}}
-			        			<div class = "messageItem">
+			        			<div class = "messageItem" id = {{id}}>
 			        				{{headline}}
 			        			</div>
 			        		{{/each}}
 				        </div>
+			        </script>
+				</div>
+	        	<div class = "col-md-9">
+		        	<div id="selDripp">
 		        	</div>
-
-		        	<div id="message">
-		        		<div class = "row">
-		        			place headline here
+		        	<script id="selDripp-template" type="text/x-handlebars-template">
+			        	<div id="message">
+			        		{{#each selItems}}
+				        		<div class = "row">
+				        			{{headline}}
+				        			<img src = {{imgUrl}}>
+				        		</div>
+			        		{{/each}}
 		        		</div>
-		        		
+	        		</script>
+	        		<div id="selItem">
 		        	</div>
-				 
-		        	<div class = "col-md-9">
-		        		
-						
-
-
-						<div class = "row">
-							<div class = "col-md-2">
-							</div>
-			                <div class = "col-md-2">
-								<div class = "opDiv">
-									<img src = "images/readLater.svg" class="opinion" article="{{this.id}}">
-								</div>
-		                	</div>
-		                	<div class = "col-md-2">
-								<div class = "opDiv">
-									<img src = "images/like.svg" class="opinion  like" article="{{this.id}}">
-								</div>
-							</div>
-							<div class = "col-md-0">
-								<p class = "number" article="{{this.id}}" id = "up">
-									{{ this.numLikes }}
-								</p>
-		                	</div>
-		                	<div class = "col-md-2">
-								<div class = "opDiv">
-									<img src = "images/dislike.svg" class="opinion  dislike" article="{{this.id}}">
-								</div>
-							</div>
-							<div class = "col-md-0">
-								<p class = "number" article="{{this.id}}" id = "down">
-									{{ this.numDislikes }}
-								</p>
-							</div>
-							<div class = "col-md-2">
-								<div class = "opDiv">
-									<img src = "images/dropOp.svg" class = "opinion" article="{{this.id}}">
-								</div>
-							</div>
-							<div class = "col-md-2">
-							</div>
-		                </div>
-
-
-
-					</div>
+		        	<script id="selItem-template" type="text/x-handlebars-template">
+			        	<div id="message">
+			        		<div class = "row">
+			   					jfkldsjfklsd
+			        		</div>
+		        		</div>
+					</script>
 				</div>
 			</div>
-
-			<script>
-				var sliders = [];
-				$('.slider').each(function() {
-				sliders.push(new Slider(this))
-				});
-			</script>
-		</script>
+		</div>
 	</body>
 </html>

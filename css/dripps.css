@@ -1,4 +1,4 @@
-/*lightBlue: #82C6ED
+/*lightBlue: #A3DCFF
 darkBlue: #1C75BB
 lightGrey: #e9eaed
 darkGrey: #6D6E70*/
@@ -64,11 +64,12 @@ body {
 .arrow {
   width: 90px;
   cursor: pointer;
-  line-height: 575px;
+  line-height: 605px;
 }
 
 .arrow:hover {
-  background-color: black;
+   box-shadow: inset 0px 0px 10px 10px black;
+   z-index:5;
 }
 
 .arrowDiv {
@@ -77,7 +78,7 @@ body {
 }
 
 .slider {
-  width: 850px; height: 575px;
+  width: 850px; height: 605px;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -96,7 +97,7 @@ body {
     
 .slider > ul > li {
       float: left;
-      width: 850px; height: 575px;
+      width: 850px; height: 605px;
 }
 
 .mainBubble {
@@ -136,14 +137,6 @@ body {
   max-width: 125px;
 }
 
-#categories {
-  height: 50px;
-  width: 100%;
-  font-size: 30px;
-  border-radius: 9px;
-  line-height: 50px;
-}
-
 #selPage {
   font-size: 25px;
   color:white;
@@ -159,8 +152,8 @@ body {
 }
 
 #imageDiv {
-  height: 500px;
-  line-height: 500px;
+  height: 530px;
+  line-height: 530px;
   text-align: center;
 }
 
@@ -169,16 +162,6 @@ body {
   max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
-}
-
-#articleOp {
-  width: 800px;
-  float: none;
-  background-color: #82C6ED;
-  margin: 0 auto;
-  height: 80px;
-  border-radius: 50px;
-  line-height: 80px;
 }
 
 .word {
@@ -212,18 +195,10 @@ body {
   width: 80px
 }
 
-.headingPad3 {
-  width: 80px
-}
-
 .catImgDiv {
   
   height: 70px;
   line-height: 70px;
-}
-
-.len {
-  padding-right: 0;
 }
 
 .opDiv {
@@ -235,11 +210,7 @@ body {
   float: left;
 }
 
-.right {
-  margin-left: 40px;
-}
-
-.display {
+.hide {
   display: none;
 }
 
