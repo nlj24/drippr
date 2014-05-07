@@ -16,7 +16,6 @@ xfbml      : true  // parse XFBML
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
-			testAPI();
 			getFriends();
 		} else if (response.status === 'not_authorized') {
 			// In this case, the person is logged into Facebook, but not into the app, so we call
@@ -35,10 +34,14 @@ xfbml      : true  // parse XFBML
 			// The same caveats as above apply to the FB.login() call here.
 			FB.login();
 		}
+		$('#logout').click(function(){
+			FB.logout(function(response) {
+			  // user is now logged out
+			  window.location.assign("http://localhost:5000");
+			});
+		});
 	});
-FB.logout(function(response) {
-  // user is now logged out
-});
+
 };
 
 // Load the SDK asynchronously
@@ -52,12 +55,6 @@ ref.parentNode.insertBefore(js, ref);
 
 // Here we run a very simple test of the Graph API after login is successful. 
 // This testAPI() function is only called in those cases. 
-function testAPI() {
-console.log('Welcome!  Fetching your information.... ');
-FB.api('/me', function(response) {
-	console.log('Good to see you, ' + response.name + '.');
-});
-};
 
 // Gets Facebook friends as an array of Objects 
 function getFriends() {

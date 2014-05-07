@@ -64,17 +64,31 @@ body {
 .arrow {
   width: 90px;
   cursor: pointer;
-  line-height: 605px;
+  line-height: 689px;
 }
 
-.arrow:hover {
-   box-shadow: inset 0px 0px 10px 10px black;
-   z-index:5;
+#prevArrow:hover {
+  width: 90px;
+  height: 689px;
+  -webkit-box-shadow: inset 30px 0 50px -2px black;
+  box-shadow: inset 30px 0 50px -20px black;           
+}
+
+#nextArrow {
+  float: right;
+}
+
+#nextArrow:hover {
+  width: 90px;
+  height: 689px;
+  -webkit-box-shadow: inset -30px 0 50px -2px black;
+  box-shadow: inset -30px 0 50px -20px black;
+  float: right;
 }
 
 .arrowDiv {
   padding: 0px;
-  width: 90px;
+  width: 119.8px;
 }
 
 .slider {
@@ -118,6 +132,10 @@ body {
 #headline {
   text-decoration: none;
   color: #6D6E70;
+}
+
+#headline:hover {
+  color: #1C75BB;
 }
 
 .opinion {
@@ -216,4 +234,8 @@ body {
 
 .sliderWidth {
   width: 880px;
+}
+
+#sliderPad {
+  padding: 0;
 }

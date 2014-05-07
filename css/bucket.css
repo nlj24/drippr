@@ -101,3 +101,27 @@ body {
 .headingPad2 {
   width: 80px
 }
+
+#headline {
+  text-align: center;
+  font-size: 40px;
+}
+
+#fitImage {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.indMess {
+  max-width: 200px;
+}
+
+#conversation {
+  height: 500px;
+  background-color: #82C6ED;
+  overflow: scroll;
+}
+
+#convoCont {
+  height: 500px;
+}

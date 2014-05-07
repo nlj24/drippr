@@ -73,7 +73,7 @@
 		        	<script id="items-template" type="text/x-handlebars-template">
 			        	<div class = "mainCatDiv">
 			        		{{#each buckets}}
-			        			<div class = "messageItem" id = {{id}}>
+			        			<div class = "messageItem" id = {{id}} conversationId = {{conversationId}}>
 			        				{{headline}}
 			        			</div>
 			        		{{/each}}
@@ -84,15 +84,29 @@
 		        	<div id="selDripp">
 		        	</div>
 		        	<script id="selDripp-template" type="text/x-handlebars-template">
-			        	<div id="message">
+			        	<div>
 			        		{{#each selItems}}
-				        		<div class = "row">
+				        		<div class = "row" id = "headline">
 				        			{{headline}}
-				        			<img src = {{imgUrl}}>
+				        		</div>
+				        		<div class = "row">
+				        			<img id = "fitImage" src = {{imgUrl}}>
 				        		</div>
 			        		{{/each}}
 		        		</div>
-	        		</script>
+			        	<div id="messagesDiv">
+			        		<div class = "row" id = "lowestDiv">
+			        			<div id = "conversation">
+				        			{{#each messages}}
+				        				<div class = "indMess">
+				        					{{fName}} {{lName}}: {{content}} Time: {{time}}
+				        				</div>
+			        				{{/each}}
+			        			</div>
+			        		</div>
+		        		</div>
+		        	</script>
+	        		
 	        		<div id="selItem">
 		        	</div>
 		        	<script id="selItem-template" type="text/x-handlebars-template">

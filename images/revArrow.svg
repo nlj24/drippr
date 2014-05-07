@@ -11,7 +11,7 @@ You may NOT sub-license, resell, rent, redistribute or otherwise transfer the ic
 
 	 width="90px" height="90px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"  >
 
-<polygon id="arrow-29-icon" style="fill:#6D6E70"  points="153.49,50 153.49,160.299 248.736,256 153.49,351.701 153.49,462 358.51,256 "/>
+<polygon id="arrow-29-icon" transform="rotate(-180 255 255)" style="fill:#6D6E70"  points="153.49,50 153.49,160.299 248.736,256 153.49,351.701 153.49,462 358.51,256 "/>
 
 </svg>
 

@@ -2,12 +2,25 @@ var bucket_results;
 
 var BUCKET_METHOD ={
 
-        compileBuckets:function(dripps_data, readItLater_data){
+        compileBuckets:function(dripps_data, readItLater_data, conversation_data){
 
+            console.log(dripps_data);
+            
+            console.log(readItLater_data);
+            console.log(conversation_data);
+            
             var feed = dripps_data;
-            var selItem = []
+            var selItem = [];
             selItem.push(feed[0]);
 
+
+            var convo = [];
+            var convoId = feed[0]['conversationId'];
+            for (var i=0;i<conversation_data.length;i++) {
+                if (parseInt(convoId) === conversation_data[i]['conversationId']) {
+                    convo.push(conversation_data[i]);
+                }
+            }
 
             var articlesData = {};
             for (var i=0;i<feed.length;i++) {
@@ -23,6 +36,8 @@ var BUCKET_METHOD ={
             template = Handlebars.compile(templateSource),
             drippsHTML = template({"selItems":selItem});
             $('#selDripp').html(drippsHTML);
+            drippsHTML = template({"messages":convo});
+            $('#messagesDiv').html(drippsHTML);
 
             $('.selBucket').click(function(e){
                 
@@ -53,17 +68,26 @@ var BUCKET_METHOD ={
             });
 
             $('.messageItem').click(function(e){
-                console.log('f');
                 selItem = [];
-                console.log(feed);
+                convo = [];
                 var id = $(e.target).attr('id');
                 for (var i=0;i<feed.length;i++) {
                     if (parseInt(id) === feed[i]['id']) {
                         selItem.push(feed[i]);
                     }
                 }
+
+                var convoId = $(e.target).attr('conversationId');
+                for (var i=0;i<conversation_data.length;i++) {
+                    if (parseInt(convoId) === conversation_data[i]['conversationId']) {
+                        convo.push(conversation_data[i]);
+                    }
+                }
+
                 drippsHTML = template({"selItems":selItem});
                 $('#selDripp').html(drippsHTML);
+                drippsHTML = template({"messages":convo});
+                $('#messagesDiv').html(drippsHTML);
             });
 
             $(".like").click(function(){
@@ -134,6 +158,21 @@ var BUCKET_METHOD ={
             });
         },
 
+        handlerData2:function(dripps_data, readItLater_data){
+
+            $.ajax({
+                // url:'json/articles.json',
+                url:'http://localhost:5000/conversations',
+                data: {user: 1},
+                method:'get',
+                success: function(data2){
+                    BUCKET_METHOD.compileBuckets(dripps_data, readItLater_data, data2);
+                }
+            });
+
+
+        },
+
         handlerData:function(dripps_data){
 
             $.ajax({
@@ -142,7 +181,7 @@ var BUCKET_METHOD ={
                 data: {user: 1},
                 method:'get',
                 success: function(data){
-                    BUCKET_METHOD.compileBuckets(dripps_data, data);
+                    BUCKET_METHOD.handlerData2(dripps_data, data);
                 }
             });
 

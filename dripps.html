@@ -2,7 +2,7 @@
 <html>
 	<head>
 	    <title>drippr</title>
-	    <link rel="shortcut icon" href="images/drop.svg">
+	    <link rel="shortcut icon" href="images/drop.png">
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/dripps.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
@@ -61,6 +61,7 @@
     				<div id = "fb">
 						<fb:login-button show-faces="true" width="200" max-rows="1">
 						</fb:login-button>
+						<div id = "logout">logout</div>
 					</div>
 				</div>
 			</div>
@@ -159,18 +160,18 @@
 		        		</div>
 			        </div>
 	        	</div>
-	        	<div class = "col-md-9">
+	        	<div class = "col-md-1 arrowDiv">
+		        	<a href = "javascript:sliders[0].goToPrev()">
+			        	<div class = "arrow" id = "prevArrow">
+			        		<img src = "/images/revArrow.svg">
+						</div>
+					</a>
+				</div>
+	        	<div class = "col-md-7" id = "sliderPad">
 		        	<div id="articles">
 		        	</div>
 	        		<script id="article-template" type="text/x-handlebars-template"> 
 		        		<div class = "row">
-			        		<div class = "col-md-1 arrowDiv">
-					        	<div class = "arrow" id = "prevArrow">
-					        		<a href = "javascript:sliders[0].goToPrev()">
-					        			<img src = "/images/arrow.svg">
-									</a>
-								</div>
-							</div>
 							<div class = "col-md-10 sliderWidth">
 								<div class="slider">
 						            <ul>
@@ -196,13 +197,6 @@
 						            </ul>
 				            	</div>
 				            </div>
-							<div class = "col-md-1 arrowDiv">
-								<div class = "arrow">
-									<a href = "javascript:sliders[0].goToNext()">
-										<img src = "/images/arrow.svg">
-									</a>
-								</div>
-							</div>
 						</div>
 						<script>
 							var sliders = [];
@@ -212,9 +206,9 @@
 						</script>
 					</script>
 					<div class = "row">
-						<div class = "col-md-2">
+						<div class = "col-md-1">
 						</div>
-						<div class = "row col-md-8">
+						<div class = "row col-md-10">
 			                <div class = "col-md-3">
 								<div class = "opDiv">
 									<img src = "images/readLater.svg" class="opinion readLater grey2">
@@ -222,25 +216,25 @@
 								</div>
 		                	</div>
 		                	<div class = "row col-md-4">
-			                	<div class = "col-md-5">
+			                	<div class = "col-md-6">
 									<div class = "opDiv">
 										<img src = "images/like.svg" class="opinion like grey2">
 										<img src = "images/likeBlue.svg" class="opinion like blue hide">
 									</div>
 								</div>
-								<div class = "col-md-7">
+								<div class = "col-md-6">
 									<p class = "number" id = "up">
 									</p>
 		                		</div>
 		                	</div>
 		                	<div class = "row col-md-4">
-			                	<div class = "col-md-5">
+			                	<div class = "col-md-6">
 									<div class = "opDiv">
 										<img src = "images/dislike.svg" class="opinion dislike grey2">
 										<img src = "images/dislikeBlue.svg" class="opinion dislike blue hide">
 									</div>
 								</div>
-								<div class = "col-md-7">
+								<div class = "col-md-6">
 									<p class = "number" id = "down">
 									</p>
 								</div>
@@ -252,9 +246,16 @@
 								</div>
 							</div>
 						</div>
-						<div class = "col-md-2">
+						<div class = "col-md-1">
 						</div>
 	                </div>
+				</div>
+				<div class = "col-md-1 arrowDiv">
+					<a href = "javascript:sliders[0].goToNext()">
+						<div class = "arrow" id = "nextArrow">
+							<img src = "/images/arrow.svg">
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>		
