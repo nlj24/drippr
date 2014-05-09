@@ -9,6 +9,7 @@ var connection;
     var userId = req.query.user;
     var article_query = 'SELECT * FROM Articles';
     var like_query = 'SELECT * FROM Likes WHERE userId=' + userId;
+    var dislike_query = 'SELECT * FROM Dislikes WHERE userId=' + userId;
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
@@ -17,21 +18,29 @@ var connection;
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = false;
+            articles_dict[rows[ii].id]["userDisliked"] = false;
         }
 
         //now do other query for likes
         connection.query(like_query, function(err,inner_rows,fields) {
-            // if(err) throw err;
-            // for(var jj=0; jj < inner_rows.length; jj++){
-            //     articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
-            // }         
+            if(err) throw err;
+            for(var jj=0; jj < inner_rows.length; jj++){
+                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
+            }
+        });
+
+        //now do other query for dislikes
+        connection.query(dislike_query, function(err,inner_rows,fields) {
+            if(err) throw err;
+            for(var jj=0; jj < inner_rows.length; jj++){
+                articles_dict[inner_rows[jj].articleId]["userDisliked"] = true;
+            }         
             console.log(articles_dict);
 
             articles_list = [];
             for(var id in articles_dict){
                 articles_list.push(articles_dict[id]);
             }
-
 
             res.send(articles_list);
         });

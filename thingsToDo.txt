@@ -6,4 +6,8 @@ Things To Do
 	-sockets and triggers
 	-inbox, sent (inbox/sent ordered by unread messages/articles)
 
--
+-bindings
+
+-small pics
+
+-facebook users
