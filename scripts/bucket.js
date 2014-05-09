@@ -19,7 +19,7 @@ var BUCKET_METHOD ={
             var convo = [];
             var convoId = feed[0]['conversationId'];
             for (var i=0;i<conversation_data.length;i++) {
-                if (parseInt(convoId) === conversation_data[i]['conversationId']) {
+                if (convoId == conversation_data[i]['conversationId']) {
                     convo.push(conversation_data[i]);
                 }
             }
@@ -43,8 +43,8 @@ var BUCKET_METHOD ={
 
             $('.selBucket').click(function(e){
              
-             if ($(e.target).attr('bucketIdentifier') === 'dripps') {
-                feed = dripps_data;
+                if ($(e.target).attr('bucketIdentifier') === 'dripps') {
+                    feed = dripps_data;
 
                 }
 
@@ -59,7 +59,7 @@ var BUCKET_METHOD ={
                 
                 $('#items').html(itemHTML);
 
-                  if ($(e.target).attr('bucketIdentifier') === 'dripps') {
+                if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                 
                 var templateSource = $("#selDripp-template").html(),
                     
@@ -101,7 +101,7 @@ var BUCKET_METHOD ={
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/conversations',
-                data: {user: 1},
+                data: {user: 1418163097},
                 method:'get',
                 success: function(data2){
                     BUCKET_METHOD.compileBuckets(dripps_data, readItLater_data, data2);
@@ -116,7 +116,7 @@ var BUCKET_METHOD ={
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/buckets',
-                data: {user: 1},
+                data: {user: 1418163097},
                 method:'get',
                 success: function(data){
                     BUCKET_METHOD.handlerData2(dripps_data, data);
@@ -131,7 +131,7 @@ var BUCKET_METHOD ={
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/dripps',
-                data: {user: 1},
+                data: {user: 1418163097},
                 method:'get',
                 success:this.handlerData
             });
@@ -190,7 +190,7 @@ function bindButtons(){
                 
                 $.ajax({
                     url:'http://localhost:5000/likes',
-                    data: {user: 1, article: articleId},
+                    data: {user: 1418163097, article: articleId},
                     type:'get'
                 });
             });
@@ -219,7 +219,7 @@ function bindButtons(){
 
                 $.ajax({
                     url:'http://localhost:5000/dislikes',
-                    data: {user: 1, article: articleId},
+                    data: {user: 1418163097, article: articleId},
                     type:'get'
                 });
             });

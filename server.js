@@ -83,7 +83,27 @@ app.get("/conversations",  function(req, res){
     });
 });
 
-
+/* sends a list of (from content, conversationId, fName, lName, time ) ordered by time */
+app.get("/is_user",  function(req, res){
+    console.log("in user query");
+    var uid = req.query.uid;
+    var fName = req.query.fName;
+    var lName = req.query.lName;
+    console.log("uid is " + uid);
+    var get_is_user_query = "SELECT * FROM Users WHERE id = " + uid;
+    connection.query(get_is_user_query, function(err,rows,fields) {
+        console.log(rows);
+        if (err) throw err;
+        if (rows.length === 0) {
+            console.log("i'm trying to add a user");
+            var add_user_query = "INSERT INTO Users (id, fName, lName) VALUES (" + uid + ",'" + fName + "','" + lName + "')";
+            console.log(add_user_query);
+            connection.query(add_user_query, function(err,rows,fields) {
+                if (err) throw err;
+            });
+        }
+    });
+});
 
 
 

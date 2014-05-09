@@ -91,7 +91,7 @@ var ARTICLE_METHOD ={
                     $(".like.blue").attr("class", 'opinion like blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                     for(var i=0; i < window.likeList.length; i++){
@@ -109,7 +109,7 @@ var ARTICLE_METHOD ={
                     $("#down").text(--articlesData[articleId].numDislikes);
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                     articlesData[articleId]['userLiked'] = false;
@@ -121,7 +121,7 @@ var ARTICLE_METHOD ={
                     $(".like.blue").attr("class", 'opinion like blue');
                     $.ajax({
                         url:'http://localhost:5000/likes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                     internalLike.push(articleId);
@@ -141,7 +141,7 @@ var ARTICLE_METHOD ={
                     $(".dislike.blue").attr("class", 'opinion dislike blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                     return;
@@ -153,7 +153,7 @@ var ARTICLE_METHOD ={
                     $("#up").text(--articlesData[articleId].numLikes);
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                 };
@@ -164,7 +164,7 @@ var ARTICLE_METHOD ={
                     $(".dislike.blue").attr("class", 'opinion dislike blue');
                     $.ajax({
                         url:'http://localhost:5000/dislikes',
-                        data: {user: 1, article: articleId},
+                        data: {user: 1418163097, article: articleId},
                         type:'get'
                     });
                 };
@@ -186,7 +186,7 @@ var ARTICLE_METHOD ={
                 $(".readLater.blue").attr("class", 'opinion readLater blue');
                 $.ajax({
                     url:'http://localhost:5000/readItLater',
-                    data: {userId: 1, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
+                    data: {userId: 1418163097, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
                     type:'get'
                 });
             });
@@ -196,7 +196,7 @@ var ARTICLE_METHOD ={
  
             $.ajax({
                 url:'http://localhost:5000/articles',
-                data: {user: 1},
+                data: {user: 1418163097},
                 method:'get',
                 success:this.handlerData
             });

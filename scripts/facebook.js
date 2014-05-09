@@ -40,15 +40,34 @@ xfbml      : true  // parse XFBML
 			  window.location.assign("http://localhost:5000");
 			});
 		});
+		FB.api('/me', function(response) {
+        	console.log("Welcome " + response.name + ": Your UID is " + response.id); 
+        	console.log(response);
+
+    	    $.ajax({
+                // url:'json/articles.json',
+                url:'http://localhost:5000/is_user',
+                data: {uid: response.id, fName: response.first_name, lName: response.last_name},
+                method:'get',
+                success:this.userData
+            });
+
+    	});
+
+
 	});
+ 
 
 };
 
 // Load the SDK asynchronously
 (function(d){
 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-if (d.getElementById(id)) {return;}
-js = d.createElement('script'); js.id = id; js.async = true;
+	if (d.getElementById(id)) {
+		return;
+	}
+js = d.createElement('script');
+js.id = id; js.async = true;
 js.src = "//connect.facebook.net/en_US/all.js";
 ref.parentNode.insertBefore(js, ref);
 }(document));
@@ -60,11 +79,32 @@ ref.parentNode.insertBefore(js, ref);
 function getFriends() {
 	FB.api( "/me/friends",
 		function (response) {
-			console.log(response.data);
+			for (var i=0;i<response.data.length;i++) {
+				if (response.data[i]['name'] == 'Darshan Patel') {
+					console.log("Darshan is " + response.data[i]['id']);
+				}
+			}
 				if (response && !response.error) {
 			/* handle the result */
 				}
 		}
 	);
 }
+
+//check if user is already in database
+// function userData (results) {
+// 	if(results.length) { //already in database
+// 		console.log("Welcome, " + results[0].fName);
+// 	} else { // need to add
+// 		console.log("tryna add");
+// 		console.log(results);
+// 		$.ajax({
+//             // url:'json/articles.json',
+//             url:'http://localhost:5000/add_user',
+//             data: {id: results.id, fName: },
+//             method:'get',
+//             success:this.userData
+//         });
+// 	}
+// };
 
