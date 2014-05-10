@@ -5,11 +5,15 @@
 	    <link rel="shortcut icon" href="images/drop.png">
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/dripps.css">
+	    <link rel="stylesheet" href="css/facebook.css">
+	    <link rel="stylesheet" href="css/modal.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
 		<script type="text/javascript" src="/scripts/jquery.js"></script>
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
 		<script type="text/javascript" src="/scripts/slider.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
+		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
+		<script type="text/javascript" src="/scripts/modal.js"></script>
 	</head>
     <body>
     	<div id="fb-root"></div>
@@ -205,6 +209,14 @@
 							});
 						</script>
 					</script>
+	           		<form id="fb-form" class="modal">
+	        			<p id = "chosen">
+						</p>
+	        			<input id = "fb-input" type = "text" autocomplete="off">
+	        			<br>
+	        			<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">Send </a>
+	        		</form>
+
 					<div class = "row">
 						<div class = "col-md-1">
 						</div>

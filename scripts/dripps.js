@@ -45,23 +45,6 @@ var ARTICLE_METHOD ={
 
                 var articleId = window.curArticle;
                 console.log(articleId);
-                // if (articlesResults[articleId]['userLiked']) {
-                //         $(".like.grey2").attr("class", 'opinion like grey2 hide')
-                //         $(".like.blue").attr("class", 'opinion like blue');
-                //     }
-                //     if (articlesResults[articleId]['userLiked'] === false) {
-                //         $(".like.grey2").attr("class", 'opinion like grey2')
-                //         $(".like.blue").attr("class", 'opinion like blue hide');
-                //     }
-                //     if (articlesResults[articleId]['userDisliked']) {
-                //         $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide')
-                //         $(".dislike.blue").attr("class", 'opinion dislike blue');
-                //     }
-                //     if (articlesResults[articleId]['userDisliked'] === false) {
-                //         $(".dislike.grey2").attr("class", 'opinion dislike grey2')
-                //         $(".dislike.blue").attr("class", 'opinion dislike blue hide');
-                //     }
-
 
                 $('.categ').css("background", "white");
                 $('.categ').css("color", "#6D6E70");
@@ -84,7 +67,7 @@ var ARTICLE_METHOD ={
             var internalLike = [];
            	$(".like").click(function(){
                 var articleId = window.curArticle;
-
+                console.log(window.chosenFriend);
                 if($('.like.grey2').hasClass('hide')) {
                     $("#up").text(--articlesData[articleId].numLikes);
                     $(".like.grey2").attr("class", 'opinion like grey2');
@@ -172,11 +155,16 @@ var ARTICLE_METHOD ={
 
             $(".dripp").click(function(){
                 var articleId = window.curArticle;
-                var recipientUserId =prompt("Please enter your name");
-                $.ajax({
-                    url:'http://localhost:5000/sendDripp',
-                    data: {recipientUserId: recipientUserId, fromUserId: 4, recipientGroup: 0, recipientFriendIds: 0, articleId: articleId, timeSent: "2014-04-29 17:12:58", conversationId: 1, isRead: 1},
-                    type:'get'
+                $('#fb-form').modal({
+                    fadeDuration: 250,
+                    fadeDelay: 1.2
+                });
+                $('#fb-form').bind("keyup keypress", function(e) {
+                    var code = e.keyCode || e.which; 
+                    if (code  == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
                 });
             });
 

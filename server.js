@@ -231,22 +231,32 @@ app.get("/removeDislikes", function(req, res) {
 });
 
 app.get("/sendDripp", function(req, res) {
-    var recipientUserId = req.query.recipientUserId;
     var fromUserId = req.query.fromUserId;
     var recipientGroup = req.query.recipientGroup;
     var recipientFriendIds = req.query.recipientFriendIds;
     var articleId = req.query.articleId;
-    var timeSent = req.query.timeSent;
-    var conversationId = req.query.conversationId;
-    var isRead = req.query.isRead;
+    var convoId;
+    var set_send_query;
 
-    var set_send_query = 'INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (' + recipientUserId + ',' + fromUserId + ',' +recipientGroup + ',' + recipientFriendIds + ',' +  articleId + ',' + "'" + timeSent + "'" + ',' + conversationId + ',' + isRead + ')';
-    console.log(set_send_query);
-    connection.query(set_send_query, function(err,rows,fields) {
+    var max_id_query = "SELECT MAX(conversationId) FROM Dripps;";
+    connection.query(max_id_query, function(err,rows,fields) {
             if (err) throw err;
-            console.log("Inserted into Dripps table that user " + fromUserId + " sent article " + articleId);
+            console.log(rows);
+            convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+
+            for(var jj=0; jj < recipientFriendIds.length; jj++){
+                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
+                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0)";
+                console.log(set_send_query);
+                connection.query(set_send_query, function(err,rows,fields) {
+                    if (err) throw err;
+                    console.log(rows);
+                    res.send(200);                
+                });   
+            }
     });
 });
+
 
 app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
