@@ -7,7 +7,6 @@ var ARTICLE_METHOD ={
             article_results = resJSON;
             console.log(resJSON);
 
-
             var articlesData = {};
             articlesData["All"] = [];
             var cat;
@@ -44,7 +43,6 @@ var ARTICLE_METHOD ={
                 
 
                 var articleId = window.curArticle;
-                console.log(articleId);
 
                 $('.categ').css("background", "white");
                 $('.categ').css("color", "#6D6E70");
@@ -67,14 +65,13 @@ var ARTICLE_METHOD ={
             var internalLike = [];
            	$(".like").click(function(){
                 var articleId = window.curArticle;
-                console.log(window.chosenFriend);
                 if($('.like.grey2').hasClass('hide')) {
                     $("#up").text(--articlesData[articleId].numLikes);
                     $(".like.grey2").attr("class", 'opinion like grey2');
                     $(".like.blue").attr("class", 'opinion like blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
                     for(var i=0; i < window.likeList.length; i++){
@@ -92,19 +89,24 @@ var ARTICLE_METHOD ={
                     $("#down").text(--articlesData[articleId].numDislikes);
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userLiked'] = false;
+                    for(var i=0; i < window.dislikeList.length; i++){
+                        if (articleId === window.dislikeList[i]) {
+                            dislikeList.splice(dislikeList.indexOf(articleId),1);
+                        }
+                    }
+                    articlesData[articleId]['userLiked'] = true;
+                    articlesData[articleId]['userDisliked'] = false;                
                 };
-
                 if($('.like.blue').hasClass('hide')) {
                     $("#up").text(++articlesData[articleId].numLikes);
                     $(".like.grey2").attr("class", 'opinion like grey2 hide')
                     $(".like.blue").attr("class", 'opinion like blue');
                     $.ajax({
                         url:'http://localhost:5000/likes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
                     internalLike.push(articleId);
@@ -113,20 +115,25 @@ var ARTICLE_METHOD ={
                 window.likeList = internalLike;
 			});
 
-            console.log(window.likeList);    
-
+            window.dislikeList = [];
+            var internalDislike = [];
 			$(".dislike").click(function(){
                 var articleId = window.curArticle;
-
                 if($('.dislike.grey2').hasClass('hide')) {
                     $("#down").text(--articlesData[articleId].numDislikes);
                     $(".dislike.grey2").attr("class", 'opinion dislike grey2');
                     $(".dislike.blue").attr("class", 'opinion dislike blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
+                    for(var i=0; i < window.dislikeList.length; i++){
+                        if (articleId === window.dislikeList[i]) {
+                            dislikeList.splice(dislikeList.indexOf(articleId),1);
+                        }
+                    }
+                    articlesData[articleId]['userDisliked'] = false;
                     return;
                 };
 
@@ -136,9 +143,16 @@ var ARTICLE_METHOD ={
                     $("#up").text(--articlesData[articleId].numLikes);
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
+                    for(var i=0; i < window.likeList.length; i++){
+                        if (articleId === window.likeList[i]) {
+                            likeList.splice(likeList.indexOf(articleId),1);
+                        }
+                    }
+                    articlesData[articleId]['userLiked'] = false;
+                    articlesData[articleId]['userDisliked'] = true;
                 };
 
                 if($('.dislike.blue').hasClass('hide')) {
@@ -147,10 +161,13 @@ var ARTICLE_METHOD ={
                     $(".dislike.blue").attr("class", 'opinion dislike blue');
                     $.ajax({
                         url:'http://localhost:5000/dislikes',
-                        data: {user: 1418163097, article: articleId},
+                        data: {user: window.myID, article: articleId},
                         type:'get'
                     });
+                    internalDislike.push(articleId);
+                    articlesData[articleId]['userDisliked'] = true;
                 };
+                window.dislikeList = internalDislike;
 			});
 
             $(".dripp").click(function(){
@@ -168,23 +185,46 @@ var ARTICLE_METHOD ={
                 });
             });
 
+            window.readList = [];
+            var internalReadList = [];
             $(".readLater").click(function(){
                 var articleId = window.curArticle;
-                $(".readLater.grey2").attr("class", 'opinion readLater grey2 hide');
-                $(".readLater.blue").attr("class", 'opinion readLater blue');
-                $.ajax({
-                    url:'http://localhost:5000/readItLater',
-                    data: {userId: 1418163097, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
-                    type:'get'
-                });
+                if($('.readLater.grey2').hasClass('hide')) {
+                    console.log('da');
+                    $(".readLater.grey2").attr("class", 'opinion readLater grey2');
+                    $(".readLater.blue").attr("class", 'opinion readLater blue hide');
+                    $.ajax({
+                        url:'http://localhost:5000/removeReadItLater',
+                        data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
+                        type:'get'
+                    });
+                    for(var i=0; i < window.readList.length; i++){
+                        if (articleId === window.readList[i]) {
+                            readList.splice(readList.indexOf(articleId),1);
+                        }
+                    }
+                return;
+                }
+                if($('.readLater.blue').hasClass('hide')) {
+                    console.log('d');
+                    $(".readLater.grey2").attr("class", 'opinion readLater grey2 hide');
+                    $(".readLater.blue").attr("class", 'opinion readLater blue');
+                    $.ajax({
+                        url:'http://localhost:5000/readItLater',
+                        data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
+                        type:'get'
+                    });
+                    internalReadList.push(articleId);
+                }
+                window.readList = internalReadList;
             });
         },
 
         loadArticleData : function(){
- 
+    
             $.ajax({
                 url:'http://localhost:5000/articles',
-                data: {user: 1418163097},
+                data: {user: 1}, //need to fix for current user
                 method:'get',
                 success:this.handlerData
             });

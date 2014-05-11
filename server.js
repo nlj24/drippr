@@ -238,22 +238,22 @@ app.get("/sendDripp", function(req, res) {
     var convoId;
     var set_send_query;
 
-    var max_id_query = "SELECT MAX(conversationId) FROM Dripps;";
+    var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
     connection.query(max_id_query, function(err,rows,fields) {
-            if (err) throw err;
-            console.log(rows);
-            convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+        if (err) throw err;
+        console.log(rows);
+        convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
 
-            for(var jj=0; jj < recipientFriendIds.length; jj++){
-                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
-                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0)";
-                console.log(set_send_query);
-                connection.query(set_send_query, function(err,rows,fields) {
-                    if (err) throw err;
-                    console.log(rows);
-                    res.send(200);                
-                });   
-            }
+        for(var jj=0; jj < recipientFriendIds.length; jj++){
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
+                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + 1 + ",0)";
+            console.log(set_send_query);
+            connection.query(set_send_query, function(err,rows,fields) {
+                if (err) throw err;
+                console.log(rows);
+                // res.send(200);                
+            });   
+        }
     });
 });
 
@@ -262,17 +262,27 @@ app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
     var name = req.query.name;
     var articleId = req.query.articleId;
-    var dateAdded = req.query.dateAdded;
     var bucketId = req.query.bucketId;
 
-    var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ',' + "'" + dateAdded + "'" + ',' +  bucketId + ')';
+    var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ", NOW()," +  bucketId + ')';
     console.log(set_read_query);
     connection.query(set_read_query, function(err,rows,fields) {
-            if (err) throw err;
-            console.log("Inserted into Bucket table that user " + userId + " saved article " + articleId);
+        if (err) throw err;
+        console.log("Inserted into Bucket table that user " + userId + " saved article " + articleId);
     });
 });
 
+app.get("/removeReadItLater", function(req, res) {
+    var userId = req.query.userId;
+    var articleId = req.query.articleId;
+
+    var set_read_query = 'DELETE FROM Buckets WHERE userId =' +userId + ' AND articleId = ' +  articleId + " LIMIT 1";;
+    console.log(set_read_query);
+    connection.query(set_read_query, function(err,rows,fields) {
+        if (err) throw err;
+        console.log("Deleted into Bucket table that user " + userId + " deleted article " + articleId);
+    });
+});
 
 /* -----------------------------------------------*/
 

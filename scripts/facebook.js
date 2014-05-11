@@ -5,7 +5,7 @@ status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true  // parse XFBML
 });
-
+console.log('first');
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -17,36 +17,50 @@ xfbml      : true  // parse XFBML
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
 			getFriends();
-			var chosenFriends = {};
-			var ids = [];
-			var myID = response.authResponse.userID;
+			window.chosenFriends = {}; //don't tell Ashwin about this!!
+			window.ids = [];
+			window.myID = response.authResponse.userID;
 			$('#fb-input').facebookAutocomplete({
 				showAvatars: true,
 				avatarSize: 50,
 				maxSuggestions: 8,
 				onpick: function (friend) {
+					var add_to_dom = false;
 					console.log("You picked: " + friend.name + " with an ID of " + friend.id);
-					if (!(friend.id in chosenFriends)) {
-						ids.push(friend.id);
+					if (!(friend.id in window.chosenFriends)) {
+						window.ids.push(friend.id);
+						add_to_dom = true;
 					}
-					chosenFriends[friend.id] = friend;
-					console.log(chosenFriends);
-					var chosenHTML = chosenFriends[ids[0]]['name'];
-					for (var i = 1; i < ids.length; i++) {
-						chosenHTML += ", " + chosenFriends[ids[i]]['name'];
-					}
-					$('#chosen').html(chosenHTML);
-					$(".send").click(function(){
+					window.chosenFriends[friend.id] = friend;
 
-						$.ajax({
-			                url:'http://localhost:5000/sendDripp',
-			                data: {fromUserId: myID, recipientGroup: -1, recipientFriendIds: ids, articleId: window.curArticle},
-			                type:'get'
-			            });
-					});
+					if(add_to_dom) {
+						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>x</div></div>");
+					}
+
+					$(".rm" ).unbind("click", handler2);
+                        $(".rm").bind("click", handler2);
+                    var handler2 = $('.rm').click(function(e) {
+                        var id = $(e.target).attr('id');
+                        console.log(id);
+                        delete window.chosenFriends[id];
+                        window.ids.splice(window.ids.indexOf(id),1);
+						$("#"+id).remove();
+                    });                        
 				}
-
 			});
+					$(".send").click(function(){
+						console.log('about to cum');
+						if (ids.length > 0) {
+							$.ajax({
+				                url:'http://localhost:5000/sendDripp',
+				                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
+				                type:'get'
+				            });
+						}
+			            window.chosenFriends = {};
+						window.ids=[];
+						$('#chosen').empty();
+					});
             
 		} else if (response.status === 'not_authorized') {
 			// In this case, the person is logged into Facebook, but not into the app, so we call

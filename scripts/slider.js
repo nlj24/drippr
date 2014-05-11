@@ -31,6 +31,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		                $(".dislike.grey2").attr("class", 'opinion dislike grey2')
 		                $(".dislike.blue").attr("class", 'opinion dislike blue hide');
 		            }
+		            window.chosenFriends = {};
+					window.ids=[];
+					$('#chosen').empty();
 			    },
 			 
 			    goTo: function(index) {
@@ -50,22 +53,38 @@ var Slider = function() { this.initialize.apply(this, arguments) }
                 	$(".blue").addClass("hide");
                 	var articleId = window.curArticle;
 		            if (articlesResults[articleId]['userLiked']) {
-		                $(".like.grey2").attr("class", 'opinion like grey2 hide')
+		                $(".like.grey2").attr("class", 'opinion like grey2 hide');
 		                $(".like.blue").attr("class", 'opinion like blue');
 		            }
 		            if (articlesResults[articleId]['userDisliked']) {
-		                $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide')
+		                $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide');
 		                $(".dislike.blue").attr("class", 'opinion dislike blue');
 		            }
 
-		            console.log(window.likeList);
 		            for(var i=0; i < window.likeList.length; i++){
 		            	if (articleId === window.likeList[i]) {
-			            	$(".like.grey2").attr("class", 'opinion like grey2 hide')
+			            	$(".like.grey2").attr("class", 'opinion like grey2 hide');
 			                $(".like.blue").attr("class", 'opinion like blue');
 			                $("#up").text(articlesResults[articleId].numLikes);
 			            }
-		            } 
+		            }
+		            for(var i=0; i < window.dislikeList.length; i++){
+		            	if (articleId === window.dislikeList[i]) {
+			            	$(".dislike.grey2").attr("class", 'opinion dislike grey2 hide');
+			                $(".dislike.blue").attr("class", 'opinion dislike blue');
+			                $("#down").text(articlesResults[articleId].numDislikes);
+			            }
+		            }
+		            console.log(readList);
+		            for(var i=0; i < window.readList.length; i++){
+		            	if (articleId === window.readList[i]) {
+			            	$(".readLater.grey2").attr("class", 'opinion readLater grey2 hide');
+			                $(".readLater.blue").attr("class", 'opinion readLater blue');
+			            }
+		            }
+		            window.chosenFriends = {};
+					window.ids=[];
+					$('#chosen').empty();
 			    },
 			 
 			    goToPrev: function() {
