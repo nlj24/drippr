@@ -1,7 +1,7 @@
 .modal {
   display: none;
   width: 600px;
-  background: #fff;
+  background: #e9eaed;
   padding: 15px 30px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -54,5 +54,28 @@
 }
 
 .friends {
-  border: 1px solid red;
+  display: inline-block;
+  background-color: #A3DCFF;
+  padding: 10px;
+  border: 1px solid #6D6E70;
+  border-radius: 10px;
+}
+
+.rm {
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.fbPics {
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+#fb-input {
+  margin-top: 25px;
+}
+
+#close {
+  float: right;
 }

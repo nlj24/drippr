@@ -5,5 +5,3 @@ Things To Do
 	-data representation
 	-sockets and triggers
 	-inbox, sent (inbox/sent ordered by unread messages/articles)
-
--small pics

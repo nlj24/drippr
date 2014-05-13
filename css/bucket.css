@@ -1,4 +1,4 @@
-/*lightBlue: #82C6ED
+/*lightBlue: #A3DCFF
 darkBlue: #1C75BB
 lightGrey: #e9eaed
 darkGrey: #6D6E70*/
@@ -9,7 +9,7 @@ body {
   color: #6D6E70;
 }
 
-.mainCatDiv {
+.mainItemDiv {
   height: 689px;
   background-color: white;
   overflow: scroll;
@@ -26,90 +26,27 @@ body {
   border-right: 1px solid #e5e5e5;
 }
 
-.headBub {
-  border-radius: 100%;
-  background-color: #6D6E70;
-  height: 70px;
-  width: 70px;
-  color: #6D6E70;
-  margin: 10px auto;
-  float: none
-  display: table-cell;
-  line-height: 70px;
-  text-align: center;
-  display: inline-block;
-}
-
-.chosenHeadBub {
-  border-radius: 50px;
-  background-color: #6D6E70;
-  height: 70px;
-  width: 165px;
-  color: #6D6E70;
-  margin-top: 10px;
-  line-height: 70px;
-}
-
-.headBubImg {
-  width: 40px;
-  height: 40px;
-}
-
-.choosenHeadBubImg {
-  width: 40px;
-  height: 40px;
-}
-
-#dripprdiv {
-  height: 70px;
-  line-height: 90px;
-  text-align: center;
-}
-
-#logo {
-  max-height: 75px;
-  max-width: 125px;
-}
-
 #selPage {
   font-size: 25px;
   color:white;
   text-align: center;
 }
 
-#fb {
-  float: right;
-}
-
-.menuBar {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.header {
-  background-color: #A3DCFF;
-}
-
-.headingPad {
-  padding-left: 0px;
-}
-
-.headingPad1 {
-  width: 175px
-}
-
-.headingPad2 {
-  width: 80px
-}
-
-#headline {
+#headlineBucket {
   text-align: center;
   font-size: 40px;
 }
 
-#fitImage {
-  max-width: 300px;
+#fitImageBucket {
+  max-width: 800px;
   max-height: 300px;
+  border-radius: 10px;
+}
+
+#imageDivBucket {
+  text-align: center;
+  height: 350px;
+  line-height: 350px;
 }
 
 .indMess {
@@ -117,11 +54,19 @@ body {
 }
 
 #conversation {
-  height: 500px;
-  background-color: #82C6ED;
+  height: 300px;
+  background-color: #A3DCFF;
   overflow: scroll;
 }
 
-#convoCont {
+.opinionBucket {
+  height: 85px;
+  width: 85px;
+  cursor: pointer;
+}
+
+#opContainer {
   height: 500px;
+  line-height: 125px;
+  padding-left: 50px;
 }

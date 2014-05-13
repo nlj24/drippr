@@ -35,7 +35,7 @@ var connection;
             for(var jj=0; jj < inner_rows.length; jj++){
                 articles_dict[inner_rows[jj].articleId]["userDisliked"] = true;
             }         
-            console.log(articles_dict);
+            // console.log(articles_dict);
 
             articles_list = [];
             for(var id in articles_dict){
@@ -64,8 +64,8 @@ app.get("/buckets", function(req, res){
 /* sends a list of (from name, headline, conversationId ) ordered by time */
 app.get("/dripps", function(req, res){
     var userId = req.param('user');
-
-    var get_inbox_articles_query = "SELECT Dripps.id, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    console.log(userId);
+    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
             if (err) throw err;
             res.send(rows);
@@ -75,12 +75,26 @@ app.get("/dripps", function(req, res){
 /* sends a list of (from content, conversationId, fName, lName, time ) ordered by time */
 app.get("/conversations",  function(req, res){
     var userId = req.param('user');
+    var get_conversations_ids_query = "SELECT DISTINCT conversationId FROM Dripps WHERE fromUserId = " + userId + " OR recipientUserId = "+ userId;
+    connection.query(get_conversations_ids_query, function(err,rows,fields) {
+            if (err) throw err;
+            var id_list = "(" + rows[0]['conversationId'];
+            for (var i = 1; i < rows.length; i++) {
+                id_list += ("," + rows[i]['conversationId']);
+            };
+            id_list += ")";
 
-    var get_conversations_articles_query = "SELECT content, conversationId, fName, lName, time FROM Conversations INNER JOIN Users ON Conversations.userId = Users.id ORDER BY Conversations.time";
+    var get_conversations_articles_query = "SELECT content, conversationId, fName, lName, time FROM Conversations INNER JOIN Users ON Conversations.userId = Users.id WHERE conversationId IN " + id_list + " ORDER BY Conversations.time";
+    console.log(get_conversations_articles_query);
     connection.query(get_conversations_articles_query, function(err,rows,fields) {
             if (err) throw err;
+            console.log("loading convo data????");
+            console.log(rows);
             res.send(rows);
-    });
+    });    
+});
+
+    
 });
 
 /* sends a list of (from content, conversationId, fName, lName, time ) ordered by time */

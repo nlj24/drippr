@@ -39,6 +39,7 @@ body {
   line-height: 70px;
   text-align: center;
   display: inline-block;
+  cursor: pointer;
 }
 
 .chosenHeadBub {
@@ -49,14 +50,10 @@ body {
   color: #6D6E70;
   margin-top: 10px;
   line-height: 70px;
+  cursor: pointer;
 }
 
 .headBubImg {
-  width: 40px;
-  height: 40px;
-}
-
-.choosenHeadBubImg {
   width: 40px;
   height: 40px;
 }
@@ -129,7 +126,7 @@ body {
   line-height: 33px;
 }
 
-#headline {
+#headlineDripp {
   text-decoration: none;
   color: #6D6E70;
 }
@@ -138,7 +135,7 @@ body {
   color: #1C75BB;
 }
 
-.opinion {
+.opinionDripp {
   height: 55px;
   width: 70px;
   cursor: pointer;
@@ -169,17 +166,19 @@ body {
   text-align: center;
 }
 
-#imageDiv {
+#imageDivDripp {
   height: 530px;
   line-height: 530px;
   text-align: center;
 }
 
-#fitimage {
+#fitimageDripp {
   max-width: 100%;
   max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
+  min-width: 400px;
+  min-height: 275px;
 }
 
 .word {
@@ -202,7 +201,7 @@ body {
 }
 
 .headingPad {
-  padding-left: 0px;
+  padding-left: 10px;
 }
 
 .headingPad1 {

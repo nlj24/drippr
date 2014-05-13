@@ -16,24 +16,33 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					var articleId = window.curArticle;
 					console.log(articlesResults[articleId]['userLiked']);
 					if (articlesResults[articleId]['userLiked']) {
-		                $(".like.grey2").attr("class", 'opinion like grey2 hide')
-		                $(".like.blue").attr("class", 'opinion like blue');
+		                $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
+		                $(".like.blue").attr("class", 'opinionDripp like blue');
 		            }
 		            if (articlesResults[articleId]['userLiked'] === false) {
-		                $(".like.grey2").attr("class", 'opinion like grey2')
-		                $(".like.blue").attr("class", 'opinion like blue hide');
+		                $(".like.grey2").attr("class", 'opinionDripp like grey2')
+		                $(".like.blue").attr("class", 'opinionDripp like blue hide');
 		            }
 		            if (articlesResults[articleId]['userDisliked']) {
-		                $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide')
-		                $(".dislike.blue").attr("class", 'opinion dislike blue');
+		                $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
+		                $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
 		            }
 		            if (articlesResults[articleId]['userDisliked'] === false) {
-		                $(".dislike.grey2").attr("class", 'opinion dislike grey2')
-		                $(".dislike.blue").attr("class", 'opinion dislike blue hide');
+		                $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
+		                $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
 		            }
 		            window.chosenFriends = {};
 					window.ids=[];
 					$('#chosen').empty();
+
+					$(document).keydown(function(e){
+                        if (e.keyCode == 37) {
+                            javascript:sliders[0].goToPrev();
+                        }
+                        if (e.keyCode == 39) {
+                            javascript:sliders[0].goToNext();
+                        }
+                    });
 			    },
 			 
 			    goTo: function(index) {
@@ -53,40 +62,40 @@ var Slider = function() { this.initialize.apply(this, arguments) }
                 	$(".blue").addClass("hide");
                 	var articleId = window.curArticle;
 		            if (articlesResults[articleId]['userLiked']) {
-		                $(".like.grey2").attr("class", 'opinion like grey2 hide');
-		                $(".like.blue").attr("class", 'opinion like blue');
+		                $(".like.grey2").attr("class", 'opinionDripp like grey2 hide');
+		                $(".like.blue").attr("class", 'opinionDripp like blue');
 		            }
 		            if (articlesResults[articleId]['userDisliked']) {
-		                $(".dislike.grey2").attr("class", 'opinion dislike grey2 hide');
-		                $(".dislike.blue").attr("class", 'opinion dislike blue');
+		                $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide');
+		                $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
 		            }
 
 		            for(var i=0; i < window.likeList.length; i++){
 		            	if (articleId === window.likeList[i]) {
-			            	$(".like.grey2").attr("class", 'opinion like grey2 hide');
-			                $(".like.blue").attr("class", 'opinion like blue');
+			            	$(".like.grey2").attr("class", 'opinionDripp like grey2 hide');
+			                $(".like.blue").attr("class", 'opinionDripp like blue');
 			                $("#up").text(articlesResults[articleId].numLikes);
 			            }
 		            }
 		            for(var i=0; i < window.dislikeList.length; i++){
 		            	if (articleId === window.dislikeList[i]) {
-			            	$(".dislike.grey2").attr("class", 'opinion dislike grey2 hide');
-			                $(".dislike.blue").attr("class", 'opinion dislike blue');
+			            	$(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide');
+			                $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
 			                $("#down").text(articlesResults[articleId].numDislikes);
 			            }
 		            }
 		            console.log(readList);
 		            for(var i=0; i < window.readList.length; i++){
 		            	if (articleId === window.readList[i]) {
-			            	$(".readLater.grey2").attr("class", 'opinion readLater grey2 hide');
-			                $(".readLater.blue").attr("class", 'opinion readLater blue');
+			            	$(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide');
+			                $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
 			            }
 		            }
 		            window.chosenFriends = {};
 					window.ids=[];
 					$('#chosen').empty();
 			    },
-			 
+			 	
 			    goToPrev: function() {
 					this.goTo(this.currentIndex - 1);
 			    },

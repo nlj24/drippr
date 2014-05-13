@@ -5,18 +5,16 @@ status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true  // parse XFBML
 });
-console.log('first');
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
 // will be handled. 
-	FB.Event.subscribe('auth.authResponseChange', function(response) {
+	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		// Here we specify what we do with the response anytime this event occurs. 
 		if (response.status === 'connected') {
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
-			getFriends();
 			window.chosenFriends = {}; //don't tell Ashwin about this!!
 			window.ids = [];
 			window.myID = response.authResponse.userID;
@@ -34,7 +32,8 @@ console.log('first');
 					window.chosenFriends[friend.id] = friend;
 
 					if(add_to_dom) {
-						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>x</div></div>");
+						console.log(window.chosenFriends[window.ids[(window.ids.length-1)]]['picture']);
+						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
 					}
 
 					$(".rm" ).unbind("click", handler2);
@@ -48,19 +47,29 @@ console.log('first');
                     });                        
 				}
 			});
-					$(".send").click(function(){
-						console.log('about to cum');
-						if (ids.length > 0) {
-							$.ajax({
-				                url:'http://localhost:5000/sendDripp',
-				                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
-				                type:'get'
-				            });
-						}
-			            window.chosenFriends = {};
-						window.ids=[];
-						$('#chosen').empty();
-					});
+			$(".send").click(function(){
+				if (ids.length > 0) {
+					$.ajax({
+		                url:'http://localhost:5000/sendDripp',
+		                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
+		                type:'get'
+		            });
+				}
+				if (ids.length > 0) {
+					$(".showForm").attr("class", "showForm hide");
+					$(".success").attr("class", "success");
+				}
+	            window.chosenFriends = {};
+				window.ids=[];
+				$('#chosen').empty();
+			});
+			$(".close").click(function(){
+				$.modal.close();
+			});
+			console.log('d');
+			if (window.href) {};
+			window.ARTICLE_METHOD.loadArticleData();
+
             
 		} else if (response.status === 'not_authorized') {
 			// In this case, the person is logged into Facebook, but not into the app, so we call
@@ -119,20 +128,3 @@ ref.parentNode.insertBefore(js, ref);
 
 // Here we run a very simple test of the Graph API after login is successful. 
 // This testAPI() function is only called in those cases. 
-
-// Gets Facebook friends as an array of Objects 
-function getFriends() {
-	FB.api( "/me/friends",
-		function (response) {
-			console.log(response);
-			for (var i=0;i<response.data.length;i++) {
-				if (response.data[i]['name'] == 'Darshan Patel') {
-					console.log("Darshan is " + response.data[i]['id']);
-				}
-			}
-				if (response && !response.error) {
-			/* handle the result */
-				}
-		}
-	);
-}

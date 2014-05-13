@@ -5,10 +5,13 @@
 	    <link rel="shortcut icon" href="images/dropBlue.svg">
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/bucket.css">
+	    <link rel="stylesheet" href="css/modal.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
 		<script type="text/javascript" src="/scripts/jquery.js"></script>
 		<script type="text/javascript" src="/scripts/bucket.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
+		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
+		<script type="text/javascript" src="/scripts/modal.js"></script>
 	</head>
     <body>
     	<div id="fb-root"></div>
@@ -80,7 +83,7 @@
 				        </div>
 			        </script>
 				</div>
-	        	<div class = "col-md-9">
+	        	<div class = "col-md-7">
 		        	<div id="selDripp">
 		        	</div>
 		        	<script id="selDripp-template" type="text/x-handlebars-template">
@@ -89,19 +92,23 @@
 				        		<div class = "row" id = "headline">
 				        			{{headline}}
 				        		</div>
-				        		<div class = "row">
+				        		<div class = "row" id = "imageDiv">
 				        			<img id = "fitImage" src = {{imgUrl}}>
 				        		</div>
 			        		{{/each}}
 		        		</div>
 			        	<div id="messagesDiv">
-			        		<div class = "row" id = "lowestDiv">
-			        			<div id = "conversation">
+			        		<div class = "row">
+			        			<div class = "col-md-2">
+			        			</div>
+			        			<div class = "col-md-8" id = "conversation">
 				        			{{#each messages}}
 				        				<div class = "indMess">
 				        					{{fName}} {{lName}}: {{content}} Time: {{time}}
 				        				</div>
 			        				{{/each}}
+			        			</div>
+			        			<div class = "col-md-2">
 			        			</div>
 			        		</div>
 		        		</div>
@@ -116,6 +123,33 @@
 			        		</div>
 		        		</div>
 					</script>
+				</div>
+				<div class = "col-md-2" id = "opContainer">
+					<div class = "opDiv">
+						<img src = "images/readLater.svg" class="opinion readLater grey2">
+						<img src = "images/readLaterBlue.svg" class="opinion readLater blue hide">
+					</div>
+            		<div>
+						<div class = "opDiv">
+							<img src = "images/like.svg" class="opinion like grey2">
+							<img src = "images/likeBlue.svg" class="opinion like blue hide">
+						</div>
+						<p class = "number" id = "up">
+						</p>
+        			</div>
+        			<div>
+						<div class = "opDiv">
+							<img src = "images/dislike.svg" class="opinion dislike grey2">
+							<img src = "images/dislikeBlue.svg" class="opinion dislike blue hide">
+						</div>
+						<p class = "number" id = "down">
+						</p>
+					</div>
+					<div class = "opDiv">
+						<img src = "images/drop.svg" class = "opinion dripp">
+						<img src = "images/dropBlue.svg" class = "opinion dripp hide">
+					</div>
+							
 				</div>
 			</div>
 		</div>
