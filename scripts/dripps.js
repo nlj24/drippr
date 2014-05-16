@@ -1,26 +1,4 @@
 var article_results;
-$(document).ready(function(){
-    $(".drippsBub").click(function(){
-    $("#buckets").attr("class", "container-fluid hide");
-    $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
-
-    $("#dripps").attr("class", "container-fluid");
-    $("#drippsHeader").attr("class", "col-md-5 headingPad");
-
-    });
-
-    $(".bucketsBub").click(function(){
-        $("#dripps").attr("class", "container-fluid hide");
-        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
-
-        $("#buckets").attr("class", "container-fluid");
-        $("#bucketsHeader").attr("class", "col-md-5 headingPad");
-        
-    });
-});
-
-
-
 
 window.ARTICLE_METHOD ={
 
@@ -49,6 +27,14 @@ window.ARTICLE_METHOD ={
             template = Handlebars.compile(templateSource),
             articleHTML = template({"articles":feed});
             $('#articles').html(articleHTML);
+
+            $(".drippsBub").click(function(){
+                window.setLikes();
+                $("#buckets").attr("class", "container-fluid hide");
+                $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
+                $("#dripps").attr("class", "container-fluid");
+                $("#drippsHeader").attr("class", "col-md-5 headingPad");
+            });
 
             $(".topCat").css("background", "#6D6E70");
             $('.topCat').css("color", "white");
@@ -81,12 +67,10 @@ window.ARTICLE_METHOD ={
                 $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
             });
             
-            window.likeList = [];
-            var internalLike = [];
            	$(".like").click(function(){
                 var articleId = window.curArticle;
                 if($('.like.grey2').hasClass('hide')) {
-                    $("#up").text(--articlesData[articleId].numLikes);
+                    $(".up").text(--articlesData[articleId].numLikes);
                     $(".like.grey2").attr("class", 'opinionDripp like grey2');
                     $(".like.blue").attr("class", 'opinionDripp like blue hide');
                     $.ajax({
@@ -94,11 +78,6 @@ window.ARTICLE_METHOD ={
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    for(var i=0; i < window.likeList.length; i++){
-                        if (articleId === window.likeList[i]) {
-                            likeList.splice(likeList.indexOf(articleId),1);
-                        }
-                    }
                     articlesData[articleId]['userLiked'] = false;
                     return;
                 };
@@ -106,22 +85,17 @@ window.ARTICLE_METHOD ={
                 if ($(".dislike.grey2").hasClass("hide")) {
                     $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2');
                     $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
-                    $("#down").text(--articlesData[articleId].numDislikes);
+                    $(".down").text(--articlesData[articleId].numDislikes);
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    for(var i=0; i < window.dislikeList.length; i++){
-                        if (articleId === window.dislikeList[i]) {
-                            dislikeList.splice(dislikeList.indexOf(articleId),1);
-                        }
-                    }
                     articlesData[articleId]['userLiked'] = true;
                     articlesData[articleId]['userDisliked'] = false;                
                 };
                 if($('.like.blue').hasClass('hide')) {
-                    $("#up").text(++articlesData[articleId].numLikes);
+                    $(".up").text(++articlesData[articleId].numLikes);
                     $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
                     $(".like.blue").attr("class", 'opinionDripp like blue');
                     $.ajax({
@@ -129,30 +103,21 @@ window.ARTICLE_METHOD ={
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    internalLike.push(articleId);
                     articlesData[articleId]['userLiked'] = true;
                 };
-                window.likeList = internalLike;
 			});
 
-            window.dislikeList = [];
-            var internalDislike = [];
 			$(".dislike").click(function(){
                 var articleId = window.curArticle;
                 if($('.dislike.grey2').hasClass('hide')) {
-                    $("#down").text(--articlesData[articleId].numDislikes);
+                    $(".down").text(--articlesData[articleId].numDislikes);
                     $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2');
                     $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
-                    });
-                    for(var i=0; i < window.dislikeList.length; i++){
-                        if (articleId === window.dislikeList[i]) {
-                            dislikeList.splice(dislikeList.indexOf(articleId),1);
-                        }
-                    }
+                    }); 
                     articlesData[articleId]['userDisliked'] = false;
                     return;
                 };
@@ -160,23 +125,18 @@ window.ARTICLE_METHOD ={
                 if ($(".like.grey2").hasClass("hide")) {
                     $(".like.grey2").attr("class", 'opinionDripp like grey2');
                     $(".like.blue").attr("class", 'opinionDripp like blue hide');
-                    $("#up").text(--articlesData[articleId].numLikes);
+                    $(".up").text(--articlesData[articleId].numLikes);
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    for(var i=0; i < window.likeList.length; i++){
-                        if (articleId === window.likeList[i]) {
-                            likeList.splice(likeList.indexOf(articleId),1);
-                        }
-                    }
                     articlesData[articleId]['userLiked'] = false;
                     articlesData[articleId]['userDisliked'] = true;
                 };
 
                 if($('.dislike.blue').hasClass('hide')) {
-                    $("#down").text(++articlesData[articleId].numDislikes);
+                    $(".down").text(++articlesData[articleId].numDislikes);
                     $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide');
                     $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
                     $.ajax({
@@ -184,10 +144,8 @@ window.ARTICLE_METHOD ={
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    internalDislike.push(articleId);
                     articlesData[articleId]['userDisliked'] = true;
                 };
-                window.dislikeList = internalDislike;
 			});
 
             $(".dripp").click(function(){
@@ -236,6 +194,15 @@ window.ARTICLE_METHOD ={
                     internalReadList.push(articleId);
                 }
                 window.readList = internalReadList;
+            });
+
+            $(document).keydown(function(e){
+                if (e.keyCode == 37) {
+                    javascript:sliders[0].goToPrev();
+                }
+                if (e.keyCode == 39) {
+                    javascript:sliders[0].goToNext();
+                }
             });
         },
 

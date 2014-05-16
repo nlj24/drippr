@@ -57,7 +57,7 @@
     			</div>
     			<div class = "col-md-2 headingPad2">
     				<div class = "headBub">
-    					<img class = "headBubImg" src = "/images/settings.svg">
+    					<img class = "headBubImg" src = "/images/group.svg">
     				</div>
     			</div>
     		</div>
@@ -81,7 +81,7 @@
     			</div>
     			<div class = "col-md-2 headingPad2">
     				<div class = "headBub">
-    					<img class = "headBubImg" src = "/images/settings.svg">
+    					<img class = "headBubImg" src = "/images/group.svg">
     				</div>
     			</div>
     		</div>
@@ -95,212 +95,215 @@
         	</div>
 			<div class = "col-md-5">
 				<div id = "fb">
-					<fb:login-button show-faces="true" width="200" max-rows="1">
-					</fb:login-button>
-					<div id = "logout">logout</div>
+					<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">
+					</div>
 				</div>
 			</div>
 		</div> 
         <!-- end HEADER -->
 
 
-		<div id="dripps" class = "container-fluid ">
-
-    	<div class = "row">
-        	<div class = "menuBar col-md-3">
-	        	<div class = "mainCatDiv">
-	        		<div  class = "categ row topCat" category="All">
-	        			<div class = "col-md-9">
-	        				<p id="All" class = "word">all</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg topCatImg grey" category="all" src = "/images/all.svg">
-	        				<img class = "catImg hide topCatImg white" category="all" src = "/images/allWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Politics">
-	        			<div class = "col-md-9">
-	        				<p class = "word">politics</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
-	        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Sports">
-	        			<div class = "col-md-9">
-	        				<p id="Sports" class = "word">sports</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="sports" src = "/images/sports.svg">
-	        				<img class = "catImg hide white" category="sports" src = "/images/sportsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="World">
-	        			<div class = "col-md-9">
-	        				<p id="World" class = "word">world</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="world" src = "/images/world.svg">
-	        				<img class = "catImg hide white" category="world" src = "/images/worldWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Entertainment">
-	        			<div class = "col-md-9">
-	        				<p class = "word">entertainment</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
-	        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Tech">
-	        			<div class = "col-md-9">
-	        				<p class = "word">tech</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
-	        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="USA">
-	        			<div class = "col-md-9">
-	        				<p class = "word">usa</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
-	        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Science">
-	        			<div class = "col-md-9">
-	        				<p class = "word">science</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
-	        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="Business">
-	        			<div class = "col-md-9">
-	        				<p class = "word">business</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="business" src = "/images/business.svg">
-	        				<img class = "catImg hide white" category="business" src = "/images/businessWhite.svg">
-	        			</div>
-	        		</div>
-	        		<div class = "categ row" category="USA">
-	        			<div class = "col-md-9">
-	        				<p class = "word">fashion</p>
-	        			</div>
-	        			<div class = "col-md-3">
-	        				<img class = "catImg grey" category="fashion" src = "/images/fashion.svg">
-	        				<img class = "catImg hide white" category="fashion" src = "/images/fashionWhite.svg">
-	        			</div>
-	        		</div>
-		        </div>
-        	</div>
-        	<div class = "col-md-1 arrowDiv">
-	        	<a href = "javascript:sliders[0].goToPrev()">
-		        	<div class = "arrow" id = "prevArrow">
-		        		<img src = "/images/revArrow.svg">
-					</div>
-				</a>
-			</div>
-        	<div class = "col-md-7" id = "sliderPad">
-	        	<div id="articles">
+		<div id="dripps" class = "container-fluid hide">
+    		<div class = "row">
+	        	<div class = "menuBar col-md-3">
+		        	<div class = "mainCatDiv">
+		        		<div  class = "categ row topCat" category="All">
+		        			<div class = "col-md-9">
+		        				<p id="All" class = "word">all</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg topCatImg grey" category="all" src = "/images/all.svg">
+		        				<img class = "catImg hide topCatImg white" category="all" src = "/images/allWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Politics">
+		        			<div class = "col-md-9">
+		        				<p class = "word">politics</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
+		        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Sports">
+		        			<div class = "col-md-9">
+		        				<p id="Sports" class = "word">sports</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="sports" src = "/images/sports.svg">
+		        				<img class = "catImg hide white" category="sports" src = "/images/sportsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="World">
+		        			<div class = "col-md-9">
+		        				<p id="World" class = "word">world</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="world" src = "/images/world.svg">
+		        				<img class = "catImg hide white" category="world" src = "/images/worldWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Entertainment">
+		        			<div class = "col-md-9">
+		        				<p class = "word">entertainment</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
+		        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Tech">
+		        			<div class = "col-md-9">
+		        				<p class = "word">tech</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
+		        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="USA">
+		        			<div class = "col-md-9">
+		        				<p class = "word">usa</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
+		        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Science">
+		        			<div class = "col-md-9">
+		        				<p class = "word">science</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="politics" src = "/images/politics.svg">
+		        				<img class = "catImg hide white" category="politics" src = "/images/politicsWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="Business">
+		        			<div class = "col-md-9">
+		        				<p class = "word">business</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="business" src = "/images/business.svg">
+		        				<img class = "catImg hide white" category="business" src = "/images/businessWhite.svg">
+		        			</div>
+		        		</div>
+		        		<div class = "categ row" category="USA">
+		        			<div class = "col-md-9">
+		        				<p class = "word">fashion</p>
+		        			</div>
+		        			<div class = "col-md-3">
+		        				<img class = "catImg grey" category="fashion" src = "/images/fashion.svg">
+		        				<img class = "catImg hide white" category="fashion" src = "/images/fashionWhite.svg">
+		        			</div>
+		        		</div>
+			        </div>
 	        	</div>
-        		<script id="article-template" type="text/x-handlebars-template"> 
-	        		<div class = "row">
-						<div class = "col-md-10 sliderWidth">
-							<div class="slider">
-					            <ul>
-					            	{{#each articles}}
-					                	<li id = {{this.id}} numlikes={{this.numLikes}} numdislikes={{this.numDislikes}}>
-							                <div class = "mainBubble">
-												<h3 id = "source"> 
-													{{ this.source }}
-												</h3>
-								                <div class = "headlineDiv">
-								                	<a id = "headlineDripp" href = "{{ this.url }}" target="_blank">
-									                	{{ this.headline }}
-							                		</a>
-							                	</div>
-							                	<div id = "imageDivDripp">
-									                <a href = "{{ this.url }}" target="_blank">
-									                	<img id = "fitimageDripp" src = "{{ this.imgUrl }}" >
-								                	</a>
-							                	</div>
-							                </div>
-					                	</li> 
-					            	{{/each}}
-					            </ul>
-			            	</div>
-			            </div>
-					</div>
-					<script>
-						var sliders = [];
-						$('.slider').each(function() {
-						sliders.push(new Slider(this))
-						});
+	        	<div class = "col-md-1 arrowDiv">
+		        	<a href = "javascript:sliders[0].goToPrev()">
+			        	<div class = "arrow" id = "prevArrow">
+			        		<img src = "/images/revArrow.svg">
+						</div>
+					</a>
+				</div>
+	        	<div class = "col-md-7" id = "sliderPad">
+		        	<div id="articles">
+		        	</div>
+	        		<script id="article-template" type="text/x-handlebars-template"> 
+		        		<div class = "row">
+							<div class = "col-md-10 sliderWidth">
+								<div class="slider">
+						            <ul>
+						            	{{#each articles}}
+						                	<li id = {{this.id}} numlikes={{this.numLikes}} numdislikes={{this.numDislikes}}>
+								                <div class = "mainBubble">
+													<h3 id = "source"> 
+														{{ this.source }}
+													</h3>
+									                <div class = "headlineDiv">
+									                	<a id = "headlineDripp" href = "{{ this.url }}" target="_blank">
+										                	{{ this.headline }}
+								                		</a>
+								                	</div>
+								                	<div id = "imageDivDripp">
+										                <a href = "{{ this.url }}" target="_blank">
+										                	<img id = "fitimageDripp" src = "{{ this.imgUrl }}" >
+									                	</a>
+								                	</div>
+								                </div>
+						                	</li> 
+						            	{{/each}}
+						            </ul>
+				            	</div>
+				            </div>
+						</div>
+						<script>
+							var sliders = [];
+							$('.slider').each(function() {
+							sliders.push(new Slider(this))
+							});
+						</script>
 					</script>
-				</script>
 
-				<div class = "row">
-					<div class = "col-md-1">
-					</div>
-					<div class = "row col-md-10">
-		                <div class = "col-md-3">
-							<div class = "opDiv">
-								<img src = "images/readLater.svg" class="opinionDripp readLater grey2">
-								<img src = "images/readLaterBlue.svg" class="opinionDripp readLater blue hide">
-							</div>
-	                	</div>
-	                	<div class = "row col-md-4">
-		                	<div class = "col-md-6">
+					<div class = "row">
+						<div class = "col-md-1">
+						</div>
+						<div class = "row col-md-10">
+			                <div class = "col-md-3">
 								<div class = "opDiv">
-									<img src = "images/like.svg" class="opinionDripp like grey2">
-									<img src = "images/likeBlue.svg" class="opinionDripp like blue hide">
+									<img src = "images/readLater.svg" class="opinionDripp readLater grey2">
+									<img src = "images/readLaterBlue.svg" class="opinionDripp readLater blue hide">
+								</div>
+		                	</div>
+		                	<div class = "row col-md-4">
+			                	<div class = "col-md-6">
+									<div class = "opDiv">
+										<img src = "images/like.svg" class="opinionDripp like grey2">
+										<img src = "images/likeBlue.svg" class="opinionDripp like blue hide">
+									</div>
+								</div>
+								<div class = "col-md-6">
+									<p class = "number up">
+									</p>
+		                		</div>
+		                	</div>
+		                	<div class = "row col-md-4">
+			                	<div class = "col-md-6">
+									<div class = "opDiv">
+										<img src = "images/dislike.svg" class="opinionDripp dislike grey2">
+										<img src = "images/dislikeBlue.svg" class="opinionDripp dislike blue hide">
+									</div>
+								</div>
+								<div class = "col-md-6">
+									<p class = "number down">
+									</p>
 								</div>
 							</div>
-							<div class = "col-md-6">
-								<p class = "number" id = "up">
-								</p>
-	                		</div>
-	                	</div>
-	                	<div class = "row col-md-4">
-		                	<div class = "col-md-6">
+							<div class = "col-md-1">
 								<div class = "opDiv">
-									<img src = "images/dislike.svg" class="opinionDripp dislike grey2">
-									<img src = "images/dislikeBlue.svg" class="opinionDripp dislike blue hide">
+									<img src = "images/drop.svg" class = "opinionDripp dripp">
+									<img src = "images/dropBlue.svg" class = "opinionDripp dripp hide">
 								</div>
-							</div>
-							<div class = "col-md-6">
-								<p class = "number" id = "down">
-								</p>
 							</div>
 						</div>
 						<div class = "col-md-1">
-							<div class = "opDiv">
-								<img src = "images/drop.svg" class = "opinionDripp dripp">
-								<img src = "images/dropBlue.svg" class = "opinionDripp dripp hide">
-							</div>
 						</div>
-					</div>
-					<div class = "col-md-1">
-					</div>
-                </div>
-			</div>
-			<div class = "col-md-1 arrowDiv">
-				<a href = "javascript:sliders[0].goToNext()">
-					<div class = "arrow" id = "nextArrow">
-						<img src = "/images/arrow.svg">
-					</div>
-				</a>
+	                </div>
+				</div>
+				<div class = "col-md-1 arrowDiv">
+					<a href = "javascript:sliders[0].goToNext()">
+						<div class = "arrow" id = "nextArrow">
+							<img src = "/images/arrow.svg">
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
-	</div>
+		<div id="dripps" class = "container-fluid hide">
+			drippr is sooooo cool.
+			<iframe width="420" height="345" src="http://www.youtube.com/v/AtKZKl7Bgu0">
+			</iframe>
+		</div>
 	
 <!--- BUCKETs HTML -->
 	<div id="buckets" class = "container-fluid hide">
@@ -308,7 +311,7 @@
     		<div class = "menuBar col-md-3">
     			
 
-    			<div id="accordion">
+    			<!-- <div id="accordion">
 					<div class="group">
 						<h3>
 							Selected
@@ -321,7 +324,7 @@
 						</div>
 					</div>
 				</div>
-
+ -->
 
 
 
@@ -364,10 +367,13 @@
 		        			</div>
 		        			<div class = "col-md-8" id = "conversation">
 			        			{{#each messages}}
-			        				<div class = "indMess">
+			        				<div class = "indMess {{userId}}">
+			        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
 			        					{{fName}} {{lName}}: {{content}} Time: {{time}}
 			        				</div>
 		        				{{/each}}
+		        			<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
+		        			<div id = "messageSend"> Send </div>
 		        			</div>
 		        			<div class = "col-md-2">
 		        			</div>
@@ -395,7 +401,7 @@
 						<img src = "images/like.svg" class="opinionBucket like grey2">
 						<img src = "images/likeBlue.svg" class="opinionBucket like blue hide">
 					</div>
-					<p class = "number" id = "up">
+					<p class = "number up">
 					</p>
     			</div>
     			<div>
@@ -403,7 +409,7 @@
 						<img src = "images/dislike.svg" class="opinionBucket dislike grey2">
 						<img src = "images/dislikeBlue.svg" class="opinionBucket dislike blue hide">
 					</div>
-					<p class = "number" id = "down">
+					<p class = "number down">
 					</p>
 				</div>
 				<div class = "opDiv">
@@ -414,13 +420,31 @@
 			</div>
 		</div>
 	</div>
-	<form id="fb-form" class="modal">
-			<div class = "showForm">
-				<div class = "close"> X </div>
-				Send a dripp
+	<div class = "container-fluid">
+		<div id = "chosenCont">
 			<div id = "chosen">
 			</div>
+		</div>
+		<input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
+		<a class="btn group"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
+	</div>
+	<form id="fb-form" class="modal">
+		<div class = "showForm">
+			<div class = "close">
+				X 
+			</div>
+			<p id = "modalTitle">
+				Send a dripp
+			</p>
+			<div id = "chosenCont">
+				<div id = "chosen">
+				</div>
+			</div>
 			<input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
+			<br>
+			<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">Send </a>
+			<br>
+			<input id = "group-input" type = "text" autocomplete="off">
 			<br>
 			<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">Send </a>
 		</div>

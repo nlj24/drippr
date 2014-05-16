@@ -50,7 +50,7 @@ body {
 }
 
 .indMess {
-  max-width: 200px;
+  text-align: right;
 }
 
 #conversation {
@@ -69,4 +69,27 @@ body {
   height: 500px;
   line-height: 125px;
   padding-left: 50px;
+}
+
+.ownMess {
+  text-align: left;
+}
+
+#messageSend {
+  position: absolute;
+  bottom: 0;
+  right:0;
+  display: inline-block;
+  background-color: #6D6E70;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+#messageInput {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  display: inline-block;
 }

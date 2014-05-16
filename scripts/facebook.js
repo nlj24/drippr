@@ -5,6 +5,12 @@ status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true  // parse XFBML
 });
+FB.Event.subscribe("auth.logout", function() {
+	window.fbAsyncInit();
+	window.ARTICLE_METHOD.loadArticleData();
+	window.BUCKET_METHOD.loadArticleData();
+	window.location = 'http://localhost:5000';
+});
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -24,7 +30,6 @@ xfbml      : true  // parse XFBML
 				maxSuggestions: 8,
 				onpick: function (friend) {
 					var add_to_dom = false;
-					console.log("You picked: " + friend.name + " with an ID of " + friend.id);
 					if (!(friend.id in window.chosenFriends)) {
 						window.ids.push(friend.id);
 						add_to_dom = true;
@@ -32,7 +37,6 @@ xfbml      : true  // parse XFBML
 					window.chosenFriends[friend.id] = friend;
 
 					if(add_to_dom) {
-						console.log(window.chosenFriends[window.ids[(window.ids.length-1)]]['picture']);
 						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
 					}
 
@@ -40,7 +44,6 @@ xfbml      : true  // parse XFBML
                         $(".rm").bind("click", handler2);
                     var handler2 = $('.rm').click(function(e) {
                         var id = $(e.target).attr('id');
-                        console.log(id);
                         delete window.chosenFriends[id];
                         window.ids.splice(window.ids.indexOf(id),1);
 						$("#"+id).remove();
@@ -63,12 +66,24 @@ xfbml      : true  // parse XFBML
 				window.ids=[];
 				$('#chosen').empty();
 			});
+
+			$(".group").click(function(){
+				console.log(window.ids);
+                if (content !== '') {
+                    $.ajax({
+                        url:'http://localhost:5000/createGroup',
+                        data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
+                        type:'get'
+                	});
+                }
+            });
+
 			$(".close").click(function(){
 				$.modal.close();
 			});
-			console.log('d');
-			if (window.href) {};
+
 			window.ARTICLE_METHOD.loadArticleData();
+			window.BUCKET_METHOD.loadArticleData();
 
             
 		} else if (response.status === 'not_authorized') {
@@ -88,16 +103,7 @@ xfbml      : true  // parse XFBML
 			// The same caveats as above apply to the FB.login() call here.
 			FB.login();
 		}
-		$('#logout').click(function(){
-			FB.logout(function(response) {
-			  // user is now logged out
-			  window.location.assign("http://localhost:5000");
-			});
-		});
 		FB.api('/me', function(response) {
-        	console.log("Welcome " + response.name + ": Your UID is " + response.id); 
-        	console.log(response);
-
     	    $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/is_user',
@@ -115,16 +121,10 @@ xfbml      : true  // parse XFBML
 };
 
 // Load the SDK asynchronously
-(function(d){
-var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-	if (d.getElementById(id)) {
-		return;
-	}
-js = d.createElement('script');
-js.id = id; js.async = true;
-js.src = "//connect.facebook.net/en_US/all.js";
-ref.parentNode.insertBefore(js, ref);
-}(document));
-
-// Here we run a very simple test of the Graph API after login is successful. 
-// This testAPI() function is only called in those cases. 
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
