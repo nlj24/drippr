@@ -41,7 +41,8 @@ FB.Event.subscribe("auth.logout", function() {
 					}
 
 					$(".rm" ).unbind("click", handler2);
-                        $(".rm").bind("click", handler2);
+    				$(".rm").bind("click", handler2);
+
                     var handler2 = $('.rm').click(function(e) {
                         var id = $(e.target).attr('id');
                         delete window.chosenFriends[id];
@@ -50,6 +51,7 @@ FB.Event.subscribe("auth.logout", function() {
                     });                        
 				}
 			});
+
 			$(".send").click(function(){
 				if (ids.length > 0) {
 					$.ajax({
@@ -69,13 +71,15 @@ FB.Event.subscribe("auth.logout", function() {
 
 			$(".group").click(function(){
 				console.log(window.ids);
-                if (content !== '') {
+				window.ids.push(window.myID);
+                if (window.ids.length) {
                     $.ajax({
                         url:'http://localhost:5000/createGroup',
-                        data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
+                        data: {groupName: $('#groupName').val(), members: window.ids, creatorId: window.myID},
                         type:'get'
                 	});
                 }
+                window.ids = [];
             });
 
 			$(".close").click(function(){
@@ -104,6 +108,7 @@ FB.Event.subscribe("auth.logout", function() {
 			FB.login();
 		}
 		FB.api('/me', function(response) {
+			$("#user").html(response.first_name);
     	    $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/is_user',

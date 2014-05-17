@@ -40,13 +40,10 @@ var connection;
             for(var id in articles_dict){
                 articles_list.push(articles_dict[id]);
             }
-
             res.send(articles_list);
         });
-   
     });
-
- });
+});
 
 /* sends a list of bucket contents */
 app.get("/buckets", function(req, res){
@@ -130,10 +127,8 @@ app.get("/likes", function(req, res) {
 	    	if (err) throw err;
 	    	res.send(200);
 	    });
-
     }); 
-    // res.send(200);
- });
+});
 
 app.get("/removeLikes", function(req, res) {
     var userId = req.param('user');
@@ -154,7 +149,6 @@ app.get("/removeLikes", function(req, res) {
             if (err) throw err;
             res.send(200);
         });
-
     }); 
 });
 
@@ -178,9 +172,7 @@ app.get("/dislikes", function(req, res) {
             if (err) throw err;
             res.send(200);
         });
-
     }); 
-    // res.send(200);
 });
 
 app.get("/removeDislikes", function(req, res) {
@@ -203,9 +195,7 @@ app.get("/removeDislikes", function(req, res) {
             if (err) throw err;
             res.send(200);
         });
-
     }); 
-    // res.send(200);
 });
 
 app.get("/sendDripp", function(req, res) {
@@ -237,13 +227,64 @@ app.get("/sendConvo", function(req, res) {
     var userId = req.query.userId;
     var content = req.query.content;
 
-
     var set_convo_query = 'INSERT INTO Conversations (conversationId, userId, time, content) VALUES (' +conversationId + ',' +  userId + ", NOW(),'" + content + "')";
     connection.query(set_convo_query, function(err,rows,fields) {
         if (err) throw err;
     });
 });
 
+app.get("/createGroup", function(req, res) {
+    var groupName = req.query.groupName;
+    var members = req.query.members;
+    var creatorId = req.query.creatorId;
+
+    var get_max_id = "SELECT MAX(id) as id FROM Groups";
+    connection.query(get_max_id, function(err,rows,fields) {
+        if (err) throw err;
+        var next_id = parseInt(rows[0]["id"]) ? parseInt(rows[0]["id"]) + 1 : 1;
+
+        for(var ii=0; ii < members.length; ii++) {    
+            var create_group = "INSERT INTO Groups (name, members, id, creatorId) VALUES ('" + groupName + "','" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
+            connection.query(create_group, function(err,rows,fields) {
+                if (err) throw err;
+            });
+        }
+    });
+});
+
+app.get("/deleteGroup", function(req, res) {
+    var groupName = req.query.groupName;
+    var members = req.query.members;
+    var creatorId = req.query.creatorId;
+
+    var create_group = "INSERT INTO Groups (name, members, creatorId) VALUES ('" + groupName + "','" +  members + "'," + creatorId + ")";
+    console.log(create_group);
+    connection.query(create_group, function(err,rows,fields) {
+        if (err) throw err;
+    });
+});
+
+app.get("/groups", function(req, res) {
+    var userId = req.query.userId;
+
+    var my_groups_query = "SELECT id FROM Groups WHERE members=" + userId;
+
+    connection.query(my_groups_query, function(err,rows1,fields) {
+        if (err) throw err;
+        //make an array for member id's
+        var group_lst = "'" + rows1[0]["id"] + "'";
+        for(var ii = 1; ii < rows1.length; ii++) {
+            group_lst += ",'" + rows1[ii]["id"] + "'";
+        }
+        console.log(group_lst);
+
+        var members_info_query = "SELECT Groups.id, name, members, fName from Groups INNER JOIN Users on Users.id=members WHERE Groups.id IN(" + group_lst + ")";
+        connection.query(members_info_query, function(err,rows2,fields) {
+            if (err) throw err;
+            res.send(rows2);
+        });
+    });
+});
 
 app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
@@ -261,7 +302,7 @@ app.get("/removeReadItLater", function(req, res) {
     var userId = req.query.userId;
     var articleId = req.query.articleId;
 
-    var set_read_query = 'DELETE FROM Buckets WHERE userId =' +userId + ' AND articleId = ' +  articleId + " LIMIT 1";;
+    var set_read_query = 'DELETE FROM Buckets WHERE userId =' +userId + ' AND articleId = ' +  articleId + " LIMIT 1";
     connection.query(set_read_query, function(err,rows,fields) {
         if (err) throw err;
     });
@@ -270,23 +311,23 @@ app.get("/removeReadItLater", function(req, res) {
 /* -----------------------------------------------*/
 
  /* serves main page */
- app.get("/", function(req, res) {
+app.get("/", function(req, res) {
     res.sendfile(__dirname+'/dripps.html')
- });
+});
  
-  app.post("/user/add", function(req, res) { 
+app.post("/user/add", function(req, res) { 
     /* some server side logic */
     res.send("OK");
-  });
+});
  
  /* serves all the static files */
- app.get(/^(.+)$/, function(req, res){ 
+app.get(/^(.+)$/, function(req, res){ 
     res.sendfile( __dirname + req.params[0]); 
- });
+});
  
- var port = process.env.PORT || 5000;
+var port = process.env.PORT || 5000;
  
- app.listen(port, function() {
+app.listen(port, function() {
 
     connection = mysql.createConnection({
     host  : '54.86.82.21', 
@@ -297,8 +338,4 @@ app.get("/removeReadItLater", function(req, res) {
 
     connection.connect(function(err) {
     });
-
-
- });
-
-	
+});

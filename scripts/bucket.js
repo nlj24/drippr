@@ -2,7 +2,43 @@ var bucket_results;
 
 var feed; 
 
-window.BUCKET_METHOD ={
+window.BUCKET_METHOD = {
+
+        groupData:function(data) {
+            console.log(data);
+            // group_data = data["my_groups"];
+
+            // //create user dictionary to make logic with groups a bit better
+            // var users = {};
+            // for(var ii = 0; ii < data["users_in_groups"].length; ii++) {
+            //     users[data["users_in_groups"][ii].id] = {"fName": data["users_in_groups"][ii].fName, "lName": data["users_in_groups"][ii].lName, "id":data["users_in_groups"][ii].id}
+            // }
+
+            // //make a dictionary with keys = group id's and values = members
+            // var group_dict = {};
+            // for(var jj = 0; jj < group_data.length; jj++) {
+            //     group_dict[group_data[jj].id] = {};
+            //     group_dict[group_data[jj].id]["name"] = group_data[jj].name;
+            //     var members = group_data[jj].members.split(",");
+            //     group_dict[group_data[jj].id]["members"] = [];
+            //     group_dict[group_data[jj].id]["membersList"] = "";
+            //     group_dict[group_data[jj].id]["members"].push(users[members[0]]);
+            //     group_dict[group_data[jj].id]["membersList"] += users[members[0]].fName + " ";
+            //     group_dict[group_data[jj].id]["membersList"] += users[members[0]].lName;
+            //     for(var kk = 1; kk < members.length; kk++) {
+            //         group_dict[group_data[jj].id]["members"].push(users[members[kk]]);
+            //         group_dict[group_data[jj].id]["membersList"] += ", " + users[members[kk]].fName + " ";
+            //         group_dict[group_data[jj].id]["membersList"] += users[members[kk]].lName;
+            //     }
+            // }
+
+            // console.log(group_dict);
+            // var templateSource = $("#groups-template").html(),
+            // template = Handlebars.compile(templateSource),
+            // groupHTML = template({"groups":group_dict});
+            // $('#groups').html(groupHTML);
+        },
+
 
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
             
@@ -90,7 +126,15 @@ window.BUCKET_METHOD ={
                 bindMessages(messageListTemplate, conversation_data);
             });
             
-            bindMessages(messageListTemplate, conversation_data);            
+            bindMessages(messageListTemplate, conversation_data);     
+
+            $.ajax({
+                // url:'json/articles.json',
+                url:'http://localhost:5000/groups',
+                data: {userId: window.myID},
+                method:'get',
+                success: this.groupData
+            });       
             
         },
 
@@ -174,7 +218,7 @@ function bindButtons(){
 function displayConvos(selItem, convoId, template, conversation_data){
     convo = [];    
     for (var i=0;i<conversation_data.length;i++) {
-        if (convoId == conversation_data[i]['conversation_id']) {
+        if (convoId == conversation_data[i]['conversationId']) {
             convo.push(conversation_data[i]);
         }
     }
@@ -182,5 +226,8 @@ function displayConvos(selItem, convoId, template, conversation_data){
     $('#selDripp').html(drippsHTML);
     drippsHTML = template({"messages":convo});
     $('#messagesDiv').html(drippsHTML);
+    $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
 }
+
+
 

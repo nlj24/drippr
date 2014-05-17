@@ -215,5 +215,3 @@ window.ARTICLE_METHOD ={
             });
         },
 };
- 
-
