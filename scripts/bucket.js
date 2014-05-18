@@ -145,7 +145,9 @@ window.BUCKET_METHOD = {
         },
 
         handlerData:function(dripps_data){
-
+            if (dripps_data.length == 0) {
+                
+            }
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/buckets',

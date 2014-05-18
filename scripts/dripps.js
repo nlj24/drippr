@@ -36,6 +36,16 @@ window.ARTICLE_METHOD ={
                 $("#drippsHeader").attr("class", "col-md-5 headingPad");
             });
 
+            $(".groupsBub").click(function(){
+                window.setLikes();
+                $("#buckets").attr("class", "container-fluid hide");
+                $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
+                $("#dripps").attr("class", "container-fluid hide");
+                $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+                $("#groups").attr("class", "container-fluid hide");
+                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+            });
+
             $(".topCat").css("background", "#6D6E70");
             $('.topCat').css("color", "white");
             $(".topCatImg.grey").attr("class", 'topCatImg catImg grey hide');

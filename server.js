@@ -73,6 +73,10 @@ app.get("/conversations",  function(req, res){
     var get_conversations_ids_query = "SELECT DISTINCT conversationId FROM Dripps WHERE fromUserId = " + userId + " OR recipientUserId = "+ userId;
     connection.query(get_conversations_ids_query, function(err,rows,fields) {
             if (err) throw err;
+            if (rows.length == 0) {
+                res.send(rows);
+                
+            };
             var id_list = "(" + rows[0]['conversationId'];
             for (var i = 1; i < rows.length; i++) {
                 id_list += ("," + rows[i]['conversationId']);
@@ -82,6 +86,7 @@ app.get("/conversations",  function(req, res){
         connection.query(get_conversations_articles_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(rows);
+
         });    
     });   
 });
