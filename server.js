@@ -244,7 +244,7 @@ app.get("/createGroup", function(req, res) {
         var next_id = parseInt(rows[0]["id"]) ? parseInt(rows[0]["id"]) + 1 : 1;
 
         for(var ii=0; ii < members.length; ii++) {    
-            var create_group = "INSERT INTO Groups (name, members, id, creatorId) VALUES ('" + groupName + "','" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
+            var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES ('" + groupName + "','" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
             connection.query(create_group, function(err,rows,fields) {
                 if (err) throw err;
             });
@@ -257,7 +257,7 @@ app.get("/deleteGroup", function(req, res) {
     var members = req.query.members;
     var creatorId = req.query.creatorId;
 
-    var create_group = "INSERT INTO Groups (name, members, creatorId) VALUES ('" + groupName + "','" +  members + "'," + creatorId + ")";
+    var create_group = "INSERT INTO Groups (name, userId, creatorId) VALUES ('" + groupName + "','" +  members + "'," + creatorId + ")";
     console.log(create_group);
     connection.query(create_group, function(err,rows,fields) {
         if (err) throw err;
@@ -267,7 +267,7 @@ app.get("/deleteGroup", function(req, res) {
 app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
-    var my_groups_query = "SELECT id FROM Groups WHERE members=" + userId;
+    var my_groups_query = "SELECT id FROM Groups WHERE userId=" + userId;
 
     connection.query(my_groups_query, function(err,rows1,fields) {
         if (err) throw err;
@@ -278,7 +278,7 @@ app.get("/groups", function(req, res) {
         }
         console.log(group_lst);
 
-        var members_info_query = "SELECT Groups.id, name, members, fName from Groups INNER JOIN Users on Users.id=members WHERE Groups.id IN(" + group_lst + ")";
+        var members_info_query = "SELECT Groups.id, name, userId, fName, lName from Groups INNER JOIN Users on Users.id=userId WHERE Groups.id IN(" + group_lst + ")";
         connection.query(members_info_query, function(err,rows2,fields) {
             if (err) throw err;
             res.send(rows2);

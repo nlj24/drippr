@@ -6,37 +6,29 @@ window.BUCKET_METHOD = {
 
         groupData:function(data) {
             console.log(data);
-            // group_data = data["my_groups"];
 
-            // //create user dictionary to make logic with groups a bit better
-            // var users = {};
-            // for(var ii = 0; ii < data["users_in_groups"].length; ii++) {
-            //     users[data["users_in_groups"][ii].id] = {"fName": data["users_in_groups"][ii].fName, "lName": data["users_in_groups"][ii].lName, "id":data["users_in_groups"][ii].id}
-            // }
+            //(group id -> list of {id:name}?)
+            var members_dict = {};
+            window.groupList = [];
+            for (var jj = 0; jj < data.length; jj++) {
 
-            // //make a dictionary with keys = group id's and values = members
-            // var group_dict = {};
-            // for(var jj = 0; jj < group_data.length; jj++) {
-            //     group_dict[group_data[jj].id] = {};
-            //     group_dict[group_data[jj].id]["name"] = group_data[jj].name;
-            //     var members = group_data[jj].members.split(",");
-            //     group_dict[group_data[jj].id]["members"] = [];
-            //     group_dict[group_data[jj].id]["membersList"] = "";
-            //     group_dict[group_data[jj].id]["members"].push(users[members[0]]);
-            //     group_dict[group_data[jj].id]["membersList"] += users[members[0]].fName + " ";
-            //     group_dict[group_data[jj].id]["membersList"] += users[members[0]].lName;
-            //     for(var kk = 1; kk < members.length; kk++) {
-            //         group_dict[group_data[jj].id]["members"].push(users[members[kk]]);
-            //         group_dict[group_data[jj].id]["membersList"] += ", " + users[members[kk]].fName + " ";
-            //         group_dict[group_data[jj].id]["membersList"] += users[members[kk]].lName;
-            //     }
-            // }
+                if (!(members_dict[data[jj].id])) {
+                    window.groupList.push(data[jj].name);
+                    members_dict[data[jj].id] = {name:data[jj].name, list:[]};  
+                }
+                    
+                id = data[jj].userId;
+                userName = data[jj].fName +" " +data[jj].lName ;
+                members_dict[data[jj].id]['list'].push({name : userName});
+            } 
 
-            // console.log(group_dict);
-            // var templateSource = $("#groups-template").html(),
-            // template = Handlebars.compile(templateSource),
-            // groupHTML = template({"groups":group_dict});
-            // $('#groups').html(groupHTML);
+            console.log(members_dict);
+
+
+            var templateSource = $("#groups-template").html();
+            template = Handlebars.compile(templateSource);
+            groupHTML = template({"groups":members_dict});
+            $('#groups').html(groupHTML);
         },
 
 

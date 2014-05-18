@@ -69,13 +69,27 @@ FB.Event.subscribe("auth.logout", function() {
 				$('#chosen').empty();
 			});
 
-			$(".group").click(function(){
+			$("#groupBtn").click(function(){
 				console.log(window.ids);
 				window.ids.push(window.myID);
                 if (window.ids.length) {
+                	var groupName = $('#groupName').val();
+
+                	for(var kk = 0; kk < window.groupList.length; kk++){
+                		if (groupName == window.groupList[kk]) {
+                			alert("you already have a group with that name LOL");
+                			return;
+                		}
+                	}
+
+                	if (!(window.ids.length > 1)) {
+                		alert("must add some members!!!!");
+                		return;
+                	}
+
                     $.ajax({
                         url:'http://localhost:5000/createGroup',
-                        data: {groupName: $('#groupName').val(), members: window.ids, creatorId: window.myID},
+                        data: {groupName: groupName, members: window.ids, creatorId: window.myID},
                         type:'get'
                 	});
                 }

@@ -428,15 +428,17 @@
 		</div>
 		<input id = "fb-input" type = "text" autocomplete="off">
 		<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
-		<a class="btn group"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
+		<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
 		<div id="groups">
 	    </div>
 		<script id="groups-template" type="text/x-handlebars-template">
 			<div>
 				{{#each groups}}
 					<div>
-						{{this.name}}
-						{{this.membersList}}
+						<p class="groupName">{{this.name}}<p>
+						{{#each this.list}}
+							<p class="personName">{{this.name}} </p>
+						{{/each}}	
 					</div>
 				{{/each}}
 			</div>
