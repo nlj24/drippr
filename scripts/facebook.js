@@ -37,6 +37,7 @@ FB.Event.subscribe("auth.logout", function() {
 					window.chosenFriends[friend.id] = friend;
 
 					if(add_to_dom) {
+						console.log('hi');
 						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
 					}
 
@@ -145,5 +146,6 @@ FB.Event.subscribe("auth.logout", function() {
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js";
+  console.log(js.src);
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));

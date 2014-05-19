@@ -219,11 +219,18 @@ app.get("/sendDripp", function(req, res) {
     var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
     connection.query(max_id_query, function(err,rows,fields) {
         if (err) throw err;
-        convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+        console.log(rows);
+        if (rows[0]['MAX(conversationId)'] == null) {
+            convoId = 0;
+        }else{
+            convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+            
+        }
+        console.log(convoId);
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0)";
+                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
@@ -231,6 +238,7 @@ app.get("/sendDripp", function(req, res) {
             });   
         }
     });
+    res.send(201);
 });
 
 
