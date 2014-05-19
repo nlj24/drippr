@@ -229,7 +229,7 @@ app.get("/sendDripp", function(req, res) {
         console.log(convoId);
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
-            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
                 + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;

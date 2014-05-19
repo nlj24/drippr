@@ -8,6 +8,15 @@ Things To Do
 
 
 binding intial buckets
+fix modal size
+
+Styling
+Styling
+Styling
+Styling
+Styling
+Styling
+Styling
 
 readitlater re-add, load, categ
 what to do about empty table - Ashwin/Darshan, mostly done?
@@ -22,7 +31,7 @@ user existing issue
 logout issue
 display before login
 
-page little too wide
+Automatic article collection
 
 chrome extension - Poor Nate
 
