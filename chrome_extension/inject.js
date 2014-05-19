@@ -9,21 +9,22 @@ var injected = injected || (function(){
 
   // Return all of the background-color values
 methods.nate = function(){
+    console.log("HELLO");
     return window.location.href;
 }
 
 // This tells the script to listen for
 // messages from our extension.
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-var data = {};
-// If the method the extension has requested
-// exists, call it and assign its response
-// to data.
-if (methods.hasOwnProperty(request.method))
-  data = methods[request.method]();
-// Send the response back to our extension.
-sendResponse({ data: data });
-return true;
+    var data = {};
+    // If the method the extension has requested
+    // exists, call it and assign its response
+    // to data.
+    if (methods.hasOwnProperty(request.method))
+      data = methods[request.method]();
+    // Send the response back to our extension.
+    sendResponse({ data: data });
+    return true;
 });
 
   return true;

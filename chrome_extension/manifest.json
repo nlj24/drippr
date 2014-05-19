@@ -6,13 +6,9 @@
   "description": "share articles and links with friends",
 
   "browser_action": {
-    "default_icon": "drop.png"
+    "default_icon": "drop.png",
+    "default_popup" : "background.html"
   },
 
-  "background": {
-    "scripts": ["event.js"],
-    "persistent": false
-  },
-  
   "permissions": ["<all_urls>"]
 }
