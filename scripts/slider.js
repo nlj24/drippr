@@ -9,9 +9,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					// make <ul> as large as all <li>’s
 					this.ul.style.width = (this.li[0].clientWidth * this.li.length) + 'px';
 
-					this.currentIndex = 5;
+					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
-					window.setLikes();
+					window.setDrippLikes();
 					window.resetFB();
 			    },
 			 
@@ -27,7 +27,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					window.curArticle = this.li[this.currentIndex].id;
                 	var articleId = window.curArticle;
-                	window.setLikes();
+                	window.setDrippLikes();
 		            
 		            for(var i=0; i < window.readList.length; i++){
 		            	if (articleId === window.readList[i]) {
@@ -48,7 +48,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				}
 			}
 
-window.setLikes = function correctLikes() {
+window.setDrippLikes = function correctLikes() {
 	if (articlesResults[window.curArticle]['userLiked']) {
         $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
         $(".like.blue").attr("class", 'opinionDripp like blue');

@@ -7,7 +7,7 @@ Things To Do
 	-inbox, sent (inbox/sent ordered by unread messages/articles)
 
 
-binding intial buckets
+binding intial buckets (?)
 fix modal size
 
 Styling

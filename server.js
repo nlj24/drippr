@@ -27,20 +27,20 @@ var connection;
             for(var jj=0; jj < inner_rows.length; jj++){
                 articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
             }
-        });
 
-        //now do other query for dislikes
-        connection.query(dislike_query, function(err,inner_rows,fields) {
-            if(err) throw err;
-            for(var jj=0; jj < inner_rows.length; jj++){
-                articles_dict[inner_rows[jj].articleId]["userDisliked"] = true;
-            }         
+            //now do other query for dislikes
+            connection.query(dislike_query, function(err,inner_rows2,fields) {
+                if(err) throw err;
+                for(var jj=0; jj < inner_rows2.length; jj++){
+                    articles_dict[inner_rows2[jj].articleId]["userDisliked"] = true;
+                }         
 
-            articles_list = [];
-            for(var id in articles_dict){
-                articles_list.push(articles_dict[id]);
-            }
-            res.send(articles_list);
+                articles_list = [];
+                for(var id in articles_dict){
+                    articles_list.push(articles_dict[id]);
+                }
+                res.send(articles_list);
+            });
         });
     });
 });
@@ -61,9 +61,40 @@ app.get("/buckets", function(req, res){
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
     var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    
+    var like_query = 'SELECT * FROM Likes WHERE userId=' + userId;
+    var dislike_query = 'SELECT * FROM Dislikes WHERE userId=' + userId;
+
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
-            if (err) throw err;
-            res.send(rows);
+        if (err) throw err;
+        var articles_dict = {};
+        for(var ii=0; ii < rows.length; ii++){
+            articles_dict[rows[ii].id] = rows[ii];
+            articles_dict[rows[ii].id]["userLiked"] = false;
+            articles_dict[rows[ii].id]["userDisliked"] = false;
+        }
+
+        //now do other query for likes
+        connection.query(like_query, function(err,inner_rows,fields) {
+            if(err) throw err;
+            for(var jj=0; jj < inner_rows.length; jj++){
+                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
+            }
+
+            //now do other query for dislikes
+            connection.query(dislike_query, function(err,inner_rows2,fields) {
+                if(err) throw err;
+                for(var jj=0; jj < inner_rows2.length; jj++){
+                    articles_dict[inner_rows2[jj].articleId]["userDisliked"] = true;
+                }         
+
+                articles_list = [];
+                for(var id in articles_dict){
+                    articles_list.push(articles_dict[id]);
+                }
+                res.send(articles_list);
+            });
+        });
     });
 });
 
@@ -219,14 +250,12 @@ app.get("/sendDripp", function(req, res) {
     var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
     connection.query(max_id_query, function(err,rows,fields) {
         if (err) throw err;
-        console.log(rows);
         if (rows[0]['MAX(conversationId)'] == null) {
             convoId = 0;
         }else{
             convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
             
         }
-        console.log(convoId);
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
@@ -294,7 +323,6 @@ app.get("/groups", function(req, res) {
         for(var ii = 1; ii < rows1.length; ii++) {
             group_lst += ",'" + rows1[ii]["id"] + "'";
         }
-        console.log(group_lst);
 
         var members_info_query = "SELECT Groups.id, name, userId, fName, lName from Groups INNER JOIN Users on Users.id=userId WHERE Groups.id IN(" + group_lst + ")";
         connection.query(members_info_query, function(err,rows2,fields) {

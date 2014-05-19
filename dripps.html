@@ -368,7 +368,7 @@
 	        	<script id="items-template" type="text/x-handlebars-template">
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
-		        			<div class = "messageItem" id = {{id}} conversation_id = {{conversationId}}>
+		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
 		        				{{headline}}
 		        			</div>
 		        		{{/each}}
@@ -380,16 +380,13 @@
 	        	</div>
 	        	<script id="selDripp-template" type="text/x-handlebars-template">
 		        	<div>
-		        		{{#each selItems}}
-			        		<div class = "row" id = "headlineBucket">
-			        			{{headline}}
-			        		</div>
-			        		<div class = "row" id = "imageDivBucket">
-			        			<img id = "fitImageBucket" src = {{imgUrl}}>
-			        		</div>
-		        		{{/each}}
+		        		<div class = "row" id = "headlineBucket">
+		        			{{selItem.headline}}
+		        		</div>
+		        		<div class = "row" id = "imageDivBucket">
+		        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+		        		</div>
 	        		</div>
-		        	<div id="messagesDiv">
 		        		<div class = "row">
 		        			<div class = "col-md-2">
 		        			</div>
@@ -406,7 +403,6 @@
 		        			<div class = "col-md-2">
 		        			</div>
 		        		</div>
-	        		</div>
 	        	</script>
         		
         		<div id="selItem">

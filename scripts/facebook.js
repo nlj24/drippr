@@ -102,7 +102,6 @@ FB.Event.subscribe("auth.logout", function() {
 			});
 
 			window.ARTICLE_METHOD.loadArticleData();
-			window.BUCKET_METHOD.loadArticleData();
 
             
 		} else if (response.status === 'not_authorized') {
@@ -146,6 +145,5 @@ FB.Event.subscribe("auth.logout", function() {
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js";
-  console.log(js.src);
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
