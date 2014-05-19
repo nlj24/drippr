@@ -34,16 +34,17 @@ window.ARTICLE_METHOD ={
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#dripps").attr("class", "container-fluid");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad");
+                $("#groups").attr("class", "container-fluid hide");
+                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
             });
 
             $(".groupsBub").click(function(){
-                window.setLikes();
                 $("#buckets").attr("class", "container-fluid hide");
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#dripps").attr("class", "container-fluid hide");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
-                $("#groups").attr("class", "container-fluid hide");
-                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+                $("#groups").attr("class", "container-fluid");
+                $("#groupsHeader").attr("class", "col-md-5 headingPad");
             });
 
             $(".topCat").css("background", "#6D6E70");

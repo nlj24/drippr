@@ -56,7 +56,7 @@
     				</div>
     			</div>
     			<div class = "col-md-2 headingPad2">
-    				<div class = "headBub">
+    				<div class = "groupsBub headBub">
     					<img class = "headBubImg" src = "/images/group.svg">
     				</div>
     			</div>
@@ -80,8 +80,33 @@
     				</div>
     			</div>
     			<div class = "col-md-2 headingPad2">
-    				<div class = "headBub">
+    				<div class = "groupsBub headBub">
     					<img class = "headBubImg" src = "/images/group.svg">
+    				</div>
+    			</div>
+    		</div>
+
+    		<div id="groupsHeader" class = "col-md-5 headingPad hide">
+				<div class = "col-md-2 headingPad2">
+    				<div class = "drippsBub headBub">
+    					<img class = "headBubImg" src = "/images/dropWhite.svg">
+    				</div>
+        		</div>
+    			<div class = "col-md-2 headingPad2">
+    				<div class = "bucketsBub headBub">
+    					<img class = "headBubImg" src = "/images/bucket.svg">
+    				</div>
+    			</div>
+	        	<div class = "col-md-4 headingPad1">
+    				<div class = "groupsBub chosenHeadBub">
+    					<div class = "col-md-3">
+        					<img class = "headBubImg" src = "/images/group.svg">
+        				</div>
+        				<div class = "col-md-9">
+        					<p id = "selPage">
+    							groups
+    						</p>
+						</div>
     				</div>
     			</div>
     		</div>
@@ -104,7 +129,7 @@
         <!-- end HEADER -->
 
 
-		<div id="dripps" class = "container-fluid hide">
+		<div id="dripps" class = "container-fluid">
     		<div class = "row">
 	        	<div class = "menuBar col-md-3">
 		        	<div class = "mainCatDiv">
@@ -387,7 +412,7 @@
 	        	<script id="selItem-template" type="text/x-handlebars-template">
 		        	<div id="message">
 		        		<div class = "row">
-		   					jfkldsjfklsd 
+		   					No read it later articles.	 
 		        		</div>
 	        		</div>
 				</script>
@@ -421,23 +446,28 @@
 			</div>
 		</div>
 	</div>
-	<div class = "container-fluid hide">
-		<div id = "chosenCont">
-			<div id = "chosen">
-			</div>
-		</div>
-		<input id = "fb-input" type = "text" autocomplete="off">
-		<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
-		<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
-		<div id="groups">
-	    </div>
+	<div id="groups" class = "container-fluid hide">
 		<script id="groups-template" type="text/x-handlebars-template">
+			<div id = "chosenCont">
+				<div id = "chosen">
+				</div>
+			</div>
+			<input id = "fb-input" type = "text" autocomplete="off">
+			<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
+			<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
+			<div id="groups">
+		    </div>
 			<div>
 				{{#each groups}}
-					<div>
-						<p class="groupName">{{this.name}}<p>
+					<div id = group_{{this.id}}>
+							<h3>{{this.name}}</h3>
+							<div class = "deleteGroup" group_id={{this.id}}>
+								X
+						</div>
 						{{#each this.list}}
-							<p class="personName">{{this.name}} </p>
+							<div class="personName">
+								{{this.name}}
+							</div>
 						{{/each}}	
 					</div>
 				{{/each}}
