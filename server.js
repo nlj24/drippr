@@ -76,18 +76,21 @@ app.get("/conversations",  function(req, res){
             if (rows.length == 0) {
                 res.send(rows);
                 
-            };
-            var id_list = "(" + rows[0]['conversationId'];
-            for (var i = 1; i < rows.length; i++) {
-                id_list += ("," + rows[i]['conversationId']);
-            };
-            id_list += ")";
-        var get_conversations_articles_query = "SELECT content, conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users ON Conversations.userId = Users.id WHERE conversationId IN " + id_list + " ORDER BY Conversations.time";
-        connection.query(get_conversations_articles_query, function(err,rows,fields) {
-                if (err) throw err;
-                res.send(rows);
+            }
+            else{
 
-        });    
+                var id_list = "(" + rows[0]['conversationId'];
+                for (var i = 1; i < rows.length; i++) {
+                    id_list += ("," + rows[i]['conversationId']);
+                };
+                id_list += ")";
+                var get_conversations_articles_query = "SELECT content, conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users ON Conversations.userId = Users.id WHERE conversationId IN " + id_list + " ORDER BY Conversations.time";
+                connection.query(get_conversations_articles_query, function(err,rows,fields) {
+                    if (err) throw err;
+                    res.send(rows);
+
+                });    
+            }
     });   
 });
 
@@ -103,6 +106,8 @@ app.get("/is_user",  function(req, res){
             var add_user_query = "INSERT INTO Users (id, fName, lName) VALUES (" + uid + ",'" + fName + "','" + lName + "')";
             connection.query(add_user_query, function(err,rows,fields) {
                 if (err) throw err;
+                res.send(200);
+
             });
         }
     });
@@ -221,6 +226,8 @@ app.get("/sendDripp", function(req, res) {
                 + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
+                res.send(200);
+
             });   
         }
     });
@@ -252,20 +259,19 @@ app.get("/createGroup", function(req, res) {
             var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES ('" + groupName + "','" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
             connection.query(create_group, function(err,rows,fields) {
                 if (err) throw err;
+                res.send(200);
             });
         }
     });
 });
 
 app.get("/deleteGroup", function(req, res) {
-    var groupName = req.query.groupName;
-    var members = req.query.members;
-    var creatorId = req.query.creatorId;
+    var groupId = req.query.groupId;
 
-    var create_group = "INSERT INTO Groups (name, userId, creatorId) VALUES ('" + groupName + "','" +  members + "'," + creatorId + ")";
-    console.log(create_group);
-    connection.query(create_group, function(err,rows,fields) {
+    var delete_group = 'DELETE FROM Groups WHERE id =' + groupId;
+    connection.query(delete_group, function(err,rows,fields) {
         if (err) throw err;
+        res.send(200);
     });
 });
 
@@ -273,7 +279,6 @@ app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
     var my_groups_query = "SELECT id FROM Groups WHERE userId=" + userId;
-
     connection.query(my_groups_query, function(err,rows1,fields) {
         if (err) throw err;
         //make an array for member id's
@@ -307,7 +312,7 @@ app.get("/removeReadItLater", function(req, res) {
     var userId = req.query.userId;
     var articleId = req.query.articleId;
 
-    var set_read_query = 'DELETE FROM Buckets WHERE userId =' +userId + ' AND articleId = ' +  articleId + " LIMIT 1";
+    var set_read_query = 'DELETE FROM Buckets WHERE userId =' + userId + ' AND articleId = ' +  articleId + " LIMIT 1";
     connection.query(set_read_query, function(err,rows,fields) {
         if (err) throw err;
     });

@@ -13,8 +13,9 @@ window.BUCKET_METHOD = {
             for (var jj = 0; jj < data.length; jj++) {
 
                 if (!(members_dict[data[jj].id])) {
+
                     window.groupList.push(data[jj].name);
-                    members_dict[data[jj].id] = {name:data[jj].name, list:[]};  
+                    members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
                 id = data[jj].userId;
@@ -29,54 +30,81 @@ window.BUCKET_METHOD = {
             template = Handlebars.compile(templateSource);
             groupHTML = template({"groups":members_dict});
             $('#groups').html(groupHTML);
-        },
 
+            $(".deleteGroup").click(function(e){
+                var groupId = $(e.target).attr('group_id');
+                $("#group_" + groupId).attr("class", "hide");
+                console.log($("#" + groupId).attr("class"));
+                $.ajax({
+                    url:'http://localhost:5000/deleteGroup',
+                    data: {groupId: groupId},
+                    method:'get',
+                    success: function(data){console.log(data);}
+                });
+            });
+        },
 
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
             
-            feed = dripps_data;
-            window.selItem = [];
-            window.selItem.push(feed[0]);
-
-            var convo = [];
-            var convoId = feed[0]['conversationId'];
-            for (var i=0;i<conversation_data.length;i++) {
-                if (convoId == conversation_data[i]['conversationId']) {
-                    convo.push(conversation_data[i]);
-                }
-            }
-
-            window.articlesData = {};
-            for (var i=0;i<feed.length;i++) {
-                window.articlesData[feed[i].articleId2] = feed[i];
-            }
-
             $(".bucketsBub").click(function(){
                 window.setLikes();
                 $("#dripps").attr("class", "container-fluid hide");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#buckets").attr("class", "container-fluid");
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad");
-
-
+                $("#groups").attr("class", "container-fluid hide");
+                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
             });
 
-            var templateSource = $("#items-template").html(),
-            template = Handlebars.compile(templateSource),
-            itemHTML = template({"buckets":feed});
-            $('#items').html(itemHTML);
+            var feed;
+            if (dripps_data.length == 0 ) {
 
-            var templateSource = $("#selDripp-template").html(),
-            messageListTemplate = Handlebars.compile(templateSource),
-            drippsHTML = messageListTemplate({"selItems":window.selItem});
-            $('#selDripp').html(drippsHTML);
-            drippsHTML = messageListTemplate({"messages":convo});
-            $('#messagesDiv').html(drippsHTML);
+            }
+            else{
+                feed = dripps_data;
+                window.selItem = [];
+                window.selItem.push(feed[0]);
 
-            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
+                var convo = [];
+                var convoId = feed[0]['conversationId'];
+                for (var i=0;i<conversation_data.length;i++) {
+                    if (convoId == conversation_data[i]['conversationId']) {
+                        convo.push(conversation_data[i]);
+                    }
+                }
+
+                window.articlesData = {};
+                for (var i=0;i<feed.length;i++) {
+                    window.articlesData[feed[i].articleId2] = feed[i];
+                }
+
+
+                var templateSource = $("#items-template").html(),
+                template = Handlebars.compile(templateSource),
+                itemHTML = template({"buckets":feed});
+                $('#items').html(itemHTML);
+
+                var templateSource = $("#selDripp-template").html(),
+                messageListTemplate = Handlebars.compile(templateSource),
+                drippsHTML = messageListTemplate({"selItems":window.selItem});
+                $('#selDripp').html(drippsHTML);
+                drippsHTML = messageListTemplate({"messages":convo});
+                $('#messagesDiv').html(drippsHTML);
+
+                $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
+                bindMessages(messageListTemplate, conversation_data);     
+      
+            }
+
+
+
+           
 
             $('.selBucket').click(function(e){
-             
+                $('#selItem').html("");
+                $('#selDripp').html("");
+
+
                 if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                     feed = dripps_data;
                 }
@@ -98,9 +126,13 @@ window.BUCKET_METHOD = {
                     
                 window.selItem = [];
 
-                window.selItem.push(feed[0]);
+                    if (feed.length > 0) {
+                        window.selItem.push(feed[0]);
 
-                displayConvos(window.selItem, $("#" + feed[0]['id']).attr("conversation_id"), messageListTemplate, conversation_data);
+                        displayConvos(window.selItem, $("#" + feed[0]['id']).attr("conversation_id"), messageListTemplate, conversation_data);
+
+                    }
+
                 }
 
                 if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
@@ -109,8 +141,7 @@ window.BUCKET_METHOD = {
                     messageListTemplate = Handlebars.compile(templateSource),
                     readItLaterHTML = messageListTemplate({"selItems":window.selItem});
                     $('#selItem').html(readItLaterHTML);
-                    drippsHTML = messageListTemplate();
-                    $('#selDripp').html(drippsHTML);
+                    $('#selDripp').html("");
                 }
 
                 
@@ -118,7 +149,6 @@ window.BUCKET_METHOD = {
                 bindMessages(messageListTemplate, conversation_data);
             });
             
-            bindMessages(messageListTemplate, conversation_data);     
 
             $.ajax({
                 // url:'json/articles.json',
@@ -131,6 +161,7 @@ window.BUCKET_METHOD = {
         },
 
         handlerData2:function(dripps_data, readItLater_data){
+
 
             $.ajax({
                 // url:'json/articles.json',
@@ -145,9 +176,6 @@ window.BUCKET_METHOD = {
         },
 
         handlerData:function(dripps_data){
-            if (dripps_data.length == 0) {
-                
-            }
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/buckets',
