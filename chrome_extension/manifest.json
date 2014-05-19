@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "drippr",
+  "version": "1.0",
+  "description": "share articles and links with friends",
+
+  "browser_action": {
+    "default_icon": "drop.png"
+  },
+
+  "background": {
+    "scripts": ["event.js"],
+    "persistent": false
+  },
+  
+  "permissions": ["<all_urls>"]
+}
