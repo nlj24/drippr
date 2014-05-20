@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "drippr",
+  "name": "background-colorpeek",
   "version": "1.0",
-  "description": "share articles and links with friends",
+  "description": "Get every background-color from the current tab.",
 
   "browser_action": {
     "default_icon": "drop.png"
