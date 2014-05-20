@@ -70,11 +70,12 @@ app.get("/dripps", function(req, res){
         console.log(rows);
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
-            articles_dict[rows[ii].id]["userLiked"] = false;
-            articles_dict[rows[ii].id]["userDisliked"] = false;
+            articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+            articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
             articles_list.push( articles_dict[rows[ii].id]);
         }
 
+        console.log(articles_list);
        
 
             
