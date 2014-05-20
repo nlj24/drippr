@@ -19,6 +19,8 @@ window.ARTICLE_METHOD ={
                     articlesData[resJSON[i].id] = resJSON[i];
             }
 
+            console.log($( window ).height());
+
             window.articlesResults = articlesData;
 
             var feed = resJSON;
@@ -29,11 +31,22 @@ window.ARTICLE_METHOD ={
             $('#articles').html(articleHTML);
 
             $(".drippsBub").click(function(){
-                window.setLikes();
+                window.ARTICLE_METHOD.loadArticleData();
+                window.setDrippLikes();
                 $("#buckets").attr("class", "container-fluid hide");
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#dripps").attr("class", "container-fluid");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad");
+                $("#groups").attr("class", "container-fluid hide");
+                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+            });
+
+            $(".bucketsBub").click(function(){
+                window.BUCKET_METHOD.loadArticleData();
+                $("#dripps").attr("class", "container-fluid hide");
+                $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+                $("#buckets").attr("class", "container-fluid");
+                $("#bucketsHeader").attr("class", "col-md-5 headingPad");
                 $("#groups").attr("class", "container-fluid hide");
                 $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
             });
@@ -59,7 +72,6 @@ window.ARTICLE_METHOD ={
                 $('#articles').html(articleHTML);
                 
 
-                var articleId = window.curArticle;
 
                 $('.categ').css("background", "white");
                 $('.categ').css("color", "#6D6E70");

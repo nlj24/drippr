@@ -5,7 +5,6 @@ var feed;
 window.BUCKET_METHOD = {
 
         groupData:function(data) {
-            console.log(data);
 
             //(group id -> list of {id:name}?)
             var members_dict = {};
@@ -23,7 +22,6 @@ window.BUCKET_METHOD = {
                 members_dict[data[jj].id]['list'].push({name : userName});
             } 
 
-            console.log(members_dict);
 
 
             var templateSource = $("#groups-template").html();
@@ -34,36 +32,25 @@ window.BUCKET_METHOD = {
             $(".deleteGroup").click(function(e){
                 var groupId = $(e.target).attr('group_id');
                 $("#group_" + groupId).attr("class", "hide");
-                console.log($("#" + groupId).attr("class"));
                 $.ajax({
                     url:'http://localhost:5000/deleteGroup',
                     data: {groupId: groupId},
                     method:'get',
-                    success: function(data){console.log(data);}
+                    success: function(data){return;}
                 });
             });
         },
 
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
             
-            $(".bucketsBub").click(function(){
-                window.setLikes();
-                $("#dripps").attr("class", "container-fluid hide");
-                $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
-                $("#buckets").attr("class", "container-fluid");
-                $("#bucketsHeader").attr("class", "col-md-5 headingPad");
-                $("#groups").attr("class", "container-fluid hide");
-                $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
-            });
 
-            var feed;
+            
             if (dripps_data.length == 0 ) {
 
             }
             else{
                 feed = dripps_data;
-                window.selItem = [];
-                window.selItem.push(feed[0]);
+                window.selItem = feed[0];
 
                 var convo = [];
                 var convoId = feed[0]['conversationId'];
@@ -86,10 +73,8 @@ window.BUCKET_METHOD = {
 
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource),
-                drippsHTML = messageListTemplate({"selItems":window.selItem});
+                drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo});
                 $('#selDripp').html(drippsHTML);
-                drippsHTML = messageListTemplate({"messages":convo});
-                $('#messagesDiv').html(drippsHTML);
 
                 $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
                 bindMessages(messageListTemplate, conversation_data);     
@@ -124,10 +109,8 @@ window.BUCKET_METHOD = {
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource);
                     
-                window.selItem = [];
-
                     if (feed.length > 0) {
-                        window.selItem.push(feed[0]);
+                        window.selItem = feed[0];
 
                         displayConvos(window.selItem, $("#" + feed[0]['id']).attr("conversation_id"), messageListTemplate, conversation_data);
 
@@ -139,7 +122,7 @@ window.BUCKET_METHOD = {
 
                     var templateSource = $("#selItem-template").html(),
                     messageListTemplate = Handlebars.compile(templateSource),
-                    readItLaterHTML = messageListTemplate({"selItems":window.selItem});
+                    readItLaterHTML = messageListTemplate({"selItem":window.selItem});
                     $('#selItem').html(readItLaterHTML);
                     $('#selDripp').html("");
                 }
@@ -203,19 +186,18 @@ window.BUCKET_METHOD = {
 
 function bindMessages(template, conversation_data){
     $('.messageItem').click(function(e){
-            var id = $(e.target).attr('id');
-            window.selItem = [];
+            var id = $(e.target).attr('message_id');
             for (var i=0;i<feed.length;i++) {
                     if (id == feed[i]['id']) {
-                        window.selItem.push(feed[i]);
+                        window.selItem = feed[i];
                     }
                 }
 
             displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);
             
-            });
+        bindButtons();
+    });
     
-    bindButtons();
 }
 
 function bindButtons(){
@@ -224,7 +206,7 @@ function bindButtons(){
         if (content !== '') {
             $.ajax({
                 url:'http://localhost:5000/sendConvo',
-                data: {conversationId: window.selItem[0]['conversationId'], userId: window.myID, content: content},
+                data: {conversationId: window.selItem['conversationId'], userId: window.myID, content: content},
                 type:'get'
             });
             $('#messageInput').val('');
@@ -235,6 +217,29 @@ function bindButtons(){
             $('#messageSend').click();
         }
     });
+
+    //what do do???
+     if (window.selItem['userLiked']) {
+        $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
+        $(".like.blue").attr("class", 'opinionDripp like blue');
+        $(".up").html(window.selItem.numLikes);
+    }
+    if (articlesResults[window.curArticle]['userLiked'] === false) {
+        $(".like.grey2").attr("class", 'opinionDripp like grey2')
+        $(".like.blue").attr("class", 'opinionDripp like blue hide');
+        $(".up").html(articlesResults[window.curArticle].numLikes);
+    }
+    if (articlesResults[window.curArticle]['userDisliked']) {
+        $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
+        $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
+        $(".down").html(articlesResults[window.curArticle].numDislikes);
+    }
+    if (articlesResults[window.curArticle]['userDisliked'] === false) {
+        $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
+        $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
+        $(".down").html(articlesResults[window.curArticle].numDislikes);
+    }
+
 }
 
 function displayConvos(selItem, convoId, template, conversation_data){
@@ -244,10 +249,8 @@ function displayConvos(selItem, convoId, template, conversation_data){
             convo.push(conversation_data[i]);
         }
     }
-    var drippsHTML = template({"selItems":window.selItem});
+    var drippsHTML = template({"selItem":window.selItem, "messages":convo});
     $('#selDripp').html(drippsHTML);
-    drippsHTML = template({"messages":convo});
-    $('#messagesDiv').html(drippsHTML);
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
 }
 

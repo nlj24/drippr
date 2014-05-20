@@ -10,7 +10,7 @@ body {
 }
 
 .mainCatDiv {
-  height: 689px;
+  height: 100%;
   background-color: white;
   overflow: scroll;
 }
@@ -59,15 +59,15 @@ body {
 }
 
 .arrow {
-  width: 90px;
+  width: 75%;
   cursor: pointer;
   line-height: 689px;
 }
 
 #prevArrow:hover {
-  width: 90px;
+  width: 75%;
   height: 689px;
-  -webkit-box-shadow: inset 30px 0 50px -2px black;
+  -webkit-box-shadow: inset 30px 0 50px -20px black;
   box-shadow: inset 30px 0 50px -20px black;           
 }
 
@@ -76,20 +76,19 @@ body {
 }
 
 #nextArrow:hover {
-  width: 90px;
+  width: 75%;
   height: 689px;
-  -webkit-box-shadow: inset -30px 0 50px -2px black;
+  -webkit-box-shadow: inset -30px 0 50px -20px black;
   box-shadow: inset -30px 0 50px -20px black;
   float: right;
 }
 
 .arrowDiv {
   padding: 0px;
-  width: 119.8px;
 }
 
 .slider {
-  width: 850px; height: 605px;
+  height: 40%;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -107,8 +106,9 @@ body {
 }
     
 .slider > ul > li {
-      float: left;
-      width: 850px; height: 605px;
+  float: left;
+  width: 850px; 
+  height: 100%;
 }
 
 .mainBubble {
@@ -187,6 +187,7 @@ body {
 }
 
 .menuBar {
+  height: 100%;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -201,15 +202,15 @@ body {
 }
 
 .headingPad {
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .headingPad1 {
-  width: 175px
+  width: 175px;
 }
 
 .headingPad2 {
-  width: 80px
+  width: 80px;
 }
 
 .catImgDiv {
@@ -232,9 +233,18 @@ body {
 }
 
 .sliderWidth {
-  width: 880px;
+  width: 100%;
 }
 
 #sliderPad {
   padding: 0;
+}
+
+#user {
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+.fb-login-button {
+  float: right;
 }

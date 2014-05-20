@@ -37,6 +37,7 @@ FB.Event.subscribe("auth.logout", function() {
 					window.chosenFriends[friend.id] = friend;
 
 					if(add_to_dom) {
+						console.log('hi');
 						$("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
 					}
 
@@ -101,7 +102,6 @@ FB.Event.subscribe("auth.logout", function() {
 			});
 
 			window.ARTICLE_METHOD.loadArticleData();
-			window.BUCKET_METHOD.loadArticleData();
 
             
 		} else if (response.status === 'not_authorized') {
@@ -122,7 +122,7 @@ FB.Event.subscribe("auth.logout", function() {
 			FB.login();
 		}
 		FB.api('/me', function(response) {
-			$("#user").html(response.first_name);
+			$("#user").html("Welcome, " + response.first_name);
     	    $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/is_user',

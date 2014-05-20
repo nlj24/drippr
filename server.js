@@ -7,41 +7,25 @@ var connection;
 /* testing mysql ajax */
  app.get("/articles", function(req, res) {
     var userId = req.query.user;
-    var article_query = 'SELECT * FROM Articles';
-    var like_query = 'SELECT * FROM Likes WHERE userId=' + userId;
-    var dislike_query = 'SELECT * FROM Dislikes WHERE userId=' + userId;
+    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1";
+   
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
     
         var articles_dict = {};
+        var articles_list = [];
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
-            articles_dict[rows[ii].id]["userLiked"] = false;
-            articles_dict[rows[ii].id]["userDisliked"] = false;
+            articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+            articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+            articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
+
+            articles_list.push( articles_dict[rows[ii].id]);
         }
+        res.send(articles_list);
 
-        //now do other query for likes
-        connection.query(like_query, function(err,inner_rows,fields) {
-            if(err) throw err;
-            for(var jj=0; jj < inner_rows.length; jj++){
-                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
-            }
-        });
-
-        //now do other query for dislikes
-        connection.query(dislike_query, function(err,inner_rows,fields) {
-            if(err) throw err;
-            for(var jj=0; jj < inner_rows.length; jj++){
-                articles_dict[inner_rows[jj].articleId]["userDisliked"] = true;
-            }         
-
-            articles_list = [];
-            for(var id in articles_dict){
-                articles_list.push(articles_dict[id]);
-            }
-            res.send(articles_list);
-        });
+        
     });
 });
 
@@ -49,10 +33,23 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id WHERE userId=" + userId;
-    connection.query(get_bucket_articles, function(err,rows,fields) {
+    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+   
+   connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
-            res.send(rows);
+            var articles_dict = {};
+            var articles_list = [];
+            for(var ii=0; ii < rows.length; ii++){
+                articles_dict[rows[ii].id] = rows[ii];
+                articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+                articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+                //if there are other buckets need to note readitlater
+                articles_list.push( articles_dict[rows[ii].id]);
+            }
+
+        
+                
+            res.send(articles_list);
     });
 
 });
@@ -60,38 +57,40 @@ app.get("/buckets", function(req, res){
 /* sends a list of (from name, headline, conversationId ) ordered by time */
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
-    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    
+    
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
-            if (err) throw err;
-            res.send(rows);
+        if (err) throw err;
+        var articles_dict = {};
+        var articles_list = [];
+        for(var ii=0; ii < rows.length; ii++){
+            articles_dict[rows[ii].id] = rows[ii];
+            articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+            articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+            articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
+
+            articles_list.push( articles_dict[rows[ii].id]);
+        }
+
+       
+
+            
+        res.send(articles_list);
     });
 });
 
 /* sends a list of (from content, conversationId, fName, lName, time ) ordered by time */
 app.get("/conversations",  function(req, res){
     var userId = req.query.user;
-    var get_conversations_ids_query = "SELECT DISTINCT conversationId FROM Dripps WHERE fromUserId = " + userId + " OR recipientUserId = "+ userId;
-    connection.query(get_conversations_ids_query, function(err,rows,fields) {
-            if (err) throw err;
-            if (rows.length == 0) {
-                res.send(rows);
-                
-            }
-            else{
+    
+    var get_conversations_articles_query = "SELECT content, Conversations.conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users On Conversations.userId = Users.id INNER JOIN (SELECT Dripps.conversationId FROM Dripps WHERE fromUserId =" + userId +" OR recipientUserId =" + userId +") AS d1 ON d1.conversationId = Conversations.conversationId ORDER BY Conversations.time";
+    connection.query(get_conversations_articles_query, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(rows);
 
-                var id_list = "(" + rows[0]['conversationId'];
-                for (var i = 1; i < rows.length; i++) {
-                    id_list += ("," + rows[i]['conversationId']);
-                };
-                id_list += ")";
-                var get_conversations_articles_query = "SELECT content, conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users ON Conversations.userId = Users.id WHERE conversationId IN " + id_list + " ORDER BY Conversations.time";
-                connection.query(get_conversations_articles_query, function(err,rows,fields) {
-                    if (err) throw err;
-                    res.send(rows);
-
-                });    
-            }
-    });   
+    });    
+            
 });
 
 /* sends a list of (from content, conversationId, fName, lName, time ) ordered by time */
@@ -110,6 +109,8 @@ app.get("/is_user",  function(req, res){
 
             });
         }
+        res.send(200);
+
     });
 });
 
@@ -219,11 +220,16 @@ app.get("/sendDripp", function(req, res) {
     var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
     connection.query(max_id_query, function(err,rows,fields) {
         if (err) throw err;
-        convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+        if (rows[0]['MAX(conversationId)'] == null) {
+            convoId = 0;
+        }else{
+            convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+            
+        }
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
-            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0)";
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
+                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
@@ -231,6 +237,7 @@ app.get("/sendDripp", function(req, res) {
             });   
         }
     });
+    res.send(201);
 });
 
 
@@ -242,6 +249,7 @@ app.get("/sendConvo", function(req, res) {
     var set_convo_query = 'INSERT INTO Conversations (conversationId, userId, time, content) VALUES (' +conversationId + ',' +  userId + ", NOW(),'" + content + "')";
     connection.query(set_convo_query, function(err,rows,fields) {
         if (err) throw err;
+        res.send(200);
     });
 });
 
@@ -278,33 +286,116 @@ app.get("/deleteGroup", function(req, res) {
 app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
-    var my_groups_query = "SELECT id FROM Groups WHERE userId=" + userId;
-    connection.query(my_groups_query, function(err,rows1,fields) {
+    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName from Groups INNER JOIN Users on Users.id=Groups.userId LEFT JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
+    connection.query(members_info_query, function(err,rows,fields) {
         if (err) throw err;
-        //make an array for member id's
-        var group_lst = "'" + rows1[0]["id"] + "'";
-        for(var ii = 1; ii < rows1.length; ii++) {
-            group_lst += ",'" + rows1[ii]["id"] + "'";
-        }
-        console.log(group_lst);
-
-        var members_info_query = "SELECT Groups.id, name, userId, fName, lName from Groups INNER JOIN Users on Users.id=userId WHERE Groups.id IN(" + group_lst + ")";
-        connection.query(members_info_query, function(err,rows2,fields) {
-            if (err) throw err;
-            res.send(rows2);
-        });
+        res.send(rows);
     });
 });
 
+
+/* query parameters:
+    headline
+    imgUrl
+    url
+    source
+    category
+    fromUserId
+    recipientGroup
+    recipientFriendIds
+ */   
+
+app.get("/sendDripp/new", function(req, res) {
+
+    var headline = req.query.headline;
+    var imgUrl = (req.query.imgUrl == null) ? "https://www.google.com/images/srpr/logo11w.png" : req.query.imgUrl;
+    var url = req.query.url;
+    var source = req.query.source;
+    var category = req.query.category;
+
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
+    
+    connection.query(add_article_query, function(err,result) {
+        if (err) throw err;
+        var fromUserId = req.query.fromUserId;
+        var recipientGroup = req.query.recipientGroup;
+        var recipientFriendIds = req.query.recipientFriendIds;
+        var articleId = result.insertId;
+        var convoId;
+        var set_send_query;
+
+        var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
+        connection.query(max_id_query, function(err,rows,fields) {
+            if (err) throw err;
+            if (rows[0]['MAX(conversationId)'] == null) {
+                convoId = 0;
+            }else{
+                convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+                
+            }
+
+            for(var jj=0; jj < recipientFriendIds.length; jj++){
+                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
+                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
+                connection.query(set_send_query, function(err,rows,fields) {
+                    if (err) throw err;
+                    res.send(200);
+
+                });   
+            }
+        });
+
+        res.send(201);
+    });
+
+
+});
+
+/* query parameters:
+    headline
+    imgUrl
+    url
+    source
+    category
+    userId
+ */
+app.get("/readItLater/new", function(req, res) {
+    var headline = req.query.headline;
+    var imgUrl = (req.query.imgUrl == null) ? "https://www.google.com/images/srpr/logo11w.png" : req.query.imgUrl;
+    var url = req.query.url;
+    var source = req.query.source;
+    var category = req.query.category;
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
+
+    connection.query(add_article_query, function(err,result) {
+        if (err) throw err;
+        var userId = req.query.userId;
+        var name = "readItLater";
+        var articleId = result.insertId;
+        var bucketId = -1;
+
+        var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ", NOW()," +  bucketId + ')';
+        connection.query(set_read_query, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(200);
+        });
+            
+        res.send(201);
+    });
+
+});
+
+
 app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
-    var name = req.query.name;
+    var name = "readItLater";
     var articleId = req.query.articleId;
-    var bucketId = req.query.bucketId;
+    var bucketId = -1;
 
     var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ", NOW()," +  bucketId + ')';
     connection.query(set_read_query, function(err,rows,fields) {
         if (err) throw err;
+        res.send(200);
     });
 });
 
@@ -315,6 +406,8 @@ app.get("/removeReadItLater", function(req, res) {
     var set_read_query = 'DELETE FROM Buckets WHERE userId =' + userId + ' AND articleId = ' +  articleId + " LIMIT 1";
     connection.query(set_read_query, function(err,rows,fields) {
         if (err) throw err;
+        res.send(200);
+
     });
 });
 
