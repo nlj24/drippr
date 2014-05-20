@@ -35,7 +35,7 @@ var connection;
                     articles_dict[inner_rows2[jj].articleId]["userDisliked"] = true;
                 }         
 
-                articles_list = [];
+                var articles_list = [];
                 for(var id in articles_dict){
                     articles_list.push(articles_dict[id]);
                 }
@@ -49,10 +49,23 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id WHERE userId=" + userId;
-    connection.query(get_bucket_articles, function(err,rows,fields) {
+    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+   
+   connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
-            res.send(rows);
+            var articles_dict = {};
+            var articles_list = [];
+            for(var ii=0; ii < rows.length; ii++){
+                articles_dict[rows[ii].id] = rows[ii];
+                articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+                articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+                articles_list.push( articles_dict[rows[ii].id]);
+            }
+
+            console.log(articles_list);
+        
+                
+            res.send(articles_list);
     });
 
 });
@@ -60,41 +73,25 @@ app.get("/buckets", function(req, res){
 /* sends a list of (from name, headline, conversationId ) ordered by time */
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
-    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId) WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead, l1.userId AS l_user, d1.userId As d_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     
-    var like_query = 'SELECT * FROM Likes WHERE userId=' + userId;
-    var dislike_query = 'SELECT * FROM Dislikes WHERE userId=' + userId;
-
+    
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
         if (err) throw err;
         var articles_dict = {};
+        var articles_list = [];
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
-            articles_dict[rows[ii].id]["userLiked"] = false;
-            articles_dict[rows[ii].id]["userDisliked"] = false;
+            articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+            articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+            articles_list.push( articles_dict[rows[ii].id]);
         }
 
-        //now do other query for likes
-        connection.query(like_query, function(err,inner_rows,fields) {
-            if(err) throw err;
-            for(var jj=0; jj < inner_rows.length; jj++){
-                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
-            }
+        console.log(articles_list);
+       
 
-            //now do other query for dislikes
-            connection.query(dislike_query, function(err,inner_rows2,fields) {
-                if(err) throw err;
-                for(var jj=0; jj < inner_rows2.length; jj++){
-                    articles_dict[inner_rows2[jj].articleId]["userDisliked"] = true;
-                }         
-
-                articles_list = [];
-                for(var id in articles_dict){
-                    articles_list.push(articles_dict[id]);
-                }
-                res.send(articles_list);
-            });
-        });
+            
+        res.send(articles_list);
     });
 });
 
@@ -141,6 +138,8 @@ app.get("/is_user",  function(req, res){
 
             });
         }
+        res.send(200);
+
     });
 });
 
