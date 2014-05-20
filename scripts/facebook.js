@@ -122,7 +122,7 @@ FB.Event.subscribe("auth.logout", function() {
 			FB.login();
 		}
 		FB.api('/me', function(response) {
-			$("#user").html(response.first_name);
+			$("#user").html("Welcome, " + response.first_name);
     	    $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/is_user',

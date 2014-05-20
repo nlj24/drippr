@@ -19,6 +19,8 @@ window.ARTICLE_METHOD ={
                     articlesData[resJSON[i].id] = resJSON[i];
             }
 
+            console.log($( window ).height());
+
             window.articlesResults = articlesData;
 
             var feed = resJSON;
