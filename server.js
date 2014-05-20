@@ -7,41 +7,25 @@ var connection;
 /* testing mysql ajax */
  app.get("/articles", function(req, res) {
     var userId = req.query.user;
-    var article_query = 'SELECT * FROM Articles';
-    var like_query = 'SELECT * FROM Likes WHERE userId=' + userId;
-    var dislike_query = 'SELECT * FROM Dislikes WHERE userId=' + userId;
+    var article_query = "SELECT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id";
+   
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
     
         var articles_dict = {};
+        var articles_list = [];
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
-            articles_dict[rows[ii].id]["userLiked"] = false;
-            articles_dict[rows[ii].id]["userDisliked"] = false;
+            articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+            articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+            articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
+
+            articles_list.push( articles_dict[rows[ii].id]);
         }
+        res.send(articles_list);
 
-        //now do other query for likes
-        connection.query(like_query, function(err,inner_rows,fields) {
-            if(err) throw err;
-            for(var jj=0; jj < inner_rows.length; jj++){
-                articles_dict[inner_rows[jj].articleId]["userLiked"] = true;
-            }
-
-            //now do other query for dislikes
-            connection.query(dislike_query, function(err,inner_rows2,fields) {
-                if(err) throw err;
-                for(var jj=0; jj < inner_rows2.length; jj++){
-                    articles_dict[inner_rows2[jj].articleId]["userDisliked"] = true;
-                }         
-
-                var articles_list = [];
-                for(var id in articles_dict){
-                    articles_list.push(articles_dict[id]);
-                }
-                res.send(articles_list);
-            });
-        });
+        
     });
 });
 
@@ -335,7 +319,7 @@ app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
     var name = req.query.name;
     var articleId = req.query.articleId;
-    var bucketId = req.query.bucketId;
+    var bucketId = -1;
 
     var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ", NOW()," +  bucketId + ')';
     connection.query(set_read_query, function(err,rows,fields) {
