@@ -33,7 +33,7 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+    var get_bucket_articles = "SELECT DISTINCT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
    
    connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
