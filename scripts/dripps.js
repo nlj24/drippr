@@ -41,7 +41,6 @@ window.ARTICLE_METHOD ={
 
             $(".bucketsBub").click(function(){
                 window.BUCKET_METHOD.loadArticleData();
-                window.setBucketLikes();
                 $("#dripps").attr("class", "container-fluid hide");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#buckets").attr("class", "container-fluid");
@@ -51,13 +50,13 @@ window.ARTICLE_METHOD ={
             });
 
             $(".groupsBub").click(function(){
-                window.GROUP_METHOD.loadGroups();
                 $("#buckets").attr("class", "container-fluid hide");
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#dripps").attr("class", "container-fluid hide");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#groups").attr("class", "container-fluid");
                 $("#groupsHeader").attr("class", "col-md-5 headingPad");
+                window.GROUP_METHOD.loadGroups();
             });
 
             $(".topCat").css("background", "#6D6E70");

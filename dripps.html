@@ -7,7 +7,6 @@
 	    <link rel="stylesheet" href="css/dripps.css">
 		<link rel="stylesheet" href="css/bucket.css">
 	    <link rel="stylesheet" href="css/facebook.css">
-	    <link rel="stylesheet" href="css/modal.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
 		<script type="text/javascript" src="/scripts/jquery.js"></script>
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
@@ -16,7 +15,7 @@
 		<script type="text/javascript" src="/scripts/slider.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
 		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
-		<script type="text/javascript" src="/scripts/modal.js"></script>
+		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
 
 
 		<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -379,9 +378,9 @@
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
-		        				<p>{{headline}}</p>
-		        				<p>{{timeSent}}</p>
-		        				<p>{{fName}}{{lName}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{headline}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{timeSent}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{fName}}{{lName}}</p>
 		        			</div>
 		        		{{/each}}
 			        </div>
@@ -399,38 +398,41 @@
 		        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
 		        		</div>
 	        		</div>
-		        		<div class = "row">
-		        			<div class = "col-md-1">
+	        		<div class = "row">
+	        			<div class = "col-md-1">
+	        			</div>
+	        			<div class = "col-md-10" id = "convoDiv">
+		        			<div id = "conversation">
+			        			{{#each messages}}
+			        				<div class = "indMess {{userId}}">
+			        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
+			        					{{fName}} {{lName}}: {{content}} Time: {{time}}
+			        				</div>
+		        				{{/each}}
 		        			</div>
-		        			<div class = "col-md-10" id = "convoDiv">
-			        			<div id = "conversation">
-				        			{{#each messages}}
-				        				<div class = "indMess {{userId}}">
-				        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-				        					{{fName}} {{lName}}: {{content}} Time: {{time}}
-				        				</div>
-			        				{{/each}}
+		        			<div class = "row">
+		        				<div class = "col-md-11 noPad">
+			        				<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
 			        			</div>
-			        			<div class = "row">
-			        				<div class = "col-md-11 noPad">
-				        				<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
-				        			</div>
-				        			<div class = "col-md-1 noPad">
-				        				<div id = "messageSend"> Send </div>
-				        			</div>
-				        		</div>
+			        			<div class = "col-md-1 noPad">
+			        				<div id = "messageSend"> Send </div>
+			        			</div>
 			        		</div>
-		        			<div class = "col-md-1">
-		        			</div>
 		        		</div>
+	        			<div class = "col-md-1">
+	        			</div>
+	        		</div>
 	        	</script>
         		
         		<div id="selItem">
 	        	</div>
 	        	<script id="selItem-template" type="text/x-handlebars-template">
-		        	<div id="message">
-		        		<div class = "row">
-		   					No read it later articles.	 
+		        	<div>
+		        		<div class = "row" id = "headlineBucket">
+		        			{{selItem.headline}}
+		        		</div>
+		        		<div class = "row" id = "imageDivBucket">
+		        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
 		        		</div>
 	        		</div>
 				</script>
@@ -465,12 +467,11 @@
 		</div>
 	</div>
 	<div id="groups" class = "container-fluid hide">
-		<script id="groups-template" type="text/x-handlebars-template">
-			<div class = "row">
+		<div class = "row">
 				<div class = "col-md-1">
 				</div>
 				<div class = "col-md-3">
-					<input id = "fb-input" type = "text" autocomplete="off">
+					<input id = "fb-input-groups" type = "text" autocomplete="off">
 					<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
 					<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
 				</div>
@@ -483,8 +484,10 @@
 				<div class = "col-md-1">
 				</div>
 			</div>
-			<div id="groups">
-		    </div>
+			<div id="groups_placeholder"></div>
+	</div>
+		<script id="groups-template" type="text/x-handlebars-template">
+			
 			<div>
 				{{#each groups}}
 					<div id = group_{{this.id}}>
@@ -501,7 +504,6 @@
 				{{/each}}
 			</div>
 		</script>
-	</div>
 	<form id="fb-form" class="modal">
 		<div class = "showForm">
 			<div class = "close">

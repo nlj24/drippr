@@ -8,105 +8,107 @@ window.BUCKET_METHOD = {
             
             window.setBucketLikes = function correctLikes() {
                 if (window.selItem['userLiked']) {
-                    $(".like2.grey2").attr("class", 'opinionDripp like2 grey2 hide')
-                    $(".like2.blue").attr("class", 'opinionDripp like2 blue');
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue');
                     $(".up").html(window.selItem.numLikes);
                 }
                 if (window.selItem['userLiked'] === false) {
-                    $(".like2.grey2").attr("class", 'opinionDripp like2 grey2')
-                    $(".like2.blue").attr("class", 'opinionDripp like2 blue hide');
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2')
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
                     $(".up").html(window.selItem.numLikes);
                 }
                 if (window.selItem['userDisliked']) {
-                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
-                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide')
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
                     $(".down").html(window.selItem.numDislikes);
                 }
                 if (window.selItem['userDisliked'] === false) {
-                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
-                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2')
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
                     $(".down").html(window.selItem.numDislikes);
                 }
             }
 
+            window.setBucketLikes();
+
             $(".like2").click(function(){
                 var articleId = window.curArticle;
                 if($('.like2.grey2').hasClass('hide')) {
-                    $(".up").text(--articlesData[articleId].numLikes);
-                    $(".like2.grey2").attr("class", 'opinionDripp like2 grey2');
-                    $(".like2.blue").attr("class", 'opinionDripp like2 blue hide');
+                    $(".up").text(--window.selItem.numLikes);
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userLiked'] = false;
+                    window.selItem['userLiked'] = false;
                     return;
                 };
 
-                if ($(".dislike.grey2").hasClass("hide")) {
-                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2');
-                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
-                    $(".down").text(--articlesData[articleId].numDislikes);
+                if ($(".dislike2.grey2").hasClass("hide")) {
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
+                    $(".down").text(--window.selItem.numDislikes);
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userLiked'] = true;
-                    articlesData[articleId]['userDisliked'] = false;                
+                    window.selItem['userLiked'] = true;
+                    window.selItem['userDisliked'] = false;                
                 };
-                if($('.like.blue').hasClass('hide')) {
-                    $(".up").text(++articlesData[articleId].numLikes);
-                    $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
-                    $(".like.blue").attr("class", 'opinionDripp like blue');
+                if($('.like2.blue').hasClass('hide')) {
+                    $(".up").text(++window.selItem.numLikes);
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue');
                     $.ajax({
                         url:'http://localhost:5000/likes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userLiked'] = true;
+                    window.selItem['userLiked'] = true;
                 };
             });
 
-            $(".dislike").click(function(){
+            $(".dislike2").click(function(){
                 var articleId = window.curArticle;
                 if($('.dislike.grey2').hasClass('hide')) {
-                    $(".down").text(--articlesData[articleId].numDislikes);
-                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2');
-                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
+                    $(".down").text(--window.selItem.numDislikes);
+                    $(".dislike.grey2").attr("class", 'opinionBucket dislike grey2');
+                    $(".dislike.blue").attr("class", 'opinionBucket dislike blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeDislikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     }); 
-                    articlesData[articleId]['userDisliked'] = false;
+                    window.selItem['userDisliked'] = false;
                     return;
                 };
 
                 if ($(".like.grey2").hasClass("hide")) {
-                    $(".like.grey2").attr("class", 'opinionDripp like grey2');
-                    $(".like.blue").attr("class", 'opinionDripp like blue hide');
-                    $(".up").text(--articlesData[articleId].numLikes);
+                    $(".like.grey2").attr("class", 'opinionBucket like grey2');
+                    $(".like.blue").attr("class", 'opinionBucket like blue hide');
+                    $(".up").text(--window.selItem.numLikes);
                     $.ajax({
                         url:'http://localhost:5000/removeLikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userLiked'] = false;
-                    articlesData[articleId]['userDisliked'] = true;
+                    window.selItem['userLiked'] = false;
+                    window.selItem['userDisliked'] = true;
                 };
 
                 if($('.dislike.blue').hasClass('hide')) {
-                    $(".down").text(++articlesData[articleId].numDislikes);
-                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide');
-                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
+                    $(".down").text(++window.selItem.numDislikes);
+                    $(".dislike.grey2").attr("class", 'opinionBucket dislike grey2 hide');
+                    $(".dislike.blue").attr("class", 'opinionBucket dislike blue');
                     $.ajax({
                         url:'http://localhost:5000/dislikes',
                         data: {user: window.myID, article: articleId},
                         type:'get'
                     });
-                    articlesData[articleId]['userDisliked'] = true;
+                    window.selItem['userDisliked'] = true;
                 };
             });
 
@@ -131,8 +133,8 @@ window.BUCKET_METHOD = {
             $(".readLater").click(function(){
                 var articleId = window.curArticle;
                 if($('.readLater.grey2').hasClass('hide')) {
-                    $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2');
-                    $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
+                    $(".readLater.grey2").attr("class", 'opinionBucket readLater grey2');
+                    $(".readLater.blue").attr("class", 'opinionBucket readLater blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeReadItLater',
                         data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
@@ -146,8 +148,8 @@ window.BUCKET_METHOD = {
                 return;
                 }
                 if($('.readLater.blue').hasClass('hide')) {
-                    $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide');
-                    $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
+                    $(".readLater.grey2").attr("class", 'opinionBucket readLater grey2 hide');
+                    $(".readLater.blue").attr("class", 'opinionBucket readLater blue');
                     $.ajax({
                         url:'http://localhost:5000/readItLater',
                         data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
@@ -191,6 +193,7 @@ window.BUCKET_METHOD = {
 
                 $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
                 bindMessages(messageListTemplate, conversation_data);     
+                bindButtons();
       
             }
 
@@ -233,11 +236,14 @@ window.BUCKET_METHOD = {
 
                 if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
 
+                    if (feed.length > 0) {
+                        window.selItem = feed[0];
+                    }
+
                     var templateSource = $("#selItem-template").html(),
                     messageListTemplate = Handlebars.compile(templateSource),
                     readItLaterHTML = messageListTemplate({"selItem":window.selItem});
-                    $('#selItem').html(readItLaterHTML);
-                    $('#selDripp').html("");
+                    $('#selDripp').html(readItLaterHTML);
                 }
 
                 
@@ -305,6 +311,7 @@ function bindMessages(template, conversation_data){
 
 function bindButtons(){
     $("#messageSend").click(function(){
+        console.log('hi');
         content = $('#messageInput').val();
         if (content !== '') {
             $.ajax({
@@ -323,23 +330,23 @@ function bindButtons(){
 
     //what do do???
      if (window.selItem['userLiked']) {
-        $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
-        $(".like.blue").attr("class", 'opinionDripp like blue');
+        $(".like.grey2").attr("class", 'opinionBucket like grey2 hide')
+        $(".like.blue").attr("class", 'opinionBucket like blue');
         $(".up").html(window.selItem.numLikes);
     }
     if (articlesResults[window.curArticle]['userLiked'] === false) {
-        $(".like.grey2").attr("class", 'opinionDripp like grey2')
-        $(".like.blue").attr("class", 'opinionDripp like blue hide');
+        $(".like.grey2").attr("class", 'opinionBucket like grey2')
+        $(".like.blue").attr("class", 'opinionBucket like blue hide');
         $(".up").html(articlesResults[window.curArticle].numLikes);
     }
     if (articlesResults[window.curArticle]['userDisliked']) {
-        $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
-        $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
+        $(".dislike.grey2").attr("class", 'opinionBucket dislike grey2 hide')
+        $(".dislike.blue").attr("class", 'opinionBucket dislike blue');
         $(".down").html(articlesResults[window.curArticle].numDislikes);
     }
     if (articlesResults[window.curArticle]['userDisliked'] === false) {
-        $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
-        $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
+        $(".dislike.grey2").attr("class", 'opinionBucket dislike grey2')
+        $(".dislike.blue").attr("class", 'opinionBucket dislike blue hide');
         $(".down").html(articlesResults[window.curArticle].numDislikes);
     }
 

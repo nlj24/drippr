@@ -20,7 +20,11 @@ window.GROUP_METHOD = {
         var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
         groupHTML = template({"groups":members_dict});
-        $('#groups').html(groupHTML);
+        $('#groups_placeholder').html(groupHTML);
+
+
+
+        
 
         $(".deleteGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');

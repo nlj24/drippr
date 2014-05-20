@@ -5,13 +5,17 @@ status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true  // parse XFBML
 });
+
+
 FB.Event.subscribe("auth.logout", function() {
-	window.fbAsyncInit();
-	window.ARTICLE_METHOD.loadArticleData();
-	window.BUCKET_METHOD.loadArticleData();
 	window.location = 'http://localhost:5000';
 });
 $("#dripps").css("height",""+ ($( window ).height()-90));
+
+//check if we're logged in
+   //display a modal or something?
+   //remove it if they do login with the subscribe function below 
+
 
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
@@ -20,6 +24,19 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		// Here we specify what we do with the response anytime this event occurs. 
 		if (response.status === 'connected') {
+
+			FB.api('/me', function(response) {
+			$("#user").html("Welcome, " + response.first_name + "!");
+	    	    $.ajax({
+	                // url:'json/articles.json',
+	                url:'http://localhost:5000/is_user',
+	                data: {uid: response.id, fName: response.first_name, lName: response.last_name},
+	                method:'get' //,
+	                // success:this.userData
+	            });
+
+    		});
+
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
@@ -54,6 +71,36 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
                     });                        
 				}
 			});
+
+			$('#fb-input-groups').facebookAutocomplete({
+                            showAvatars: true,
+                            avatarSize: 50,
+                            maxSuggestions: 8,
+                            onpick: function (friend) {
+                                var add_to_dom = false;
+                                if (!(friend.id in window.chosenFriends)) {
+                                    window.ids.push(friend.id);
+                                    add_to_dom = true;
+                                }
+                                window.chosenFriends[friend.id] = friend;
+
+                                if(add_to_dom) {
+                                    console.log('hi');
+                                    $("#chosenCont").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+                                }
+
+                                $(".rm" ).unbind("click", handler2);
+                                $(".rm").bind("click", handler2);
+
+                                var handler2 = $('.rm').click(function(e) {
+                                    var id = $(e.target).attr('id');
+                                    delete window.chosenFriends[id];
+                                    window.ids.splice(window.ids.indexOf(id),1);
+                                    $("#"+id).remove();
+                                });                        
+                            }
+             });
+
 
 			$(".send").click(function(){
 				if (ids.length > 0) {
@@ -123,17 +170,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			// The same caveats as above apply to the FB.login() call here.
 			FB.login();
 		}
-		FB.api('/me', function(response) {
-			$("#user").html("Welcome, " + response.first_name + "!");
-    	    $.ajax({
-                // url:'json/articles.json',
-                url:'http://localhost:5000/is_user',
-                data: {uid: response.id, fName: response.first_name, lName: response.last_name},
-                method:'get',
-                success:this.userData
-            });
-
-    	});
+		
 
 
 	});
