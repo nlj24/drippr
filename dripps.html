@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="/scripts/jquery.js"></script>
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
 		<script type="text/javascript" src="/scripts/bucket.js"></script>
+		<script type="text/javascript" src="/scripts/groups.js"></script>
 		<script type="text/javascript" src="/scripts/slider.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
 		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
@@ -132,7 +133,7 @@
 
 
 		<div id="dripps" class = "container-fluid">
-    		<div class = "row">
+    		<div class = "row" id = "size1">
 	        	<div class = "menuBar col-md-3">
 		        	<div class = "mainCatDiv">
 		        		<div  class = "categ row topCat" category="All">
@@ -247,7 +248,7 @@
 		        	<div id="articles">
 		        	</div>
 	        		<script id="article-template" type="text/x-handlebars-template"> 
-		        		<div class = "row">
+		        		<div class = "row" id = "size2">
 							<div class = "col-md-10 sliderWidth">
 								<div class="slider">
 						            <ul>
@@ -318,7 +319,7 @@
 							</div>
 							<div class = "col-md-1">
 								<div class = "opDiv">
-									<img src = "images/drop.svg" class = "opinionDripp dripp hide">
+									<img src = "images/drop.svg" class = "opinionDripp dripp">
 									<img src = "images/dropBlue.svg" class = "opinionDripp dripp hide">
 								</div>
 							</div>
@@ -378,7 +379,9 @@
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
-		        				{{headline}}
+		        				<p>{{headline}}</p>
+		        				<p>{{timeSent}}</p>
+		        				<p>{{fName}}{{lName}}</p>
 		        			</div>
 		        		{{/each}}
 			        </div>
@@ -397,19 +400,27 @@
 		        		</div>
 	        		</div>
 		        		<div class = "row">
-		        			<div class = "col-md-2">
+		        			<div class = "col-md-1">
 		        			</div>
-		        			<div class = "col-md-8" id = "conversation">
-			        			{{#each messages}}
-			        				<div class = "indMess {{userId}}">
-			        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-			        					{{fName}} {{lName}}: {{content}} Time: {{time}}
-			        				</div>
-		        				{{/each}}
-		        			<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
-		        			<div id = "messageSend"> Send </div>
-		        			</div>
-		        			<div class = "col-md-2">
+		        			<div class = "col-md-10" id = "convoDiv">
+			        			<div id = "conversation">
+				        			{{#each messages}}
+				        				<div class = "indMess {{userId}}">
+				        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
+				        					{{fName}} {{lName}}: {{content}} Time: {{time}}
+				        				</div>
+			        				{{/each}}
+			        			</div>
+			        			<div class = "row">
+			        				<div class = "col-md-11 noPad">
+				        				<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
+				        			</div>
+				        			<div class = "col-md-1 noPad">
+				        				<div id = "messageSend"> Send </div>
+				        			</div>
+				        		</div>
+			        		</div>
+		        			<div class = "col-md-1">
 		        			</div>
 		        		</div>
 	        	</script>
@@ -455,13 +466,23 @@
 	</div>
 	<div id="groups" class = "container-fluid hide">
 		<script id="groups-template" type="text/x-handlebars-template">
-			<div id = "chosenCont">
-				<div id = "chosenGroup">
+			<div class = "row">
+				<div class = "col-md-1">
+				</div>
+				<div class = "col-md-3">
+					<input id = "fb-input" type = "text" autocomplete="off">
+					<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
+					<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
+				</div>
+				<div class = "col-md-7">
+					<div id = "chosenCont">
+						<div id = "chosenGroup">
+						</div>
+					</div>
+				</div>
+				<div class = "col-md-1">
 				</div>
 			</div>
-			<input id = "fb-input" type = "text" autocomplete="off">
-			<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
-			<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
 			<div id="groups">
 		    </div>
 			<div>

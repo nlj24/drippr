@@ -61,12 +61,12 @@ body {
 .arrow {
   width: 75%;
   cursor: pointer;
-  line-height: 689px;
-}
+/*  line-height: 689px;
+*/}
 
 #prevArrow:hover {
   width: 75%;
-  height: 689px;
+  height: 100%;
   -webkit-box-shadow: inset 30px 0 50px -20px black;
   box-shadow: inset 30px 0 50px -20px black;           
 }
@@ -77,7 +77,7 @@ body {
 
 #nextArrow:hover {
   width: 75%;
-  height: 689px;
+  height: 100%;
   -webkit-box-shadow: inset -30px 0 50px -20px black;
   box-shadow: inset -30px 0 50px -20px black;
   float: right;
@@ -88,7 +88,7 @@ body {
 }
 
 .slider {
-  height: 40%;
+  height: 100%;
   overflow: hidden;
   margin: 0 auto;
   float: none;
@@ -112,7 +112,7 @@ body {
 }
 
 .mainBubble {
-  height: 550px;
+  height: 100%;
   width: 800px;
   color: #6D6E70;
   margin: 0 auto;
@@ -167,8 +167,8 @@ body {
 }
 
 #imageDivDripp {
-  height: 530px;
-  line-height: 530px;
+  height: 75%;
+  line-height: 75%;
   text-align: center;
 }
 
@@ -177,8 +177,6 @@ body {
   max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
-  min-width: 400px;
-  min-height: 275px;
 }
 
 .word {
@@ -233,11 +231,13 @@ body {
 }
 
 .sliderWidth {
-  width: 100%;
+  width: 880px;
+  height: 100%;
 }
 
 #sliderPad {
   padding: 0;
+  height: 80%;
 }
 
 #user {
@@ -247,4 +247,16 @@ body {
 
 .fb-login-button {
   float: right;
+}
+
+#articles {
+  height: 100%;
+}
+
+#size1 {
+  height: 100%;
+}
+
+#size2 {
+  height: 100%;
 }

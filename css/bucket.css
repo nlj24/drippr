@@ -38,10 +38,7 @@ body {
 }
 
 #fitImageBucket {
-/*  max-width: 800px;
-  max-height: 300px;
-*/  border-radius: 10px;
-  max-width: 100%;
+  border-radius: 10px;
   max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
@@ -57,11 +54,13 @@ body {
 
 .indMess {
   text-align: right;
+  background-color: #A3DCFF;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 #conversation {
-  height: 300px;
-  background-color: #A3DCFF;
   overflow: scroll;
 }
 
@@ -82,20 +81,30 @@ body {
 }
 
 #messageSend {
-  position: absolute;
-  bottom: 0;
-  right:0;
+  margin-top: 10px;
   display: inline-block;
   background-color: #6D6E70;
-  font-size: 24px;
+  font-size: 15px;
   color: white;
   cursor: pointer;
+  border-radius: 10px;
+  width: 90%;
+  text-align: center;
+  padding: 0;
 }
 
 #messageInput {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 90%;
+  margin-top: 10px;
+  width: 100%;
   display: inline-block;
+  border-radius: 10px;
+  padding: 0;
+}
+
+#convoDiv {
+  padding: 0;
+}
+
+.noPad {
+  padding: 0;
 }

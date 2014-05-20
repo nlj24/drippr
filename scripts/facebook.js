@@ -11,6 +11,8 @@ FB.Event.subscribe("auth.logout", function() {
 	window.BUCKET_METHOD.loadArticleData();
 	window.location = 'http://localhost:5000';
 });
+$("#dripps").css("height",""+ ($( window ).height()-90));
+
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -122,7 +124,7 @@ FB.Event.subscribe("auth.logout", function() {
 			FB.login();
 		}
 		FB.api('/me', function(response) {
-			$("#user").html("Welcome, " + response.first_name);
+			$("#user").html("Welcome, " + response.first_name + "!");
     	    $.ajax({
                 // url:'json/articles.json',
                 url:'http://localhost:5000/is_user',

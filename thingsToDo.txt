@@ -7,7 +7,6 @@ Things To Do
 	-inbox, sent (inbox/sent ordered by unread messages/articles)
 
 
-binding intial buckets (?)
 fix modal size
 
 Styling
@@ -35,5 +34,7 @@ Automatic article collection
 
 chrome extension - Poor Nate
 
-Video 
+Video
+Dates
+
 (sockets)

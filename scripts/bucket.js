@@ -4,46 +4,30 @@ var feed;
 
 window.BUCKET_METHOD = {
 
-        groupData:function(data) {
-
-            //(group id -> list of {id:name}?)
-            var members_dict = {};
-            window.groupList = [];
-            for (var jj = 0; jj < data.length; jj++) {
-
-                if (!(members_dict[data[jj].id])) {
-
-                    window.groupList.push(data[jj].name);
-                    members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
-                }
-                    
-                id = data[jj].userId;
-                userName = data[jj].fName +" " +data[jj].lName ;
-                members_dict[data[jj].id]['list'].push({name : userName});
-            } 
-
-
-
-            var templateSource = $("#groups-template").html();
-            template = Handlebars.compile(templateSource);
-            groupHTML = template({"groups":members_dict});
-            $('#groups').html(groupHTML);
-
-            $(".deleteGroup").click(function(e){
-                var groupId = $(e.target).attr('group_id');
-                $("#group_" + groupId).attr("class", "hide");
-                $.ajax({
-                    url:'http://localhost:5000/deleteGroup',
-                    data: {groupId: groupId},
-                    method:'get',
-                    success: function(data){return;}
-                });
-            });
-        },
-
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
             
-
+            window.setBucketLikes = function correctLikes() {
+                if (window.selItem['userLiked']) {
+                    $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
+                    $(".like.blue").attr("class", 'opinionDripp like blue');
+                    $(".up").html(window.selItem.numLikes);
+                }
+                if (window.selItem['userLiked'] === false) {
+                    $(".like.grey2").attr("class", 'opinionDripp like grey2')
+                    $(".like.blue").attr("class", 'opinionDripp like blue hide');
+                    $(".up").html(window.selItem.numLikes);
+                }
+                if (window.selItem['userDisliked']) {
+                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
+                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
+                    $(".down").html(window.selItem.numDislikes);
+                }
+                if (window.selItem['userDisliked'] === false) {
+                    $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
+                    $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
+                    $(".down").html(window.selItem.numDislikes);
+                }
+            }
             
             if (dripps_data.length == 0 ) {
 
@@ -51,7 +35,7 @@ window.BUCKET_METHOD = {
             else{
                 feed = dripps_data;
                 window.selItem = feed[0];
-
+                console.log(window.selItem);
                 var convo = [];
                 var convoId = feed[0]['conversationId'];
                 for (var i=0;i<conversation_data.length;i++) {
@@ -131,16 +115,6 @@ window.BUCKET_METHOD = {
 
                 bindMessages(messageListTemplate, conversation_data);
             });
-            
-
-            $.ajax({
-                // url:'json/articles.json',
-                url:'http://localhost:5000/groups',
-                data: {userId: window.myID},
-                method:'get',
-                success: this.groupData
-            });       
-            
         },
 
         handlerData2:function(dripps_data, readItLater_data){
