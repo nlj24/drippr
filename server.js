@@ -294,6 +294,16 @@ app.get("/groups", function(req, res) {
 });
 
 
+/* query parameters:
+    headline
+    imgUrl
+    url
+    source
+    category
+    fromUserId
+    recipientGroup
+    recipientFriendIds
+ */   
 
 app.get("/sendDripp/new", function(req, res) {
 
@@ -341,6 +351,14 @@ app.get("/sendDripp/new", function(req, res) {
 
 });
 
+/* query parameters:
+    headline
+    imgUrl
+    url
+    source
+    category
+    userId
+ */
 app.get("/readItLater/new", function(req, res) {
     var headline = req.query.headline;
     var imgUrl = req.query.imgUrl;
