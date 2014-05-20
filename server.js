@@ -49,10 +49,23 @@ var connection;
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes FROM Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id WHERE userId=" + userId;
-    connection.query(get_bucket_articles, function(err,rows,fields) {
+    var get_bucket_articles = "SELECT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+   
+   connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
-            res.send(rows);
+            var articles_dict = {};
+            var articles_list = [];
+            for(var ii=0; ii < rows.length; ii++){
+                articles_dict[rows[ii].id] = rows[ii];
+                articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
+                articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+                articles_list.push( articles_dict[rows[ii].id]);
+            }
+
+            console.log(articles_list);
+        
+                
+            res.send(articles_list);
     });
 
 });
@@ -67,7 +80,6 @@ app.get("/dripps", function(req, res){
         if (err) throw err;
         var articles_dict = {};
         var articles_list = [];
-        console.log(rows);
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
