@@ -293,6 +293,81 @@ app.get("/groups", function(req, res) {
     });
 });
 
+
+
+app.get("/sendDripp/new", function(req, res) {
+
+    var headline = req.query.headline;
+    var imgUrl = req.query.imgUrl;
+    var url = req.query.url;
+    var source = req.query.source;
+    var category = req.query.category;
+
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
+    
+    connection.query(add_article_query, function(err,result) {
+        if (err) throw err;
+        var fromUserId = req.query.fromUserId;
+        var recipientGroup = req.query.recipientGroup;
+        var recipientFriendIds = req.query.recipientFriendIds;
+        var articleId = result.insertId;
+        var convoId;
+        var set_send_query;
+
+        var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
+        connection.query(max_id_query, function(err,rows,fields) {
+            if (err) throw err;
+            if (rows[0]['MAX(conversationId)'] == null) {
+                convoId = 0;
+            }else{
+                convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+                
+            }
+
+            for(var jj=0; jj < recipientFriendIds.length; jj++){
+                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
+                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
+                connection.query(set_send_query, function(err,rows,fields) {
+                    if (err) throw err;
+                    res.send(200);
+
+                });   
+            }
+        });
+
+        res.send(201);
+    });
+
+
+});
+
+app.get("/readItLater/new", function(req, res) {
+    var headline = req.query.headline;
+    var imgUrl = req.query.imgUrl;
+    var url = req.query.url;
+    var source = req.query.source;
+    var category = req.query.category;
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
+
+    connection.query(add_article_query, function(err,result) {
+        if (err) throw err;
+        var userId = req.query.userId;
+        var name = "readItLater";
+        var articleId = result.insertId;
+        var bucketId = -1;
+
+        var set_read_query = 'INSERT INTO Buckets (userId, name, articleId, dateAdded, bucketId) VALUES (' + userId + ',' + "'" + name+ "'" + ',' +articleId + ", NOW()," +  bucketId + ')';
+        connection.query(set_read_query, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(200);
+        });
+            
+        res.send(201);
+    });
+
+});
+
+
 app.get("/readItLater", function(req, res) {
     var userId = req.query.userId;
     var name = "readItLater";
