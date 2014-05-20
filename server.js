@@ -308,7 +308,7 @@ app.get("/groups", function(req, res) {
 app.get("/sendDripp/new", function(req, res) {
 
     var headline = req.query.headline;
-    var imgUrl = req.query.imgUrl;
+    var imgUrl = (req.query.imgUrl == null) ? "https://www.google.com/images/srpr/logo11w.png" : req.query.imgUrl;
     var url = req.query.url;
     var source = req.query.source;
     var category = req.query.category;
@@ -361,7 +361,7 @@ app.get("/sendDripp/new", function(req, res) {
  */
 app.get("/readItLater/new", function(req, res) {
     var headline = req.query.headline;
-    var imgUrl = req.query.imgUrl;
+    var imgUrl = (req.query.imgUrl == null) ? "https://www.google.com/images/srpr/logo11w.png" : req.query.imgUrl;
     var url = req.query.url;
     var source = req.query.source;
     var category = req.query.category;
