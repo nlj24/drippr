@@ -43,6 +43,7 @@ app.get("/buckets", function(req, res){
                 articles_dict[rows[ii].id] = rows[ii];
                 articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
                 articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+                //if there are other buckets need to note readitlater
                 articles_list.push( articles_dict[rows[ii].id]);
             }
 
