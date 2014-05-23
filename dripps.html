@@ -281,7 +281,6 @@
 							});
 						</script>
 					</script>
-
 					<div class = "row">
 						<div class = "col-md-1">
 						</div>
@@ -318,7 +317,7 @@
 							</div>
 							<div class = "col-md-1">
 								<div class = "opDiv">
-									<img src = "images/drop.svg" class = "opinionDripp dripp">
+									<img src = "images/drop.svg" class = "opinionDripp dripp" data-toggle="modal" data-target="#myModal">
 									<img src = "images/dropBlue.svg" class = "opinionDripp dripp hide">
 								</div>
 							</div>
@@ -439,23 +438,23 @@
 			</div>
 			<div class = "col-md-2" id = "opContainer">
 				<div class = "opDiv">
-					<img src = "images/readLater.svg" class="opinionBucket readLater grey2">
-					<img src = "images/readLaterBlue.svg" class="opinionBucket readLater blue hide">
+					<img src = "images/readLater.svg" class="opinionBucket readLater2 grey2 hide">
+					<img src = "images/readLaterBlue.svg" class="opinionBucket readLater2 blue hide">
 				</div>
         		<div>
 					<div class = "opDiv">
-						<img src = "images/like.svg" class="opinionBucket like grey2">
-						<img src = "images/likeBlue.svg" class="opinionBucket like blue hide">
+						<img src = "images/like.svg" class="opinionBucket like2 grey2 hide">
+						<img src = "images/likeBlue.svg" class="opinionBucket like2 blue hide">
 					</div>
-					<p class = "number up">
+					<p class = "number up2">
 					</p>
     			</div>
     			<div>
 					<div class = "opDiv">
-						<img src = "images/dislike.svg" class="opinionBucket dislike grey2">
-						<img src = "images/dislikeBlue.svg" class="opinionBucket dislike blue hide">
+						<img src = "images/dislike.svg" class="opinionBucket dislike2 grey2 hide">
+						<img src = "images/dislikeBlue.svg" class="opinionBucket dislike2 blue hide">
 					</div>
-					<p class = "number down">
+					<p class = "number down2">
 					</p>
 				</div>
 				<div class = "opDiv">
@@ -468,26 +467,26 @@
 	</div>
 	<div id="groups" class = "container-fluid hide">
 		<div class = "row">
-				<div class = "col-md-1">
-				</div>
-				<div class = "col-md-3">
-					<input id = "fb-input-groups" type = "text" autocomplete="off">
-					<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
-					<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
-				</div>
-				<div class = "col-md-7">
-					<div id = "chosenCont">
-						<div id = "chosenGroup">
-						</div>
+			<div class = "col-md-1">
+			</div>
+			<div class = "col-md-3">
+				<input id = "fb-input-groups" type = "text" autocomplete="off">
+				<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
+				<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
+			</div>
+			<div class = "col-md-7">
+				<div id = "chosenCont">
+					<div id = "chosenGroup">
 					</div>
 				</div>
-				<div class = "col-md-1">
-				</div>
 			</div>
-			<div id="groups_placeholder"></div>
+			<div class = "col-md-1">
+			</div>
+		</div>
+		<div id="groups_placeholder">
+		</div>
 	</div>
-		<script id="groups-template" type="text/x-handlebars-template">
-			
+		<script id="groups-template" type="text/x-handlebars-template">	
 			<div>
 				{{#each groups}}
 					<div id = group_{{this.id}}>
@@ -504,30 +503,46 @@
 				{{/each}}
 			</div>
 		</script>
-	<form id="fb-form" class="modal">
-		<div class = "showForm">
-			<div class = "close">
-				X 
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							Send Dripp
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class = "showForm" id="fb-form" >
+							<div id = "chosenCont">
+								<div id = "chosen">
+								</div>
+							</div>
+							<input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
+							<br>
+							<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
+								Send
+							</a>
+							<br>
+							<input id = "group-input" type = "text" autocomplete="off">
+							<br>
+							<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
+								Send
+							</a>
+						</form>
+						<div class = "success hide">
+							Congratulations! Your dripp has been sent!
+						</div>
+					</div>
+					<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">
+			        		Close
+			        	</button>
+			        </div>
+			    </div>
 			</div>
-			<p id = "modalTitle">
-				Send a dripp
-			</p>
-			<div id = "chosenCont">
-				<div id = "chosen">
-				</div>
-			</div>
-			<input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
-			<br>
-			<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">Send </a>
-			<br>
-			<input id = "group-input" type = "text" autocomplete="off">
-			<br>
-			<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">Send </a>
-		</div>
-		<div class = "success hide">
-			Congratulations! Your dripp has been sent!
-			<div class = "close"> X </div>
-		</div>
-	</form>
+		</div>	
 	</body>
 </html>

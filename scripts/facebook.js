@@ -73,33 +73,33 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			});
 
 			$('#fb-input-groups').facebookAutocomplete({
-                            showAvatars: true,
-                            avatarSize: 50,
-                            maxSuggestions: 8,
-                            onpick: function (friend) {
-                                var add_to_dom = false;
-                                if (!(friend.id in window.chosenFriends)) {
-                                    window.ids.push(friend.id);
-                                    add_to_dom = true;
-                                }
-                                window.chosenFriends[friend.id] = friend;
+                showAvatars: true,
+                avatarSize: 50,
+                maxSuggestions: 8,
+                onpick: function (friend) {
+                    var add_to_dom = false;
+                    if (!(friend.id in window.chosenFriends)) {
+                        window.ids.push(friend.id);
+                        add_to_dom = true;
+                    }
+                    window.chosenFriends[friend.id] = friend;
 
-                                if(add_to_dom) {
-                                    console.log('hi');
-                                    $("#chosenCont").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
-                                }
+                    if(add_to_dom) {
+                        console.log('hi');
+                        $("#chosenCont").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+                    }
 
-                                $(".rm" ).unbind("click", handler2);
-                                $(".rm").bind("click", handler2);
+                    $(".rm" ).unbind("click", handler2);
+                    $(".rm").bind("click", handler2);
 
-                                var handler2 = $('.rm').click(function(e) {
-                                    var id = $(e.target).attr('id');
-                                    delete window.chosenFriends[id];
-                                    window.ids.splice(window.ids.indexOf(id),1);
-                                    $("#"+id).remove();
-                                });                        
-                            }
-             });
+                    var handler2 = $('.rm').click(function(e) {
+                        var id = $(e.target).attr('id');
+                        delete window.chosenFriends[id];
+                        window.ids.splice(window.ids.indexOf(id),1);
+                        $("#"+id).remove();
+                    });                        
+                }
+            });
 
 
 			$(".send").click(function(){

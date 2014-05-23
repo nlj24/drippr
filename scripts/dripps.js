@@ -170,24 +170,22 @@ window.ARTICLE_METHOD ={
                 };
 			});
 
-            $(".dripp").click(function(){
-                $(".showForm").attr("class", "showForm");
-                $(".success").attr("class", "success hide");
-                $('#fb-form').modal({
-                    fadeDuration: 250,
-                    fadeDelay: 1.2
-                });
-                $('#fb-form').bind("keyup keypress", function(e) {
-                    var code = e.keyCode || e.which; 
-                    if (code  == 13) {
-                        e.preventDefault();
-                        return false;
-                    }
-                });
-            });
+            // $(".dripp").click(function(){
+            //     $(".showForm").attr("class", "showForm");
+            //     $(".success").attr("class", "success hide");
+            //     $('#fb-form').modal({
+            //         fadeDuration: 250,
+            //         fadeDelay: 1.2
+            //     });
+            //     $('#fb-form').bind("keyup keypress", function(e) {
+            //         var code = e.keyCode || e.which; 
+            //         if (code  == 13) {
+            //             e.preventDefault();
+            //             return false;
+            //         }
+            //     });
+            // });
 
-            window.readList = [];
-            var internalReadList = [];
             $(".readLater").click(function(){
                 var articleId = window.curArticle;
                 if($('.readLater.grey2').hasClass('hide')) {
@@ -198,12 +196,8 @@ window.ARTICLE_METHOD ={
                         data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
                         type:'get'
                     });
-                    for(var i=0; i < window.readList.length; i++){
-                        if (articleId === window.readList[i]) {
-                            readList.splice(readList.indexOf(articleId),1);
-                        }
-                    }
-                return;
+                    articlesData[articleId]['userReadItLater'] = false;
+                    return;
                 }
                 if($('.readLater.blue').hasClass('hide')) {
                     $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide');
@@ -213,17 +207,7 @@ window.ARTICLE_METHOD ={
                         data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                         type:'get'
                     });
-                    internalReadList.push(articleId);
-                }
-                window.readList = internalReadList;
-            });
-
-            $(document).keydown(function(e){
-                if (e.keyCode == 37) {
-                    javascript:sliders[0].goToPrev();
-                }
-                if (e.keyCode == 39) {
-                    javascript:sliders[0].goToNext();
+                    articlesData[articleId]['userReadItLater'] = true;
                 }
             });
         },
@@ -237,3 +221,12 @@ window.ARTICLE_METHOD ={
             });
         },
 };
+
+$(document).keydown(function(e){
+    if (e.keyCode == 37) {
+        javascript:sliders[0].goToPrev();
+    }
+    if (e.keyCode == 39) {
+        javascript:sliders[0].goToNext();
+    }
+});
