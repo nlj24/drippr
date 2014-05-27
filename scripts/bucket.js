@@ -37,18 +37,34 @@ window.BUCKET_METHOD = {
                 }
             }
             
+            for (var ii = 0; ii < dripps_data.length; ii++) {
+                if (moment().format('MMMM Do YYYY') === moment(dripps_data[ii]['timeSent']).format('MMMM Do YYYY')) {
+                    dripps_data[ii]['timeSent'] = "Today, " + moment(dripps_data[ii]['timeSent']).format('h:mm a');
+                }
+                else {
+                    dripps_data[ii]['timeSent'] = moment(dripps_data[ii]['timeSent']).format('MMMM Do, h:mm a');
+                }
+            }
+            console.log(dripps_data);
             if (dripps_data.length == 0 ) {
 
             }
             else{
                 feed = dripps_data;
                 window.selItem = feed[0];
-                console.log(window.selItem);
                 var convo = [];
                 var convoId = feed[0]['conversationId'];
                 for (var i=0;i<conversation_data.length;i++) {
                     if (convoId == conversation_data[i]['conversationId']) {
                         convo.push(conversation_data[i]);
+                    }
+                }
+                for (var ii = 0; ii < convo.length; ii++) {
+                    if (moment().format('MMMM Do YYYY') === moment(convo[ii]['time']).format('MMMM Do YYYY')) {
+                        convo[ii]['time'] = "Today, " + moment(convo[ii]['time']).format('h:mm a');
+                    }
+                    else {
+                        convo[ii]['time'] = moment(convo[ii]['time']).format('dddd MMMM Do YYYY, h:mm a');
                     }
                 }
 
@@ -63,6 +79,11 @@ window.BUCKET_METHOD = {
                 itemHTML = template({"buckets":feed});
                 $('#items').html(itemHTML);
 
+                for (var ii = 0; ii < feed.length; ii++) {
+                    if (feed[ii]['isRead']) {
+                        $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
+                    }
+                }
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource),
                 drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo});
@@ -85,10 +106,14 @@ window.BUCKET_METHOD = {
 
                 if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                     feed = dripps_data;
+                    $(".selBucket").attr("class", "selBucket");
+                    $(e.target).attr("class", "selBucket selectedBucket");
                 }
 
                  if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
                     feed = readItLater_data;
+                    $(".selBucket").attr("class", "selBucket");
+                    $(e.target).attr("class", "selBucket selectedBucket");
                 }
 
                 templateSource = $("#items-template").html(),
@@ -174,22 +199,29 @@ window.BUCKET_METHOD = {
 
 function bindMessages(template, conversation_data){
     $('.messageItem').click(function(e){
-            var id = $(e.target).attr('message_id');
-            for (var i=0;i<feed.length;i++) {
-                    if (id == feed[i]['id']) {
-                        window.selItem = feed[i];
-                    }
-                }
-
-            displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);
-            
+        var id = $(e.target).attr('message_id');
+        for (var i=0;i<feed.length;i++) {
+            if (id == feed[i]['id']) {
+                window.selItem = feed[i];
+            }
+        }
+        console.log('hi');
+        $.ajax({
+            url:'http://localhost:5000/isRead',
+            data: {drippId: id},
+            type:'get'
+        });
+        $('.messageItem').css("background", "white");
+        $('.messageItem').css("color", "#6D6E70");
+        $(e.target).closest('.messageItem').css("background", "#6D6E70");
+        $(e.target).closest('.messageItem').css("color", "white");
+        displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);   
         bindButtons();
     });
 }
 
 function bindButtons(){
     $("#messageSend").click(function(){
-        console.log('hi');
         content = $('#messageInput').val();
         if (content !== '') {
             $.ajax({
@@ -287,22 +319,6 @@ function bindButtons(){
         };
     });
 
-    $(".dripp").click(function(){
-        $(".showForm").attr("class", "showForm");
-        $(".success").attr("class", "success hide");
-        $('#fb-form').modal({
-            fadeDuration: 250,
-            fadeDelay: 1.2
-        });
-        $('#fb-form').bind("keyup keypress", function(e) {
-            var code = e.keyCode || e.which; 
-            if (code  == 13) {
-                e.preventDefault();
-                return false;
-            }
-        });
-    });
-
     $(".readLater2").click(function(){
         var articleId = window.selItem['articleId'];
         if($('.readLater2.grey2').hasClass('hide')) {
@@ -329,7 +345,6 @@ function bindButtons(){
     });
 
     window.setBucketLikes();
-
 }
 
 function displayConvos(selItem, convoId, template, conversation_data){
@@ -337,6 +352,14 @@ function displayConvos(selItem, convoId, template, conversation_data){
     for (var i=0;i<conversation_data.length;i++) {
         if (convoId == conversation_data[i]['conversationId']) {
             convo.push(conversation_data[i]);
+        }
+    }
+    for (var ii = 0; ii < convo.length; ii++) {
+        if (moment().format('MMMM Do YYYY') === moment(convo[ii]['time']).format('MMMM Do YYYY')) {
+            convo[ii]['time'] = "Today, " + moment(convo[ii]['time']).format('h:mm a');
+        }
+        else {
+            convo[ii]['time'] = moment(convo[ii]['time']).format('dddd MMMM Do YYYY, h:mm a');
         }
     }
     var drippsHTML = template({"selItem":window.selItem, "messages":convo});

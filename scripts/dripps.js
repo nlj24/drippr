@@ -50,15 +50,17 @@ window.ARTICLE_METHOD ={
             });
 
             $(".groupsBub").click(function(){
+                window.GROUP_METHOD.loadGroups();
                 $("#buckets").attr("class", "container-fluid hide");
                 $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#dripps").attr("class", "container-fluid hide");
                 $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
                 $("#groups").attr("class", "container-fluid");
                 $("#groupsHeader").attr("class", "col-md-5 headingPad");
-                window.GROUP_METHOD.loadGroups();
             });
-
+            
+            $('.categ').css("background", "white");
+            $('.categ').css("color", "#6D6E70");
             $(".topCat").css("background", "#6D6E70");
             $('.topCat').css("color", "white");
             $(".topCatImg.grey").attr("class", 'topCatImg catImg grey hide');
@@ -69,8 +71,6 @@ window.ARTICLE_METHOD ={
                 feed = articlesData[id];
                 articleHTML = template({"articles":feed});
                 $('#articles').html(articleHTML);
-                
-
 
                 $('.categ').css("background", "white");
                 $('.categ').css("color", "#6D6E70");
@@ -169,22 +169,27 @@ window.ARTICLE_METHOD ={
                     articlesData[articleId]['userDisliked'] = true;
                 };
 			});
+            
+            $(function() {
+                var availableTags = window.groupList;
+                $( "#tags" ).autocomplete({
+                    source: availableTags
+                });
+            });
 
-            // $(".dripp").click(function(){
-            //     $(".showForm").attr("class", "showForm");
-            //     $(".success").attr("class", "success hide");
-            //     $('#fb-form').modal({
-            //         fadeDuration: 250,
-            //         fadeDelay: 1.2
-            //     });
-            //     $('#fb-form').bind("keyup keypress", function(e) {
-            //         var code = e.keyCode || e.which; 
-            //         if (code  == 13) {
-            //             e.preventDefault();
-            //             return false;
-            //         }
-            //     });
-            // });
+            $(".sendGroup").click(function(){            
+                var groupSel = $('#tags').val();
+                console.log(groupSel);
+                var groupId = window.groupListDict[groupSel];
+                console.log(groupId);
+                if (groupId) {
+                    $.ajax({
+                        url:'http://localhost:5000/sendDripp',
+                        data: {fromUserId: window.myID, recipientGroup: groupId, recipientFriendIds: -1, articleId: window.curArticle},
+                        type:'get'
+                    });
+                }
+            });
 
             $(".readLater").click(function(){
                 var articleId = window.curArticle;
@@ -193,7 +198,7 @@ window.ARTICLE_METHOD ={
                     $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
                     $.ajax({
                         url:'http://localhost:5000/removeReadItLater',
-                        data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
+                        data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                         type:'get'
                     });
                     articlesData[articleId]['userReadItLater'] = false;

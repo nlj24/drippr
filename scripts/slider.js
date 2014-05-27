@@ -71,6 +71,7 @@ window.setDrippLikes = function correctLikes() {
         $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2')
         $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
     }
+    $(".dripp").attr("class", 'opinionDripp dripp');
 }
 
 window.resetFB = function fbReset() {

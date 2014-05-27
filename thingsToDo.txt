@@ -1,8 +1,5 @@
 Things To Do
 ------------
-
-fix modal size
-
 Styling
 Styling
 
@@ -26,10 +23,8 @@ display before login
 
 Automatic article collection - Ashwin
 
-
 chrome extension - Poor Nate
 
 Video
-Dates
 
 (sockets)

@@ -5114,7 +5114,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #ffffff;
+  background-color: #e9eaed;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
@@ -5151,6 +5151,7 @@ button.close {
 .modal-title {
   margin: 0;
   line-height: 1.42857143;
+  text-align: center;
 }
 .modal-body {
   position: relative;

@@ -9,28 +9,15 @@
 	    <link rel="stylesheet" href="css/facebook.css">
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
 		<script type="text/javascript" src="/scripts/jquery.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
 		<script type="text/javascript" src="/scripts/bucket.js"></script>
 		<script type="text/javascript" src="/scripts/groups.js"></script>
 		<script type="text/javascript" src="/scripts/slider.js"></script>
+		<script type="text/javascript" src="/scripts/moment.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
 		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
 		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
-
-
-		<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<script>
-		$(function() {
-			$("#accordion").accordion({
-				collapsible: true
-			});
-		});
-		</script> -->
-
-
 	</head>
     <body>
     	<div id="fb-root"></div>
@@ -287,7 +274,7 @@
 						<div class = "row col-md-10">
 			                <div class = "col-md-3">
 								<div class = "opDiv">
-									<img src = "images/readLater.svg" class="opinionDripp readLater grey2">
+									<img src = "images/readLater.svg" class="opinionDripp readLater grey2 hide">
 									<img src = "images/readLaterBlue.svg" class="opinionDripp readLater blue hide">
 								</div>
 		                	</div>
@@ -317,8 +304,7 @@
 							</div>
 							<div class = "col-md-1">
 								<div class = "opDiv">
-									<img src = "images/drop.svg" class = "opinionDripp dripp" data-toggle="modal" data-target="#myModal">
-									<img src = "images/dropBlue.svg" class = "opinionDripp dripp hide">
+									<img src = "images/drop.svg" class = "opinionDripp dripp hide" data-toggle="modal" data-target="#myModal">
 								</div>
 							</div>
 						</div>
@@ -329,7 +315,7 @@
 				<div class = "col-md-1 arrowDiv">
 					<a href = "javascript:sliders[0].goToNext()">
 						<div class = "arrow" id = "nextArrow">
-							<img class = "fuck" src = "/images/arrow.svg">
+							<img src = "/images/arrow.svg">
 						</div>
 					</a>
 				</div>
@@ -345,41 +331,28 @@
 	<div id="buckets" class = "container-fluid hide">
     	<div class = "row">
     		<div class = "menuBar col-md-3">
-    			
-
-    			<!-- <div id="accordion">
-					<div class="group">
-						<h3>
-							Selected
-						</h3>
-						<div>
-							dripps
-						</div>
-						<div>
-							read it later
-						</div>
-					</div>
-				</div>
- -->
-
-
-
-
-    			<div class = "selBucket" bucketIdentifier = "dripps">
-    				dripps
-    			</div>
-    			<div class = "selBucket" bucketIdentifier = "readItLater">
-    				read it later
-    			</div>
+    			<div class = "row">
+	    			<div class = "col-md-6" id = "selDripps">
+		    			<div class = "selBucket selectedBucket" bucketIdentifier = "dripps">
+		    				dripps
+		    			</div>
+	    			</div>
+	    			<div class = "col-md-6" id = "selBucket">
+		    			<div class = "selBucket" bucketIdentifier = "readItLater">
+		    				read it later
+		    			</div>
+		    		</div>
+		    	</div>
         		<div id="items">
         		</div>
 	        	<script id="items-template" type="text/x-handlebars-template">
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{headline}}</p>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{timeSent}}</p>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}}>{{fName}}{{lName}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemHead">{{headline}}</p>
+		        				<img message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
+		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemSender">{{fName}} {{lName}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemTime">{{timeSent}}</p>
 		        			</div>
 		        		{{/each}}
 			        </div>
@@ -411,7 +384,7 @@
 		        			</div>
 		        			<div class = "row">
 		        				<div class = "col-md-11 noPad">
-			        				<textarea id = "messageInput" type = "text" autocomplete="off" autofocus="autofocus"></textarea>
+			        				<textarea id = "messageInput" placeholder="Enter Message" cols="20" rows="1"></textarea>
 			        			</div>
 			        			<div class = "col-md-1 noPad">
 			        				<div id = "messageSend"> Send </div>
@@ -441,25 +414,24 @@
 					<img src = "images/readLater.svg" class="opinionBucket readLater2 grey2 hide">
 					<img src = "images/readLaterBlue.svg" class="opinionBucket readLater2 blue hide">
 				</div>
-        		<div>
-					<div class = "opDiv">
+        		<div class = "row">
+					<div class = "opDiv col-md-6">
 						<img src = "images/like.svg" class="opinionBucket like2 grey2 hide">
 						<img src = "images/likeBlue.svg" class="opinionBucket like2 blue hide">
 					</div>
-					<p class = "number up2">
-					</p>
+					<div class = "number up2 col-md-6">
+					</div>
     			</div>
-    			<div>
-					<div class = "opDiv">
+    			<div class = "row">
+					<div class = "opDiv col-md-6">
 						<img src = "images/dislike.svg" class="opinionBucket dislike2 grey2 hide">
 						<img src = "images/dislikeBlue.svg" class="opinionBucket dislike2 blue hide">
 					</div>
-					<p class = "number down2">
-					</p>
+					<div class = "number down2 col-md-6">
+					</div>
 				</div>
 				<div class = "opDiv">
-					<img src = "images/drop.svg" class = "opinionBucket dripp">
-					<img src = "images/dropBlue.svg" class = "opinionBucket dripp hide">
+					<img src = "images/drop.svg" class = "opinionBucket dripp2" data-toggle="modal" data-target="#myModal">
 				</div>
 						
 			</div>
@@ -470,8 +442,9 @@
 			<div class = "col-md-1">
 			</div>
 			<div class = "col-md-3">
-				<input id = "fb-input-groups" type = "text" autocomplete="off">
-				<input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
+				Select Friends: <input id = "fb-input-groups" type = "text" autocomplete="off">
+				<br>
+				Name Group: <input id = "groupName" type = "text" autocomplete="off" autofocus="autofocus">
 				<a class="btn" id="groupBtn"><img class="buttonDrip" src="images/dropBlue.svg">Create Group</a>
 			</div>
 			<div class = "col-md-7">
@@ -488,19 +461,36 @@
 	</div>
 		<script id="groups-template" type="text/x-handlebars-template">	
 			<div>
-				{{#each groups}}
-					<div id = group_{{this.id}}>
-							<h3>{{this.name}}</h3>
-							<div class = "deleteGroup" group_id={{this.id}}>
-								X
-						</div>
-						{{#each this.list}}
-							<div class="personName">
-								{{this.name}}
+				<table>
+					<tbody>
+						<tr>
+							<th> Group Name </th>
+							<th> Delete Group </th>
+							<th> Members </th>
+						</tr>
+						{{#each groups}}
+							<div id = group_{{this.id}}>
+								<tr>
+									<td>
+										<h3>{{this.name}}</h3>
+									</td>
+									<td>
+										<div class = "deleteGroup" group_id={{this.id}}>
+											X
+										</div>
+									</td>
+									{{#each this.list}}
+										<td>
+											<div class="personName">
+												{{this.name}}
+											</div>
+										</td>
+									{{/each}}
+								</tr>	
 							</div>
-						{{/each}}	
-					</div>
-				{{/each}}
+						{{/each}}
+					</tbody>
+				</table>
 			</div>
 		</script>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -511,8 +501,11 @@
 							&times;
 						</button>
 						<h4 class="modal-title" id="myModalLabel">
-							Send Dripp
+							send dripp
 						</h4>
+						<p>
+							Choose your facebook friends below. If your friend hasn't signed into drippr, we'll give you a chance to send them a message and they'll display red.
+						</p>
 					</div>
 					<div class="modal-body">
 						<form class = "showForm" id="fb-form" >
@@ -520,27 +513,28 @@
 								<div id = "chosen">
 								</div>
 							</div>
-							<input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
-							<br>
+							Select Friends: <input id = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
 							<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
 								Send
 							</a>
 							<br>
-							<input id = "group-input" type = "text" autocomplete="off">
-							<br>
-							<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
-								Send
-							</a>
+							<div class="ui-widget">
+								<label for="tags">Select Group: </label>
+								<input id="tags">
+								<a class="sendGroup"><img class="buttonDrip" src="images/dropBlue.svg">
+									Send
+								</a>
+							</div>
 						</form>
 						<div class = "success hide">
 							Congratulations! Your dripp has been sent!
 						</div>
 					</div>
-					<div class="modal-footer">
+					<!-- <div class="modal-footer">
 			        	<button type="button" class="btn btn-default" data-dismiss="modal">
 			        		Close
 			        	</button>
-			        </div>
+			        </div> -->
 			    </div>
 			</div>
 		</div>	

@@ -4,10 +4,11 @@ window.GROUP_METHOD = {
         //(group id -> list of {id:name}?)
         var members_dict = {};
         window.groupList = [];
+        window.groupListDict = {};
         for (var jj = 0; jj < data.length; jj++) {
 
             if (!(members_dict[data[jj].id])) {
-
+                window.groupListDict[data[jj].name] = data[jj].id;
                 window.groupList.push(data[jj].name);
                 members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
             }
@@ -21,10 +22,6 @@ window.GROUP_METHOD = {
         template = Handlebars.compile(templateSource);
         groupHTML = template({"groups":members_dict});
         $('#groups_placeholder').html(groupHTML);
-
-
-
-        
 
         $(".deleteGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');

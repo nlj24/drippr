@@ -57,7 +57,7 @@ app.get("/buckets", function(req, res){
 /* sends a list of (from name, headline, conversationId ) ordered by time */
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
-    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, fromUserId, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     
     
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
@@ -71,12 +71,17 @@ app.get("/dripps", function(req, res){
             articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
 
             articles_list.push( articles_dict[rows[ii].id]);
-        }
-
-       
-
-            
+        }            
         res.send(articles_list);
+    });
+});
+
+app.get("/isRead", function(req, res){
+    var drippId = req.query.drippId;
+    var update_isRead = "UPDATE Dripps SET isRead = 1 WHERE id =" + drippId;
+    connection.query(update_isRead, function(err,rows,fields) {
+        if (err) throw err;          
+        res.send(200);
     });
 });
 
@@ -110,6 +115,18 @@ app.get("/is_user",  function(req, res){
             });
         }
         res.send(200);
+
+    });
+});
+
+
+app.get("/shadow_users",  function(req, res){
+    var friend_id_lst = req.query.lst;
+    var friend_id_string = friend_id_lst.join();
+    var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
+    connection.query(get_real_query, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(rows);
 
     });
 });
@@ -231,9 +248,9 @@ app.get("/sendDripp", function(req, res) {
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
                 + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
+                console.log(set_send_query);
                 if (err) throw err;
                 res.send(200);
-
             });   
         }
     });
@@ -293,17 +310,7 @@ app.get("/groups", function(req, res) {
     });
 });
 
-
-/* query parameters:
-    headline
-    imgUrl
-    url
-    source
-    category
-    fromUserId
-    recipientGroup
-    recipientFriendIds
- */   
+  
 
 app.get("/sendDripp/new", function(req, res) {
 
@@ -351,14 +358,7 @@ app.get("/sendDripp/new", function(req, res) {
 
 });
 
-/* query parameters:
-    headline
-    imgUrl
-    url
-    source
-    category
-    userId
- */
+
 app.get("/readItLater/new", function(req, res) {
     var headline = req.query.headline;
     var imgUrl = (req.query.imgUrl == null) ? "https://www.google.com/images/srpr/logo11w.png" : req.query.imgUrl;
