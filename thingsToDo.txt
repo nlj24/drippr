@@ -13,11 +13,6 @@ is read? has unreadComments?
 		-still in outbox
 		-some sort of notifcations for both cases
 
-
-user existing issue
-	shawdow users
-
-
 display before login
 	--check in facebook.js
 

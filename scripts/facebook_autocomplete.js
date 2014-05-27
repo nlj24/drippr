@@ -66,6 +66,7 @@ Released under the MIT license
         return function(response) {
           var friend, i, _i, _len, _ref, _results;
           _ref = response.data;
+          console.log(response.data);
           _results = [];
           for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
             friend = _ref[i];
