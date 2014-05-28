@@ -1,39 +1,8 @@
 Things To Do
 ------------
-
--conversations
-	-data representation
-	-sockets and triggers
-	-inbox, sent (inbox/sent ordered by unread messages/articles)
-
-
-binding intial buckets (?)
-fix modal size
-
-Styling
-Styling
-Styling
-Styling
-Styling
-Styling
-Styling
-
-readitlater re-add, load, categ
-what to do about empty table - Ashwin/Darshan, mostly done?
-	-still need to display some message
-is read? has unreadComments?
-	-things to appear in sender's inbox if unread comment
-		-still in outbox
-		-some sort of notifcations for both cases
-
-
-user existing issue
-logout issue
-display before login
+Styling (empty table, binding of initial buckets)
+Styling (some sort of notifcations for unread things, displaying before login, need to shrink text for long name (do …))
 
 Automatic article collection
 
 chrome extension - Poor Nate
-
-Video 
-(sockets)

@@ -13,6 +13,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
 					window.resetFB();
+					this.goTo(window.positions[window.curCategory]);
 			    },
 			 
 			    goTo: function(index) {
@@ -27,14 +28,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					window.curArticle = this.li[this.currentIndex].id;
                 	var articleId = window.curArticle;
+                	window.positions[window.curCategory] = index;
                 	window.setDrippLikes();
 		            
-		            for(var i=0; i < window.readList.length; i++){
-		            	if (articleId === window.readList[i]) {
-			            	$(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide');
-			                $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
-			            }
-		            }
 		           	window.resetFB();
 			    },
 			 	
@@ -69,6 +65,15 @@ window.setDrippLikes = function correctLikes() {
         $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
         $(".down").html(articlesResults[window.curArticle].numDislikes);
     }
+    if (articlesResults[window.curArticle]['userReadItLater']) {
+        $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide')
+        $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
+    }
+    if (articlesResults[window.curArticle]['userReadItLater'] === false) {
+        $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2')
+        $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
+    }
+    $(".dripp").attr("class", 'opinionDripp dripp');
 }
 
 window.resetFB = function fbReset() {
