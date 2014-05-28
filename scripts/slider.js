@@ -13,6 +13,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
 					window.resetFB();
+					this.goTo(window.positions[window.curCategory]);
 			    },
 			 
 			    goTo: function(index) {
@@ -27,6 +28,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					window.curArticle = this.li[this.currentIndex].id;
                 	var articleId = window.curArticle;
+                	window.positions[window.curCategory] = index;
                 	window.setDrippLikes();
 		            
 		           	window.resetFB();

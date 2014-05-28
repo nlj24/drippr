@@ -5,7 +5,7 @@ var feed;
 window.BUCKET_METHOD = {
 
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
-            console.log(conversation_data);
+            window.conversation_data = conversation_data;
             window.setBucketLikes = function correctLikes() {
                 if (window.selItem['userLiked']) {
                     $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
@@ -257,6 +257,11 @@ function bindButtons(){
                 type:'get'
             });
             $('#messageInput').val('');
+            var templateSource = $("#selDripp-template").html(),
+            messageListTemplate = Handlebars.compile(templateSource);
+            window.conversation_data.push({content: content, conversationId: window.selItem['conversationId'], fName:"You", lName: "", userId:window.myID, time:moment.utc()});
+
+            displayConvos(window.selItem, window.selItem['conversationId'], messageListTemplate, window.conversation_data);
         }
     });
     $('#messageInput').keypress(function(e){
@@ -272,15 +277,16 @@ function displayConvos(selItem, convoId, template, conversation_data){
     convo = [];    
     for (var i=0;i<conversation_data.length;i++) {
         if (convoId == conversation_data[i]['conversationId']) {
+            conversation_data[i]['time'] = moment(conversation_data[i]['time']).utc().local();
             convo.push(conversation_data[i]);
         }
     }
     for (var ii = 0; ii < convo.length; ii++) {
-        if (moment().format('MMMM Do YYYY') === moment(convo[ii]['time']).format('MMMM Do YYYY')) {
-            convo[ii]['time'] = "Today, " + moment(convo[ii]['time']).subtract('hours', 4).format('h:mm a');
+        if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
+            convo[ii]['time'] = "Today, " + convo[ii]['time'].format('h:mm a');
         }
         else {
-            convo[ii]['time'] = moment(convo[ii]['time']).subtract('hours', 4).format('dddd MMMM Do YYYY, h:mm a');
+            convo[ii]['time'] = convo[ii]['time'].format('dddd MMMM Do YYYY, h:mm a');
         }
     }
 

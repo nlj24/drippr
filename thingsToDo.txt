@@ -1,25 +1,19 @@
 Things To Do
 ------------
-Styling (empty table)
-Styling
+Styling (empty table, binding of initial buckets)
+Styling (some sort of notifcations for unread things, displaying before login)
 
-is read? has unreadComments?
-	-things to appear in sender's inbox if unread comment
-		-still in outbox
-		-some sort of notifcations for both cases
 
-display before login
-	--check in facebook.js
-
-add own message to message list
+add own message to message list (also fix time issues)
 Times need to be local (server is UTC)
 
-Automatic article collection - Ashwin
+
+Automatic article collection
 
 chrome extension - Poor Nate
 
-Video
+multiple of the same articles buckets likes
 
-(sockets)
+need to shrink text for long name (do …)
 
-multiple articles buckets likes
+make input elastic
