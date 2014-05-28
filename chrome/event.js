@@ -11,7 +11,7 @@ function injectedMethod (tab_id, method, callback) {
 }
 
 
-function getCurTab() {    
+function getCurTab() {
     //query to get the id of new tab
     chrome.tabs.query(
         { currentWindow: true, active: true },
