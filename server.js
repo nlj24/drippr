@@ -357,8 +357,8 @@ app.get("/sendDripp/new", function(req, res) {
     var source = req.query.source;
     var category = req.query.category;
 
-    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
-    
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"',NOW(), 0, 0, 0)";
+    console.log(add_article_query);
     connection.query(add_article_query, function(err,result) {
         if (err) throw err;
         var fromUserId = req.query.fromUserId;
@@ -378,15 +378,20 @@ app.get("/sendDripp/new", function(req, res) {
                 
             }
 
-            for(var jj=0; jj < recipientFriendIds.length; jj++){
-                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
-                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
+             for(var jj=0; jj < recipientFriendIds.length; jj++){
+                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
+                    + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
                 connection.query(set_send_query, function(err,rows,fields) {
                     if (err) throw err;
-                    res.send(200);
-
                 });   
             }
+
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
+                    + fromUserId + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
+            connection.query(set_send_query, function(err,rows,fields) {
+                if (err) throw err;
+                res.send(200);
+            });   
         });
 
         res.send(201);
@@ -402,7 +407,7 @@ app.get("/readItLater/new", function(req, res) {
     var url = req.query.url;
     var source = req.query.source;
     var category = req.query.category;
-    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ("+headline+","+imgUrl+","+url+","+source+","+category+",NOW(), 0, 0, 0)";
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"',NOW(), 0, 0, 0)";
 
     connection.query(add_article_query, function(err,result) {
         if (err) throw err;

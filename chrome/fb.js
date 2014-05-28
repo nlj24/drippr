@@ -63,7 +63,7 @@ FB.Event.subscribe("auth.logout", function() {
                                 if (window.ids.length > 0) {
                                     $.ajax({
                                         url:'http://localhost:5000/sendDripp/new',
-                                        data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, headline: $("#title").val(), imgUrl: data.lead_image_url, url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
+                                        data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
                                         type:'get'
                                     });
                                 }
@@ -75,7 +75,17 @@ FB.Event.subscribe("auth.logout", function() {
                                 window.ids=[];
                                 $('#chosen').empty();
                             });
+                            
                             // read it later
+                            $(".save").click(function(){
+                                    $.ajax({
+                                        url:'http://localhost:5000/readItLater/new',
+                                        data: {userId:window.myID, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
+                                        type:'get'
+                                    });
+                                    $(".showForm").attr("class", "showForm hide");
+                                    $(".success").attr("class", "success");
+                            });
 
 
             $("#groupBtn").click(function(){
