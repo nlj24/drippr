@@ -76,7 +76,6 @@ app.get("/dripps", function(req, res){
 
             articles_list.push( articles_dict[rows[ii].id]);
         }            
-        console.log(articles_list);
         res.send(articles_list);
     });
 });
@@ -84,6 +83,8 @@ app.get("/dripps", function(req, res){
 app.get("/isRead", function(req, res){
     var drippId = req.query.drippId;
     var update_isRead = "UPDATE Dripps SET unreadComments = 0, unreadDripps = 0 WHERE id =" + drippId;
+    console.log(update_isRead);
+    console.log('cunt');
     connection.query(update_isRead, function(err,rows,fields) {
         if (err) throw err;          
         res.send(200);
@@ -276,7 +277,6 @@ app.get("/sendDripp", function(req, res) {
         set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
                 + fromUserId + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
-                console.log(set_send_query);
                 if (err) throw err;
                 res.send(200);
             });   
@@ -287,7 +287,6 @@ app.get("/sendDripp", function(req, res) {
 
 
 app.get("/sendConvo", function(req, res) {
-    console.log('Nate likes little boys');
     var conversationId = req.query.conversationId;
     var userId = req.query.userId;
     var content = req.query.content;

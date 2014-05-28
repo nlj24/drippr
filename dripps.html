@@ -355,9 +355,11 @@
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
 		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemHead">{{headline}}</p>
-		        				<img message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
-		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemSender">{{fName}} {{lName}}</p>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemTime">{{timeSent}}</p>
+		        				<div message_id = {{id}} conversation_id = {{conversationId}} class = "row fullMessage">
+		        					<img message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
+		        					<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemSender">{{fName}} {{lName}}</p>
+		        					<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemTime">{{timeSentString}}</p>
+		        				</div>
 		        			</div>
 		        		{{/each}}
 			        </div>
@@ -387,7 +389,7 @@
 			        			{{#each messages}}
 			        				<div class = "indMess {{userId}}">
 			        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-			        					{{fName}} {{lName}}: {{content}} Time: {{time}}
+			        					{{fName}} {{lName}}: {{content}} Time: {{timeString}}
 			        				</div>
 		        				{{/each}}
 		        			</div>

@@ -241,3 +241,10 @@ body {
 #chosen {
   padding: 5px;
 }
+
+.fullMessage {
+  width: 100%;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}

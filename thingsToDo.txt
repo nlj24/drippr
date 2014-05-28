@@ -3,16 +3,11 @@ Things To Do
 Styling (empty table, binding of initial buckets)
 Styling (some sort of notifcations for unread things, displaying before login)
 
-
-add own message to message list (also fix time issues)
-Times need to be local (server is UTC)
-
+Times need to be local (server is UTC) (almost? today isn't right)
 
 Automatic article collection
 
 chrome extension - Poor Nate
-
-multiple of the same articles buckets likes
 
 need to shrink text for long name (do …)
 
