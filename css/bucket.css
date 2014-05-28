@@ -225,6 +225,10 @@ body {
   padding-right: 0px;
 }
 
+#selSent {
+  padding: 0px;
+}
+
 #selBucket {
   padding-left: 0px;
 }

@@ -33,7 +33,7 @@
 	        				</div>
 	        				<div class = "col-md-9">
 	        					<p id = "selPage">
-	    							dripps
+	    							find
 	    						</p>
 							</div>
 	    				</div>
@@ -119,7 +119,12 @@
 
 
 		<div id="dripps" class = "container-fluid">
-    		<div class = "row" id = "size1">
+			<div id="drippsPromo">
+				drippr is sooooo cool.
+				<iframe width="420" height="345" src="http://www.youtube.com/v/AtKZKl7Bgu0">
+				</iframe>
+			</div>    		
+			<div class = "row hide" id = "size1">
 	        	<div class = "menuBar col-md-3">
 		        	<div class = "mainCatDiv">
 		        		<div  class = "categ row topCat" category="All">
@@ -321,25 +326,25 @@
 				</div>
 			</div>
 		</div>
-		<div id="drippsPromo" class = "container-fluid hide">
-			drippr is sooooo cool.
-			<iframe width="420" height="345" src="http://www.youtube.com/v/AtKZKl7Bgu0">
-			</iframe>
-		</div>
 	
 <!--- BUCKETs HTML -->
 	<div id="buckets" class = "container-fluid hide">
     	<div class = "row">
     		<div class = "menuBar col-md-3">
     			<div class = "row">
-	    			<div class = "col-md-6" id = "selDripps">
+	    			<div class = "col-md-4" id = "selDripps">
 		    			<div class = "selBucket selectedBucket" bucketIdentifier = "dripps">
 		    				dripps
 		    			</div>
 	    			</div>
-	    			<div class = "col-md-6" id = "selBucket">
+	    			<div class = "col-md-4" id = "selSent">
+		    			<div class = "selBucket" bucketIdentifier = "sent">
+		    				sent
+		    			</div>
+		    		</div>
+		    		<div class = "col-md-4" id = "selBucket">
 		    			<div class = "selBucket" bucketIdentifier = "readItLater">
-		    				read it later
+		    				saved
 		    			</div>
 		    		</div>
 		    	</div>
@@ -361,6 +366,10 @@
         	<div class = "col-md-7">
 	        	<div id="selDripp">
 	        	</div>
+	        	<div class = "noDrippsMain hide">
+    				link to Chrome Extension
+    				link to dripps stumble
+    			</div>
 	        	<script id="selDripp-template" type="text/x-handlebars-template">
 		        	<div>
 		        		<div class = "row" id = "headlineBucket">
@@ -431,7 +440,7 @@
 					</div>
 				</div>
 				<div class = "opDiv">
-					<img src = "images/drop.svg" class = "opinionBucket dripp2" data-toggle="modal" data-target="#myModal">
+					<img src = "images/drop.svg" class = "opinionBucket dripp2 hide" data-toggle="modal" data-target="#myModal">
 				</div>
 						
 			</div>

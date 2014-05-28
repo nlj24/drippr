@@ -23,14 +23,13 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 // whenever someone who was previously logged out tries to log in again, the correct case below 
 // will be handled. 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
-
+		$("#drippsPromo").attr("class", "hide");
+		$("#size1").attr("class", "row");
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
 	      		if (response2 && !response2.error) {
 	      			var my_friends = response2.data;
-					window.connect = true;
-					$('#drippsPromo').attr("class", "container-fluid hide");
 					// Here we specify what we do with the response anytime this event occurs. 
 					if (response.status === 'connected') {
 
@@ -73,7 +72,6 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			                for(var jj=0; jj < friend_data.length; jj++) {
 			                	friend_dict[friend_data[jj].id] = friend_data[jj];
 			                }
-			                console.log(friend_dict);
 
 							$('#fb-input').facebookAutocomplete({
 								showAvatars: true,
@@ -211,7 +209,8 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			            }
 						window.GROUP_METHOD.loadGroups();
 						window.ARTICLE_METHOD.loadArticleData();
-
+						window.bindDripps();
+						window.bindBucket();
 			            
 					} else if (response.status === 'not_authorized') {
 						// In this case, the person is logged into Facebook, but not into the app, so we call
@@ -234,11 +233,6 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 	    	}
 		);
 	});
-
-	if (window.connect === false) {
-		$('#drippsPromo').attr("class", "container-fluid");
-	}
-
 };
 
 

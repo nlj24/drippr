@@ -1,12 +1,7 @@
 Things To Do
 ------------
+Styling (empty table)
 Styling
-Styling
-
-
-
-what to do about empty table - Ashwin/Darshan, mostly done?
-	-still need to display some message
 
 is read? has unreadComments?
 	-things to appear in sender's inbox if unread comment
@@ -16,6 +11,9 @@ is read? has unreadComments?
 display before login
 	--check in facebook.js
 
+add own message to message list
+Times need to be local (server is UTC)
+
 Automatic article collection - Ashwin
 
 chrome extension - Poor Nate
@@ -23,3 +21,5 @@ chrome extension - Poor Nate
 Video
 
 (sockets)
+
+multiple articles buckets likes

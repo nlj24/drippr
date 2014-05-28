@@ -54,31 +54,36 @@ app.get("/buckets", function(req, res){
 
 });
 
-/* sends a list of (from name, headline, conversationId ) ordered by time */
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
-    var get_inbox_articles_query = "SELECT Dripps.id, Dripps.articleId, fName, lName, fromUserId, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, isRead, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    var get_inbox_articles_query = "SELECT DISTINCT Dripps.id, Dripps.articleId, fName, lName, fromUserId, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, inInbox, unreadDripps, unreadComments, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     
     
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
         if (err) throw err;
         var articles_dict = {};
         var articles_list = [];
+
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
             articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
             articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
+            articles_dict[rows[ii].id]["isSender"] = (rows[ii]["fromUserId"] == userId);
+            articles_dict[rows[ii].id]["inInbox"] = (rows[ii]["inInbox"] == 1);
+            articles_dict[rows[ii].id]["unreadComments"] = (rows[ii]["unreadComments"] == 1);
+            articles_dict[rows[ii].id]["unreadDripps"] = (rows[ii]["unreadDripps"] == 1);
 
             articles_list.push( articles_dict[rows[ii].id]);
         }            
+        console.log(articles_list);
         res.send(articles_list);
     });
 });
 
 app.get("/isRead", function(req, res){
     var drippId = req.query.drippId;
-    var update_isRead = "UPDATE Dripps SET isRead = 1 WHERE id =" + drippId;
+    var update_isRead = "UPDATE Dripps SET unreadComments = 0, unreadDripps = 0 WHERE id =" + drippId;
     connection.query(update_isRead, function(err,rows,fields) {
         if (err) throw err;          
         res.send(200);
@@ -89,7 +94,7 @@ app.get("/isRead", function(req, res){
 app.get("/conversations",  function(req, res){
     var userId = req.query.user;
     
-    var get_conversations_articles_query = "SELECT content, Conversations.conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users On Conversations.userId = Users.id INNER JOIN (SELECT Dripps.conversationId FROM Dripps WHERE fromUserId =" + userId +" OR recipientUserId =" + userId +") AS d1 ON d1.conversationId = Conversations.conversationId ORDER BY Conversations.time";
+    var get_conversations_articles_query = "SELECT content, Conversations.conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users On Conversations.userId = Users.id INNER JOIN (SELECT Dripps.conversationId FROM Dripps WHERE recipientUserId =" + userId +") AS d1 ON d1.conversationId = Conversations.conversationId ORDER BY Conversations.time";
     connection.query(get_conversations_articles_query, function(err,rows,fields) {
         if (err) throw err;
         res.send(rows);
@@ -261,20 +266,28 @@ app.get("/sendDripp", function(req, res) {
         }
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
-            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId, isRead, unreadComments) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0)";
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
+                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+            connection.query(set_send_query, function(err,rows,fields) {
+                if (err) throw err;
+            });   
+        }
+
+        set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
+                + fromUserId + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 console.log(set_send_query);
                 if (err) throw err;
                 res.send(200);
             });   
-        }
+
+
     });
-    res.send(201);
 });
 
 
 app.get("/sendConvo", function(req, res) {
+    console.log('Nate likes little boys');
     var conversationId = req.query.conversationId;
     var userId = req.query.userId;
     var content = req.query.content;
@@ -282,8 +295,14 @@ app.get("/sendConvo", function(req, res) {
     var set_convo_query = 'INSERT INTO Conversations (conversationId, userId, time, content) VALUES (' +conversationId + ',' +  userId + ", NOW(),'" + content + "')";
     connection.query(set_convo_query, function(err,rows,fields) {
         if (err) throw err;
-        res.send(200);
+        var update_dripp_query = "UPDATE Dripps SET unreadComments = 1, inInbox = 1 WHERE conversationId = " + conversationId + " AND recipientUserId<>" + userId;
+        connection.query(update_dripp_query, function(err, rows, fields){
+            res.send(200);
+        });
+
     });
+
+
 });
 
 app.get("/createGroup", function(req, res) {
@@ -327,7 +346,7 @@ app.get("/groups", function(req, res) {
 });
 
   
-
+//for chrome extension, probably
 app.get("/sendDripp/new", function(req, res) {
 
     var headline = req.query.headline;

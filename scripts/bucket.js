@@ -5,35 +5,41 @@ var feed;
 window.BUCKET_METHOD = {
 
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
-            
+            console.log(conversation_data);
             window.setBucketLikes = function correctLikes() {
-                if (window.selItem) {
-                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
+                if (window.selItem['userLiked']) {
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
                     $(".like2.blue").attr("class", 'opinionBucket like2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                     $(".up2").html(window.selItem.numLikes);
                 }
                 if (window.selItem['userLiked'] === false) {
-                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2')
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
                     $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                     $(".up2").html(window.selItem.numLikes);
                 }
                 if (window.selItem['userDisliked']) {
-                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide')
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
                     $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                     $(".down2").html(window.selItem.numDislikes);
                 }
                 if (window.selItem['userDisliked'] === false) {
-                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2')
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
                     $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                     $(".down2").html(window.selItem.numDislikes);
                 }
-                if (window.selItem) {
-                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide')
+                if (window.selItem['userReadItLater']) {
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
                     $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                 }
                 if (window.selItem['userReadItLater'] === false) {
-                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2')
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
                     $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
                 }
             }
             
@@ -45,12 +51,30 @@ window.BUCKET_METHOD = {
                     dripps_data[ii]['timeSent'] = moment(dripps_data[ii]['timeSent']).format('MMMM Do, h:mm a');
                 }
             }
-            console.log(dripps_data);
-            if (dripps_data.length == 0 ) {
 
+            sendList = [];
+            receiveList = [];
+            for (var jj = 0; jj < dripps_data.length; jj++) {
+                if (dripps_data[jj]["inInbox"]) {
+                    receiveList.push(dripps_data[jj]);
+                } 
+                if (dripps_data[jj]["isSender"]) {
+                    sendList.push(dripps_data[jj]);
+
+                }
+                    
+            }
+
+            if (receiveList.length == 0 ) {
+                $(".noDrippsMain").attr("class", "noDrippsMain");
+                var templateSource = $("#items-template").html(),
+                template = Handlebars.compile(templateSource),
+                itemHTML = template({"buckets":[]});
+                $('#items').html(itemHTML);
+                $('.mainItemDiv').text('You have nothing in this bucket.');
             }
             else{
-                feed = dripps_data;
+                feed = receiveList;
                 window.selItem = feed[0];
                 var convo = [];
                 var convoId = feed[0]['conversationId'];
@@ -67,12 +91,6 @@ window.BUCKET_METHOD = {
                         convo[ii]['time'] = moment(convo[ii]['time']).format('dddd MMMM Do YYYY, h:mm a');
                     }
                 }
-
-                window.articlesData = {};
-                for (var i=0;i<feed.length;i++) {
-                    window.articlesData[feed[i].articleId2] = feed[i];
-                }
-
 
                 var templateSource = $("#items-template").html(),
                 template = Handlebars.compile(templateSource),
@@ -95,22 +113,25 @@ window.BUCKET_METHOD = {
                 window.setBucketLikes();
             }
 
-
-
-           
-
             $('.selBucket').click(function(e){
+
                 $('#selItem').html("");
                 $('#selDripp').html("");
 
 
                 if ($(e.target).attr('bucketIdentifier') === 'dripps') {
-                    feed = dripps_data;
+                    feed = receiveList;
                     $(".selBucket").attr("class", "selBucket");
                     $(e.target).attr("class", "selBucket selectedBucket");
                 }
 
-                 if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
+                if ($(e.target).attr('bucketIdentifier') === 'sent') {
+                    feed = sendList;
+                    $(".selBucket").attr("class", "selBucket");
+                    $(e.target).attr("class", "selBucket selectedBucket");
+                }
+
+                if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
                     feed = readItLater_data;
                     $(".selBucket").attr("class", "selBucket");
                     $(e.target).attr("class", "selBucket selectedBucket");
@@ -121,17 +142,22 @@ window.BUCKET_METHOD = {
                 itemHTML = template({"buckets":feed});
                 
                 $('#items').html(itemHTML);
+                if (feed.length == 0 ) {
+                    $('.mainItemDiv').text('You have nothing in this bucket.');
+                } else {
+                    $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
 
-                if ($(e.target).attr('bucketIdentifier') === 'dripps') {
+                if ( ($(e.target).attr('bucketIdentifier') === 'dripps') || ($(e.target).attr('bucketIdentifier') === 'sent')) {
                 
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource);
                     
                     if (feed.length > 0) {
                         window.selItem = feed[0];
-
-                        displayConvos(window.selItem, $("#" + feed[0]['id']).attr("conversation_id"), messageListTemplate, conversation_data);
-
+                        console.log(conversation_data);
+                        displayConvos(window.selItem, window.selItem["conversationId"], messageListTemplate, conversation_data);
+                        bindButtons();
                     }
 
                 }
@@ -193,7 +219,6 @@ window.BUCKET_METHOD = {
                 method:'get',
                 success:this.handlerData
             });
-            
         },
 };
 
@@ -205,7 +230,8 @@ function bindMessages(template, conversation_data){
                 window.selItem = feed[i];
             }
         }
-        console.log('hi');
+        $(".up2").text(window.selItem.numLikes);
+        $(".down2").text(window.selItem.numDislikes);
         $.ajax({
             url:'http://localhost:5000/isRead',
             data: {drippId: id},
@@ -221,6 +247,7 @@ function bindMessages(template, conversation_data){
 }
 
 function bindButtons(){
+    window.setBucketLikes();
     $("#messageSend").click(function(){
         content = $('#messageInput').val();
         if (content !== '') {
@@ -238,9 +265,35 @@ function bindButtons(){
         }
     });
 
+    
+}
+
+function displayConvos(selItem, convoId, template, conversation_data){
+    convo = [];    
+    for (var i=0;i<conversation_data.length;i++) {
+        if (convoId == conversation_data[i]['conversationId']) {
+            convo.push(conversation_data[i]);
+        }
+    }
+    for (var ii = 0; ii < convo.length; ii++) {
+        if (moment().format('MMMM Do YYYY') === moment(convo[ii]['time']).format('MMMM Do YYYY')) {
+            convo[ii]['time'] = "Today, " + moment(convo[ii]['time']).subtract('hours', 4).format('h:mm a');
+        }
+        else {
+            convo[ii]['time'] = moment(convo[ii]['time']).subtract('hours', 4).format('dddd MMMM Do YYYY, h:mm a');
+        }
+    }
+
+    var drippsHTML = template({"selItem":window.selItem, "messages":convo});
+    $('#selDripp').html(drippsHTML);
+    $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
+}
+
+window.bindBucket = function() {
     $(".like2").click(function(){
         var articleId = window.selItem['articleId'];
         if($('.like2.grey2').hasClass('hide')) {
+            console.log('flsdfj1');
             $(".up2").text(--window.selItem.numLikes);
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
             $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
@@ -266,6 +319,7 @@ function bindButtons(){
             window.selItem['userDisliked'] = false;                
         };
         if($('.like2.blue').hasClass('hide')) {
+            console.log('flsdfj2');
             $(".up2").text(++window.selItem.numLikes);
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
             $(".like2.blue").attr("class", 'opinionBucket like2 blue');
@@ -343,29 +397,5 @@ function bindButtons(){
             window.selItem['userReadItLater'] = true;
         }
     });
-
-    window.setBucketLikes();
 }
-
-function displayConvos(selItem, convoId, template, conversation_data){
-    convo = [];    
-    for (var i=0;i<conversation_data.length;i++) {
-        if (convoId == conversation_data[i]['conversationId']) {
-            convo.push(conversation_data[i]);
-        }
-    }
-    for (var ii = 0; ii < convo.length; ii++) {
-        if (moment().format('MMMM Do YYYY') === moment(convo[ii]['time']).format('MMMM Do YYYY')) {
-            convo[ii]['time'] = "Today, " + moment(convo[ii]['time']).format('h:mm a');
-        }
-        else {
-            convo[ii]['time'] = moment(convo[ii]['time']).format('dddd MMMM Do YYYY, h:mm a');
-        }
-    }
-    var drippsHTML = template({"selItem":window.selItem, "messages":convo});
-    $('#selDripp').html(drippsHTML);
-    $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
-}
-
-
 
