@@ -123,14 +123,17 @@ body {
   text-align: center;
   font-size: 40px;
   line-height: 33px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-#headlineDripp {
+.headlineDripp {
   text-decoration: none;
   color: #6D6E70;
 }
 
-#headline:hover {
+.headline:hover {
   color: #1C75BB;
 }
 
@@ -211,7 +214,6 @@ body {
 }
 
 .catImgDiv {
-  
   height: 70px;
   line-height: 70px;
 }

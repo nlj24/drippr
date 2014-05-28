@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
 		<script type="text/javascript" src="/scripts/bucket.js"></script>
 		<script type="text/javascript" src="/scripts/groups.js"></script>
+		<script type="text/javascript" src="/scripts/elastic.js"></script>
 		<script type="text/javascript" src="/scripts/slider.js"></script>
 		<script type="text/javascript" src="/scripts/moment.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
@@ -217,15 +218,6 @@
 		        				<img class = "catImg hide white" category="fashion" src = "/images/fashionWhite.svg">
 		        			</div>
 		        		</div>
-		        		<div class = "categ row" category="USA">
-		        			<div class = "col-md-9">
-		        				<p class = "word">porn</p>
-		        			</div>
-		        			<div class = "col-md-3">
-		        				<img class = "catImg grey" category="fashion" src = "/images/fashion.svg">
-		        				<img class = "catImg hide white" category="fashion" src = "/images/fashionWhite.svg">
-		        			</div>
-		        		</div>
 			        </div>
 	        	</div>
 	        	<div class = "col-md-1 arrowDiv">
@@ -250,7 +242,7 @@
 														{{ this.source }}
 													</h3>
 									                <div class = "headlineDiv">
-									                	<a id = "headlineDripp" href = "{{ this.url }}" target="_blank">
+									                	<a class = "headlineDripp" href = "{{ this.url }}" target="_blank">
 										                	{{ this.headline }}
 								                		</a>
 								                	</div>
@@ -375,16 +367,24 @@
 	        	<script id="selDripp-template" type="text/x-handlebars-template">
 		        	<div>
 		        		<div class = "row" id = "headlineBucket">
-		        			{{selItem.headline}}
+		        			<a class = "headlineDripp" href = {{selItem.url}} target="_blank">
+		        				{{selItem.headline}}
+		        			</a>
 		        		</div>
 		        		<div class = "row" id = "imageDivBucket">
-		        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+		        			<a href = {{selItem.url}} target="_blank">
+		        				<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+		        			</a>
 		        		</div>
 	        		</div>
 	        		<div class = "row">
 	        			<div class = "col-md-1">
 	        			</div>
 	        			<div class = "col-md-10" id = "convoDiv">
+	        				{{#each friendNames}}
+	        					<img src = {{picture}}>
+	        					{{name}}
+	        				{{/each}}
 		        			<div id = "conversation">
 			        			{{#each messages}}
 			        				<div class = "indMess {{userId}}">
@@ -395,7 +395,7 @@
 		        			</div>
 		        			<div class = "row">
 		        				<div class = "col-md-11 noPad">
-			        				<textarea id = "messageInput" placeholder="Enter Message" cols="20" rows="1"></textarea>
+			        				<textarea id = "messageInput" placeholder="Enter Message" cols="20"></textarea>
 			        			</div>
 			        			<div class = "col-md-1 noPad">
 			        				<div id = "messageSend"> Send </div>

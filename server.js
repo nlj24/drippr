@@ -46,9 +46,6 @@ app.get("/buckets", function(req, res){
                 //if there are other buckets need to note readitlater
                 articles_list.push( articles_dict[rows[ii].id]);
             }
-
-        
-                
             res.send(articles_list);
     });
 
@@ -63,7 +60,7 @@ app.get("/dripps", function(req, res){
         if (err) throw err;
         var articles_dict = {};
         var articles_list = [];
-
+        var members = "";
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
@@ -75,8 +72,14 @@ app.get("/dripps", function(req, res){
             articles_dict[rows[ii].id]["unreadDripps"] = (rows[ii]["unreadDripps"] == 1);
 
             articles_list.push( articles_dict[rows[ii].id]);
-        }            
-        res.send(articles_list);
+            members += "," + rows[ii]['recipientFriendIds'];
+        }
+        members = "(" + members.slice(1) + ")";
+        var get_names_query = "select fName, lName, id from Users Where id in " + members;
+        connection.query(get_names_query, function(err,rows,fields) {
+            if (err) throw err; 
+            res.send({article: articles_list, names: rows});
+        });
     });
 });
 

@@ -137,8 +137,8 @@ body {
 }
 
 .opinionBucket {
-  height: 85px;
-  width: 85px;
+  height: 70px;
+  width: 70px;
   cursor: pointer;
 }
 
@@ -169,7 +169,6 @@ body {
   margin-top: 10px;
   width: 100%;
   display: inline-block;
-  border-radius: 10px;
   padding: 0;
   max-height: 70px;
 }

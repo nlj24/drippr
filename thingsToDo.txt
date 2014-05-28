@@ -1,14 +1,8 @@
 Things To Do
 ------------
 Styling (empty table, binding of initial buckets)
-Styling (some sort of notifcations for unread things, displaying before login)
-
-Times need to be local (server is UTC) (almost? today isn't right)
+Styling (some sort of notifcations for unread things, displaying before login, need to shrink text for long name (do …))
 
 Automatic article collection
 
 chrome extension - Poor Nate
-
-need to shrink text for long name (do …)
-
-make input elastic

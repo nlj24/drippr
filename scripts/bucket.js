@@ -3,12 +3,12 @@ var bucket_results;
 var feed; 
 
 window.BUCKET_METHOD = {
-
         compileBuckets:function(dripps_data, readItLater_data, conversation_data){
             articleDict = {};
             for (var i =0; i < conversation_data.length;i++) {
-                conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD h:mm:ss") + " +0000");
+                conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
             };
+            console.log(conversation_data);
             window.conversation_data = conversation_data;
 
             window.setBucketLikes = function correctLikes() {
@@ -49,7 +49,7 @@ window.BUCKET_METHOD = {
             }
             
             for (var i =0; i < dripps_data.length;i++) {
-                dripps_data[i]["timeSent"] = moment(moment(dripps_data[i]["timeSent"]).format("YYYY MM DD h:mm:ss") + " +0000");
+                dripps_data[i]["timeSent"] = moment(moment(dripps_data[i]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
                 console.log(dripps_data[i]["timeSent"].format());
             };
 
@@ -113,9 +113,10 @@ window.BUCKET_METHOD = {
                         $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
                     }
                 }
+                console.log(makeUserNameList(window.selItem.recipientFriendIds));
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource),
-                drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo});
+                drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
                 $('#selDripp').html(drippsHTML);
 
                 $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
@@ -185,12 +186,11 @@ window.BUCKET_METHOD = {
                     $('#selDripp').html(readItLaterHTML);
                 }
 
-                
-
                 bindMessages(messageListTemplate, conversation_data);
             });
 
             window.setBucketLikes();
+            $('#messageInput').elastic();
         },
 
         handlerData2:function(dripps_data, readItLater_data){
@@ -228,7 +228,14 @@ window.BUCKET_METHOD = {
                 url:'http://localhost:5000/dripps',
                 data: {user: window.myID},
                 method:'get',
-                success:this.handlerData
+                success: function(data) {
+                    console.log(data);
+                    window.BUCKET_METHOD.handlerData(data.article);
+                    window.userNames = {};
+                    for (var jj = 0; jj < data.names.length; jj++) {
+                        window.userNames[data.names[jj].id] = data.names[jj]['fName'] + " " + data.names[jj]['lName'];
+                    }
+                }
             });
         },
 };
@@ -300,7 +307,7 @@ function displayConvos(selItem, convoId, template, conversation_data){
         }
     }
 
-    var drippsHTML = template({"selItem":window.selItem, "messages":convo});
+    var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
     $('#selDripp').html(drippsHTML);
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
 }
@@ -415,3 +422,14 @@ window.bindBucket = function() {
     });
 }
 
+function makeUserNameList(recIds) {
+    var list = recIds.split(',');
+    for (var zz = 0; zz < list.length; zz++) {
+
+        list[zz] = {name:window.userNames[list[zz]], picture: "http://graph.facebook.com/" + list[zz] + "/picture?width=25&height=25"};
+    }
+
+
+
+    return list;
+}
