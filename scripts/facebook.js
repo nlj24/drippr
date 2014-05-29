@@ -1,3 +1,5 @@
+window.address = document.URL;
+
 window.fbAsyncInit = function() {
 FB.init({
 appId      : '231951950330964',
@@ -37,7 +39,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 						$("#user").html("Welcome, " + response.first_name + "!");
 				    	    $.ajax({
 				                // url:'json/articles.json',
-				                url:'http://localhost:5000/is_user',
+				                url: window.address + 'is_user',
 				                data: {uid: response.id, fName: response.first_name, lName: response.last_name},
 				                method:'get' //,
 				                // success:this.userData
@@ -60,7 +62,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 						$.ajax({
 			                // url:'json/articles.json',
-			                url:'http://localhost:5000/shadow_users',
+			                url: window.address + 'shadow_users',
 			                data: {lst: friend_id_lst},
 			                method:'get',
 			                success: everythingElse
@@ -81,7 +83,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 									if(!friend_dict[friend.id]) { //need to make the SHADOW USER
 										$.ajax({
 							                // url:'json/articles.json',
-							                url:'http://localhost:5000/add_shadow_user',
+							                url: window.address + 'add_shadow_user',
 							                data: {id: friend.id},
 							                method:'get'
 							            });
@@ -165,7 +167,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 							$(".send").click(function(){
 								if (ids.length > 0) {
 									$.ajax({
-						                url:'http://localhost:5000/sendDripp',
+						                url: window.address + 'sendDripp',
 						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
 						                type:'get'
 						            });
@@ -197,7 +199,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                	}
 
 				                    $.ajax({
-				                        url:'http://localhost:5000/createGroup',
+				                        url: window.address + 'createGroup',
 				                        data: {groupName: groupName, members: window.ids, creatorId: window.myID},
 				                        type:'get'
 				                	});
