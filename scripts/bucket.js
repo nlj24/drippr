@@ -198,7 +198,7 @@ window.BUCKET_METHOD = {
 
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/conversations',
+                url: window.address + 'conversations',
                 data: {user: window.myID},
                 method:'get',
                 success: function(data2){
@@ -211,7 +211,7 @@ window.BUCKET_METHOD = {
         handlerData:function(dripps_data){
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/buckets',
+                url: window.address + 'buckets',
                 data: {user: window.myID},
                 method:'get',
                 success: function(data){
@@ -225,7 +225,7 @@ window.BUCKET_METHOD = {
  
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/dripps',
+                url: window.address + 'dripps',
                 data: {user: window.myID},
                 method:'get',
                 success: function(data) {
@@ -251,7 +251,7 @@ function bindMessages(template, conversation_data){
         $(".up2").text(window.selItem.numLikes);
         $(".down2").text(window.selItem.numDislikes);
         $.ajax({
-            url:'http://localhost:5000/isRead',
+            url: window.address + 'isRead',
             data: {drippId: id},
             type:'get'
         });
@@ -270,7 +270,7 @@ function bindButtons(){
         content = $('#messageInput').val();
         if (content !== '') {
             $.ajax({
-                url:'http://localhost:5000/sendConvo',
+                url: window.address + 'sendConvo',
                 data: {conversationId: window.selItem['conversationId'], userId: window.myID, content: content},
                 type:'get'
             });
@@ -321,7 +321,7 @@ window.bindBucket = function() {
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
             $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeLikes',
+                url: window.address + 'removeLikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -334,7 +334,7 @@ window.bindBucket = function() {
             $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
             $(".down2").text(--articleDict[window.selItem.articleId].numDislikes);
             $.ajax({
-                url:'http://localhost:5000/removeDislikes',
+                url: window.address + 'removeDislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -347,7 +347,7 @@ window.bindBucket = function() {
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
             $(".like2.blue").attr("class", 'opinionBucket like2 blue');
             $.ajax({
-                url:'http://localhost:5000/likes',
+                url: window.address + 'likes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -362,7 +362,7 @@ window.bindBucket = function() {
             $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
             $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeDislikes',
+                url: window.address + 'removeDislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             }); 
@@ -375,7 +375,7 @@ window.bindBucket = function() {
             $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
             $(".up2").text(--articleDict[window.selItem.articleId].numLikes);
             $.ajax({
-                url:'http://localhost:5000/removeLikes',
+                url: window.address + 'removeLikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -388,7 +388,7 @@ window.bindBucket = function() {
             $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
             $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
             $.ajax({
-                url:'http://localhost:5000/dislikes',
+                url: window.address + 'dislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -402,7 +402,7 @@ window.bindBucket = function() {
             $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
             $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeReadItLater',
+                url: window.address + 'removeReadItLater',
                 data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
                 type:'get'
             });
@@ -413,7 +413,7 @@ window.bindBucket = function() {
             $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
             $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
             $.ajax({
-                url:'http://localhost:5000/readItLater',
+                url: window.address + 'readItLater',
                 data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                 type:'get'
             });

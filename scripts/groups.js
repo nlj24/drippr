@@ -27,7 +27,7 @@ window.GROUP_METHOD = {
             var groupId = $(e.target).attr('group_id');
             $("#group_" + groupId).attr("class", "hide");
             $.ajax({
-                url:'http://localhost:5000/deleteGroup',
+                url: window.address + 'deleteGroup',
                 data: {groupId: groupId},
                 method:'get',
                 success: function(data){return;}
@@ -36,7 +36,7 @@ window.GROUP_METHOD = {
     },
     
     loadGroups:function(){$.ajax({
-        url:'http://localhost:5000/groups',
+        url: window.address + 'groups',
         data: {userId: window.myID},
         method:'get',
         success: this.groupData

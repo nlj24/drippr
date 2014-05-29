@@ -39,7 +39,7 @@ window.ARTICLE_METHOD ={
 
         loadArticleData : function(){
             $.ajax({
-                url:'http://localhost:5000/articles',
+                url: window.address + 'articles',
                 data: {user: window.myID}, //need to fix for current user
                 method:'get',
                 success:this.handlerData
@@ -131,7 +131,7 @@ window.bindDripps = function() {
             $(".like.grey2").attr("class", 'opinionDripp like grey2');
             $(".like.blue").attr("class", 'opinionDripp like blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeLikes',
+                url: window.address + 'removeLikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -144,7 +144,7 @@ window.bindDripps = function() {
             $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
             $(".down").text(--window.articlesData[articleId].numDislikes);
             $.ajax({
-                url:'http://localhost:5000/removeDislikes',
+                url: window.address + 'removeDislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -156,7 +156,7 @@ window.bindDripps = function() {
             $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
             $(".like.blue").attr("class", 'opinionDripp like blue');
             $.ajax({
-                url:'http://localhost:5000/likes',
+                url: window.address + 'likes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -171,7 +171,7 @@ window.bindDripps = function() {
             $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2');
             $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeDislikes',
+                url: window.address + 'removeDislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             }); 
@@ -184,7 +184,7 @@ window.bindDripps = function() {
             $(".like.blue").attr("class", 'opinionDripp like blue hide');
             $(".up").text(--window.articlesData[articleId].numLikes);
             $.ajax({
-                url:'http://localhost:5000/removeLikes',
+                url: window.address + 'removeLikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -197,7 +197,7 @@ window.bindDripps = function() {
             $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide');
             $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
             $.ajax({
-                url:'http://localhost:5000/dislikes',
+                url: window.address + 'dislikes',
                 data: {user: window.myID, article: articleId},
                 type:'get'
             });
@@ -219,7 +219,7 @@ window.bindDripps = function() {
         console.log(groupId);
         if (groupId) {
             $.ajax({
-                url:'http://localhost:5000/sendDripp',
+                url: window.address + 'sendDripp',
                 data: {fromUserId: window.myID, recipientGroup: groupId, recipientFriendIds: -1, articleId: window.curArticle},
                 type:'get'
             });
@@ -232,7 +232,7 @@ window.bindDripps = function() {
             $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2');
             $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
             $.ajax({
-                url:'http://localhost:5000/removeReadItLater',
+                url: window.address + 'removeReadItLater',
                 data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                 type:'get'
             });
@@ -243,7 +243,7 @@ window.bindDripps = function() {
             $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide');
             $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
             $.ajax({
-                url:'http://localhost:5000/readItLater',
+                url: window.address + 'readItLater',
                 data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                 type:'get'
             });
