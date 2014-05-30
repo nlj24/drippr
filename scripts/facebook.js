@@ -160,10 +160,14 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                    }
 				                    window.chosenFriends[friend.id] = friend;
 
-				                    if(add_to_dom) {
-				                        $("#chosenCont").append("<div class='blue_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
-				                    }
 
+									if(add_to_dom) {
+										if(!friend_dict[friend.id].isReal) { //SHADOW USER
+											$("#chosenCont").append("<div class='red_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+										} else {
+											$("#chosenCont").append("<div class='blue_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+										}
+									}
 				                    $(".rm" ).unbind("click", handler2);
 				                    $(".rm").bind("click", handler2);
 
@@ -175,7 +179,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                    });                        
 			                		
 			                	}
-				               
+				                
 				            });
 
 
