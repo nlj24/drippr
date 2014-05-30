@@ -142,10 +142,9 @@ app.get("/is_user",  function(req, res){
 app.post("/shadow_users",  function(req, res){
     req.setEncoding('utf8');
     req.on('data', function(chunk) {
-        var data = JSON.parse(chunk);
         data = chunk;
         console.log(data);
-        var friend_id_lst = data.lst;
+        var friend_id_lst = data["lst"];
         var friend_id_string = friend_id_lst.join();
         console.log(friend_id_string);
         var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
