@@ -140,7 +140,7 @@ app.get("/is_user",  function(req, res){
 });
 
 
-app.get("/shadow_users",  function(req, res){
+app.post("/shadow_users",  function(req, res){
     console.log("AT THE START");
     var friend_id_lst = req.query.lst;
     var friend_id_string = friend_id_lst.join();

@@ -66,7 +66,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			                // url:'json/articles.json',
 			                url: window.address + 'shadow_users',
 			                data: {lst: friend_id_lst},
-			                method:'get',
+			                method:'post',
 			                success: everythingElse
 			            });
 			            console.log("FUCK: " + window.address + 'shadow_users');
