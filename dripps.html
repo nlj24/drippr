@@ -236,7 +236,7 @@
 								<div class="slider">
 						            <ul>
 						            	{{#each articles}}
-						                	<li id = {{this.id}} numlikes={{this.numLikes}} nuxsislikes={{this.nuxsislikes}}>
+						                	<li id = {{this.id}} numlikes={{this.numLikes}} numDislikes={{this.numDislikes}}>
 								                <div class = "mainBubble">
 													<h3 id = "source"> 
 														{{ this.source }}
@@ -343,7 +343,7 @@
         		<div id="items">
         		</div>
 	        	<script id="items-template" type="text/x-handlebars-template">
-		        	<div class = "mainItexsiv">
+		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
 		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemHead">{{headline}}</p>
