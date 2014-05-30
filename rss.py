@@ -3,13 +3,13 @@ import MySQLdb
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
+print 'gay'
 # rss = [("ESPN","http://sports.espn.go.com/espn/rss/news"),("Fox News", "http://feeds.foxnews.com/foxnews/latest"),("CNN", "http://rss.cnn.com/rss/cnn_topstories.rss")]
-print "hi"
 articlesToAdd = []
 
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources WHERE id=1"
+	sql = "SELECT * FROM Sources WHERE id=2"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 
@@ -20,12 +20,12 @@ try:
 	for url in articleUrls:
 		articleUrls2.append(url[0])
 	print articleUrls2
+	print 1
+
 
 	for (id, source, url, category) in rss:
-		print source
 		feed = feedparser.parse(url)
 		lst = feed['items']
-		print len(lst)
 		for a in lst:
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
@@ -41,17 +41,14 @@ try:
 				image_result = data[beg:end]
 			except:
 				image = 'Stock Photo'
-			if ("'" + url_result + "'") not in articleUrls2:
-				print "hi ashwin " + url_result
+			if (url_result) not in articleUrls2:
+				print url_result
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date':'2013-11-13 12:12:12','category':category})
-			else:
-				print "hi darshan " + url_result
-	print articlesToAdd
 
 	for article in articlesToAdd:
 		try:
 			# execute SQL query using execute() method.
-			sql = "INSERT INTO Articles (headline, imgUrl, url, source, date, category) VALUES (\'" + article['headline'] + "\',\'" + article['image'] + "\',\'" + article['url'] + "\',\'" + article['source'] + "\',NOW(),\'" + article['category'] + "\')"
+			sql = "INSERT INTO Articles (headline, imgUrl, url, source, date, category, numLikes, numDislikes, collected) VALUES (\'" + article['headline'] + "\',\'" + article['image'] + "\',\'" + article['url'] + "\',\'" + article['source'] + "\',NOW(),\'" + article['category'] + "\',0,0,1)"
 			print sql
 			cursor.execute(sql)
 			db.commit()
@@ -63,7 +60,6 @@ except Exception as e:
 	print e
 	db.rollback()
 	db.close()
-
 
 
 
