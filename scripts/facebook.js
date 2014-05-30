@@ -1,4 +1,5 @@
 window.address = document.URL;
+alert(window.address);
 
 window.fbAsyncInit = function() {
 FB.init({
