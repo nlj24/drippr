@@ -61,7 +61,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 							friend_id_lst.push(my_friends[ii].id);
 						}
 						console.log(friend_id_lst);
-
+						console.log("BITCH: " + window.address + 'shadow_users');
 						$.ajax({
 			                // url:'json/articles.json',
 			                url: window.address + 'shadow_users',
