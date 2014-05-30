@@ -60,6 +60,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 						for(var ii = 0; ii < my_friends.length; ii++) {
 							friend_id_lst.push(my_friends[ii].id);
 						}
+						console.log(friend_id_lst);
 
 						$.ajax({
 			                // url:'json/articles.json',
@@ -71,6 +72,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 						//I hope ashwin doesn't see this name...
 			            function everythingElse(friend_data) {
+			            	console.log(friend_data);
 			            	var friend_dict = {};
 			                for(var jj=0; jj < friend_data.length; jj++) {
 			                	friend_dict[friend_data[jj].id] = friend_data[jj];
