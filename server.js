@@ -146,7 +146,6 @@ app.post("/shadow_users",  function(req, res){
         var friend_id_lst = data["lst"];
         var friend_id_string = friend_id_lst.join();
         var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
-        console.log(get_real_query);
         connection.query(get_real_query, function(err,rows,fields) {
             if (err) throw err;
             res.send(rows);
@@ -160,9 +159,17 @@ app.post("/shadow_users",  function(req, res){
 
 app.get("/add_shadow_user",  function(req, res){
     var friend_id = req.query.id;
-    var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0)";
+
+    var select_user_query = "SELECT id FROM Users WHERE id=" + friend_id;
     connection.query(add_shadow_query, function(err,rows,fields) {
         if (err) throw err;
+        if (rows.length > 0) {
+            var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0)";
+            connection.query(add_shadow_query, function(err,rows,fields) {
+                if (err) throw err;
+
+            });
+        } 
         res.send(200);
 
     });
