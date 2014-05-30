@@ -173,14 +173,9 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                        window.ids.splice(window.ids.indexOf(id),1);
 				                        $("#"+id).remove();
 				                    });                        
-			                	} else {
-			                		FB.ui({
-										to: friend.id,
-										method: 'send',
-										link: 'http://drippr.me',
-									});
+			                		
 			                	}
-				                
+				               
 				            });
 
 
