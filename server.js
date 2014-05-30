@@ -75,11 +75,15 @@ app.get("/dripps", function(req, res){
             members += "," + rows[ii]['recipientFriendIds'];
         }
         members = "(" + members.slice(1) + ")";
-        var get_names_query = "select fName, lName, id from Users Where id in " + members;
-        connection.query(get_names_query, function(err,rows,fields) {
-            if (err) throw err; 
-            res.send({article: articles_list, names: rows});
-        });
+        if (rows.length > 0) {        
+            var get_names_query = "select fName, lName, id from Users Where id in " + members;
+            connection.query(get_names_query, function(err,rows,fields) {
+                if (err) throw err; 
+                res.send({article: articles_list, names: rows});
+            });
+        } else{
+            res.send({article: [], names: []});
+        }
     });
 });
 
