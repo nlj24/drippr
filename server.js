@@ -143,6 +143,8 @@ app.get("/shadow_users",  function(req, res){
     var friend_id_lst = req.query.lst;
     var friend_id_string = friend_id_lst.join();
     var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
+    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+    console.log(get_real_query);
     connection.query(get_real_query, function(err,rows,fields) {
         if (err) throw err;
         res.send(rows);
