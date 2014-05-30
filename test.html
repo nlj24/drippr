@@ -1,7 +1,6 @@
 <html>
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script type="text/javascript" src="/scripts/db.js"></script>
 	</head>
 
 	<body>
@@ -15,6 +14,15 @@ src: url(bauhas.ttf);
 }
 
 </style>
+
+<script type="text/javascript">
+$.ajax({
+	  type:'POST',
+	  url: "http://localhost:5003/postTest",
+	  data: {x : 1},
+	  success: function(response){ console.log(response);}
+	});
+</script>
 <g id="Layer_1_1_">
 	<g id="Layer_1_3_">
 		<text transform="matrix(0.8583 0 0 1 -1.861155e-04 20.269)" style="fill:#6D6E71; font-family:'bauhaus'; font-size:23.9164;">dr</text>
