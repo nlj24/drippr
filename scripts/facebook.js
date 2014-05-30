@@ -60,8 +60,6 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 						for(var ii = 0; ii < my_friends.length; ii++) {
 							friend_id_lst.push(my_friends[ii].id);
 						}
-						console.log(friend_id_lst);
-						console.log("BITCH: " + window.address + 'shadow_users');
 						$.ajax({
 			                // url:'json/articles.json',
 			                url: window.address + 'shadow_users',
@@ -70,7 +68,6 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			                method:'post',
 			                success: everythingElse
 			            });
-			            console.log("FUCK: " + window.address + 'shadow_users');
 
 						//I hope ashwin doesn't see this name...
 			            function everythingElse(friend_data) {

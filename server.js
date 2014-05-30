@@ -163,7 +163,7 @@ app.get("/add_shadow_user",  function(req, res){
     var select_user_query = "SELECT id FROM Users WHERE id=" + friend_id;
     connection.query(add_shadow_query, function(err,rows,fields) {
         if (err) throw err;
-        if (rows.length > 0) {
+        if (!(rows.length > 0)) {
             var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0)";
             connection.query(add_shadow_query, function(err,rows,fields) {
                 if (err) throw err;
