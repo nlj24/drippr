@@ -142,6 +142,7 @@ app.get("/is_user",  function(req, res){
 app.post("/shadow_users",  function(req, res){
     req.setEncoding('utf8');
     req.on('data', function(chunk) {
+        console.log(chunk);
         var friend_id_lst = chunk.lst;
         var friend_id_string = friend_id_lst.join();
         console.log(friend_id_string);
