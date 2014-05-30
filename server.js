@@ -6,7 +6,6 @@ var connection;
 
 /* testing mysql ajax */
  app.get("/articles", function(req, res) {
-    console.log("DARSHANDARSHANDARSHANDARSHANDARSHANDARSHANDARSHANDARSHANDARSHAN");
     var userId = req.query.user;
     var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1";
    
@@ -141,18 +140,23 @@ app.get("/is_user",  function(req, res){
 
 
 app.post("/shadow_users",  function(req, res){
-    console.log("AT THE START");
-    var friend_id_lst = req.query.lst;
-    var friend_id_string = friend_id_lst.join();
-    console.log(friend_id_string);
-    var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
-    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-    console.log(get_real_query);
-    connection.query(get_real_query, function(err,rows,fields) {
-        if (err) throw err;
-        res.send(rows);
+    req.setEncoding('utf8');
+    req.on('data', function(chunk) {
+        var friend_id_lst = chunk.lst;
+        var friend_id_string = friend_id_lst.join();
+        console.log(friend_id_string);
+        var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
+        console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+        console.log(get_real_query);
+        connection.query(get_real_query, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(rows);
 
+        });
+    
+    
     });
+    
 });
 
 app.get("/add_shadow_user",  function(req, res){
