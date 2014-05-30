@@ -85,23 +85,24 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 								avatarSize: 50,
 								maxSuggestions: 8,
 								onpick: function (friend) {
-									if(!friend_dict[friend.id]) { //need to make the SHADOW USER
-										$.ajax({
-							                // url:'json/articles.json',
-							                url: window.address + 'add_shadow_user',
-							                data: {id: friend.id},
-							                method:'get'
-							            });
-							            friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
-									}
+									console.log(friend.id);
+									// if(!friend_dict[friend.id]) { //need to make the SHADOW USER
+									// 	$.ajax({
+							  //               // url:'json/articles.json',
+							  //               url: window.address + 'add_shadow_user',
+							  //               data: {id: friend.id},
+							  //               method:'get'
+							  //           });
+							  //           friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
+									// }
 
-									if(!friend_dict[friend.id].isReal) { // friend is a SHADOW USER
-										FB.ui({
-											to: friend.id,
-											method: 'send',
-											link: 'http://drippr.me',
-										});
-									} 
+									// if(!friend_dict[friend.id].isReal) { // friend is a SHADOW USER
+									// 	FB.ui({
+									// 		to: friend.id,
+									// 		method: 'send',
+									// 		link: 'http://drippr.me',
+									// 	});
+									// } 
 
 									var add_to_dom = false;
 									if (!(friend.id in window.chosenFriends)) {

@@ -143,13 +143,9 @@ app.post("/shadow_users",  function(req, res){
     req.setEncoding('utf8');
     req.on('data', function(chunk) {
         data = JSON.parse(chunk);
-        console.log(data);
         var friend_id_lst = data["lst"];
-        console.log(friend_id_lst);
         var friend_id_string = friend_id_lst.join();
-        console.log(friend_id_string);
         var get_real_query = "SELECT * FROM Users WHERE id IN(" + friend_id_string + ")";
-        console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
         console.log(get_real_query);
         connection.query(get_real_query, function(err,rows,fields) {
             if (err) throw err;
