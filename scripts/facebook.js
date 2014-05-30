@@ -65,7 +65,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 						$.ajax({
 			                // url:'json/articles.json',
 			                url: window.address + 'shadow_users',
-			                dataType: "json",
+			                contentType: "json",
 			                data: {lst: friend_id_lst},
 			                method:'post',
 			                success: everythingElse
