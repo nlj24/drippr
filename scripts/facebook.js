@@ -69,6 +69,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 			                method:'get',
 			                success: everythingElse
 			            });
+			            console.log("FUCK: " + window.address + 'shadow_users');
 
 						//I hope ashwin doesn't see this name...
 			            function everythingElse(friend_data) {
