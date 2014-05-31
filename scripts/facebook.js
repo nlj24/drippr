@@ -10,7 +10,7 @@ xfbml      : true  // parse XFBML
 
 
 FB.Event.subscribe("auth.logout", function() {
-	window.location = 'http://localhost:5000';
+	window.location = 'http://drippr.me';
 });
 
 $("#dripps").css("height",""+ ($( window ).height()-90));
