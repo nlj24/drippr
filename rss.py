@@ -1,5 +1,6 @@
 import feedparser, urllib2
 import MySQLdb
+import shuffle from random
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
@@ -50,6 +51,7 @@ try:
 			else:
 				print 2
 
+	shuffle(articlesToAdd)
 	for article in articlesToAdd:
 		try:
 			# execute SQL query using execute() method.
