@@ -9,7 +9,7 @@ xfbml      : true  // parse XFBML
 FB.Event.subscribe("auth.logout", function() {
     console.log("logout stuff");
     window.fbAsyncInit();
-    window.location = 'http://localhost:5000';
+    window.location = 'http://drippr.me';
 });
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
@@ -62,7 +62,7 @@ FB.Event.subscribe("auth.logout", function() {
                             $(".send").click(function(){
                                 if (window.ids.length > 0) {
                                     $.ajax({
-                                        url:'http://localhost:5000/sendDripp/new',
+                                        url:'http://drippr.me/sendDripp/new',
                                         data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
                                         type:'get'
                                     });
@@ -79,7 +79,7 @@ FB.Event.subscribe("auth.logout", function() {
                             // read it later
                             $(".save").click(function(){
                                     $.ajax({
-                                        url:'http://localhost:5000/readItLater/new',
+                                        url:'http://drippr.me/readItLater/new',
                                         data: {userId:window.myID, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
                                         type:'get'
                                     });
@@ -107,7 +107,7 @@ FB.Event.subscribe("auth.logout", function() {
                     }
 
                     $.ajax({
-                        url:'http://localhost:5000/createGroup',
+                        url:'http://drippr.me/createGroup',
                         data: {groupName: groupName, members: window.ids, creatorId: window.myID},
                         type:'get'
                     });
@@ -144,7 +144,7 @@ FB.Event.subscribe("auth.logout", function() {
             $("#user").html(response.first_name);
             $.ajax({
                 // url:'json/articles.json',
-                url:'http://localhost:5000/is_user',
+                url:'http://drippr.me/is_user',
                 data: {uid: response.id, fName: response.first_name, lName: response.last_name},
                 method:'get',
                 success:this.userData
