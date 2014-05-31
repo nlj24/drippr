@@ -1,5 +1,8 @@
 var article_results;
 window.chunkSize = 100;
+window.articlesData = {};
+window.articlesData["All"] = [];
+
 
 window.ARTICLE_METHOD ={
 
@@ -9,18 +12,16 @@ window.ARTICLE_METHOD ={
             article_results = resJSON;
 
             window.article_results = resJSON;
-            window.articlesData = {};
-            window.articlesData["All"] = [];
             var cat;
 
-            for (var i=0;i< window.chunkSize * 10 /* resJSON.length*/;i++) {
-                cat = resJSON[i % window.chunkSize].category;
+            for (var i=0;i<  resJSON.length;i++) {
+                cat = resJSON[i].category;
                 if(!(cat in window.articlesData)){
                     window.articlesData[cat] = [];
                 }
-                    window.articlesData[cat].push(resJSON[i % window.chunkSize]);
-                    window.articlesData["All"].push(resJSON[i % window.chunkSize]);
-                    window.articlesData[resJSON[i % window.chunkSize].id] = resJSON[i % window.chunkSize];
+                    window.articlesData[cat].push(resJSON[i]);
+                    window.articlesData["All"].push(resJSON[i]);
+                    window.articlesData[resJSON[i].id] = resJSON[i];
             }
 
             window.articlesResults = window.articlesData;
@@ -33,7 +34,7 @@ window.ARTICLE_METHOD ={
 
             }
 
-            var feed = window.articlesData[window.curCategory];
+            var feed = window.articlesData[window.curCategory].slice(0, 50);
 
             var templateSource = $("#article-template").html(),
             template = Handlebars.compile(templateSource),
@@ -100,12 +101,29 @@ window.bindDripps = function() {
     $(".topCatImg.grey").attr("class", 'topCatImg catImg grey hide');
     $(".topCatImg.white").attr("class", 'topCatImg catImg white');
 
-    $('.categ').click(function(e){
-        var id = $(e.target).parents('.categ').attr("category");
-        feed = window.articlesData[id];
+
+    function makeSlider(feed){
         var templateSource = $("#article-template").html(), 
         template = Handlebars.compile(templateSource),
         articleHTML = template({"articles":feed});
+        
+    }
+    
+    $('.categ').click(function(e){
+        var id = $(e.target).parents('.categ').attr("category");
+
+        if (window.positions[id] > 15) {
+
+                feed = window.articlesData[id].slice(window.positions[id] - 10, Math.min(window.positions[id] + 40, window.articlesData[id].length);
+            
+        } else{
+            feed = window.articlesData[id];
+
+        }
+
+        makeSlider(feed);
+
+
         window.curCategory = $(e.target).parents('.categ').attr("category");
         $('#articles').html(articleHTML);
 
