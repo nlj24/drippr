@@ -29,6 +29,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id;
                 	var articleId = window.curArticle;
                 	window.positions[window.curCategory] = index;
+
+                	
                 	window.setDrippLikes();
 		            
 		           	window.resetFB();
