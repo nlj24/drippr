@@ -3,31 +3,16 @@ var article_results;
 window.ARTICLE_METHOD ={
 
         handlerData:function(resJSON){
-            console.log('cunt');
-            var currentIndex = resJSON.length,
-            temporaryValue,
-            randomIndex;
-
-            // While there remain elements to shuffle...
-            while (0 !== currentIndex) {
-                console.log(currentIndex);
-                // Pick a remaining element...
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-
-                // And swap it with the current element.
-                temporaryValue = resJSON[currentIndex];
-                resJSON[currentIndex] = resJSON[randomIndex];
-                resJSON[randomIndex] = temporaryValue;
-            }
+            
 
             article_results = resJSON;
 
+            window.article_results = resJSON;
             window.articlesData = {};
             window.articlesData["All"] = [];
             var cat;
 
-            for (var i=0;i<resJSON.length;i++) {
+            for (var i=0;i< 100/* resJSON.length*/;i++) {
                 cat = resJSON[i].category;
                 if(!(cat in window.articlesData)){
                     window.articlesData[cat] = [];
