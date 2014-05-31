@@ -159,18 +159,6 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 									}
 									window.chosenFriends[friend.id] = friend;
 
-<<<<<<< HEAD
-
-									if(add_to_dom) {
-										if(!friend_dict[friend.id].isReal) { //SHADOW USER
-											$("#chosenCont").append("<div class='red_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
-										} else {
-											$("#chosenCont").append("<div class='blue_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
-										}
-									}
-				                    $(".rm" ).unbind("click", handler2);
-				                    $(".rm").bind("click", handler2);
-=======
 									if(add_to_dom) {
 										if(!friend_dict[friend.id].isReal) { //SHADOW USER
 											$("#chosenCont").append("<div class='red_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
@@ -181,25 +169,16 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 									$(".rm" ).unbind("click", handler2);
 				    				$(".rm").bind("click", handler2);
->>>>>>> b07b088e6cd4babcad234d27045ea2de3c861258
-
 				                    var handler2 = $('.rm').click(function(e) {
 				                        var id = $(e.target).attr('id');
 				                        delete window.chosenFriends[id];
 				                        window.ids.splice(window.ids.indexOf(id),1);
 										$("#"+id).remove();
 				                    });                        
-<<<<<<< HEAD
-			                		
-			                	}
-				                
-				            });
-=======
 								}
 								
 							});
 
->>>>>>> b07b088e6cd4babcad234d27045ea2de3c861258
 
 
 							$(".send").click(function(){
