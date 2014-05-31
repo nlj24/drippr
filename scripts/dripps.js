@@ -13,14 +13,14 @@ window.ARTICLE_METHOD ={
             window.articlesData["All"] = [];
             var cat;
 
-            for (var i=0;i< window.chunkSize /* resJSON.length*/;i++) {
-                cat = resJSON[i].category;
+            for (var i=0;i< window.chunkSize * 10 /* resJSON.length*/;i++) {
+                cat = resJSON[i % window.chunkSize].category;
                 if(!(cat in window.articlesData)){
                     window.articlesData[cat] = [];
                 }
-                    window.articlesData[cat].push(resJSON[i]);
-                    window.articlesData["All"].push(resJSON[i]);
-                    window.articlesData[resJSON[i].id] = resJSON[i];
+                    window.articlesData[cat].push(resJSON[i % window.chunkSize]);
+                    window.articlesData["All"].push(resJSON[i % window.chunkSize]);
+                    window.articlesData[resJSON[i % window.chunkSize].id] = resJSON[i % window.chunkSize];
             }
 
             window.articlesResults = window.articlesData;
