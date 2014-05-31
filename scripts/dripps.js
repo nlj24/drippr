@@ -1,4 +1,5 @@
 var article_results;
+window.chunkSize = 100;
 
 window.ARTICLE_METHOD ={
 
@@ -12,7 +13,7 @@ window.ARTICLE_METHOD ={
             window.articlesData["All"] = [];
             var cat;
 
-            for (var i=0;i< 100/* resJSON.length*/;i++) {
+            for (var i=0;i< window.chunkSize /* resJSON.length*/;i++) {
                 cat = resJSON[i].category;
                 if(!(cat in window.articlesData)){
                     window.articlesData[cat] = [];
@@ -43,7 +44,7 @@ window.ARTICLE_METHOD ={
         loadArticleData : function(){
             $.ajax({
                 url: window.address + 'articles',
-                data: {user: window.myID}, //need to fix for current user
+                data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
                 method:'get',
                 success:this.handlerData
             });
