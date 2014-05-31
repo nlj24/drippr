@@ -28,7 +28,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						window.curArticle = this.li[index].id;
 
 						window.positions[window.curCategory] = 10;						
-						feed = window.articlesData[window.curCategory].slice(Math.min(0, index -10), Math.min(index + 40,window.articlesData[window.curCategory].length) );
+						feed = window.articlesData[window.curCategory].slice(Math.max(0, index -10), Math.min(index + 40,window.articlesData[window.curCategory].length) );
 
 				        var templateSource = $("#article-template").html(), 
 				        template = Handlebars.compile(templateSource),
