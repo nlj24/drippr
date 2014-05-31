@@ -1,6 +1,6 @@
 import feedparser, urllib2
 import MySQLdb
-import shuffle from random
+from random import shuffle
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
@@ -30,6 +30,8 @@ try:
 			print 1
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
+			print source
+			print a['published_parsed']
 			try:
 				date = a['published']
 			except:
