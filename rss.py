@@ -30,10 +30,10 @@ try:
 			print 1
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
-			print source
-			print a['published_parsed']
 			try:
-				date = a['published']
+				print source
+				date=a['published_parsed']
+				# date = a['published']
 			except:
 				date = 'no date'
 			request = urllib2.Request(url_result)
