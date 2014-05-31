@@ -102,12 +102,6 @@ window.bindDripps = function() {
     $(".topCatImg.white").attr("class", 'topCatImg catImg white');
 
 
-    function makeSlider(feed){
-        var templateSource = $("#article-template").html(), 
-        template = Handlebars.compile(templateSource),
-        articleHTML = template({"articles":feed});
-        
-    }
     
     $('.categ').click(function(e){
         var id = $(e.target).parents('.categ').attr("category");
@@ -121,11 +115,13 @@ window.bindDripps = function() {
 
         }
 
-        makeSlider(feed);
+        var templateSource = $("#article-template").html(), 
+        template = Handlebars.compile(templateSource),
+        articleHTML = template({"articles":feed});
+        $('#articles').html(articleHTML);
 
 
         window.curCategory = $(e.target).parents('.categ').attr("category");
-        $('#articles').html(articleHTML);
 
         $('.categ').css("background", "white");
         $('.categ').css("color", "#6D6E70");
