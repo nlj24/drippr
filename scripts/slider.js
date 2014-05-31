@@ -22,18 +22,36 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					return;
 
 					// move <ul> left
-					this.ul.style.left = '-' + (100 * index) + '%';
+					
 
-					this.currentIndex = index;
+					if (this.li.length  - index < 10) {
+						window.curArticle = this.li[index].id;
 
-					window.curArticle = this.li[this.currentIndex].id;
-                	var articleId = window.curArticle;
-                	window.positions[window.curCategory] = index;
+						window.positions[window.curCategory] = 10;						
+						feed = window.articlesData[window.curCategory].slice(Math.min(0, index -10), Math.min(index + 40,window.articlesData[window.curCategory].length) );
 
-                	
-                	window.setDrippLikes();
-		            
-		           	window.resetFB();
+				        var templateSource = $("#article-template").html(), 
+				        template = Handlebars.compile(templateSource),
+				        articleHTML = template({"articles":feed});
+				        $('#articles').html(articleHTML);
+
+					} else{
+						this.ul.style.left = '-' + (100 * index) + '%';
+
+						this.currentIndex = index;
+
+						window.curArticle = this.li[this.currentIndex].id;
+	                	window.positions[window.curCategory] = index;
+
+
+	                	window.setDrippLikes();
+			            
+			           	window.resetFB();
+						
+					}
+
+
+
 			    },
 			 	
 			    goToPrev: function() {

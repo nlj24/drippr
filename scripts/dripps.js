@@ -112,7 +112,7 @@ window.bindDripps = function() {
             
         }else{
             feed = window.articlesData[id];
-
+            
         }
 
         var templateSource = $("#article-template").html(), 
