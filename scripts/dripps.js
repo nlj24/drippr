@@ -114,9 +114,9 @@ window.bindDripps = function() {
 
         if (window.positions[id] > 15) {
 
-                feed = window.articlesData[id].slice(window.positions[id] - 10, Math.min(window.positions[id] + 40, window.articlesData[id].length);
+                feed = window.articlesData[id].slice(window.positions[id] - 10, Math.min(window.positions[id] + 40, window.articlesData[id].length));
             
-        } else{
+        }else{
             feed = window.articlesData[id];
 
         }
