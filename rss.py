@@ -43,7 +43,7 @@ try:
 				end = data.index('"',data.find('jpg'))
 				image_result = data[beg:end]
 			except:
-				image = 'Stock Photo'
+				image_result = '/images/drop.png'
 			if (url_result) not in articleUrls2:
 				print url_result
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date, 'category':category})
