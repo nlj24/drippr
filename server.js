@@ -7,7 +7,7 @@ var connection;
 /* testing mysql ajax */
  app.get("/articles", function(req, res) {
     var userId = req.query.user;
-    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 LIMIT 1000";
+    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 LIMIT 10";
    
 
     connection.query(article_query, function(err,rows,fields) {
