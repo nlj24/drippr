@@ -47,6 +47,8 @@ try:
 			if (url_result) not in articleUrls2:
 				print url_result
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date, 'category':category})
+			else:
+				print 2
 
 	for article in articlesToAdd:
 		try:
