@@ -6,50 +6,59 @@ window.articlesData["All"] = [];
 
 window.ARTICLE_METHOD ={
 
-        handlerData:function(resJSON){
-            
+    handlerData:function(resJSON){
 
-            article_results = resJSON;
+        for (var ii = 0; ii < resJSON.length; ii++) {
+            resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
+                resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mm a');
+            }
+            else {
+                resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mm a');
+            }
+        }
 
-            window.article_results = resJSON;
-            var cat;
+        article_results = resJSON;
 
-            for (var i=0;i<  resJSON.length;i++) {
-                cat = resJSON[i].category;
-                if(!(cat in window.articlesData)){
-                    window.articlesData[cat] = [];
-                }
-                    window.articlesData[cat].push(resJSON[i]);
-                    window.articlesData["All"].push(resJSON[i]);
-                    window.articlesData[resJSON[i].id] = resJSON[i];
+        window.article_results = resJSON;
+        var cat;
+
+        for (var i=0;i<  resJSON.length;i++) {
+            cat = resJSON[i].category;
+            if(!(cat in window.articlesData)){
+                window.articlesData[cat] = [];
+            }
+                window.articlesData[cat].push(resJSON[i]);
+                window.articlesData["All"].push(resJSON[i]);
+                window.articlesData[resJSON[i].id] = resJSON[i];
+        }
+
+        window.articlesResults = window.articlesData;
+        var categories = Object.keys(window.articlesResults);
+
+        for(var ii = 0; ii < categories.length; ii++){
+            if(!(categories[ii] in window.positions)){
+                window.positions[categories[ii]] = 0;
             }
 
-            window.articlesResults = window.articlesData;
-            var categories = Object.keys(window.articlesResults);
+        }
 
-            for(var ii = 0; ii < categories.length; ii++){
-                if(!(categories[ii] in window.positions)){
-                    window.positions[categories[ii]] = 0;
-                }
+        var feed = window.articlesData[window.curCategory].slice(0, 50);
 
-            }
+        var templateSource = $("#article-template").html(),
+        template = Handlebars.compile(templateSource),
+        articleHTML = template({"articles":feed});
+        $('#articles').html(articleHTML);
+    },
 
-            var feed = window.articlesData[window.curCategory].slice(0, 50);
-
-            var templateSource = $("#article-template").html(),
-            template = Handlebars.compile(templateSource),
-            articleHTML = template({"articles":feed});
-            $('#articles').html(articleHTML);
-        },
-
-        loadArticleData : function(){
-            $.ajax({
-                url: window.address + 'articles',
-                data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
-                method:'get',
-                success:this.handlerData
-            });
-        },
+    loadArticleData : function(){
+        $.ajax({
+            url: window.address + 'articles',
+            data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
+            method:'get',
+            success:this.handlerData
+        });
+    },
 };
 
 $(document).keydown(function(e){

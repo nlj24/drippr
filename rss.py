@@ -2,7 +2,7 @@ import feedparser, urllib2
 import MySQLdb
 from random import shuffle
 from time import mktime
-from datetime import datetime
+from datetime import datetime, timedelta
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
@@ -10,7 +10,7 @@ articlesToAdd = []
 
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources"
+	sql = "SELECT * FROM Sources where id =133"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 	rss2 = []
@@ -25,22 +25,22 @@ try:
 		articleUrls2.append(url[0])
 
 	dateListFail = []
+	cutoff = datetime.utcnow() - timedelta(days=1)
 	b = 0
 	for (id, source, url, category) in rss2:
 		feed = feedparser.parse(url)
 		lst = feed['items']
 		for a in lst:
-			print 1
+			print lst
 			b = b + 1
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
 			try:
 				date = a['published_parsed']
-				date = str(datetime.fromtimestamp(mktime(date)))
+				date = datetime.fromtimestamp(mktime(date)) - timedelta(hours=1)
+				date2 = str(date)
 			except:
-				date = 'no date'
-				dateListFail.append(source)
-				print date
+				print "s"
 			request = urllib2.Request(url_result)
 			request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
 			try:
@@ -52,17 +52,15 @@ try:
 				image_result = data[beg:end]
 			except:
 				image_result = '/images/drop.png'
-			if (url_result) not in articleUrls2:
+			if ((url_result) not in articleUrls2) and (date > cutoff):
 				print url_result
-				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date, 'category':category})
-	print dateListFail
+				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
+
 	shuffle(articlesToAdd)
-	print articlesToAdd
 	for article in articlesToAdd:
 		try:
 			# execute SQL query using execute() method.
 			sql = "INSERT INTO Articles (headline, imgUrl, url, source, date, category, numLikes, numDislikes, collected) VALUES (\"" + article['headline'] + "\",\'" + article['image'] + "\',\'" + article['url'] + "\',\'" + article['source'] + "\',\'" + article['date'] + "\',\'"  + article['category'] + "\',0,0,1)"
-			print sql
 			cursor.execute(sql)
 			db.commit()
 		except:

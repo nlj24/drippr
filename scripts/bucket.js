@@ -47,14 +47,9 @@ window.BUCKET_METHOD = {
                     $(".dripp2").attr("class", 'opinionBucket dripp2');
                 }
             }
-            
-            for (var i =0; i < dripps_data.length;i++) {
-                dripps_data[i]["timeSent"] = moment(moment(dripps_data[i]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
-                console.log(dripps_data[i]["timeSent"].format());
-            };
-
 
             for (var ii = 0; ii < dripps_data.length; ii++) {
+                dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
                 if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
                     dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mm a');
                 }
