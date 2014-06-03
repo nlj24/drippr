@@ -2,7 +2,7 @@ var article_results;
 window.chunkSize = 100;
 window.articlesData = {};
 window.articlesData["All"] = [];
-
+window.callingback = {};
 
 window.ARTICLE_METHOD ={
 
@@ -60,6 +60,7 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, callback){
+        window.callingback[category] = true;
         $.ajax({
             url: window.address + 'articles/' + category,
             data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
@@ -86,7 +87,8 @@ window.ARTICLE_METHOD ={
                     window.articlesData["All"].push(data[i]);
                     window.articlesData[data[i].id] = data[i];
                 }
-
+             window.callingback[category] = false;
+            callback();
             }
         });
     }

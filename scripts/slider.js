@@ -25,9 +25,19 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					
 
 					if (this.li.length  - index < 10) {
+
+
+						this.ul.style.left = '-' + (100 * index) + '%';
+
+
+	                	window.setDrippLikes();
+			            
+			           	window.resetFB();
+
+
 						window.curArticle = this.li[index].id;
 
-						window.positions[window.curCategory] = 10;	
+						window.positions[window.curCategory] = Math.min(10, index);
 
 						var indexInArray = window.articlesData[window.curCategory].indexOf(window.curArticle);
 
@@ -42,7 +52,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						}
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
-							window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle.id, refreshTemplate);
+							if (!(window.callingback[window.curCategory])) {
+								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle, refreshTemplate);
+								
+							}
 
 						}
 						else{
