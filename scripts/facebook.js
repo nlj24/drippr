@@ -36,7 +36,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 					if (response.status === 'connected') {
 
 						FB.api('/me', function(response) {
-						$("#user").html("Welcome, " + response.first_name + "!");
+							$("#user").html("Welcome, " + response.first_name + "!");
 				    	    $.ajax({
 				                // url:'json/articles.json',
 				                url: window.address + 'is_user',
@@ -133,12 +133,12 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 								avatarSize: 50,
 								maxSuggestions: 8,
 								onpick: function (friend) {
-									console.log(friend.id);
+									console.log(friend);
 									if(!friend_dict[friend.id]) { //need to make the SHADOW USER
 										$.ajax({
 							                // url:'json/articles.json',
 							                url: window.address + 'add_shadow_user',
-							                data: {id: friend.id},
+							                data: {id: friend.id, name: friend.name},
 							                method:'get'
 							            });
 							            friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
@@ -200,6 +200,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 							$("#groupBtn").click(function(){
 								window.ids.push(window.myID);
+								$('#chosenCont').html('');
 				                if (window.ids.length) {
 				                	var groupName = $('#groupName').val();
 
@@ -221,6 +222,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                        type:'get'
 				                	});
 				                }
+								$('#groupName').val('');
 				                window.ids = [];
 				            });
 

@@ -15,7 +15,8 @@ window.GROUP_METHOD = {
                 
             id = data[jj].userId;
             userName = data[jj].fullName;
-            members_dict[data[jj].id]['list'].push({name : userName});
+            userId = data[jj].userId;
+            members_dict[data[jj].id]['list'].push({name : userName, userId: userId});
         }
 
         var templateSource = $("#groups-template").html();
@@ -24,11 +25,14 @@ window.GROUP_METHOD = {
         $('#groups_placeholder').html(groupHTML);
 
         for (var ii = 0; ii < data.length; ii++) {
+            console.log('tyr');
             if (!data[ii]["isReal"]) {
+                console.log('fun');
                 $("#"+data[ii]['userId']).attr("class", "personName red_friends")
             }
             else {
-                
+                console.log('f');
+                $("#"+data[ii]['userId']).attr("class", "personName blue_friends")
             }
         }
 
