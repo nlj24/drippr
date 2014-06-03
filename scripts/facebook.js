@@ -40,7 +40,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				    	    $.ajax({
 				                // url:'json/articles.json',
 				                url: window.address + 'is_user',
-				                data: {uid: response.id, fName: response.first_name, lName: response.last_name},
+				                data: {uid: response.id, fName: response.first_name, lName: response.last_name, name: response.name},
 				                method:'get' //,
 				                // success:this.userData
 				            });
@@ -86,7 +86,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 										$.ajax({
 							                // url:'json/articles.json',
 							                url: window.address + 'add_shadow_user',
-							                data: {id: friend.id},
+							                data: {id: friend.id, name: friend.name},
 							                method:'get'
 							            });
 							            friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};

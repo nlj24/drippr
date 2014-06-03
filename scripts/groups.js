@@ -1,7 +1,7 @@
 window.GROUP_METHOD = {
     
     groupData:function(data) {
-        //(group id -> list of {id:name}?)
+        console.log(data);
         var members_dict = {};
         window.groupList = [];
         window.groupListDict = {};
@@ -14,7 +14,7 @@ window.GROUP_METHOD = {
             }
                 
             id = data[jj].userId;
-            userName = data[jj].fName +" "+data[jj].lName ;
+            userName = data[jj].fullName;
             members_dict[data[jj].id]['list'].push({name : userName});
         }
 
@@ -22,6 +22,15 @@ window.GROUP_METHOD = {
         template = Handlebars.compile(templateSource);
         groupHTML = template({"groups":members_dict});
         $('#groups_placeholder').html(groupHTML);
+
+        for (var ii = 0; ii < data.length; ii++) {
+            if (!data[ii]["isReal"]) {
+                $("#"+data[ii]['userId']).attr("class", "personName red_friends")
+            }
+            else {
+                
+            }
+        }
 
         $(".deleteGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');
