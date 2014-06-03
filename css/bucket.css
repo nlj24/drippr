@@ -16,21 +16,22 @@ darkGrey: #6D6E70*/
 .blue_friends {
   display: inline-block;
   background-color: #A3DCFF;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #6D6E70;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 14px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
 .red_friends {
+  color: white;
   display: inline-block;
-  background-color: red;
-  padding: 10px;
+  background-color: #E00000;
+  padding: 5px;
   border: 1px solid #6D6E70;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 14px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
@@ -42,6 +43,7 @@ darkGrey: #6D6E70*/
   padding-right: 5px;
   background-color: #6D6E70;
   color: white;
+  border-radius: 5px;
 }
 
 .fbPics {
@@ -64,10 +66,19 @@ darkGrey: #6D6E70*/
 #chosenCont {
   background-color: white;
   height: 300px;
-  width: 400px;
+  width: 100%;
   overflow: scroll;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 6px;
+}
+
+.groupCont {
+  margin-top: 15px;
+}
+
+.groupInput {
+  margin-top: 60px;
 }
 
 
