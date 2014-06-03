@@ -77,10 +77,10 @@ darkGrey: #6D6E70*/
   margin-top: 15px;
 }
 
-.groupInput {
-  margin-top: 60px;
+#groupInput {
+  height: 300px;
+  background-color: black;
 }
-
 
 body {
   background-color: #e9eaed;
