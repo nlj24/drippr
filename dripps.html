@@ -122,8 +122,6 @@
 		<div id="dripps" class = "container-fluid">
 			<div id="drippsPromo">
 				drippr is sooooo cool.
-				<iframe width="420" height="345" src="http://www.youtube.com/v/AtKZKl7Bgu0">
-				</iframe>
 			</div>    		
 			<div class = "row hide" id = "size1">
 	        	<div class = "menuBar col-xs-3">
@@ -483,37 +481,28 @@
 		</div>
 	</div>
 		<script id="groups-template" type="text/x-handlebars-template">	
-			<div>
-				<table>
-					<tbody>
-						<tr>
-							<th> Group Name </th>
-							<th> Delete Group </th>
-							<th> Members </th>
-						</tr>
-						{{#each groups}}
-							<div id = group_{{this.id}}>
-								<tr>
-									<td>
-										<h3>{{this.name}}</h3>
-									</td>
-									<td>
-										<div class = "deleteGroup" group_id={{this.id}}>
-											X
-										</div>
-									</td>
-									{{#each this.list}}
-										<td>
-											<div class="personName">
-												{{this.name}}
-											</div>
-										</td>
-									{{/each}}
-								</tr>	
+			<div>		
+				{{#each groups}}
+					<div class = "row">
+						<div class = "col-xs-1">
+						</div>
+						<div class = "row col-xs-10" id = group_{{this.id}}>						
+							<div class = "col-xs-2">{{this.name}}</div>
+							<div class = "col-xs-8">
+								{{#each this.list}}
+									<div class="personName" id = {{userId}}>
+										{{this.name}}
+									</div>
+								{{/each}}
 							</div>
-						{{/each}}
-					</tbody>
-				</table>
+							<div class = "col-xs-2 deleteGroup" group_id={{this.id}}>
+								delete group
+							</div>
+						</div>
+						<div class = "col-xs-1">
+						</div>
+					</div>
+				{{/each}}
 			</div>
 		</script>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

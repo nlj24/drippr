@@ -8,7 +8,7 @@ var connection;
  app.get("/articles", function(req, res) {
     var userId = req.query.user;
     var numArticles = req.query.numArticles;
-    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND date>NOW() - INTERVAL 1 DAY LIMIT " + numArticles;
+    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND date>NOW() - INTERVAL 3 DAY LIMIT " + numArticles;
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
@@ -36,7 +36,7 @@ app.get("/articles/:category", function(req, res) {
     var numArticles = req.query.numArticles;
     var category = req.category;
     var lastId = req.query.lastId;
-    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND id >" + lastId+" AND category = '"+category +"' date>NOW() - INTERVAL 1 DAY LIMIT " + numArticles;
+    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND id >" + lastId + " AND category = '"+category +"'' date>NOW() - INTERVAL 1 DAY LIMIT " + numArticles;
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
@@ -144,11 +144,12 @@ app.get("/is_user",  function(req, res){
     var uid = req.query.uid;
     var fName = req.query.fName;
     var lName = req.query.lName;
+    var name = req.query.name;
     var get_is_user_query = "SELECT * FROM Users WHERE id = " + uid;
     connection.query(get_is_user_query, function(err,rows,fields) {
         if (err) throw err;
         if (rows.length === 0) { //we're a brand new user
-            var add_user_query = "INSERT INTO Users (id, fName, lName, isReal) VALUES (" + uid + ",'" + fName + "','" + lName + "',1)";
+            var add_user_query = "INSERT INTO Users (id, fName, lName, isReal, fullName) VALUES (" + uid + ",'" + fName + "','" + lName + "',1,'" + name + "')";
             connection.query(add_user_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
@@ -187,12 +188,13 @@ app.post("/shadow_users",  function(req, res){
 
 app.get("/add_shadow_user",  function(req, res){
     var friend_id = req.query.id;
+    var name = req.query.name;
 
     var select_user_query = "SELECT id FROM Users WHERE id=" + friend_id;
     connection.query(select_user_query, function(err,rows,fields) {
         if (err) throw err;
         if (!(rows.length > 0)) {
-            var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0)";
+            var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0,'"+name+"')";
             connection.query(add_shadow_query, function(err,rows,fields) {
                 if (err) throw err;
 
@@ -387,7 +389,7 @@ app.get("/deleteGroup", function(req, res) {
 app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
-    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName from Groups INNER JOIN Users on Users.id=Groups.userId LEFT JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
+    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId LEFT JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
     connection.query(members_info_query, function(err,rows,fields) {
         if (err) throw err;
         res.send(rows);
