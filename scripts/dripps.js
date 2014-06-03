@@ -59,6 +59,37 @@ window.ARTICLE_METHOD ={
             success:this.handlerData
         });
     },
+    loadArticleDataCategory : function(category, lastId, callback){
+        $.ajax({
+            url: window.address + 'articles/' + category,
+            data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
+            method:'get',
+            success:function(data){
+
+                for (var ii = 0; ii < data.length; ii++) {
+                    data[ii]["date"] = moment(moment(data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
+                    if (moment().format('MMMM Do YYYY') === data[ii]['date'].format('MMMM Do YYYY')) {
+                        data[ii]['date'] = "Today, " + data[ii]['date'].format('h:mm a');
+                    }
+                    else {
+                        data[ii]['date'] = data[ii]['date'].format('MMMM Do, h:mm a');
+                    }
+                    window.article_results.push(data[ii]);
+                }
+
+                var cat;
+
+                for (var i=0;i<  data.length;i++) {
+                    cat = data[i].category;
+                    
+                    window.articlesData[cat].push(data[i]);
+                    window.articlesData["All"].push(data[i]);
+                    window.articlesData[data[i].id] = data[i];
+                }
+
+            }
+        });
+    }
 };
 
 $(document).keydown(function(e){

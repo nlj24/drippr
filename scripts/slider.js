@@ -27,13 +27,30 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					if (this.li.length  - index < 10) {
 						window.curArticle = this.li[index].id;
 
-						window.positions[window.curCategory] = 10;						
-						feed = window.articlesData[window.curCategory].slice(Math.max(0, index -10), Math.min(index + 40,window.articlesData[window.curCategory].length) );
+						window.positions[window.curCategory] = 10;	
 
-				        var templateSource = $("#article-template").html(), 
-				        template = Handlebars.compile(templateSource),
-				        articleHTML = template({"articles":feed});
-				        $('#articles').html(articleHTML);
+						var indexInArray = window.articlesData[window.curCategory].indexOf(window.curArticle);
+
+						var refreshTemplate = function(){
+							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+
+					        var templateSource = $("#article-template").html(), 
+					        template = Handlebars.compile(templateSource),
+					        articleHTML = template({"articles":feed});
+					        $('#articles').html(articleHTML);
+
+						}
+
+						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
+							window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle.id, refreshTemplate);
+
+						}
+						else{
+							refreshTemplate();
+						}
+
+
+
 
 					} else{
 						this.ul.style.left = '-' + (100 * index) + '%';
