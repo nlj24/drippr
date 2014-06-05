@@ -14,6 +14,8 @@ FB.Event.subscribe("auth.logout", function() {
 });
 
 $("#dripps").css("height",""+ ($( window ).height()-90));
+// $(".arrowDiv").css("height",""+ ($( window ).height()-90));
+$(".arrow").css("margin-top",""+ (($( window ).height()-90)/2) - 90);
 // window.connect = false;
 //check if we're logged in
    //display a modal or something?
