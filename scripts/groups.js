@@ -14,10 +14,6 @@ window.GROUP_METHOD = {
 
         window.groupListDict = {};
 
-        // for (var ii = 0; ii < data.length; ii++) {
-
-        // }
-
         for (var jj = 0; jj < data.length; jj++) {
 
             if(data[jj].creatorId == me) { // I'm the creator
