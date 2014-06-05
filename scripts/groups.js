@@ -25,14 +25,11 @@ window.GROUP_METHOD = {
         $('#groups_placeholder').html(groupHTML);
 
         for (var ii = 0; ii < data.length; ii++) {
-            console.log('tyr');
             if (!data[ii]["isReal"]) {
-                console.log('fun');
-                $("#"+data[ii]['userId']).attr("class", "personName red_friends")
+                $("."+data[ii]['userId']).attr("class", "personName red_friends")
             }
             else {
-                console.log('f');
-                $("#"+data[ii]['userId']).attr("class", "personName blue_friends")
+                $("."+data[ii]['userId']).attr("class", "personName blue_friends")
             }
         }
 

@@ -248,6 +248,8 @@ body {
 
 .fb-login-button {
   float: right;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 #articles {

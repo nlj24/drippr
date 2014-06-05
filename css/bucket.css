@@ -53,6 +53,12 @@ darkGrey: #6D6E70*/
   width: 25px;
 }
 
+.fbPics2 {
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+}
+
 #fb-input {
   margin-top: 25px;
 }
@@ -65,7 +71,7 @@ darkGrey: #6D6E70*/
 
 #chosenCont {
   background-color: white;
-  height: 300px;
+  height: 200px;
   width: 100%;
   overflow: scroll;
   margin-left: auto;
@@ -78,7 +84,7 @@ darkGrey: #6D6E70*/
 }
 
 #groupInput {
-  height: 300px;
+  height: 200px;
 }
 
 body {
@@ -256,4 +262,35 @@ body {
   margin: 0;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+#fb-input-groups {
+  margin-top: 5px;
+}
+
+#groupNameStyle {
+  font-size: 15px;
+  line-height: 25px;
+}
+
+#selFriendsStyle {
+  margin-top: 5px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+#centerWel {
+  display: inline-block;
+  margin-top: 5.5px;
+  margin-bottom: 0px;
+}
+
+#createGroupSyle {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.groupRowStyle {
+  border-bottom: 2px solid white;
+  margin-top: 10px; 
 }

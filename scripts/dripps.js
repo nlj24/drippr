@@ -49,6 +49,11 @@ window.ARTICLE_METHOD ={
         template = Handlebars.compile(templateSource),
         articleHTML = template({"articles":feed});
         $('#articles').html(articleHTML);
+
+        $(".dripp").click(function(){
+            $(".showForm").attr("class", "showForm");
+            $(".success").attr("class", "success hide");
+        });
     },
 
     loadArticleData : function(){

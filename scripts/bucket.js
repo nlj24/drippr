@@ -3,236 +3,236 @@ var bucket_results;
 var feed; 
 
 window.BUCKET_METHOD = {
-        compileBuckets:function(dripps_data, readItLater_data, conversation_data){
-            articleDict = {};
-            for (var i =0; i < conversation_data.length;i++) {
-                conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            };
-            console.log(conversation_data);
-            window.conversation_data = conversation_data;
+    compileBuckets:function(dripps_data, readItLater_data, conversation_data){
+        articleDict = {};
+        for (var i =0; i < conversation_data.length;i++) {
+            conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
+        };
+        console.log(conversation_data);
+        window.conversation_data = conversation_data;
 
-            window.setBucketLikes = function correctLikes() {
-                if (articleDict[window.selItem.articleId]['userLiked']) {
-                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
-                    $(".like2.blue").attr("class", 'opinionBucket like2 blue');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
-                    $(".up2").html(articleDict[window.selItem.articleId].numLikes);
-                }
-                if (articleDict[window.selItem.articleId]['userLiked'] === false) {
-                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
-                    $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
-                    $(".up2").html(articleDict[window.selItem.articleId].numLikes);
-                }
-                if (articleDict[window.selItem.articleId]['userDisliked']) {
-                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
-                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
-                    $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
-                }
-                if (articleDict[window.selItem.articleId]['userDisliked'] === false) {
-                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
-                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
-                    $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
-                }
-                if (articleDict[window.selItem.articleId]['userReadItLater']) {
-                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
-                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
-                }
-                if (articleDict[window.selItem.articleId]['userReadItLater'] === false) {
-                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
-                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
-                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+        window.setBucketLikes = function correctLikes() {
+            if (articleDict[window.selItem.articleId]['userLiked']) {
+                $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
+                $(".like2.blue").attr("class", 'opinionBucket like2 blue');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+                $(".up2").html(articleDict[window.selItem.articleId].numLikes);
+            }
+            if (articleDict[window.selItem.articleId]['userLiked'] === false) {
+                $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
+                $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+                $(".up2").html(articleDict[window.selItem.articleId].numLikes);
+            }
+            if (articleDict[window.selItem.articleId]['userDisliked']) {
+                $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
+                $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+                $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
+            }
+            if (articleDict[window.selItem.articleId]['userDisliked'] === false) {
+                $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
+                $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+                $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
+            }
+            if (articleDict[window.selItem.articleId]['userReadItLater']) {
+                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
+                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+            }
+            if (articleDict[window.selItem.articleId]['userReadItLater'] === false) {
+                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
+                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+                $(".dripp2").attr("class", 'opinionBucket dripp2');
+            }
+        }
+
+        for (var ii = 0; ii < dripps_data.length; ii++) {
+            dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
+                dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mm a');
+            }
+            else {
+                dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mm a');
+            }
+        }
+
+        sendList = [];
+        receiveList = [];
+        for (var jj = 0; jj < dripps_data.length; jj++) {
+            if (dripps_data[jj]["inInbox"]) {
+                receiveList.push(dripps_data[jj]);
+            } 
+            if (dripps_data[jj]["isSender"]) {
+                sendList.push(dripps_data[jj]);
+
+            }
+            articleDict[dripps_data[jj]['articleId']] = dripps_data[jj];
+        }
+
+        if (receiveList.length == 0 ) {
+            $(".noDrippsMain").attr("class", "noDrippsMain");
+            var templateSource = $("#items-template").html(),
+            template = Handlebars.compile(templateSource),
+            itemHTML = template({"buckets":[]});
+            $('#items').html(itemHTML);
+            $('.mainItemDiv').text('You have nothing in this bucket.');
+        }
+        else{
+            feed = receiveList;
+            window.selItem = feed[0];
+            var convo = [];
+            var convoId = feed[0]['conversationId'];
+            for (var i=0;i<conversation_data.length;i++) {
+                if (convoId == conversation_data[i]['conversationId']) {
+                    convo.push(conversation_data[i]);
                 }
             }
-
-            for (var ii = 0; ii < dripps_data.length; ii++) {
-                dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
-                if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
-                    dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mm a');
+            for (var ii = 0; ii < convo.length; ii++) {
+                if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
+                    convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mm a');
                 }
                 else {
-                    dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mm a');
+                    convo[ii]['timeString'] = convo[ii]['time'].format('dddd MMMM Do YYYY, h:mm a');
                 }
             }
 
-            sendList = [];
-            receiveList = [];
-            for (var jj = 0; jj < dripps_data.length; jj++) {
-                if (dripps_data[jj]["inInbox"]) {
-                    receiveList.push(dripps_data[jj]);
-                } 
-                if (dripps_data[jj]["isSender"]) {
-                    sendList.push(dripps_data[jj]);
+            var templateSource = $("#items-template").html(),
+            template = Handlebars.compile(templateSource),
+            itemHTML = template({"buckets":feed});
+            $('#items').html(itemHTML);
 
+            for (var ii = 0; ii < feed.length; ii++) {
+                if (feed[ii]['isRead']) {
+                    $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
                 }
-                articleDict[dripps_data[jj]['articleId']] = dripps_data[jj];
             }
+            console.log(makeUserNameList(window.selItem.recipientFriendIds));
+            var templateSource = $("#selDripp-template").html(),
+            messageListTemplate = Handlebars.compile(templateSource),
+            drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
+            $('#selDripp').html(drippsHTML);
 
-            if (receiveList.length == 0 ) {
-                $(".noDrippsMain").attr("class", "noDrippsMain");
-                var templateSource = $("#items-template").html(),
-                template = Handlebars.compile(templateSource),
-                itemHTML = template({"buckets":[]});
-                $('#items').html(itemHTML);
-                $('.mainItemDiv').text('You have nothing in this bucket.');
-            }
-            else{
-                feed = receiveList;
-                window.selItem = feed[0];
-                var convo = [];
-                var convoId = feed[0]['conversationId'];
-                for (var i=0;i<conversation_data.length;i++) {
-                    if (convoId == conversation_data[i]['conversationId']) {
-                        convo.push(conversation_data[i]);
-                    }
-                }
-                for (var ii = 0; ii < convo.length; ii++) {
-                    if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-                        convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mm a');
-                    }
-                    else {
-                        convo[ii]['timeString'] = convo[ii]['time'].format('dddd MMMM Do YYYY, h:mm a');
-                    }
-                }
-
-                var templateSource = $("#items-template").html(),
-                template = Handlebars.compile(templateSource),
-                itemHTML = template({"buckets":feed});
-                $('#items').html(itemHTML);
-
-                for (var ii = 0; ii < feed.length; ii++) {
-                    if (feed[ii]['isRead']) {
-                        $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
-                    }
-                }
-                console.log(makeUserNameList(window.selItem.recipientFriendIds));
-                var templateSource = $("#selDripp-template").html(),
-                messageListTemplate = Handlebars.compile(templateSource),
-                drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
-                $('#selDripp').html(drippsHTML);
-
-                $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
-                bindMessages(messageListTemplate, conversation_data);     
-                bindButtons();
-                window.setBucketLikes();
-            }
-
-            $('.selBucket').click(function(e){
-
-                $('#selItem').html("");
-                $('#selDripp').html("");
-
-
-                if ($(e.target).attr('bucketIdentifier') === 'dripps') {
-                    feed = receiveList;
-                    $(".selBucket").attr("class", "selBucket");
-                    $(e.target).attr("class", "selBucket selectedBucket");
-                }
-
-                if ($(e.target).attr('bucketIdentifier') === 'sent') {
-                    feed = sendList;
-                    $(".selBucket").attr("class", "selBucket");
-                    $(e.target).attr("class", "selBucket selectedBucket");
-                }
-
-                if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
-                    feed = readItLater_data;
-                    $(".selBucket").attr("class", "selBucket");
-                    $(e.target).attr("class", "selBucket selectedBucket");
-                }
-
-                templateSource = $("#items-template").html(),
-                template = Handlebars.compile(templateSource),
-                itemHTML = template({"buckets":feed});
-                
-                $('#items').html(itemHTML);
-                if (feed.length == 0 ) {
-                    $('.mainItemDiv').text('You have nothing in this bucket.');
-                } else {
-                    $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                }
-
-                if ( ($(e.target).attr('bucketIdentifier') === 'dripps') || ($(e.target).attr('bucketIdentifier') === 'sent')) {
-                
-                var templateSource = $("#selDripp-template").html(),
-                messageListTemplate = Handlebars.compile(templateSource);
-                    
-                    if (feed.length > 0) {
-                        window.selItem = feed[0];
-                        console.log(conversation_data);
-                        displayConvos(window.selItem, window.selItem["conversationId"], messageListTemplate, conversation_data);
-                        bindButtons();
-                    }
-
-                }
-
-                if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
-
-                    if (feed.length > 0) {
-                        window.selItem = feed[0];
-                    }
-
-                    var templateSource = $("#selItem-template").html(),
-                    messageListTemplate = Handlebars.compile(templateSource),
-                    readItLaterHTML = messageListTemplate({"selItem":window.selItem});
-                    $('#selDripp').html(readItLaterHTML);
-                }
-
-                bindMessages(messageListTemplate, conversation_data);
-            });
-
+            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
+            bindMessages(messageListTemplate, conversation_data);     
+            bindButtons();
             window.setBucketLikes();
-            $('#messageInput').elastic();
-        },
+        }
 
-        handlerData2:function(dripps_data, readItLater_data){
+        $('.selBucket').click(function(e){
+
+            $('#selItem').html("");
+            $('#selDripp').html("");
 
 
-            $.ajax({
-                // url:'json/articles.json',
-                url: window.address + 'conversations',
-                data: {user: window.myID},
-                method:'get',
-                success: function(data2){
-                    BUCKET_METHOD.compileBuckets(dripps_data, readItLater_data, data2);
+            if ($(e.target).attr('bucketIdentifier') === 'dripps') {
+                feed = receiveList;
+                $(".selBucket").attr("class", "selBucket");
+                $(e.target).attr("class", "selBucket selectedBucket");
+            }
+
+            if ($(e.target).attr('bucketIdentifier') === 'sent') {
+                feed = sendList;
+                $(".selBucket").attr("class", "selBucket");
+                $(e.target).attr("class", "selBucket selectedBucket");
+            }
+
+            if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
+                feed = readItLater_data;
+                $(".selBucket").attr("class", "selBucket");
+                $(e.target).attr("class", "selBucket selectedBucket");
+            }
+
+            templateSource = $("#items-template").html(),
+            template = Handlebars.compile(templateSource),
+            itemHTML = template({"buckets":feed});
+            
+            $('#items').html(itemHTML);
+            if (feed.length == 0 ) {
+                $('.mainItemDiv').text('You have nothing in this bucket.');
+            } else {
+                $(".noDrippsMain").attr("class", "noDrippsMain hide");
+            }
+
+            if ( ($(e.target).attr('bucketIdentifier') === 'dripps') || ($(e.target).attr('bucketIdentifier') === 'sent')) {
+            
+            var templateSource = $("#selDripp-template").html(),
+            messageListTemplate = Handlebars.compile(templateSource);
+                
+                if (feed.length > 0) {
+                    window.selItem = feed[0];
+                    console.log(conversation_data);
+                    displayConvos(window.selItem, window.selItem["conversationId"], messageListTemplate, conversation_data);
+                    bindButtons();
                 }
-            });
 
-        },
+            }
 
-        handlerData:function(dripps_data){
-            $.ajax({
-                // url:'json/articles.json',
-                url: window.address + 'buckets',
-                data: {user: window.myID},
-                method:'get',
-                success: function(data){
-                    BUCKET_METHOD.handlerData2(dripps_data, data);
+            if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
+
+                if (feed.length > 0) {
+                    window.selItem = feed[0];
                 }
-            });
 
-        },
+                var templateSource = $("#selItem-template").html(),
+                messageListTemplate = Handlebars.compile(templateSource),
+                readItLaterHTML = messageListTemplate({"selItem":window.selItem});
+                $('#selDripp').html(readItLaterHTML);
+            }
 
-        loadArticleData : function(){
- 
-            $.ajax({
-                // url:'json/articles.json',
-                url: window.address + 'dripps',
-                data: {user: window.myID},
-                method:'get',
-                success: function(data) {
-                    console.log(data);
-                    window.BUCKET_METHOD.handlerData(data.article);
-                    window.userNames = {};
-                    for (var jj = 0; jj < data.names.length; jj++) {
-                        window.userNames[data.names[jj].id] = data.names[jj]['fName'] + " " + data.names[jj]['lName'];
-                    }
+            bindMessages(messageListTemplate, conversation_data);
+        });
+
+        window.setBucketLikes();
+        $('#messageInput').elastic();
+    },
+
+    handlerData2:function(dripps_data, readItLater_data){
+
+
+        $.ajax({
+            // url:'json/articles.json',
+            url: window.address + 'conversations',
+            data: {user: window.myID},
+            method:'get',
+            success: function(data2){
+                BUCKET_METHOD.compileBuckets(dripps_data, readItLater_data, data2);
+            }
+        });
+
+    },
+
+    handlerData:function(dripps_data){
+        $.ajax({
+            // url:'json/articles.json',
+            url: window.address + 'buckets',
+            data: {user: window.myID},
+            method:'get',
+            success: function(data){
+                BUCKET_METHOD.handlerData2(dripps_data, data);
+            }
+        });
+
+    },
+
+    loadArticleData : function(){
+
+        $.ajax({
+            // url:'json/articles.json',
+            url: window.address + 'dripps',
+            data: {user: window.myID},
+            method:'get',
+            success: function(data) {
+                console.log(data);
+                window.BUCKET_METHOD.handlerData(data.article);
+                window.userNames = {};
+                for (var jj = 0; jj < data.names.length; jj++) {
+                    window.userNames[data.names[jj].id] = data.names[jj]['fName'] + " " + data.names[jj]['lName'];
                 }
-            });
-        },
+            }
+        });
+    },
 };
 
 function bindMessages(template, conversation_data){

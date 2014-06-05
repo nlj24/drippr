@@ -391,6 +391,7 @@ app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
     var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId LEFT JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
+    console.log(members_info_query);
     connection.query(members_info_query, function(err,rows,fields) {
         if (err) throw err;
         res.send(rows);
