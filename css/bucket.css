@@ -294,3 +294,13 @@ body {
   border-bottom: 2px solid white;
   margin-top: 10px; 
 }
+
+#groupContainer {
+  overflow: scroll;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.nameGroupsStyle {
+  font-size: 18px;
+}
