@@ -3,10 +3,6 @@ window.GROUP_METHOD = {
     groupData:function(res) {
         var data = res.data;
         var me = res.me;
-        console.log("data");
-        console.log(data);
-        console.log("myId");
-        console.log(me);
         var my_members_dict = {};
         window.groupList = [];
         var other_members_dict = {};
@@ -18,6 +14,7 @@ window.GROUP_METHOD = {
             if(data[jj].creatorId == me) { // I'm the creator
                 if (!(my_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);
+                    window.groupListDict[data[jj].name] = data[jj].id;
                     my_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
@@ -30,6 +27,7 @@ window.GROUP_METHOD = {
 
                 if (!(other_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);
+                    window.groupListDict[data[jj].name] = data[jj].id;
                     other_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
