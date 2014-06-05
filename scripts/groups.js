@@ -33,14 +33,20 @@ window.GROUP_METHOD = {
         }
 
         $(".deleteGroup").click(function(e){
+            console.log('1');
             var groupId = $(e.target).attr('group_id');
-            $("#group_" + groupId).attr("class", "hide");
-            $.ajax({
-                url: window.address + 'deleteGroup',
-                data: {groupId: groupId},
-                method:'get',
-                success: function(data){return;}
-            });
+            if (groupId == null) {
+                alert("cunt");
+            }
+            else {
+                $("#group_" + groupId).attr("class", "hide");
+                $.ajax({
+                    url: window.address + 'deleteGroup',
+                    data: {groupId: groupId},
+                    method:'get',
+                    success: function(data){return;}
+                });
+            }
         });
     },
     
