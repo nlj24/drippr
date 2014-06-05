@@ -387,11 +387,11 @@ app.get("/deleteGroup", function(req, res) {
 app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
-    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId INNER JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
+    var members_info_query = "SELECT Groups.id, Groups.creatorId, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId INNER JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
     connection.query(members_info_query, function(err,rows,fields) {
         console.log(rows);
         if (err) throw err;
-        res.send(rows);
+        res.send({data: rows, me: userId});
     });
 });
 

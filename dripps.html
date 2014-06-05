@@ -496,7 +496,7 @@
 		<div id="groups_placeholder">
 		</div>
 	</div>
-		<script id="groups-template" type="text/x-handlebars-template">
+		<script id="my-groups-template" type="text/x-handlebars-template">
 			<div class = "row">
 				<div class = "row col-xs-6">
 					<div class = "col-xs-1">
@@ -508,8 +508,46 @@
 				<div class = "col-xs-6">
 				</div>
 			</div>
-			<div id = "groupContainer">		
-				{{#each groups}}
+			<div class = "groupContainer">		
+				{{#each my_groups}}
+					<div class = "row" id = group_{{this.id}}>
+						<div class = "col-xs-1">
+						</div>
+						<div class = "row col-xs-10">
+							<div class = "groupRowStyle">						
+								<div class = "col-xs-2 nameGroupsStyle">{{this.name}}</div>
+								<div class = "col-xs-8">
+									{{#each this.list}}
+										<div class="personName {{userId}}">
+											{{this.name}}
+										</div>
+									{{/each}}
+								</div>
+								<div class = "col-xs-2 deleteGroup" group_id={{this.id}}>
+									delete
+								</div>
+							</div>
+						</div>
+						<div class = "col-xs-1">
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</script>
+		<script id="other-groups-template" type="text/x-handlebars-template">
+			<div class = "row">
+				<div class = "row col-xs-6">
+					<div class = "col-xs-1">
+					</div>
+					<div class = "col-xs-11" id = "createGroupSyle">
+						groups friends made
+					</div>
+				</div>
+				<div class = "col-xs-6">
+				</div>
+			</div>
+			<div class = "groupContainer">		
+				{{#each other_groups}}
 					<div class = "row" id = group_{{this.id}}>
 						<div class = "col-xs-1">
 						</div>

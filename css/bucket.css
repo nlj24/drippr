@@ -297,7 +297,7 @@ body {
   padding-top: 10px;
 }
 
-#groupContainer {
+.groupContainer {
   overflow: scroll;
   height: 300px;
   margin-top: 20px;
