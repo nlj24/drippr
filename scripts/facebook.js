@@ -225,7 +225,7 @@ $(".arrow").css("margin-top",""+ (($( window ).height()-90)/2) - 90);
 				                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
 				                	//how to come up with id
-				                    $("#groupContainer").append("<div class ='row' id = " + 'group_{{this.id}}' + "><div class = 'col-xs-1'></div><div class ='row col-xs-10 groupRowStyle'><div class = 'col-xs-2'>" + groupName +"</div><div class ='col-xs-8'>" + membersString + "</div><div class = 'col-xs-2 deleteGroup'>delete group</div></div><div class = 'col-xs-1'></div></div>");
+				                    $("#my_groupContainer").append("<div class ='row' id = " + 'group_{{this.id}}' + "><div class = 'col-xs-1'></div><div class ='row col-xs-10 groupRowStyle'><div class = 'col-xs-2'>" + groupName +"</div><div class ='col-xs-8'>" + membersString + "</div><div class = 'col-xs-2 deleteGroup'>delete group</div></div><div class = 'col-xs-1'></div></div>");
 
 				           //          var handler3 = $(".deleteGroup").click(function(e){
 				           //          	console.log('2');

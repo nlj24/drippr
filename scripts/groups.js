@@ -8,9 +8,8 @@ window.GROUP_METHOD = {
         console.log("myId");
         console.log(me);
         var my_members_dict = {};
-        window.my_groupList = [];
+        window.groupList = [];
         var other_members_dict = {};
-        window.other_groupList = [];
 
         window.groupListDict = {};
 
@@ -18,6 +17,7 @@ window.GROUP_METHOD = {
 
             if(data[jj].creatorId == me) { // I'm the creator
                 if (!(my_members_dict[data[jj].id])) {
+                    window.groupList.push(data[jj].name);
                     my_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
@@ -29,6 +29,7 @@ window.GROUP_METHOD = {
             } else { // I'm just a member
 
                 if (!(other_members_dict[data[jj].id])) {
+                    window.groupList.push(data[jj].name);
                     other_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
@@ -46,14 +47,9 @@ window.GROUP_METHOD = {
         console.log("other group dict...");
         console.log(other_members_dict);
 
-        var templateSource = $("#my-groups-template").html();
+        var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
-        groupHTML = template({"my_groups":my_members_dict});
-        $('#groups_placeholder').html(groupHTML);
-
-        var templateSource = $("#other-groups-template").html();
-        template = Handlebars.compile(templateSource);
-        groupHTML = template({"other_groups":other_members_dict});
+        groupHTML = template({"my_groups":my_members_dict, "other_groups":other_members_dict});
         $('#groups_placeholder').html(groupHTML);
 
         for (var ii = 0; ii < data.length; ii++) {
