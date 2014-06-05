@@ -127,7 +127,7 @@ window.setDrippLikes = function correctLikes() {
 }
 
 window.resetFB = function fbReset() {
-	window.chosenFriends = {};
-	window.ids=[];
+	window.drippsChosenFriends = {};
+	window.drippsIds=[];
 	$('#chosen').empty();
 }
