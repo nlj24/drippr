@@ -1,7 +1,6 @@
 window.GROUP_METHOD = {
     
     groupData:function(data) {
-        console.log(data);
         var members_dict = {};
         window.groupList = [];
         window.groupListDict = {};
