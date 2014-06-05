@@ -52,7 +52,8 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 						// login status of the person. In this case, we're handling the situation where they 
 						// have logged in to the app.
 						window.chosenFriends = {}; //don't tell Ashwin about this!!
-						window.ids = [];
+						window.drippsIds = [];
+						window.groupsIds = [];
 						window.myID = response.authResponse.userID;
 
 						//flatten out the friend list to just get their ids
@@ -102,17 +103,17 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 									} 
 
 									var add_to_dom = false;
-									if (!(friend.id in window.chosenFriends)) {
-										window.ids.push(friend.id);
+									if (!(friend.id in window.drippsChosenFriends)) {
+										window.drippsIds.push(friend.id);
 										add_to_dom = true;
 									}
 									window.chosenFriends[friend.id] = friend;
 
 									if(add_to_dom) {
 										if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-											$("#chosen").append("<div class='red_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+											$("#chosen").append("<div class='red_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
 										} else {
-											$("#chosen").append("<div class='blue_friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+											$("#chosen").append("<div class='blue_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
 										}
 									}
 
@@ -121,8 +122,8 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 				                    var handler2 = $('.rm').click(function(e) {
 				                        var id = $(e.target).attr('id');
-				                        delete window.chosenFriends[id];
-				                        window.ids.splice(window.ids.indexOf(id),1);
+				                        delete window.drippsChosenFriends[id];
+				                        window.drippsIds.splice(window.drippsIds.indexOf(id),1);
 										$("#"+id).remove();
 				                    });                        
 								}
@@ -154,31 +155,31 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 									var add_to_dom = false;
 									if (!(friend.id in window.chosenFriends)) {
-										window.ids.push(friend.id);
+										window.groupsIds.push(friend.id);
 										add_to_dom = true;
 									}
-									console.log(window.ids);
+									console.log(window.groupsIds);
 									window.chosenFriends[friend.id] = friend;
 									console.log(chosenFriends);
 
-									console.log(window.ids);
+									console.log(window.groupsIds);
 									if(add_to_dom) {
 										if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-											$("#chosenCont").append("<div class='red_friends' id='" + window.ids[(window.ids.length-1)] + "'>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+											$("#chosenCont").append("<div class='red_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>" + window.chosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
 										} else {
-											$("#chosenCont").append("<div class='blue_friends' id='" + window.ids[(window.ids.length-1)] + "'>"+ window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " " + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+											$("#chosenCont").append("<div class='blue_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>"+ window.chosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
 										}
 									}
-									console.log(window.ids);
+									console.log(window.groupsIds);
 									$(".rm" ).unbind("click", handler2);
 				    				$(".rm").bind("click", handler2);
 				                    var handler2 = $('.rm').click(function(e) {
 				                        var id = $(e.target).attr('id');
 				                        delete window.chosenFriends[id];
-				                        window.ids.splice(window.ids.indexOf(id),1);
+				                        window.groupsIds.splice(window.groupsIds.indexOf(id),1);
 										$("#"+id).remove();
 				                    });
-				                    console.log(window.ids);                        
+				                    console.log(window.groupsIds);                        
 								}
 								
 							});
@@ -188,7 +189,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 								if (ids.length > 0) {
 									$.ajax({
 						                url: window.address + 'sendDripp',
-						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, articleId: window.curArticle},
+						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.drippsIds, articleId: window.curArticle},
 						                type:'get'
 						            });
 								}
@@ -197,14 +198,14 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 									$(".success").attr("class", "success");
 								}
 					            window.chosenFriends = {};
-								window.ids=[];
+								window.drippsIds=[];
 								$('#chosen').empty();
 							});
 
 							$("#groupBtn").click(function(){
-								console.log(window.ids);
+								console.log(window.groupsIds);
 								console.log($('#groupName').val());
-				                if ((window.ids.length) && (($('#groupName').val()!= ""))) {
+				                if ((window.groupsIds.length) && (($('#groupName').val()!= ""))) {
 				                	var groupName = $('#groupName').val();
 
 				                	for(var kk = 0; kk < window.groupList.length; kk++){
@@ -213,10 +214,10 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 				                			return;
 				                		}
 				                	}
-									window.ids.push(window.myID);
+									window.groupsIds.push(window.myID);
 				                    $.ajax({
 				                        url: window.address + 'createGroup',
-				                        data: {groupName: groupName, members: window.ids, creatorId: window.myID},
+				                        data: {groupName: groupName, members: window.groupsIds, creatorId: window.myID},
 				                        type:'get'
 				                	});
 
@@ -246,7 +247,7 @@ $("#dripps").css("height",""+ ($( window ).height()-90));
 
 				                    $('#chosenCont').html('');
 									$('#groupName').val('');
-				                	window.ids = [];
+				                	window.groupsIds = [];
 				                }
 			                	else {
 			                		alert("must add some members and have group name!!!");
