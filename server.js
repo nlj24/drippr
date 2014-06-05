@@ -38,7 +38,6 @@ app.get("/articles/:category", function(req, res) {
     var lastId = req.query.lastId;
 
     var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND Articles.id >" + lastId + " AND category = '"+category +"' AND date>NOW() - INTERVAL 3 DAY LIMIT " + numArticles;
-console.log(article_query);
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
     
@@ -119,8 +118,6 @@ app.get("/dripps", function(req, res){
 app.get("/isRead", function(req, res){
     var drippId = req.query.drippId;
     var update_isRead = "UPDATE Dripps SET unreadComments = 0, unreadDripps = 0 WHERE id =" + drippId;
-    console.log(update_isRead);
-    console.log('cunt');
     connection.query(update_isRead, function(err,rows,fields) {
         if (err) throw err;          
         res.send(200);
@@ -390,9 +387,9 @@ app.get("/deleteGroup", function(req, res) {
 app.get("/groups", function(req, res) {
     var userId = req.query.userId;
 
-    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId LEFT JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
-    console.log(members_info_query);
+    var members_info_query = "SELECT Groups.id, Groups.name, Groups.userId, fName, lName, fullName, isReal from Groups INNER JOIN Users on Users.id=Groups.userId INNER JOIN (SELECT * FROM Groups WHERE Groups.userId="+userId+") AS g1 ON g1.id = Groups.id";
     connection.query(members_info_query, function(err,rows,fields) {
+        console.log(rows);
         if (err) throw err;
         res.send(rows);
     });
@@ -409,7 +406,6 @@ app.get("/sendDripp/new", function(req, res) {
     var category = req.query.category;
 
     var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"',NOW(), 0, 0, 0)";
-    console.log(add_article_query);
     connection.query(add_article_query, function(err,result) {
         if (err) throw err;
         var fromUserId = req.query.fromUserId;
