@@ -24,23 +24,36 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					// move <ul> left
 					
 
+					this.ul.style.left = '-' + (100 * index) + '%';
+
+					this.currentIndex = index;
+
+					window.curArticle = this.li[this.currentIndex].id;
+                	window.positions[window.curCategory] = index;
+
+
+                	window.setDrippLikes();
+		            
+		           	window.resetFB();
+
 					if (this.li.length  - index < 10) {
+						
 
-
-						this.ul.style.left = '-' + (100 * index) + '%';
-
-
-	                	window.setDrippLikes();
-			            
-			           	window.resetFB();
-
-
-						window.curArticle = this.li[index].id;
-
+						console.log("index: " + index)
 						window.positions[window.curCategory] = Math.min(10, index);
 
-						var indexInArray = window.articlesData[window.curCategory].indexOf(window.curArticle);
+						console.log("position :" +window.positions[window.curCategory]);
+						var indexInArray = index;
 
+						for (var ii = index; ii < window.articlesData[window.curCategory].length; ii++) {
+							if(window.articlesData[window.curCategory][ii].id == window.curArticle){
+								indexInArray = ii;
+								break;
+							}	
+						}
+						
+						console.log("index in array: "+ indexInArray);
+						
 						var refreshTemplate = function(){
 							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
@@ -53,32 +66,19 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 							if (!(window.callingback[window.curCategory])) {
-								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle, refreshTemplate);
+								// window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle, refreshTemplate);
 								
 							}
 
 						}
 						else{
-							refreshTemplate();
+							// refreshTemplate();
 						}
 
 
 
 
-					} else{
-						this.ul.style.left = '-' + (100 * index) + '%';
-
-						this.currentIndex = index;
-
-						window.curArticle = this.li[this.currentIndex].id;
-	                	window.positions[window.curCategory] = index;
-
-
-	                	window.setDrippLikes();
-			            
-			           	window.resetFB();
-						
-					}
+					} 
 
 
 
