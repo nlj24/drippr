@@ -341,7 +341,7 @@ app.get("/sendConvo", function(req, res) {
     var userId = req.query.userId;
     var content = req.query.content;
 
-    var set_convo_query = 'INSERT INTO Conversations (conversationId, userId, time, content) VALUES (' +conversationId + ',' +  userId + ", NOW(),'" + content + "')";
+    var set_convo_query = 'INSERT INTO Conversations (conversationId, userId, time, content) VALUES (' +conversationId + ',' +  userId + ", NOW(),\"" + content + "\")";
     connection.query(set_convo_query, function(err,rows,fields) {
         if (err) throw err;
         var update_dripp_query = "UPDATE Dripps SET unreadComments = 1, inInbox = 1 WHERE conversationId = " + conversationId + " AND recipientUserId<>" + userId;
@@ -365,7 +365,8 @@ app.get("/createGroup", function(req, res) {
         var next_id = parseInt(rows[0]["id"]) ? parseInt(rows[0]["id"]) + 1 : 1;
 
         for(var ii=0; ii < members.length; ii++) {    
-            var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES ('" + groupName + "','" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
+            var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES (\"" + groupName + "\",'" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
+            console.log(create_group);
             connection.query(create_group, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);

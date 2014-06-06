@@ -13,9 +13,8 @@ FB.Event.subscribe("auth.logout", function() {
 	window.location = 'http://drippr.me';
 });
 
-$("#dripps").css("height",""+ ($( window ).height()-90));
-// $(".arrowDiv").css("height",""+ ($( window ).height()-90));
-$(".arrow").css("margin-top",""+ (($( window ).height()-90)/2) - 90);
+$("#dripps").css("height",""+ ($(window).height()-91));
+$(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 // window.connect = false;
 //check if we're logged in
    //display a modal or something?
@@ -207,6 +206,13 @@ $(".arrow").css("margin-top",""+ (($( window ).height()-90)/2) - 90);
 				                			return;
 				                		}
 				                	}
+
+				                	for (var i = 0; i < groupName.length; i++) {
+				                		if(groupName[i] == "\"") {
+											var groupName = groupName.substring(0, i) + "'" + groupName.substring(i+1);
+				                		}
+				                	}
+
 									window.groupsIds.push(window.myID);
 				                    $.ajax({
 				                        url: window.address + 'createGroup',

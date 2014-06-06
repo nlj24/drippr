@@ -313,5 +313,7 @@ body {
   font-size: 18px;
 }
 
-.groupRowStyle:nth-of-type(odd) { background:green; }
+.groupRowStyle:nth-of-type(odd) { 
+  background:azure;
+}
 /*#groupContainer .groupRowStyle:nth-child(even) { background-color:#fff; }*/

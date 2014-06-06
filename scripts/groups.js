@@ -75,6 +75,15 @@ window.GROUP_METHOD = {
                 });
             }
         });
+
+         $(function() {
+        var availableTags = window.groupList;
+        console.log(window.groupList);
+        console.log(availableTags); 
+        $( "#tags" ).autocomplete({
+            source: availableTags
+        });
+    });
     },
     
     loadGroups:function(){$.ajax({

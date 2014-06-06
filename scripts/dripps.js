@@ -270,12 +270,7 @@ window.bindDripps = function() {
         };
     });
     
-    $(function() {
-        var availableTags = window.groupList;
-        $( "#tags" ).autocomplete({
-            source: availableTags
-        });
-    });
+
 
     $(".sendGroup").click(function(){            
         var groupSel = $('#tags').val();
