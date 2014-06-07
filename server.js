@@ -29,8 +29,6 @@ var connection;
     });
 });
 
-
-
 app.get("/articles/:category", function(req, res) {
     var userId = req.query.user;
     var numArticles = req.query.numArticles;
@@ -203,9 +201,6 @@ app.get("/add_shadow_user",  function(req, res){
     });
 });
 
-
-
-
 /* -----------------------------------------------*/
 app.get("/likes", function(req, res) {
     var userId = req.param('user');
@@ -335,7 +330,6 @@ app.get("/sendDripp", function(req, res) {
     });
 });
 
-
 app.get("/sendConvo", function(req, res) {
     var conversationId = req.query.conversationId;
     var userId = req.query.userId;
@@ -348,10 +342,7 @@ app.get("/sendConvo", function(req, res) {
         connection.query(update_dripp_query, function(err, rows, fields){
             res.send(200);
         });
-
     });
-
-
 });
 
 app.get("/createGroup", function(req, res) {
@@ -380,6 +371,18 @@ app.get("/deleteGroup", function(req, res) {
 
     var delete_group = 'DELETE FROM Groups WHERE id =' + groupId;
     connection.query(delete_group, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(200);
+    });
+});
+
+app.get("/leaveGroup", function(req, res) {
+    var groupId = req.query.groupId;
+    var myId = req.query.myId;
+
+    var leave_group = 'DELETE FROM Groups WHERE id =' + groupId + " AND userId = '" + myId + "'";
+    console.log(leave_group);
+    connection.query(leave_group, function(err,rows,fields) {
         if (err) throw err;
         res.send(200);
     });
@@ -444,8 +447,6 @@ app.get("/sendDripp/new", function(req, res) {
 
         res.send(201);
     });
-
-
 });
 
 
@@ -468,11 +469,9 @@ app.get("/readItLater/new", function(req, res) {
         connection.query(set_read_query, function(err,rows,fields) {
             if (err) throw err;
             res.send(200);
-        });
-            
+        });    
         res.send(201);
     });
-
 });
 
 

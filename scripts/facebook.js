@@ -197,7 +197,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 							});
 
 							$("#groupBtn").click(function(){
-				                if ((window.groupsIds.length) && (($('#groupName').val()!= ""))) {
+				                if ((window.groupsIds.length > 1) && (($('#groupName').val()!= ""))) {
 				                	var groupName = $('#groupName').val();
 
 				                	for(var kk = 0; kk < window.groupList.length; kk++){
@@ -231,7 +231,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
 				                	//how to come up with id
-				                    $("#my_groupContainer").append("<div class ='row' id = " + 'group_{{this.id}}' + "><div class = 'col-xs-1'></div><div class ='row col-xs-10 groupRowStyle'><div class = 'col-xs-2'>" + groupName +"</div><div class ='col-xs-8'>" + membersString + "</div><div class = 'col-xs-2 deleteGroup'>delete group</div></div><div class = 'col-xs-1'></div></div>");
+				                    $("#my_group_container").append("<div class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2 deleteGroup'>delete</div></div>");
 
 				           //          var handler3 = $(".deleteGroup").click(function(e){
 				           //          	console.log('2');

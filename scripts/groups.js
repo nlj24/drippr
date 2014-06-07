@@ -40,11 +40,6 @@ window.GROUP_METHOD = {
 
         }
 
-        console.log("my group dict...");
-        console.log(my_members_dict);
-        console.log("other group dict...");
-        console.log(other_members_dict);
-
         var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":my_members_dict, "other_groups":other_members_dict});
@@ -60,13 +55,21 @@ window.GROUP_METHOD = {
         }
 
         $(".deleteGroup").click(function(e){
-            console.log('1');
             var groupId = $(e.target).attr('group_id');
             if (groupId == null) {
-                alert("cunt");
+                alert("doesn't work correctly");
             }
             else {
-                $("#group_" + groupId).attr("class", "hide");
+                var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
+                $("[group_id=" + "group_" + groupId + "]").html('Your group was deleted.');
+                $("[group_id=" + "group_" + groupId + "]").height(groupRowHeight);
+                setTimeout(function() {
+                    $("[group_id=" + "group_" + groupId + "]").fadeOut(400, function() {
+                        $("[group_id=" + "group_" + groupId + "]").remove();
+                        $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
+                        $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
+                    });
+                }, 5000);
                 $.ajax({
                     url: window.address + 'deleteGroup',
                     data: {groupId: groupId},
@@ -76,10 +79,28 @@ window.GROUP_METHOD = {
             }
         });
 
+        $(".leaveGroup").click(function(e){
+            var groupId = $(e.target).attr('group_id'); 
+            var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
+            $("[group_id=" + "group_" + groupId + "]").html('You have left the group.');
+            $("[group_id=" + "group_" + groupId + "]").height(groupRowHeight);
+            setTimeout(function() {
+                $("[group_id=" + "group_" + groupId + "]").fadeOut(400, function() {
+                    $("[group_id=" + "group_" + groupId + "]").remove();
+                    $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
+                    $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
+                });
+            }, 5000);
+            $.ajax({
+                url: window.address + 'leaveGroup',
+                data: {groupId: groupId, myId: window.myID},
+                method:'get',
+                success: function(data){return;}
+            });
+        });        
+
          $(function() {
         var availableTags = window.groupList;
-        console.log(window.groupList);
-        console.log(availableTags); 
         $( "#tags" ).autocomplete({
             source: availableTags
         });
