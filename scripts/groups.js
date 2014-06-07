@@ -44,6 +44,8 @@ window.GROUP_METHOD = {
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":my_members_dict, "other_groups":other_members_dict});
         $('#groups_placeholder').html(groupHTML);
+        $("#my_group_container").height($(window).height()-430);
+        $("#other_group_container").height($(window).height()-430);
 
         for (var ii = 0; ii < data.length; ii++) {
             if (!data[ii]["isReal"]) {
@@ -61,7 +63,7 @@ window.GROUP_METHOD = {
             }
             else {
                 var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
-                $("[group_id=" + "group_" + groupId + "]").html('Your group was deleted.');
+                $("[group_id=" + "group_" + groupId + "]").html("<div class = 'groupDeletionStyle'> Your group was deleted.</div>");
                 $("[group_id=" + "group_" + groupId + "]").height(groupRowHeight);
                 setTimeout(function() {
                     $("[group_id=" + "group_" + groupId + "]").fadeOut(400, function() {
@@ -69,7 +71,7 @@ window.GROUP_METHOD = {
                         $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
                         $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
                     });
-                }, 5000);
+                }, 3500);
                 $.ajax({
                     url: window.address + 'deleteGroup',
                     data: {groupId: groupId},
@@ -82,7 +84,7 @@ window.GROUP_METHOD = {
         $(".leaveGroup").click(function(e){
             var groupId = $(e.target).attr('group_id'); 
             var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
-            $("[group_id=" + "group_" + groupId + "]").html('You have left the group.');
+            $("[group_id=" + "group_" + groupId + "]").html("<div class = 'groupDeletionStyle'> You have left the group.</div>");
             $("[group_id=" + "group_" + groupId + "]").height(groupRowHeight);
             setTimeout(function() {
                 $("[group_id=" + "group_" + groupId + "]").fadeOut(400, function() {

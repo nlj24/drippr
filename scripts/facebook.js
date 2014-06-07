@@ -15,7 +15,7 @@ FB.Event.subscribe("auth.logout", function() {
 
 $("#dripps").css("height",""+ ($(window).height()-91));
 $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
-// window.connect = false;
+
 //check if we're logged in
    //display a modal or something?
    //remove it if they do login with the subscribe function below 
@@ -231,25 +231,30 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
 				                	//how to come up with id
-				                    $("#my_group_container").append("<div class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2 deleteGroup'>delete</div></div>");
+				                    $("#my_group_container").append("<div class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2 deleteGroup2'>delete</div></div>");
 
-				           //          var handler3 = $(".deleteGroup").click(function(e){
-				           //          	console.log('2');
-							        //     var groupId = $(e.target).attr('group_id');
-							        //     if (groupId == null) {
-							        //         alert("cunt");
-							        //     }
-							        //     else {
-							        //         $("#group_" + groupId).attr("class", "hide");
-							        //         $.ajax({
-							        //             url: window.address + 'deleteGroup',
-							        //             data: {groupId: groupId},
-							        //             method:'get',
-							        //             success: function(data){return;}
-							        //         });
-							        //     }
-							        // });
-							        // $(".deleteGroup").unbind("click", handler3);
+				                    $(".deleteGroup2").unbind("click", handler3);
+				                    
+				                    var handler3 = $(".deleteGroup2").click(function(e){
+							            var groupRow = ($(e.target).parents(".groupRowStyle"));
+							            groupName = groupRow.find(".nameGroupsStyle").text();						                
+							            var groupRowHeight = $(groupRow).height();
+						                $(groupRow).html("<div class = 'groupDeletionStyle'> Your group was deleted.</div>");
+						                $(groupRow).height(groupRowHeight);
+						                setTimeout(function() {
+						                    $(groupRow).fadeOut(400, function() {
+						                        $(groupRow).remove();
+						                        $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
+						                        $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
+						                    });
+						                }, 3500);
+						                $.ajax({
+						                    url: window.address + 'deleteNewGroup',
+						                    data: {creatorId: window.myID, groupName: groupName},
+						                    method:'get',
+						                    success: function(data){return;}
+						                });
+							        });
 
 				                    $('#chosenCont').html('');
 									$('#groupName').val('');
@@ -266,6 +271,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 			            }
 						window.GROUP_METHOD.loadGroups();
 						window.ARTICLE_METHOD.loadArticleData();
+						window.BUCKET_METHOD.loadArticleData();
 						window.bindDripps();
 						window.bindBucket();
 			            

@@ -66,8 +66,14 @@ window.ARTICLE_METHOD ={
     },
     loadArticleDataCategory : function(category, lastId, callback){
         window.callingback[category] = true;
+        var url;
+        if (category == "All") {
+            url = window.address + 'articles';
+        } else{
+             url = window.address + 'articles/' + category;
+        }
         $.ajax({
-            url: window.address + 'articles/' + category,
+            url: url,
             data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
             method:'get',
             success:function(data){
@@ -119,6 +125,7 @@ window.bindDripps = function() {
         $("#drippsHeader").attr("class", "col-md-5 headingPad");
         $("#groups").attr("class", "container-fluid hide");
         $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+        window.BUCKET_METHOD.loadArticleData();
     });
 
     $(".bucketsBub").click(function(){
@@ -139,6 +146,7 @@ window.bindDripps = function() {
         $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
         $("#groups").attr("class", "container-fluid");
         $("#groupsHeader").attr("class", "col-md-5 headingPad");
+        window.BUCKET_METHOD.loadArticleData();
     });
     
     $('.categ').css("background", "white");
@@ -162,13 +170,12 @@ window.bindDripps = function() {
             
         }
 
+        window.curCategory = $(e.target).parents('.categ').attr("category");
+
         var templateSource = $("#article-template").html(), 
         template = Handlebars.compile(templateSource),
         articleHTML = template({"articles":feed});
         $('#articles').html(articleHTML);
-
-
-        window.curCategory = $(e.target).parents('.categ').attr("category");
 
         $('.categ').css("background", "white");
         $('.categ').css("color", "#6D6E70");

@@ -291,22 +291,21 @@ body {
 }
 
 .groupRowStyle {
-  border-bottom: 1px solid #A3DCFF;
   margin-top: 10px;
   margin: 0px;
   padding-top: 10px;
 }
 
-#my_groupContainer {
+#my_group_container {
   overflow: scroll;
-  height: 300px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-#other_groupContainer {
+#other_group_container {
   overflow: scroll;
-  height: 300px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .nameGroupsStyle {
@@ -317,3 +316,8 @@ body {
   background:azure;
 }
 /*#groupContainer .groupRowStyle:nth-child(even) { background-color:#fff; }*/
+
+.groupDeletionStyle {
+  text-align: center;
+  font-size: 30px;
+}

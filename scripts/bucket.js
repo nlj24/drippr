@@ -4,11 +4,21 @@ var feed;
 
 window.BUCKET_METHOD = {
     compileBuckets:function(dripps_data, readItLater_data, conversation_data){
+        window.notifications = 0;
+        for (var ii = 0; ii <dripps_data.length; ii++) {
+            if (dripps_data[ii]['unreadComments'] || dripps_data[ii]['unreadDripps']) {
+                window.notifications +=1;
+            }
+        }
+        if (window.notifications) {
+            $(".notify").text(window.notifications);
+            $(".notify").parents(".headBub").css("background-color", "red");
+        }
+
         articleDict = {};
         for (var i =0; i < conversation_data.length;i++) {
             conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
         };
-        console.log(conversation_data);
         window.conversation_data = conversation_data;
 
         window.setBucketLikes = function correctLikes() {
@@ -108,7 +118,6 @@ window.BUCKET_METHOD = {
                     $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
                 }
             }
-            console.log(makeUserNameList(window.selItem.recipientFriendIds));
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource),
             drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
@@ -186,6 +195,10 @@ window.BUCKET_METHOD = {
 
         window.setBucketLikes();
         $('#messageInput').elastic();
+        $(".dripp2").click(function(){
+            $(".showForm").attr("class", "showForm");
+            $(".success").attr("class", "success hide");
+        });
     },
 
     handlerData2:function(dripps_data, readItLater_data){
@@ -224,7 +237,6 @@ window.BUCKET_METHOD = {
             data: {user: window.myID},
             method:'get',
             success: function(data) {
-                console.log(data);
                 window.BUCKET_METHOD.handlerData(data.article);
                 window.userNames = {};
                 for (var jj = 0; jj < data.names.length; jj++) {

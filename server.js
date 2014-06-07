@@ -8,7 +8,7 @@ var connection;
  app.get("/articles", function(req, res) {
     var userId = req.query.user;
     var numArticles = req.query.numArticles;
-    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND date>NOW() - INTERVAL 5 DAY LIMIT " + numArticles;
+    var article_query = "SELECT DISTINCT headline, imgUrl, url, source, category, Articles.id, date, numLikes, numDislikes, l1.userId AS l_user, d1.userId AS d_user, b1.userId as b_user FROM Articles LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId ="+userId+ ") AS l1 ON l1.articleId = Articles.id LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId = "+userId+ ") AS d1 ON d1.articleId = Articles.id LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE collected=1 AND date>NOW() - INTERVAL 7 DAY LIMIT " + numArticles;
 
     connection.query(article_query, function(err,rows,fields) {
         if(err) throw err;
@@ -312,8 +312,8 @@ app.get("/sendDripp", function(req, res) {
         }
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
-            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+            set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+            console.log(set_send_query);
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
             });   
@@ -371,6 +371,17 @@ app.get("/deleteGroup", function(req, res) {
 
     var delete_group = 'DELETE FROM Groups WHERE id =' + groupId;
     connection.query(delete_group, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(200);
+    });
+});
+
+app.get("/deleteNewGroup", function(req, res) {
+    var creatorId = req.query.creatorId;
+    var groupName = req.query.groupName;
+
+    var delete_new_group = "DELETE FROM Groups WHERE name ='" + groupName + "' AND creatorId ='" + creatorId + "'";
+    connection.query(delete_new_group, function(err,rows,fields) {
         if (err) throw err;
         res.send(200);
     });
