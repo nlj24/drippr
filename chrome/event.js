@@ -18,7 +18,7 @@ function getCurTab() {
         function (tabArray) { 
             var tab_id = tabArray[0].id;
             // 'the jquery'
-            chrome.tabs.executeScript(tab_id, { file: "jquery.js" }, function() {
+            chrome.tabs.executeScript(tab_id, { file: "jquery-2.1.1.min.js" }, function() {
                 //retrieve current url
                 injectedMethod(tab_id, 'getUrl', function(response) {
                     var dict = response.data;
@@ -33,7 +33,7 @@ function getCurTab() {
                         function (tabArray) { 
                             var new_tab_id = tabArray[0].id;
                             // 'the jquery'
-                            chrome.tabs.executeScript(new_tab_id, { file: "jquery.js" }, function() {
+                            chrome.tabs.executeScript(new_tab_id, { file: "jquery-2.1.1.min.js" }, function() {
                                 //pass a variable
                                 chrome.tabs.executeScript(new_tab_id, {code: 'var config =' + JSON.stringify(dict)}, function() {
                                     //retrieve current url
