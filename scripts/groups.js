@@ -101,12 +101,12 @@ window.GROUP_METHOD = {
             });
         });        
 
-         $(function() {
-        var availableTags = window.groupList;
-        $( "#tags" ).autocomplete({
-            source: availableTags
+        $(function() {
+            var availableTags = window.groupList;
+            $("#tags").autocomplete({
+                source: availableTags
+            });
         });
-    });
     },
     
     loadGroups:function(){$.ajax({

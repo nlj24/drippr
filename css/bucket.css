@@ -158,12 +158,6 @@ body {
   cursor: pointer;
 }
 
-#opContainer {
-  height: 500px;
-  line-height: 125px;
-  padding-left: 50px;
-}
-
 .ownMess {
   text-align: left;
 }
@@ -320,4 +314,10 @@ body {
 .groupDeletionStyle {
   text-align: center;
   font-size: 30px;
+}
+
+.createdSuccessStyle {
+  text-align: center;
+  font-size: 20px;
+  line-height: 200px;
 }

@@ -62,6 +62,13 @@ body {
   cursor: pointer;
 }
 
+#opContainer {
+  height: 500px;
+  line-height: 125px;
+  padding-left: 50px;
+  padding-top: 20px;
+}
+
 #prevArrow:hover {
   width: 75%;
   height: 100%;
@@ -213,11 +220,15 @@ body {
 
 .opDiv {
   text-align: center;
+  padding: -10px;
+  margin-top: -12px;
 }
 
 .number {
   font-size: 40px;
   float: left;
+  text-align: center;
+  margin-top: -12px;
 }
 
 .hide {

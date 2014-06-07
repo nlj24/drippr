@@ -84,50 +84,54 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								avatarSize: 50,
 								maxSuggestions: 8,
 								onpick: function (friend) {
-									if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
-										$.ajax({
-							                // url:'json/articles.json',
-							                url: window.address + 'add_shadow_user',
-							                data: {id: friend.id, name: friend.name},
-							                method:'get'
-							            });
-							            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
-									}
-
-									if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
-										FB.ui({
-											to: friend.id,
-											method: 'send',
-											link: 'http://drippr.me',
-										});
-									} 
-
-									var add_to_dom = false;
-									if (!(friend.id in window.drippsChosenFriends)) {
-										window.drippsIds.push(friend.id);
-										add_to_dom = true;
-									}
-									window.drippsChosenFriends[friend.id] = friend;
-
-									if(add_to_dom) {
-										if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-											$("#chosen").append("<div class='red_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
-										} else {
-											$("#chosen").append("<div class='blue_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
+									try {
+										if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
+											$.ajax({
+								                // url:'json/articles.json',
+								                url: window.address + 'add_shadow_user',
+								                data: {id: friend.id, name: friend.name},
+								                method:'get'
+								            });
+								            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
 										}
+
+										if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
+											FB.ui({
+												to: friend.id,
+												method: 'send',
+												link: 'http://drippr.me',
+											});
+										} 
+
+										var add_to_dom = false;
+										if (!(friend.id in window.drippsChosenFriends)) {
+											window.drippsIds.push(friend.id);
+											add_to_dom = true;
+										}
+										window.drippsChosenFriends[friend.id] = friend;
+
+										if(add_to_dom) {
+											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
+												$("#chosen").append("<div class='red_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
+											} else {
+												$("#chosen").append("<div class='blue_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
+											}
+										}
+
+										$(".rm" ).unbind("click", handler2);
+					    				$(".rm").bind("click", handler2);
+
+					                    var handler2 = $('.rm').click(function(e) {
+					                        var id = $(e.target).attr('id');
+					                        delete window.drippsChosenFriends[id];
+					                        window.drippsIds.splice(window.drippsIds.indexOf(id),1);
+											$("#"+id).remove();
+					                    });
 									}
-
-									$(".rm" ).unbind("click", handler2);
-				    				$(".rm").bind("click", handler2);
-
-				                    var handler2 = $('.rm').click(function(e) {
-				                        var id = $(e.target).attr('id');
-				                        delete window.drippsChosenFriends[id];
-				                        window.drippsIds.splice(window.drippsIds.indexOf(id),1);
-										$("#"+id).remove();
-				                    });                        
-								}
-								
+									catch(e) {
+					                	return;
+					                }
+								}	
 							});
 
 							$('#fb-input-groups').facebookAutocomplete({
@@ -135,48 +139,52 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								avatarSize: 50,
 								maxSuggestions: 8,
 								onpick: function (friend) {
-									if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
-										$.ajax({
-							                // url:'json/articles.json',
-							                url: window.address + 'add_shadow_user',
-							                data: {id: friend.id, name: friend.name},
-							                method:'get'
-							            });
-							            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
-									}
-
-									if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
-										FB.ui({
-											to: friend.id,
-											method: 'send',
-											link: 'http://drippr.me',
-										});
-									} 
-
-									var add_to_dom = false;
-									if (!(friend.id in window.groupsChosenFriends)) {
-										window.groupsIds.push(friend.id);
-										add_to_dom = true;
-									}
-									window.groupsChosenFriends[friend.id] = friend;
-
-									if(add_to_dom) {
-										if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-											$("#chosenCont").append("<div class='red_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>" + window.groupsChosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
-										} else {
-											$("#chosenCont").append("<div class='blue_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>"+ window.groupsChosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
+									try {
+										if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
+											$.ajax({
+								                // url:'json/articles.json',
+								                url: window.address + 'add_shadow_user',
+								                data: {id: friend.id, name: friend.name},
+								                method:'get'
+								            });
+								            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
 										}
-									}
-									$(".rm" ).unbind("click", handler2);
-				    				$(".rm").bind("click", handler2);
-				                    var handler2 = $('.rm').click(function(e) {
-				                        var id = $(e.target).attr('id');
-				                        delete window.groupsChosenFriends[id];
-				                        window.groupsIds.splice(window.groupsIds.indexOf(id),1);
-										$("#"+id).remove();
-				                    });
-								}
-								
+
+										if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
+											FB.ui({
+												to: friend.id,
+												method: 'send',
+												link: 'http://drippr.me',
+											});
+										} 
+
+										var add_to_dom = false;
+										if (!(friend.id in window.groupsChosenFriends)) {
+											window.groupsIds.push(friend.id);
+											add_to_dom = true;
+										}
+										window.groupsChosenFriends[friend.id] = friend;
+
+										if(add_to_dom) {
+											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
+												$("#chosenCont").append("<div class='red_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>" + window.groupsChosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
+											} else {
+												$("#chosenCont").append("<div class='blue_friends' id='" + window.groupsIds[(window.groupsIds.length-1)] + "'>"+ window.groupsChosenFriends[window.groupsIds[(window.groupsIds.length-1)]]['name'] + " " + "<div id='"+window.groupsIds[(window.groupsIds.length-1)]+"' class='rm'>X</div></div>");
+											}
+										}
+										$(".rm" ).unbind("click", handler2);
+					    				$(".rm").bind("click", handler2);
+					                    var handler2 = $('.rm').click(function(e) {
+					                        var id = $(e.target).attr('id');
+					                        delete window.groupsChosenFriends[id];
+					                        window.groupsIds.splice(window.groupsIds.indexOf(id),1);
+											$("#"+id).remove();
+					                    });
+					                }
+					                catch(e) {
+					                	return;
+					                }
+								}						
 							});
 
 							$(".send").click(function(){
@@ -255,8 +263,14 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						                    success: function(data){return;}
 						                });
 							        });
-
-				                    $('#chosenCont').html('');
+									
+									$('#chosenCont').html('<div class = "createdSuccessStyle">Your group has been created!</div>');
+									setTimeout(function() {
+					                    $('.createdSuccessStyle').fadeOut(400, function() {
+					                        $('#chosenCont').html('');
+					                    });
+					                }, 3500);
+				                   
 									$('#groupName').val('');
 				                	window.groupsIds = [];
 				                	window.groupsChosenFriends = {};
