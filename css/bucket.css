@@ -181,14 +181,22 @@ body {
   display: inline-block;
   padding: 0;
   max-height: 70px;
+  border-radius: 5px;
 }
 
 #convoDiv {
   padding: 0;
 }
-
+.friendPics{
+  padding-left: 6px;
+}
 .noPad {
   padding: 0;
+}
+
+.messageInputRow{
+  padding-left: 3px;
+  padding-right: 7px;
 }
 
 #messageItemHead {

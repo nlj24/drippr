@@ -171,7 +171,6 @@ window.BUCKET_METHOD = {
                 
                 if (feed.length > 0) {
                     window.selItem = feed[0];
-                    console.log(conversation_data);
                     displayConvos(window.selItem, window.selItem["conversationId"], messageListTemplate, conversation_data);
                     bindButtons();
                 }
@@ -323,13 +322,13 @@ function displayConvos(selItem, convoId, template, conversation_data){
     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
     $('#selDripp').html(drippsHTML);
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
+    bindButtons();
 }
 
 window.bindBucket = function() {
     $(".like2").click(function(){
         var articleId = window.selItem['articleId'];
         if($('.like2.grey2').hasClass('hide')) {
-            console.log('flsdfj1');
             $(".up2").text(--articleDict[window.selItem.articleId].numLikes);
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
             $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
@@ -355,7 +354,6 @@ window.bindBucket = function() {
             articleDict[window.selItem.articleId]['userDisliked'] = false;                
         };
         if($('.like2.blue').hasClass('hide')) {
-            console.log('flsdfj2');
             $(".up2").text(++articleDict[window.selItem.articleId].numLikes);
             $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide')
             $(".like2.blue").attr("class", 'opinionBucket like2 blue');

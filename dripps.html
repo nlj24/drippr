@@ -361,26 +361,25 @@
     				link to dripps stumble
     			</div>
 	        	<script id="selDripp-template" type="text/x-handlebars-template">
-		        	<div>
-		        		<div class = "row" id = "headlineBucket">
-		        			<a class = "headlineDripp" href = {{selItem.url}} target="_blank">
-		        				{{selItem.headline}}
-		        			</a>
-		        		</div>
-		        		<div class = "row" id = "imageDivBucket">
-		        			<a href = {{selItem.url}} target="_blank">
-		        				<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
-		        			</a>
-		        		</div>
+	        		<div class = "row" id = "headlineBucket">
+	        			<a class = "headlineDripp" href = {{selItem.url}} target="_blank">
+	        				{{selItem.headline}}
+	        			</a>
 	        		</div>
+	        		<div class = "row" id = "imageDivBucket">
+	        			<a href = {{selItem.url}} target="_blank">
+	        				<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+	        			</a>
+	        		</div>
+
 	        		<div class = "row">
-	        			<div class = "col-xs-1">
-	        			</div>
-	        			<div class = "col-xs-10" id = "convoDiv">
-	        				{{#each friendNames}}
-	        					<img src = {{picture}}>
-	        					{{name}}
-	        				{{/each}}
+	        			<div class = "col-xs-11 col-xs-offset-1" id = "convoDiv">
+	        				<div class = "friendPics">
+		        				{{#each friendNames}}
+		        					<img src = {{picture}}>
+		        					{{name}}
+		        				{{/each}}
+		        			</div>
 		        			<div id = "conversation">
 			        			{{#each messages}}
 			        				<div class = "indMess {{userId}}">
@@ -389,32 +388,30 @@
 			        				</div>
 		        				{{/each}}
 		        			</div>
-		        			<div class = "row">
-		        				<div class = "col-xs-11 noPad">
-			        				<textarea id = "messageInput" placeholder="Enter Message" cols="20"></textarea>
-			        			</div>
-			        			<div class = "col-xs-1 noPad">
-			        				<div id = "messageSend"> Send </div>
-			        			</div>
-			        		</div>
-		        		</div>
-	        			<div class = "col-xs-1">
+			        	</div>
+	        		</div>
+	    			<div class = "row">
+	    				<div class = "col-xs-10 col-xs-offset-1 messageInputRow" >
+	        				<textarea id = "messageInput" placeholder="Enter Message" cols="20"></textarea>
+	        			</div>
+	        			<div class = "col-xs-1 noPad">
+	        				<div id = "messageSend"> Send </div>
 	        			</div>
 	        		</div>
-	        	</script>
-        		
-        		<div id="selItem">
-	        	</div>
-	        	<script id="selItem-template" type="text/x-handlebars-template">
-		        	<div>
-		        		<div class = "row" id = "headlineBucket">
-		        			{{selItem.headline}}
-		        		</div>
-		        		<div class = "row" id = "imageDivBucket">
-		        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
-		        		</div>
+        		</script>
+    		
+    		<div id="selItem">
+        	</div>
+        	<script id="selItem-template" type="text/x-handlebars-template">
+	        	<div>
+	        		<div class = "row" id = "headlineBucket">
+	        			{{selItem.headline}}
 	        		</div>
-				</script>
+	        		<div class = "row" id = "imageDivBucket">
+	        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+	        		</div>
+        		</div>
+			</script>
 			</div>
 			<div class = "col-xs-2" id = "opContainer">
 				<div class = "row">
