@@ -515,7 +515,8 @@ app.get("/removeReadItLater", function(req, res) {
 app.get("/", function(req, res) {
     res.sendfile(__dirname+'/dripps.html')
 });
- 
+
+
 app.post("/user/add", function(req, res) { 
     /* some server side logic */
     res.send("OK");

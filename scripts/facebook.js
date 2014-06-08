@@ -1,4 +1,4 @@
-window.address = document.URL;
+window.address = "http://localhost:5000/";
 
 window.fbAsyncInit = function() {
 FB.init({
@@ -283,11 +283,40 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 							
 			            }
+
 						window.GROUP_METHOD.loadGroups();
 						window.ARTICLE_METHOD.loadArticleData();
 						window.BUCKET_METHOD.loadArticleData();
 						window.bindDripps();
 						window.bindBucket();
+
+
+
+						switch(location.hash){
+							case "#bucket":
+								$("#dripps").attr("class", "container-fluid hide");
+						        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#buckets").attr("class", "container-fluid");
+						        $("#bucketsHeader").attr("class", "col-md-5 headingPad");
+						        $("#groups").attr("class", "container-fluid hide");
+						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+								break;
+							case "#group":
+								$("#buckets").attr("class", "container-fluid hide");
+						        $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#dripps").attr("class", "container-fluid hide");
+						        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#groups").attr("class", "container-fluid");
+						        $("#groupsHeader").attr("class", "col-md-5 headingPad");
+						        window.BUCKET_METHOD.loadArticleData();
+								break;
+								
+						}
+
+
+
+
+
 			            
 					} else if (response.status === 'not_authorized') {
 						// In this case, the person is logged into Facebook, but not into the app, so we call
