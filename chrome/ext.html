@@ -1,49 +1,95 @@
 <html>
     <head>
+        <link rel="shortcut icon" href="../images/drop.png">
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/dripps.css">
+        <link rel="stylesheet" href="../css/bucket.css">
+        <link rel="stylesheet" href="../css/facebook.css">
+        <script type="text/javascript" src="../scripts/handlebars.js"></script>
         <script src="jquery-2.1.1.min.js"></script>
+
+        <script type="text/javascript" src="../scripts/dripps.js"></script>
+        <script type="text/javascript" src="../scripts/bucket.js"></script>
+        <script type="text/javascript" src="../scripts/groups.js"></script>
+        <script type="text/javascript" src="../scripts/elastic.js"></script>
+        <script type="text/javascript" src="../scripts/slider.js"></script>
+        <script type="text/javascript" src="../scripts/moment.js"></script>
+
         <script type="text/javascript" src="fb.js"></script>
         <script type="text/javascript" src="event.js"></script>
         <script type="text/javascript" src="facebook_autocomplete.js"></script>
-        <script type="text/javascript" src="fb_ext.js"></script>
         <script type="text/javascript" src="inject.js"></script>
         <title>Darshan</title>
     </head>
     <body>
         <div id="fb-root"></div>
-        <label for="link">Send this URL to friends:</label>
-        <input type="text" id="link"></input><br>
+        <!--Handlebar templates start-->
+        <!-- Header -->
+        <div id="header" class = "container-fluid">
+            <div class = "row header">
 
-        <label for="title">Title for link</label>
-        <input type="text" id="title"></input><br>
+                <div id="drippsHeader" class = "col-xs-5 headingPad">
+                    <div class = "col-xs-8 headingPad1">
+                        <a href="#dripp">
+                            <div class = "drippsBub chosenHeadBub_ext">
+                                <div class = "col-xs-3">
+                                    <img class = "headBubImg" src = "/images/dropWhite.svg">
+                                </div>
+                                <div class = "col-xs-9">
+                                    <p id = "selPage">
+                                        continue to drippr
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class = "col-xs-2">
+                    <div id = "dripprdiv">
+                        <a href = "http://drippr.me"> 
+                            <img id = "logo" src = "../images/logo.png">
+                        </a>
+                    </div>
+                </div>
+                <div class = "col-xs-5">
+                    <div id = "fb">
+                        <div id = "user">
+                        </div>
+                        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end HEADER -->
 
-        <label for="src">Source for link</label>
-        <input type="text" id="src"></input><br>
 
-        <label for="img">Image URL for link</label>
-        <input type="text" id="img"></input><br>
 
-        <label for="chosen">Currently selected friends:</label>
-        <div id="chosen"></div>
 
-        <label for="fb-input">Choose friends:</label>
-        <input type="text" id="fb-input" autocomplete="off"></input><br>
+        <div class="row form">
+            <div class = "col-xs-6">
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Send this URL to friends:</div></div></div>
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Title for link:</div></div></div>
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Source for link:</div></div></div>
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Image URL for link:</div></div></div>
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Currently selected friends:</div></div></div>
+                <div class="row"><div class="col-xs-9"></div><div class="bkg col-xs-3"><div class="derecha"> Choose friends:</div></div></div>
+            </div>
+            <div class = "col-xs-6 noPad row">
+                <div class = "bkg col-xs-3">
+                    <input type="text" class="inputBox" id="link"></input><br>
+                    <input type="text" class="inputBox" id="title"></input><br>
+                    <input type="text" class="inputBox" id="src"></input><br>
+                    <input type="text" class="inputBox" id="img"></input><br>
+                    <div id="chosen"></div>
+                    <input type="text" class="inputBox" id="fb-input" autocomplete="off"></input><br>
+                </div>
+                <div class = "col-xs-9"></div>
+            </div>
 
-        <label for="category">Choose category:</label>
-        <select id="category">
-            <option value="politics">politics</option>
-            <option value="world">world</option>
-            <option value="sports">sports</option>
-            <option value="tech">tech</option>
-            <option value="usa">usa</option>
-            <option value="business">business</option>
-            <option value="entertainment">entertainment</option>
-            <option value="general" selected>general</option>
-        </select>
-
-        <div class="send">send drip</div>
-        <div class="save">save drip</div>
-
-        <h1>MIKE GORMLEY</h1>
+            <div class="send">send drip</div>
+            <div class="save">save drip</div>
+        </div>
 
     </body>
 </html>

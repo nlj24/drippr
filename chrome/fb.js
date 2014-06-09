@@ -41,7 +41,7 @@ FB.Event.subscribe("auth.logout", function() {
                             window.chosenFriends[friend.id] = friend;
 
                             if(add_to_dom) {
-                                $("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + "<div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+                                $("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " <div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
                             }
 
                             $(".rm" ).unbind("click", handler2);
@@ -141,7 +141,7 @@ FB.Event.subscribe("auth.logout", function() {
             FB.login();
         }
         FB.api('/me', function(response) {
-            $("#user").html(response.first_name);
+            $("#user").html("<p id = 'centerWel'>Welcome, " + response.first_name + "!</p> <img class = 'fbPics2' src = http://graph.facebook.com/" + window.myID + "/picture?width=400&height=400>");
             $.ajax({
                 // url:'json/articles.json',
                 url:'http://drippr.me/is_user',
