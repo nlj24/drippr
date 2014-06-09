@@ -90,7 +90,16 @@ window.GROUP_METHOD = {
         });
 
         $(".leaveGroup").click(function(e){
-            var groupId = $(e.target).attr('group_id'); 
+            var groupId = $(e.target).attr('group_id');
+            if (other_members_dict[groupId]['list'].length == 3) {
+                $.ajax({
+                    url: window.address + 'deleteGroup',
+                    data: {groupId: groupId},
+                    method:'get',
+                    success: function(data){return;}
+                });
+                alert('need to alert creator that group was deleted');
+            }
             delete window.other_members_dict[groupId];
             var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
             $("[group_id=" + "group_" + groupId + "]").html("<div class = 'groupDeletionStyle'> you have left the group.</div>");

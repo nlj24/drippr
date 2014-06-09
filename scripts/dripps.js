@@ -5,29 +5,29 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
-function bindKeys() {
-    $(document).keydown(function(e){
-        if (e.keyCode == 37) {
-            javascript:sliders[0].goToPrev();
-        }
-        if (e.keyCode == 39) {
-            javascript:sliders[0].goToNext();
-        }
-    });
-};
+// function bindKeys() {
+//     $(document).keydown(function(e){
+//         if (e.keyCode == 37) {
+//             javascript:sliders[0].goToPrev();
+//         }
+//         if (e.keyCode == 39) {
+//             javascript:sliders[0].goToNext();
+//         }
+//     });
+// };
 
-function unbindKeys() {
-        alert('fsdfddfdsfadff');
-    $(document).keydown(function(e){
-        if (e.keyCode == 37) {
-            alert("fdsf");
-        }
-        if (e.keyCode == 39) {
-            return;
-        }
-    });
-};
-bindKeys();
+// function unbindKeys() {
+//         alert('fsdfddfdsfadff');
+//     $(document).keydown(function(e){
+//         if (e.keyCode == 37) {
+//             alert("fdsf");
+//         }
+//         if (e.keyCode == 39) {
+//             return;
+//         }
+//     });
+// };
+// bindKeys();
 
 window.onhashchange = function (e){
 
