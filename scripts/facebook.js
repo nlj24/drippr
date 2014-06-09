@@ -215,6 +215,12 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                		}
 				                	}
 
+				                	if ($.isEmptyObject(window.my_members_dict)) {
+			                            $('#my_group_container').html("");
+			                        }
+
+			                        window.my_members_dict[groupName] = {name: groupName};
+
 				                	for (var i = 0; i < groupName.length; i++) {
 				                		if(groupName[i] == "\"") {
 											var groupName = groupName.substring(0, i) + "'" + groupName.substring(i+1);
@@ -245,15 +251,19 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                    
 				                    var handler3 = $(".deleteGroup2").click(function(e){
 							            var groupRow = ($(e.target).parents(".groupRowStyle"));
-							            groupName = groupRow.find(".nameGroupsStyle").text();						                
+							            groupName = groupRow.find(".nameGroupsStyle").text();
+							            delete window.my_members_dict[groupName];					                
 							            var groupRowHeight = $(groupRow).height();
-						                $(groupRow).html("<div class = 'groupDeletionStyle'> Your group was deleted.</div>");
+						                $(groupRow).html("<div class = 'groupDeletionStyle'> your group was deleted.</div>");
 						                $(groupRow).height(groupRowHeight);
 						                setTimeout(function() {
 						                    $(groupRow).fadeOut(400, function() {
 						                        $(groupRow).remove();
 						                        $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
 						                        $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
+						                        if ($.isEmptyObject(window.my_members_dict)) {
+							                        $('#my_group_container').html("you haven't created any groups");
+							                    }
 						                    });
 						                }, 3500);
 						                $.ajax({
@@ -264,7 +274,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						                });
 							        });
 									
-									$('#chosenCont').html('<div class = "createdSuccessStyle">Your group has been created!</div>');
+									$('#chosenCont').html('<div class = "createdSuccessStyle">your group has been created!</div>');
 									setTimeout(function() {
 					                    $('.createdSuccessStyle').fadeOut(400, function() {
 					                        $('#chosenCont').html('');
