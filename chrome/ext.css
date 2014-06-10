@@ -76,14 +76,24 @@
 }
 
 .noLeftPad {
-    padding-left: 0px;
-    padding-right: 15px;
+  padding-left: 0px;
+  padding-right: 15px;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .form {
-    width: 100%;
+  width: 100%;
+}
+
+#centerHeadbug {
+  margin-top: 15px;
+}
+
+#logoExt {
+  max-height: 75px;
+  max-width: 125px;
+  margin-top: 15px;
 }

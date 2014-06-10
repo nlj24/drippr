@@ -5,29 +5,15 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
-// function bindKeys() {
-//     $(document).keydown(function(e){
-//         if (e.keyCode == 37) {
-//             javascript:sliders[0].goToPrev();
-//         }
-//         if (e.keyCode == 39) {
-//             javascript:sliders[0].goToNext();
-//         }
-//     });
-// };
+// $(document).keydown(function(e){
+//     if (e.keyCode == 37) {
+//         alert('fucking cunt');
+//     }
+//     if (e.keyCode == 39) {
+//         javascript:sliders[0].goToNext();
+//     }
+// });
 
-// function unbindKeys() {
-//         alert('fsdfddfdsfadff');
-//     $(document).keydown(function(e){
-//         if (e.keyCode == 37) {
-//             alert("fdsf");
-//         }
-//         if (e.keyCode == 39) {
-//             return;
-//         }
-//     });
-// };
-// bindKeys();
 
 window.onhashchange = function (e){
 
@@ -42,8 +28,6 @@ window.onhashchange = function (e){
         $("#groups").attr("class", "container-fluid hide");
         $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
         window.BUCKET_METHOD.loadArticleData();
-        unbindKeys();
-        bindKeys();
     }
 
     if (location.hash == "#bucket") {
@@ -55,7 +39,6 @@ window.onhashchange = function (e){
         $("#bucketsHeader").attr("class", "col-md-5 headingPad");
         $("#groups").attr("class", "container-fluid hide");
         $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
-        unbindKeys();
     }
     if (location.hash == "#group") {
 
@@ -67,7 +50,6 @@ window.onhashchange = function (e){
         $("#groups").attr("class", "container-fluid");
         $("#groupsHeader").attr("class", "col-md-5 headingPad");
         window.BUCKET_METHOD.loadArticleData();
-        unbindKeys();
     }
 
 }

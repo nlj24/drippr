@@ -480,7 +480,7 @@
 			</div>
 			<div class = "col-xs-3" id = "groupInput">
 				<div>
-					Select friends for your new group - if your friend hasn't used drippr, we'll give you a chance to invite them and they will be able to see their dripps once they login.</p>
+					Select friends for your new group - if your friend hasn't used drippr, we'll give you a chance to invite them and they will be able to see their dripps once they login.<strong>(drippr users appear in blue)</strong>
 					<div class = "row">
 						<div class = "col-xs-5" id = "groupNameStyle">
 							group name:
@@ -567,10 +567,9 @@
 					<div id = "other_group_container">
 						{{#each other_groups}}
 							<div class = "row groupRowStyle" group_id="group_{{this.id}}">
-								<div class = "col-xs-2 nameGroupsStyle">
-									{{this.name}}
-								</div>
-								<div class = "col-xs-8">
+								<div class = "col-xs-2 nameGroupsStyle">{{this.name}}</div>
+								<div class = "col-xs-2">{{this.creatorId}}</div>
+								<div class = "col-xs-6">
 									{{#each this.list}}
 										<div class="personName {{userId}}">
 											{{this.name}}

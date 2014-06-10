@@ -28,7 +28,13 @@ window.GROUP_METHOD = {
                 if (!(window.other_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);
                     window.groupListDict[data[jj].name] = data[jj].id;
-                    window.other_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
+                    if (data[jj].creatorId == data[jj].userId) {
+                        creator = data[jj].fullName;
+                    }
+                    else {
+                        creator = "idk";
+                    }
+                    window.other_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, creatorId: creator, list:[]};
                 }
                     
                 id = data[jj].userId;
@@ -39,7 +45,9 @@ window.GROUP_METHOD = {
             }
 
         }
-
+        console.log(data);
+        console.log(window.groupList);
+        console.log(window.other_members_dict);
         var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":window.my_members_dict, "other_groups":window.other_members_dict});
