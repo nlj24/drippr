@@ -289,17 +289,4 @@ body {
   color: blue;
 }
 
-.derecha {
-  height: 23px;
-  line-height: 23px;
-  float: right;
-  margin-bottom: 10px;
-}
 
-.inputBox {
-  margin-bottom: 10px;
-}
-
-.bkg {
-  background: white;
-}
