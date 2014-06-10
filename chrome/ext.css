@@ -1,0 +1,63 @@
+.derecha {
+    font-size: 22px;
+    float: right;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.inputBox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.save {
+    font-size: 22px;
+}
+
+.bkg {
+    background: white;
+}
+
+#topLeft {
+    border-top-left-radius: 10px;
+}
+
+#botLeft {
+    border-bottom-left-radius: 10px
+}
+
+#rhs {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#fb-input-ext {
+    margin-bottom: 9px;
+}
+
+#chosen_ext {
+    background: white;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+#sendBtn {
+    font-size: 22px;
+    float: right;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#saveBtn {
+    font-size: 22px;
+    background: white;
+    padding: 10px;
+    float: left;
+    border-radius: 10px;
+}

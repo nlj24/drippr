@@ -1,5 +1,4 @@
 window.fbAsyncInit = function() {
-    console.log("darshan is a CUNT!");
 FB.init({
 appId      : '231951950330964',
 status     : true, // check login status
@@ -11,6 +10,23 @@ FB.Event.subscribe("auth.logout", function() {
     window.fbAsyncInit();
     window.location = 'http://drippr.me';
 });
+
+$(".derecha").css("height", ($(".inputBox").height()+4) + "px");
+$(".derecha").css("line-height", ($(".inputBox").height()+4) + "px");
+$("#chosen_ext").css("height", ($(".form").height()/3) + "px");
+
+
+$("#sendBtn").click(function() {
+    $.ajax({
+        // url:'json/articles.json',
+        url: window.address + 'sendDripp/new',
+        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null"},
+        method:'get' //,
+        // success:this.userData
+    });
+});
+
+
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -27,7 +43,7 @@ FB.Event.subscribe("auth.logout", function() {
                     window.chosenFriends = {}; //don't tell Ashwin about this!!
                     window.ids = [];
                     window.myID = response.authResponse.userID;
-                    $('#fb-input').facebookAutocomplete({
+                    $('#fb-input-ext').facebookAutocomplete({
                         showAvatars: true,
                         avatarSize: 50,
                         maxSuggestions: 8,
@@ -41,7 +57,7 @@ FB.Event.subscribe("auth.logout", function() {
                             window.chosenFriends[friend.id] = friend;
 
                             if(add_to_dom) {
-                                $("#chosen").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " <div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
+                                $("#chosen_ext").append("<div class='friends' id='" + window.ids[(window.ids.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.chosenFriends[window.ids[(window.ids.length-1)]]['id'] + "/picture?width=25&height=25>" + window.chosenFriends[window.ids[(window.ids.length-1)]]['name'] + " <div id='"+window.ids[(window.ids.length-1)]+"' class='rm'>X</div></div>");
                             }
 
                             $(".rm" ).unbind("click", handler2);
@@ -73,7 +89,7 @@ FB.Event.subscribe("auth.logout", function() {
                                 }
                                 window.chosenFriends = {};
                                 window.ids=[];
-                                $('#chosen').empty();
+                                $('#chosen_ext').empty();
                             });
                             
                             // read it later
