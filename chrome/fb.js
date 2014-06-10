@@ -18,11 +18,17 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
 
 $("#sendBtn").click(function() {
     $.ajax({
-        // url:'json/articles.json',
         url: window.address + 'sendDripp/new',
-        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null"},
-        method:'get' //,
-        // success:this.userData
+        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.ids},
+        method:'get' 
+    });
+});
+
+$("#saveBtn").click(function() {
+    $.ajax({
+        url: window.address + 'readItLater/new',
+        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
+        method:'get' 
     });
 });
 
