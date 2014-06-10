@@ -65,7 +65,7 @@
 
 .chosenHeadBub_ext {
   margin-left: 10px;
-  width: 285px;
+  width: 275px;
   border-radius: 50px;
   background-color: #6D6E70;
   height: 70px;
@@ -73,4 +73,13 @@
   margin-top: 10px;
   line-height: 70px;
   cursor: pointer;
+}
+
+.noLeftPad {
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+.center {
+    text-align: center;
 }
