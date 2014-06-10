@@ -190,7 +190,7 @@ app.get("/add_shadow_user",  function(req, res){
     connection.query(select_user_query, function(err,rows,fields) {
         if (err) throw err;
         if (!(rows.length > 0)) {
-            var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0,'"+name+"')";
+            var add_shadow_query = "INSERT INTO Users VALUES('" + friend_id + "','','',0,\""+name+"\")";
             connection.query(add_shadow_query, function(err,rows,fields) {
                 if (err) throw err;
 
@@ -343,6 +343,21 @@ app.get("/sendConvo", function(req, res) {
             res.send(200);
         });
     });
+});
+
+app.get("/addMembers", function(req, res) {
+    var groupName = req.query.groupName;
+    var members = req.query.members;
+    var creatorId = req.query.creatorId;
+    var groupId = req.query.groupId;
+
+    for(var ii=0; ii < members.length; ii++) {    
+        var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES (\"" + groupName + "\",'" +  members[ii] + "'," + groupId + ",'" + creatorId + "')";
+        connection.query(create_group, function(err,rows,fields) {
+            if (err) throw err;
+            res.send(200);
+        });
+    }
 });
 
 app.get("/createGroup", function(req, res) {

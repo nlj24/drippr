@@ -53,18 +53,6 @@ body {
   cursor: pointer;
 }
 
-.chosenHeadBub_ext {
-  margin-left: 10px;
-  width: 315px;
-  border-radius: 50px;
-  background-color: #6D6E70;
-  height: 70px;
-  color: #6D6E70;
-  margin-top: 10px;
-  line-height: 70px;
-  cursor: pointer;
-}
-
 .headBubImg {
   width: 40px;
   height: 40px;
@@ -142,6 +130,7 @@ body {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .headlineDripp {
@@ -289,4 +278,11 @@ body {
   color: blue;
 }
 
+.ui-corner-all {
+  z-index: 1050;
+  list-style-type: none;
+}
 
+.ui-helper-hidden-accessible {
+  display: none;
+}

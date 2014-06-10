@@ -1,7 +1,6 @@
 window.GROUP_METHOD = {
     
     groupData:function(res) {
-        console.log("fdsfdfaffaffewjfhaweh");
         var data = res.data;
         var me = res.me;
         window.my_members_dict = {};
@@ -65,6 +64,9 @@ window.GROUP_METHOD = {
             }
         }
 
+        $('#chosenCont').html('');
+        $('#addChosenCont').html('');
+
         $(".deleteGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');
             delete window.my_members_dict[groupId];
@@ -121,6 +123,19 @@ window.GROUP_METHOD = {
                 success: function(data){return;}
             });
         });        
+        
+        $(".addMems").click(function(e){
+            $("#addChosenCont").html('');
+            window.addIds = [];
+            window.addChosenFriends = {};
+            $(".showForm").attr("class", "showForm");
+            $(".success").attr("class", "success hide");
+            window.groupId = $(e.target).attr('group_id');
+            var groupRow = ($(e.target).parents(".groupRowStyle"));
+            window.groupName = groupRow.find(".nameGroupsStyle").text();
+            $(".groupModalName").html("add members to " + window.groupName);
+        });
+
 
         $(function() {
             var availableTags = window.groupList;
@@ -128,6 +143,8 @@ window.GROUP_METHOD = {
                 source: availableTags
             });
         });
+
+        $("#tags").autocomplete( "option", "minLength", 3);
     },
     
     loadGroups:function(){$.ajax({

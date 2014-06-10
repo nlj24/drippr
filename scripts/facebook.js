@@ -52,10 +52,12 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						// The window.response object is returned with a status field that lets the app know the current
 						// login status of the person. In this case, we're handling the situation where they 
 						// have logged in to the app.
-						window.drippsChosenFriends = {}; //don't tell Ashwin about this!!
-						window.groupsChosenFriends = {}; //don't tell Ashwin about this!!
+						window.drippsChosenFriends = {};
+						window.groupsChosenFriends = {};
+						window.addChosenFriends = {};
 						window.drippsIds = [];
 						window.groupsIds = [];
+						window.addIds = [];
 						window.myID = response.authResponse.userID;
 
 						//flatten out the friend list to just get their ids
@@ -79,7 +81,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 			                	window.friend_dict[friend_data[jj].id] = friend_data[jj];
 			                }
 
-							$('#fb-input').facebookAutocomplete({
+							$('.fb-input').facebookAutocomplete({
 								showAvatars: true,
 								avatarSize: 50,
 								maxSuggestions: 8,
@@ -187,21 +189,77 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								}						
 							});
 
+							$('.fb-input-add').facebookAutocomplete({
+								showAvatars: true,
+								avatarSize: 50,
+								maxSuggestions: 8,
+								onpick: function (friend) {
+									try {
+										if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
+											$.ajax({
+								                // url:'json/articles.json',
+								                url: window.address + 'add_shadow_user',
+								                data: {id: friend.id, name: friend.name},
+								                method:'get'
+								            });
+								            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
+										}
+
+										if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
+											FB.ui({
+												to: friend.id,
+												method: 'send',
+												link: 'http://drippr.me',
+											});
+										} 
+
+										var add_to_dom = false;
+										if (!(friend.id in window.addChosenFriends)) {
+											window.addIds.push(friend.id);
+											add_to_dom = true;
+										}
+										window.addChosenFriends[friend.id] = friend;
+
+										if(add_to_dom) {
+											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
+												$("#addChosenCont").append("<div class='red_friends' id='" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+											} else {
+												$("#addChosenCont").append("<div class='blue_friends' id='" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+											}
+										}
+
+										$(".rm" ).unbind("click", handler2);
+					    				$(".rm").bind("click", handler2);
+
+					                    var handler2 = $('.rm').click(function(e) {
+					                        var id = $(e.target).attr('id');
+					                        delete window.addChosenFriends[id];
+					                        window.addIds.splice(window.addIds.indexOf(id),1);
+											$("#"+id).remove();
+					                    });
+									}
+									catch(e) {
+					                	return;
+					                }
+								}	
+							});
+
 							$(".send").click(function(){
 								if (window.drippsIds.length > 0) {
 									$.ajax({
 						                url: window.address + 'sendDripp',
-						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.drippsIds, articleId: window.curArticle},
+						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
 						                type:'get'
 						            });
-								}
-								if (window.drippsIds.length > 0) {
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-								}
-					            window.drippsChosenFriends = {};
-								window.drippsIds=[];
-								$('#chosen').empty();
+						            window.drippsChosenFriends = {};
+									window.drippsIds=[];
+									$('#chosen').empty();
+									setTimeout(function() {
+					                    $('#myModal').modal('hide');
+					                }, 3500);
+								}								
 							});
 
 							$("#groupBtn").click(function(){
@@ -244,7 +302,6 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                	}
 				                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
-				                	//how to come up with id
 				                    $("#my_group_container").append("<div class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2 deleteGroup2'>delete</div></div>");
 
 				                    $(".deleteGroup2").unbind("click", handler3);
@@ -290,8 +347,38 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 			                		return;
 			                	}
 				            });
-
 							
+
+							$(".add").click(function(){
+				                if (window.addIds.length > 0) {
+				                    $.ajax({
+				                        url: window.address + 'addMembers',
+				                        data: {groupName: window.groupName, groupId: window.groupId, members: window.addIds, creatorId: window.myID},
+				                        type:'get'
+				                	});
+
+				                    membersString = "";
+				                	for(var person in window.addChosenFriends) {
+				                		if(!window.friend_dict[window.addChosenFriends[person]['id']].isReal) { //SHADOW USER
+											membersString += "<div class='red_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
+										} else {
+											membersString += "<div class='blue_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
+										}
+				                	}
+
+				                    $(".namesList").append(membersString);
+				                    
+									$(".showForm").attr("class", "showForm hide");
+									$(".success").attr("class", "success");
+									$("#addChosenCont").html('');
+				                   
+				                	window.addIds = [];
+				                	window.addChosenFriends = {};
+				                	setTimeout(function() {
+					                    $('#myModal2').modal('hide');
+					                }, 3500);
+				                }
+				            });
 			            }
 
 						window.GROUP_METHOD.loadGroups();

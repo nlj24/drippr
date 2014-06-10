@@ -194,10 +194,6 @@ window.BUCKET_METHOD = {
 
         window.setBucketLikes();
         $('#messageInput').elastic();
-        $(".dripp2").click(function(){
-            $(".showForm").attr("class", "showForm");
-            $(".success").attr("class", "success hide");
-        });
     },
 
     handlerData2:function(dripps_data, readItLater_data){
@@ -430,6 +426,12 @@ window.bindBucket = function() {
             });
             articleDict[window.selItem.articleId]['userReadItLater'] = true;
         }
+    });
+
+    $(".dripp2").click(function(){
+        window.articleSendId = window.selItem['articleId'];
+        $(".showForm").attr("class", "showForm");
+        $(".success").attr("class", "success hide");
     });
 }
 

@@ -79,6 +79,16 @@ darkGrey: #6D6E70*/
   border-radius: 6px;
 }
 
+#addChosenCont {
+  background-color: white;
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+}
+
 .groupCont {
   margin-top: 15px;
 }
@@ -256,6 +266,10 @@ body {
 }
 
 #chosen {
+  padding: 5px;
+}
+
+#chosenAdd {
   padding: 5px;
 }
 

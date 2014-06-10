@@ -119,6 +119,7 @@ window.ARTICLE_METHOD ={
         $('#articles').html(articleHTML);
 
         $(".dripp").click(function(){
+            window.articleSendId = window.curArticle;
             $(".showForm").attr("class", "showForm");
             $(".success").attr("class", "success hide");
         });
