@@ -138,4 +138,6 @@ window.resetFB = function fbReset() {
 	window.drippsChosenFriends = {};
 	window.drippsIds=[];
 	$('#chosen').empty();
+    window.autoCompleteGroups = window.groupList;
+    window.selGroups = [];
 }

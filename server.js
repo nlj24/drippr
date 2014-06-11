@@ -293,6 +293,8 @@ app.get("/removeDislikes", function(req, res) {
     }); 
 });
 
+
+// handle any friends (as a group) and any groups (separately)
 app.get("/sendDripp", function(req, res) {
     var fromUserId = req.query.fromUserId;
     var recipientGroup = req.query.recipientGroup;
@@ -313,7 +315,7 @@ app.get("/sendDripp", function(req, res) {
 
         for(var jj=0; jj < recipientFriendIds.length; jj++){
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+                + recipientFriendIds[jj] + "," +  fromUserId+ ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
             });   

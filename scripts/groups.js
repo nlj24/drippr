@@ -5,6 +5,7 @@ window.GROUP_METHOD = {
         var me = res.me;
         window.my_members_dict = {};
         window.groupList = [];
+        window.groupList_ids = [];
         window.other_members_dict = {};
 
         window.groupListDict = {};
@@ -14,6 +15,7 @@ window.GROUP_METHOD = {
             if(data[jj].creatorId == me) { // I'm the creator
                 if (!(window.my_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);
+                    window.groupList_ids.push(data[jj].id);
                     window.groupListDict[data[jj].name] = data[jj].id;
                     window.my_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
@@ -27,6 +29,7 @@ window.GROUP_METHOD = {
 
                 if (!(window.other_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);
+                    window.groupList_ids.push(data[jj].id);
                     window.groupListDict[data[jj].name] = data[jj].id;
                     if (data[jj].creatorId == data[jj].userId) {
                         creator = data[jj].fullName;
@@ -145,14 +148,7 @@ window.GROUP_METHOD = {
         });
 
 
-        $(function() {
-            var availableTags = window.groupList;
-            $("#tags").autocomplete({
-                source: availableTags
-            });
-        });
 
-        $("#tags").autocomplete( "option", "minLength", 3);
     },
     
     loadGroups:function(){$.ajax({

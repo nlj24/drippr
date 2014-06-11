@@ -5,16 +5,6 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
-// $(document).keydown(function(e){
-//     if (e.keyCode == 37) {
-//         alert('fucking cunt');
-//     }
-//     if (e.keyCode == 39) {
-//         javascript:sliders[0].goToNext();
-//     }
-// });
-
-
 window.onhashchange = function (e){
 
 
@@ -302,19 +292,19 @@ window.bindDripps = function() {
     
 
 
-    $(".sendGroup").click(function(){            
-        var groupSel = $('#tags').val();
-        console.log(groupSel);
-        var groupId = window.groupListDict[groupSel];
-        console.log(groupId);
-        if (groupId) {
-            $.ajax({
-                url: window.address + 'sendDripp',
-                data: {fromUserId: window.myID, recipientGroup: groupId, recipientFriendIds: -1, articleId: window.curArticle},
-                type:'get'
-            });
-        }
-    });
+    // $(".sendGroup").click(function(){            
+    //     var groupSel = $('#tags').val();
+    //     console.log(groupSel);
+    //     var groupId = window.groupListDict[groupSel];
+    //     console.log(groupId);
+    //     if (groupId) {
+    //         $.ajax({
+    //             url: window.address + 'sendDripp',
+    //             data: {fromUserId: window.myID, recipientGroup: groupId, recipientFriendIds: -1, articleId: window.curArticle},
+    //             type:'get'
+    //         });
+    //     }
+    // });
 
     $(".readLater").click(function(){
         var articleId = window.curArticle;

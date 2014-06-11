@@ -15,7 +15,6 @@ FB.Event.subscribe("auth.logout", function() {
 
 $("#dripps").css("height",""+ ($(window).height()-91));
 $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
-
 //check if we're logged in
    //display a modal or something?
    //remove it if they do login with the subscribe function below 
@@ -59,6 +58,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						window.groupsIds = [];
 						window.addIds = [];
 						window.myID = response.authResponse.userID;
+						window.selGroups = [];
 
 						//flatten out the friend list to just get their ids
 						var friend_id_lst = [];
@@ -77,6 +77,15 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						//I hope ashwin doesn't see this name...
 			            function everythingElse(friend_data) {
 			            	window.friend_dict = {};
+			            	window.autoCompleteGroups = window.groupList;
+			            	$(function() {
+					            $("#tags").autocomplete({
+					                source: window.autoCompleteGroups
+					            });
+					        });
+
+        					$("#tags").autocomplete( "option", "minLength", 3);
+
 			                for(var jj=0; jj < friend_data.length; jj++) {
 			                	window.friend_dict[friend_data[jj].id] = friend_data[jj];
 			                }
@@ -244,7 +253,34 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								}	
 							});
 
+							$("#tags").keypress(function(e) {
+								if (e.keyCode == 13) {
+									var name = $("#tags").val();
+									var groupId = groupListDict[name];
+									if(window.groupList_ids.indexOf(groupId) != -1) {
+										window.selGroups.push(groupId);
+										$("#chosen").append("<div class='green_friends' id='"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
+							    		$(".rm_group" ).unbind("click", handler3);
+					    				$(".rm_group").bind("click", handler3);
+
+					                    var handler3 = $('.rm_group').click(function(e) {
+					                        var id = $(e.target).attr('id');
+					                        console.log(id);
+					                        window.selGroups.splice(window.selGroups.indexOf(id),1);
+											$("#"+id).remove();
+					                    });
+
+					                    window.autoCompleteGroups.splice(window.autoCompleteGroups.indexOf(name),1);
+					                }
+
+						    		$("#tags").val("");
+						    	}
+
+							});
+
 							$(".send").click(function(){
+								var groupsEnteredStr = $("#tags").val();
+								var groupsEntered = groupsEnteredStr
 								if (window.drippsIds.length > 0) {
 									$.ajax({
 						                url: window.address + 'sendDripp',
@@ -259,9 +295,11 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 									setTimeout(function() {
 					                    $('#myModal').modal('hide');
 					                }, 3500);
-								}								
+								}							
 							});
 
+
+							// creating a group...
 							$("#groupBtn").click(function(){
 				                if ((window.groupsIds.length > 1) && (($('#groupName').val()!= ""))) {
 				                	var groupName = $('#groupName').val();
