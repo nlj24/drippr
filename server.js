@@ -300,9 +300,11 @@ app.get("/sendDripp", function(req, res) {
     var recipientGroup = req.query.recipientGroup;
     var recipientFriendIds = req.query.recipientFriendIds;
     var articleId = req.query.articleId;
+    var selGroupsDict = JSON.parse(req.query.groupsDict);
     var convoId;
     var set_send_query;
-    console.log(recipientGroup);
+
+    console.log(selGroupsDict);
     if (recipientFriendIds.length > 0) {
         var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
         connection.query(max_id_query, function(err,rows,fields) {
@@ -325,6 +327,9 @@ app.get("/sendDripp", function(req, res) {
                     + fromUserId + "," +  fromUserId + ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
+
+
+                //start the group stuff
                 if (recipientGroup.length > 0) {
                     var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
                     connection.query(max_id_query, function(err,rows,fields) {
@@ -334,29 +339,20 @@ app.get("/sendDripp", function(req, res) {
                             convoId = parseInt(rows[0]['MAX(conversationId)']);   
                         }
                         if (err) throw err;
-
+                        //loop through each group
                         for (var aa = 0; aa < recipientGroup.length; aa++) {
-                            var members_ids = "SELECT * FROM Groups WHERE id =" + recipientGroup[aa];
-                            var group = recipientGroup[aa];
-                            connection.query(members_ids, function(err,rows,fields) {
-                                convoId += 1;
-                                recipientFriendDicts = rows;
-                                recipientFriendIds = [];
-                                for(var x in recipientFriendDicts) {
-                                    recipientFriendIds.push(recipientFriendDicts[x].userId);
-                                }
-                                console.log(group);
-                                for (var kk = 0; kk < rows[0].length; kk++) {  
-                                    set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" 
-                                        + recipientFriendIds[kk] + "','" +  fromUserId+ "','" + group + "','" + "" +recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
-                                    connection.query(set_send_query, function(err,rows,fields) {
-                                        if (err) throw err;
-                                    });
-                                }
-                                set_send_query2 = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" + fromUserId + "','" +  fromUserId + "','" + group + "','" + "" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
-                                connection.query(set_send_query2, function(err,rows,fields) {
+                            convoId += 1;
+                            recipientFriendIds = selGroupsDict[recipientGroup[aa]];
+                            for (var kk = 0; kk < recipientFriendIds.length; kk++) {  
+                                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" 
+                                    + recipientFriendIds[kk] + "','" +  fromUserId+ "','" + recipientGroup[aa] + "','" + "" +recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+                                connection.query(set_send_query, function(err,rows,fields) {
                                     if (err) throw err;
                                 });
+                            }
+                            set_send_query2 = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" + fromUserId + "','" +  fromUserId + "','" + recipientGroup[aa] + "','" + "" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
+                            connection.query(set_send_query2, function(err,rows,fields) {
+                                if (err) throw err;
                             });
                         }
                     });
@@ -368,6 +364,12 @@ app.get("/sendDripp", function(req, res) {
             });   
         });
     } 
+
+
+
+
+
+
     else {
         for (var jj = 0; jj < recipientGroup.length; jj++) {
             var max_id_query = "SELECT MAX(conversationId) FROM Dripps";

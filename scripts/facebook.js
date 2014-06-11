@@ -273,9 +273,21 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 							$(".send").click(function(){
 								if (window.drippsIds.length > 0 || window.selGroups.length > 0) {
+									var selGroupsDict = {}
+									if(window.selGroups.length > 0) {
+										for(var ii = 0; ii < selGroups.length; ii++) {
+											var friendLst = window.all_members_dict[selGroups[ii]].list;
+											selGroupsDict[selGroups[ii]] = [];
+											for(var jj = 0; jj < friendLst.length; jj++) {
+												selGroupsDict[selGroups[ii]].push(friendLst[jj].userId);
+											}
+											selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
+										}
+									}
+									console.log(selGroupsDict);
 									$.ajax({
 						                url: window.address + 'sendDripp',
-						                data: {fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
+						                data: {groupsDict: JSON.stringify(selGroupsDict), fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
 						                type:'get'
 						            });
 									$(".showForm").attr("class", "showForm hide");

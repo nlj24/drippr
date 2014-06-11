@@ -8,6 +8,7 @@ window.GROUP_METHOD = {
         window.groupList_ids = [];
         window.groupAll = {};
         window.other_members_dict = {};
+        window.all_members_dict = {};
 
         window.groupListDict = {};
         window.groupListDict2 = {};
@@ -22,12 +23,14 @@ window.GROUP_METHOD = {
                     window.groupListDict[data[jj].name] = data[jj].id;
                     window.groupListDict2[data[jj].id] = data[jj].name;
                     window.my_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
+                    window.all_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
                 id = data[jj].userId;
                 userName = data[jj].fullName;
                 userId = data[jj].userId;
                 window.my_members_dict[data[jj].id]['list'].push({name : userName, userId: userId});
+                window.all_members_dict[data[jj].id]['list'].push({name : userName, userId: userId});
 
             } else { // I'm just a member
 
@@ -38,12 +41,14 @@ window.GROUP_METHOD = {
                     window.groupListDict2[data[jj].id] = data[jj].name;
                     creator = window.groupAll[data[jj].creatorId];
                     window.other_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, creatorId: creator, list:[]};
+                    window.all_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, creatorId: creator, list:[]};
                 }
                     
                 id = data[jj].userId;
                 userName = data[jj].fullName;
                 userId = data[jj].userId;
                 window.other_members_dict[data[jj].id]['list'].push({name : userName, userId: userId});
+                window.all_members_dict[data[jj].id]['list'].push({name : userName, userId: userId});
 
             }
 
