@@ -36,6 +36,10 @@
     border-bottom-right-radius: 10px;
 }
 
+.bl {
+  border-bottom-left-radius: 10px;
+}
+
 #fb-input-ext {
     margin-bottom: 9px;
 }
