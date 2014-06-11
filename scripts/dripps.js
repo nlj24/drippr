@@ -148,7 +148,7 @@ window.ARTICLE_METHOD ={
 
 $(document).keydown(function(e){
 
-    if ((!$("#dripps").hasClass("hidden")) && ($("#myModal").attr("aria-hidden") == "true" )) {
+    if ((!$("#dripps").hasClass("hide")) && ($("#myModal").attr("aria-hidden") == "true" )) {
         if (e.keyCode == 37) {
             javascript:sliders[0].goToPrev();
         }
