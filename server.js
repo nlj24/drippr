@@ -304,7 +304,6 @@ app.get("/sendDripp", function(req, res) {
     var convoId;
     var set_send_query;
 
-    console.log(selGroupsDict);
     if (recipientFriendIds.length > 0) {
         var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
         connection.query(max_id_query, function(err,rows,fields) {
