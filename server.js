@@ -303,33 +303,34 @@ app.get("/sendDripp", function(req, res) {
     var convoId;
     var set_send_query;
 
-    var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
-    connection.query(max_id_query, function(err,rows,fields) {
-        if (err) throw err;
-        if (rows[0]['MAX(conversationId)'] == null) {
-            convoId = 0;
-        }else{
-            convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
-            
-        }
+    if (recipientFriendIds.length > 0) {
+        var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
+        connection.query(max_id_query, function(err,rows,fields) {
+            if (err) throw err;
+            if (rows[0]['MAX(conversationId)'] == null) {
+                convoId = 0;
+            }else{
+                convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
+                
+            }
 
-        for(var jj=0; jj < recipientFriendIds.length; jj++){
+            for(var jj=0; jj < recipientFriendIds.length; jj++){
+                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
+                    + recipientFriendIds[jj] + "," +  fromUserId+ ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+                connection.query(set_send_query, function(err,rows,fields) {
+                    if (err) throw err;
+                });   
+            }
+
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                + recipientFriendIds[jj] + "," +  fromUserId+ ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
-            connection.query(set_send_query, function(err,rows,fields) {
-                if (err) throw err;
-            });   
-        }
-
-        set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                + fromUserId + "," +  fromUserId+ "," +recipientGroup + ",'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
+                    + fromUserId + "," +  fromUserId + ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
             });   
 
 
-    });
+        });
 });
 
 app.get("/sendConvo", function(req, res) {
@@ -376,9 +377,9 @@ app.get("/createGroup", function(req, res) {
             var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES (\"" + groupName + "\",'" +  members[ii] + "'," + next_id + ",'" + creatorId + "')";
             connection.query(create_group, function(err,rows,fields) {
                 if (err) throw err;
-                res.send(200);
             });
         }
+        res.send(200);
     });
 });
 

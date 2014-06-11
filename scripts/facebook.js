@@ -272,18 +272,17 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 							});
 
 							$(".send").click(function(){
-								var groupsEnteredStr = $("#tags").val();
-								var groupsEntered = groupsEnteredStr
-								if (window.drippsIds.length > 0) {
+								if (window.drippsIds.length > 0 || window.selGroups.length > 0) {
 									$.ajax({
 						                url: window.address + 'sendDripp',
-						                data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
+						                data: {fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
 						                type:'get'
 						            });
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
 						            window.drippsChosenFriends = {};
 									window.drippsIds=[];
+									window.selGroups = [];
 									$('#chosen').empty();
 									setTimeout(function() {
 					                    $('#myModal').modal('hide');
