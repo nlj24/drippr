@@ -147,11 +147,14 @@ window.ARTICLE_METHOD ={
 };
 
 $(document).keydown(function(e){
-    if (e.keyCode == 37) {
-        javascript:sliders[0].goToPrev();
-    }
-    if (e.keyCode == 39) {
-        javascript:sliders[0].goToNext();
+
+    if ((!$("#dripps").hasClass("hidden")) && ($("#myModal").attr("aria-hidden") == "true" )) {
+        if (e.keyCode == 37) {
+            javascript:sliders[0].goToPrev();
+        }
+        if (e.keyCode == 39) {
+            javascript:sliders[0].goToNext();
+        }
     }
 });
 
