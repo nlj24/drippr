@@ -115,6 +115,34 @@ body {
   height: 100%;
 }
 
+#drippsIntro {
+  width: 720px;
+  height: 540px;
+}
+
+.slider2 {
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  float: none;
+}
+
+.slider2 > ul {
+    /* styled by JS to match the added width and height of all <li>’s */
+    position: relative;
+    -webkit-transition: 0.5s left;
+    -moz-transition: 0.5s left;
+    -ms-transition: 0.5s left;
+    -o-transition: 0.5s left;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+    
+.slider2 > ul > li {
+  float: left;
+  height: 100%;
+}
+
 .mainBubble {
   color: #6D6E70;
   float: none;

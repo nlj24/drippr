@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="/scripts/groups.js"></script>
 		<script type="text/javascript" src="/scripts/elastic.js"></script>
 		<script type="text/javascript" src="/scripts/slider.js"></script>
+		<script type="text/javascript" src="/scripts/introSlider.js"></script>
 		<script type="text/javascript" src="/scripts/moment.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
 		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
@@ -142,7 +143,52 @@
 
 		<div id="dripps" class = "container-fluid">
 			<div id="drippsPromo">
-				drippr is sooooo cool.
+				<div id="drippsIntro">	
+					<div class="slider2">
+			            <ul>
+		                	<li>
+						        <img src = "/intro/Slide1.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide2.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide3.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide4.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide5.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide6.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide7.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide8.png">
+		                	</li> 
+			            </ul>
+	            	</div>
+	            </div>
+	            <a href = "javascript:sliders2[0].goToNext()">
+		        	<div class = "arrow" id = "nextArrow2">
+		        		<img src = "/images/revArrow.svg">
+					</div>
+				</a>
+				<a href = "javascript:sliders2[0].goToPrev()">
+		        	<div class = "arrow" id = "prevArrow2">
+		        		<img src = "/images/revArrow.svg">
+					</div>
+				</a>
+				<script>
+					var sliders2 = [];
+					$('.slider2').each(function() {
+					sliders2.push(new Slider2(this))
+					});
+				</script>
 			</div>    		
 			<div class = "row hide" id = "size1">
 	        	<div class = "menuBar col-xs-3">
