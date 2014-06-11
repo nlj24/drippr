@@ -111,13 +111,6 @@ window.BUCKET_METHOD = {
                 }
             }
 
-            var templateSource = $("#items-template").html(),
-            template = Handlebars.compile(templateSource),
-            itemHTML = template({"buckets":feed});
-            $('#items').html(itemHTML);
-            $('#fb').attr("class", "");
-            $('#dripprdiv').attr("class", "");
-
             for (var ii = 0; ii < feed.length; ii++) {
                 if (feed[ii]['isRead']) {
                     $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
@@ -215,6 +208,11 @@ window.BUCKET_METHOD = {
             data: {user: window.myID},
             method:'get',
             success: function(data2){
+                for (var i = 0; i < data2.length; i++) {
+                    if (window.myID == data2[i].userId) {
+                        data2[i].fullName = "me";
+                    }
+                }
                 BUCKET_METHOD.compileBuckets(dripps_data, readItLater_data, data2);
             }
         });
@@ -295,7 +293,7 @@ function bindButtons(){
             $('#messageInput').val('');
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource);
-            window.conversation_data.push({content: content, conversationId: window.selItem['conversationId'], fName:"You", lName: "", userId:window.myID, time:moment()});
+            window.conversation_data.push({content: content, conversationId: window.selItem['conversationId'], fullName:"me", userId:window.myID, time:moment()});
 
             displayConvos(window.selItem, window.selItem['conversationId'], messageListTemplate, window.conversation_data);
         }

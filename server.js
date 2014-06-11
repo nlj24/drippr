@@ -305,7 +305,7 @@ app.get("/sendDripp", function(req, res) {
     var convoId;
     var set_send_query;
 
-    if (recipientFriendIds.length > 0) {
+    if (recipientFriendIds) {
         var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
         connection.query(max_id_query, function(err,rows,fields) {
             if (err) throw err;
@@ -365,29 +365,32 @@ app.get("/sendDripp", function(req, res) {
         });
     } 
 
-
-
-
-
-
     else {
-        for (var jj = 0; jj < recipientGroup.length; jj++) {
-            var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
-            connection.query(max_id_query, function(err,rows,fields) {
-                if (err) throw err;
-                if (rows[0]['MAX(conversationId)'] == null) {
-                    convoId = 0;
-                }else{
-                    convoId = 1 + parseInt(rows[0]['MAX(conversationId)']);
-                    
+        var max_id_query = "SELECT MAX(conversationId) FROM Dripps";
+        connection.query(max_id_query, function(err,rows,fields) {
+            if (rows[0]['MAX(conversationId)'] == null) {
+                convoId = 0;
+            }else{
+                convoId = parseInt(rows[0]['MAX(conversationId)']);   
+            }
+            if (err) throw err;
+            //loop through each group
+            for (var aa = 0; aa < recipientGroup.length; aa++) {
+                convoId += 1;
+                recipientFriendIds = selGroupsDict[recipientGroup[aa]];
+                for (var kk = 0; kk < recipientFriendIds.length; kk++) {  
+                    set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" 
+                        + recipientFriendIds[kk] + "','" +  fromUserId+ "','" + recipientGroup[aa] + "','" + "" +recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+                    connection.query(set_send_query, function(err,rows,fields) {
+                        if (err) throw err;
+                    });
                 }
-                set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                    + "-1,'" +  fromUserId+ "','" + recipientGroup[jj] + "',-1," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
-                connection.query(set_send_query, function(err,rows,fields) {
+                set_send_query2 = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" + fromUserId + "','" +  fromUserId + "','" + recipientGroup[aa] + "','" + "" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
+                connection.query(set_send_query2, function(err,rows,fields) {
                     if (err) throw err;
-                });     
-            });
-        }
+                });
+            }
+        });
         res.send(200);
     }
 });
@@ -450,18 +453,36 @@ app.get("/deleteGroup", function(req, res) {
         if (err) throw err;
         res.send(200);
     });
+    var delete_records = "DELETE FROM Dripps WHERE recipientGroup = " + groupId;
+    connection.query(delete_records, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(200);
+    });
 });
 
 app.get("/deleteNewGroup", function(req, res) {
     var creatorId = req.query.creatorId;
     var groupName = req.query.groupName;
-
-    var delete_new_group = "DELETE FROM Groups WHERE creatorId ='" + creatorId + "' AND name = '" + groupName + "'";
-    console.log(delete_new_group);
-    connection.query(delete_new_group, function(err,rows,fields) {
-        if (err) throw err;
-        res.send(200);
-    });
+    try{
+        var get_group_id = "SELECT DISTINCT id FROM Groups WHERE creatorId ='" + creatorId + "' AND name = '" + groupName + "'";
+        connection.query(get_group_id, function(err,rows,fields) {
+            if (err) throw err;
+            groupId = rows[0].id;
+            console.log(groupId);
+            var delete_group = 'DELETE FROM Groups WHERE id =' + groupId;
+            connection.query(delete_group, function(err,rows,fields) {
+                if (err) throw err;
+            });
+            var delete_records = "DELETE FROM Dripps WHERE recipientGroup = " + groupId;
+            connection.query(delete_records, function(err,rows,fields) {
+                if (err) throw err;
+                res.send(200);
+            });
+        });
+    }
+    catch(e) {
+        return;
+    }
 });
 
 app.get("/leaveGroup", function(req, res) {
