@@ -10,12 +10,22 @@ window.GROUP_METHOD = {
         window.other_members_dict = {};
         window.all_members_dict = {};
 
+        //key is names, values ids
         window.groupListDict = {};
+        //key is ids, values names
         window.groupListDict2 = {};
+
+        window.groupMemberCounts = {};
 
         for (var jj = 0; jj < data.length; jj++) {
             window.groupAll[data[jj].userId] = data[jj].fullName;
 
+            if (window.groupMemberCounts[data[jj].id] == undefined) {
+                window.groupMemberCounts[data[jj].id] = 0;
+            }
+
+            window.groupMemberCounts[data[jj].id]++;
+            
             if(data[jj].creatorId == me) { // I'm the creator
                 if (!(window.my_members_dict[data[jj].id])) {
                     window.groupList.push(data[jj].name);

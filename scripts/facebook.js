@@ -251,7 +251,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 									var groupId = groupListDict[name];
 									if((selGroups.indexOf(groupId) == -1) && (window.groupList_ids.indexOf(groupId) != -1)) {
 										window.selGroups.push(groupId);
-										$("#chosen").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
+										$("#chosen").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " | " + window.groupMemberCounts[groupId] + " people " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
 							    		$(".rm_group" ).unbind("click", handler3);
 					    				$(".rm_group").bind("click", handler3);
 
