@@ -9,6 +9,7 @@ window.GROUP_METHOD = {
         window.other_members_dict = {};
 
         window.groupListDict = {};
+        window.groupListDict2 = {};
 
         for (var jj = 0; jj < data.length; jj++) {
 
@@ -17,6 +18,7 @@ window.GROUP_METHOD = {
                     window.groupList.push(data[jj].name);
                     window.groupList_ids.push(data[jj].id);
                     window.groupListDict[data[jj].name] = data[jj].id;
+                    window.groupListDict2[data[jj].id] = data[jj].name;
                     window.my_members_dict[data[jj].id] = {name: data[jj].name, id: data[jj].id, list:[]};
                 }
                     
@@ -31,6 +33,7 @@ window.GROUP_METHOD = {
                     window.groupList.push(data[jj].name);
                     window.groupList_ids.push(data[jj].id);
                     window.groupListDict[data[jj].name] = data[jj].id;
+                    window.groupListDict2[data[jj].id] = data[jj].name;
                     if (data[jj].creatorId == data[jj].userId) {
                         creator = data[jj].fullName;
                     }
@@ -148,9 +151,17 @@ window.GROUP_METHOD = {
         });
 
 
+        window.autoCompleteGroups = window.groupList;
+        $(function() {
+            $("#tags").autocomplete({
+                source: window.autoCompleteGroups
+            });
+        });
+
+        $("#tags").autocomplete( "option", "minLength", 3);
 
     },
-    
+
     loadGroups:function(){$.ajax({
         url: window.address + 'groups',
         data: {userId: window.myID},

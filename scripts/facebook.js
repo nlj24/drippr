@@ -77,14 +77,6 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 						//I hope ashwin doesn't see this name...
 			            function everythingElse(friend_data) {
 			            	window.friend_dict = {};
-			            	window.autoCompleteGroups = window.groupList;
-			            	$(function() {
-					            $("#tags").autocomplete({
-					                source: window.autoCompleteGroups
-					            });
-					        });
-
-        					$("#tags").autocomplete( "option", "minLength", 3);
 
 			                for(var jj=0; jj < friend_data.length; jj++) {
 			                	window.friend_dict[friend_data[jj].id] = friend_data[jj];
@@ -257,9 +249,9 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								if (e.keyCode == 13) {
 									var name = $("#tags").val();
 									var groupId = groupListDict[name];
-									if(window.groupList_ids.indexOf(groupId) != -1) {
+									if((selGroups.indexOf(groupId) == -1) && (window.groupList_ids.indexOf(groupId) != -1)) {
 										window.selGroups.push(groupId);
-										$("#chosen").append("<div class='green_friends' id='"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
+										$("#chosen").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
 							    		$(".rm_group" ).unbind("click", handler3);
 					    				$(".rm_group").bind("click", handler3);
 
@@ -267,7 +259,8 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 					                        var id = $(e.target).attr('id');
 					                        console.log(id);
 					                        window.selGroups.splice(window.selGroups.indexOf(id),1);
-											$("#"+id).remove();
+											$("#group_"+id).remove();
+											window.autoCompleteGroups.push(window.groupListDict2[$(e.target).attr('id')]);
 					                    });
 
 					                    window.autoCompleteGroups.splice(window.autoCompleteGroups.indexOf(name),1);
