@@ -107,7 +107,7 @@ window.GROUP_METHOD = {
 
         $(".leaveGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');
-            if (other_members_dict[groupId]['list'].length == 3) {
+            if (other_members_dict[groupId]['list'].length == 1) {
                 $.ajax({
                     url: window.address + 'deleteGroup',
                     data: {groupId: groupId},

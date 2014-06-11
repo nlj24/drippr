@@ -79,7 +79,7 @@ app.get("/buckets", function(req, res){
 
 app.get("/dripps", function(req, res){
     var userId = req.query.user;
-    var get_inbox_articles_query = "SELECT DISTINCT Dripps.id, Dripps.articleId, fName, lName, isReal, fromUserId, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, inInbox, unreadDripps, unreadComments, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
+    var get_inbox_articles_query = "SELECT DISTINCT Dripps.id, Dripps.articleId, Users.fullName, isReal, fromUserId, headline, source, url, imgUrl, numLikes, numDislikes, Dripps.conversationId, recipientGroup, recipientFriendIds, timeSent, inInbox, unreadDripps, unreadComments, l1.userId AS l_user, d1.userId As d_user, b1.userId AS b_user FROM (Dripps INNER JOIN Articles ON Dripps.articleId = Articles.id INNER JOIN Users ON Users.id = Dripps.fromUserId LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Dripps.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Dripps.articleId)  LEFT JOIN (SELECT * FROM Buckets WHERE bucketId = -1 AND Buckets.userId = "+userId+ ") AS b1 ON b1.articleId = Articles.id WHERE recipientUserId=" + userId + " ORDER BY Dripps.timeSent";
     
     
     connection.query(get_inbox_articles_query, function(err,rows,fields) {
@@ -99,10 +99,11 @@ app.get("/dripps", function(req, res){
 
             articles_list.push( articles_dict[rows[ii].id]);
             members += "," + rows[ii]['recipientFriendIds'];
+            members += "," + rows[ii]['fromUserId'];
         }
         members = "(" + members.slice(1) + ")";
         if (rows.length > 0) {        
-            var get_names_query = "select fName, lName, id from Users Where id in " + members;
+            var get_names_query = "select fullName, id from Users Where id in " + members;
             connection.query(get_names_query, function(err,rows,fields) {
                 if (err) throw err; 
                 res.send({article: articles_list, names: rows});
@@ -126,7 +127,7 @@ app.get("/isRead", function(req, res){
 app.get("/conversations",  function(req, res){
     var userId = req.query.user;
     
-    var get_conversations_articles_query = "SELECT content, Conversations.conversationId, fName, lName, Conversations.userId, time FROM Conversations INNER JOIN Users On Conversations.userId = Users.id INNER JOIN (SELECT Dripps.conversationId FROM Dripps WHERE recipientUserId =" + userId +") AS d1 ON d1.conversationId = Conversations.conversationId ORDER BY Conversations.time";
+    var get_conversations_articles_query = "SELECT content, Conversations.conversationId, Users.fullName, Conversations.userId, time FROM Conversations INNER JOIN Users On Conversations.userId = Users.id INNER JOIN (SELECT Dripps.conversationId FROM Dripps WHERE recipientUserId =" + userId +") AS d1 ON d1.conversationId = Conversations.conversationId ORDER BY Conversations.time";
     connection.query(get_conversations_articles_query, function(err,rows,fields) {
         if (err) throw err;
         res.send(rows);

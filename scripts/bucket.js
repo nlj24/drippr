@@ -9,6 +9,9 @@ window.BUCKET_METHOD = {
             if (dripps_data[ii]['unreadComments'] || dripps_data[ii]['unreadDripps']) {
                 window.notifications +=1;
             }
+            if (dripps_data[ii].recipientGroup != -1) {
+                dripps_data[ii].fullName = window.groupListDict2[dripps_data[ii].recipientGroup] + ": " + dripps_data[ii].fullName;
+            }
         }
         if (window.notifications) {
             $(".notify").text(window.notifications);
@@ -242,7 +245,7 @@ window.BUCKET_METHOD = {
                 window.BUCKET_METHOD.handlerData(data.article);
                 window.userNames = {};
                 for (var jj = 0; jj < data.names.length; jj++) {
-                    window.userNames[data.names[jj].id] = data.names[jj]['fName'] + " " + data.names[jj]['lName'];
+                    window.userNames[data.names[jj].id] = data.names[jj]['fullName'];
                 }
             }
         });
@@ -444,6 +447,7 @@ window.bindBucket = function() {
 
 function makeUserNameList(recIds) {
     var list = recIds.split(',');
+    list.push(window.selItem.fromUserId);
     for (var zz = 0; zz < list.length; zz++) {
 
         list[zz] = {name:window.userNames[list[zz]], picture: "http://graph.facebook.com/" + list[zz] + "/picture?width=25&height=25"};
