@@ -36,7 +36,28 @@ darkGrey: #6D6E70*/
   margin-bottom: 10px;
 }
 
+.green_friends {
+  color: white;
+  display: inline-block;
+  background-color: #00CC00;
+  padding: 5px;
+  border: 1px solid #6D6E70;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .rm {
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #6D6E70;
+  color: white;
+  border-radius: 5px;
+}
+.rm_group {
   display: inline-block;
   cursor: pointer;
   padding-left: 5px;
