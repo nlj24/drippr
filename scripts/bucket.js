@@ -111,6 +111,11 @@ window.BUCKET_METHOD = {
                 }
             }
 
+            var templateSource = $("#items-template").html(),
+            template = Handlebars.compile(templateSource),
+            itemHTML = template({"buckets":feed});
+            $('#items').html(itemHTML);
+
             for (var ii = 0; ii < feed.length; ii++) {
                 if (feed[ii]['isRead']) {
                     $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
@@ -193,10 +198,6 @@ window.BUCKET_METHOD = {
         window.setBucketLikes();
         $('#messageInput').elastic();
 
-        var templateSource = $("#header-template").html(),
-        template = Handlebars.compile(templateSource);
-        headerHTML = template();
-        $('#headerDiv').html(headerHTML);
     },
 
     handlerData2:function(dripps_data, readItLater_data){
