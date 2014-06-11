@@ -16,13 +16,6 @@ $(".derecha").css("line-height", ($(".inputBox").height()+4) + "px");
 $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
 
 
-$("#sendBtn").click(function() {
-    $.ajax({
-        url: window.address + 'sendDripp/new',
-        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.ids},
-        method:'get' 
-    });
-});
 
 $("#saveBtn").click(function() {
     $.ajax({
@@ -81,11 +74,11 @@ $("#saveBtn").click(function() {
 
 
                             //send drip
-                            $(".send").click(function(){
+                            $(".sendBtn").click(function(){
                                 if (window.ids.length > 0) {
                                     $.ajax({
                                         url:'http://drippr.me/sendDripp/new',
-                                        data: {fromUserId: window.myID, recipientGroup: -1, recipientFriendIds: window.ids, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
+                                        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds},
                                         type:'get'
                                     });
                                 }
@@ -102,7 +95,7 @@ $("#saveBtn").click(function() {
                             $(".save").click(function(){
                                     $.ajax({
                                         url:'http://drippr.me/readItLater/new',
-                                        data: {userId:window.myID, headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category: "world"}, // fix category
+                                        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
                                         type:'get'
                                     });
                                     $(".showForm").attr("class", "showForm hide");
@@ -110,39 +103,6 @@ $("#saveBtn").click(function() {
                             });
 
 
-            $("#groupBtn").click(function(){
-                console.log(window.ids);
-                window.ids.push(window.myID);
-                if (window.ids.length) {
-                    var groupName = $('#groupName').val();
-
-                    for(var kk = 0; kk < window.groupList.length; kk++){
-                        if (groupName == window.groupList[kk]) {
-                            alert("you already have a group with that name LOL");
-                            return;
-                        }
-                    }
-
-                    if (!(window.ids.length > 1)) {
-                        alert("must add some members!!!!");
-                        return;
-                    }
-
-                    $.ajax({
-                        url:'http://drippr.me/createGroup',
-                        data: {groupName: groupName, members: window.ids, creatorId: window.myID},
-                        type:'get'
-                    });
-                }
-                window.ids = [];
-            });
-
-            $(".close").click(function(){
-                $.modal.close();
-            });
-
-            // window.ARTICLE_METHOD.loadArticleData();
-            // window.BUCKET_METHOD.loadArticleData();
 
             
         } else if (response.status === 'not_authorized') {
