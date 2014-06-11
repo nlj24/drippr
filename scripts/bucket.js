@@ -3,9 +3,12 @@ var bucket_results;
 var feed; 
 
 window.BUCKET_METHOD = {
+
     compileBuckets:function(dripps_data, readItLater_data, conversation_data){
         window.notifications = 0;
+        window.dripps_data_dict = {};
         for (var ii = 0; ii <dripps_data.length; ii++) {
+            window.dripps_data_dict[dripps_data[ii].id] = dripps_data[ii];
             if (dripps_data[ii]['unreadComments'] || dripps_data[ii]['unreadDripps']) {
                 window.notifications +=1;
             }
@@ -16,6 +19,10 @@ window.BUCKET_METHOD = {
         if (window.notifications) {
             $(".notify").text(window.notifications);
             $(".notify").parents(".headBub").css("background-color", "red");
+        }else{
+            $(".notify").text("");
+            $(".notify").parents(".headBub").css("background-color", "#6D6E70");
+
         }
 
         articleDict = {};
@@ -266,10 +273,34 @@ function bindMessages(template, conversation_data){
             data: {drippId: id},
             type:'get'
         });
+
+        window.dripps_data_dict[id]['unreadDripps'] = 0;
+        window.dripps_data_dict[id]['unreadComments'] = 0;
+
+        window.notifications = 0;
+        for (var message_id in window.dripps_data_dict) {
+            if (window.dripps_data_dict[message_id]['unreadComments'] || window.dripps_data_dict[message_id]['unreadDripps']) {
+                window.notifications +=1;
+            }
+           
+        }
+        if (window.notifications) {
+            $(".notify").text(window.notifications);
+            $(".notify").parents(".headBub").css("background-color", "red");
+        }else{
+            $(".notify").text("");
+            $(".notify").parents(".headBub").css("background-color", "#6D6E70");
+
+        }
+
+
+
         $('.messageItem').css("background", "white");
         $('.messageItem').css("color", "#6D6E70");
         $(e.target).closest('.messageItem').css("background", "#6D6E70");
         $(e.target).closest('.messageItem').css("color", "white");
+
+
         displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);   
         bindButtons();
     });
