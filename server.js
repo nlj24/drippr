@@ -321,7 +321,6 @@ app.get("/sendDripp", function(req, res) {
                     if (err) throw err;
                 });   
             }
-            console.log(recipientGroup);
             set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
                     + fromUserId + "," +  fromUserId + ",-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
             connection.query(set_send_query, function(err,rows,fields) {
@@ -338,19 +337,23 @@ app.get("/sendDripp", function(req, res) {
 
                         for (var aa = 0; aa < recipientGroup.length; aa++) {
                             var members_ids = "SELECT * FROM Groups WHERE id =" + recipientGroup[aa];
-                            console.log(members_ids);
+                            var group = recipientGroup[aa];
                             connection.query(members_ids, function(err,rows,fields) {
                                 convoId += 1;
-                                console.log(recipientGroup[aa]);
-                                recipientFriendIds = rows[0];  
+                                recipientFriendDicts = rows;
+                                recipientFriendIds = [];
+                                for(var x in recipientFriendDicts) {
+                                    recipientFriendIds.push(recipientFriendDicts[x].userId);
+                                }
+                                console.log(group);
                                 for (var kk = 0; kk < rows[0].length; kk++) {  
-                                    set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" 
-                                        + recipientFriendIds[kk] + "," +  fromUserId+ "','" + recipientGroup[aa] + "','" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
+                                    set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" 
+                                        + recipientFriendIds[kk] + "','" +  fromUserId+ "','" + group + "','" + "" +recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
                                     connection.query(set_send_query, function(err,rows,fields) {
                                         if (err) throw err;
                                     });
                                 }
-                                set_send_query2 = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES (" + fromUserId + "," +  fromUserId + "','" + recipientGroup[aa] + "','" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
+                                set_send_query2 = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('" + fromUserId + "','" +  fromUserId + "','" + group + "','" + "" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 0, 0)";
                                 connection.query(set_send_query2, function(err,rows,fields) {
                                     if (err) throw err;
                                 });
