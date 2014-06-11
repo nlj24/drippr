@@ -412,8 +412,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 			            }
 
 						window.GROUP_METHOD.loadGroups();
-						window.ARTICLE_METHOD.loadArticleData();
-						window.BUCKET_METHOD.loadArticleData();
+						
 						window.bindDripps();
 						window.bindBucket();
 

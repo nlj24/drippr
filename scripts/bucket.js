@@ -112,6 +112,8 @@ window.BUCKET_METHOD = {
             template = Handlebars.compile(templateSource),
             itemHTML = template({"buckets":feed});
             $('#items').html(itemHTML);
+            $('#fb').attr("class", "");
+            $('#dripprdiv').attr("class", "");
 
             for (var ii = 0; ii < feed.length; ii++) {
                 if (feed[ii]['isRead']) {
@@ -194,6 +196,11 @@ window.BUCKET_METHOD = {
 
         window.setBucketLikes();
         $('#messageInput').elastic();
+
+        var templateSource = $("#header-template").html(),
+        template = Handlebars.compile(templateSource);
+        headerHTML = template();
+        $('#headerDiv').html(headerHTML);
     },
 
     handlerData2:function(dripps_data, readItLater_data){

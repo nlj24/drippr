@@ -26,108 +26,111 @@
             <!-- Header -->
 		<div id="header" class = "container-fluid">
 			<div class = "row header">
-	    		<div id="drippsHeader" class = "col-xs-5 headingPad">
-		        	<div class = "col-xs-4 headingPad1">
-		        		<a href="#dripp">
-		    				<div class = "drippsBub chosenHeadBub">
-		    					<div class = "col-xs-3">
-		        					<img class = "headBubImg" src = "/images/dropWhite.svg">
-		        				</div>
-		        				<div class = "col-xs-9">
-		        					<p id = "selPage">
-		    							find
-		    						</p>
-								</div>
-		    				</div>
-	    				</a>
-	    			</div>
-	    			<div class = "col-xs-2 headingPad2">
-	    				<a href="#bucket">
-		    				<div class = "bucketsBub headBub">
-		    					<div class = "notify"></div>
-		    					<img class = "headBubImg" src = "/images/bucket.svg">
-		    				</div>
-	    				</a>
-	    			</div>
-	    			<div class = "col-xs-2 headingPad2">
-	    				<a href="#group">
-		    				<div class = "groupsBub headBub">
-		    					<img class = "headBubImg" src = "/images/group.svg">
-		    				</div>
-	    				</a>
-	    			</div>
-	    		</div>
-	    		<div id="bucketsHeader" class = "col-xs-5 headingPad hide">
-					<div class = "col-xs-2 headingPad2">
-	    				<a href="#dripp">
-	    				<div class = "drippsBub headBub">
-	    					<img class = "headBubImg" src = "/images/dropWhite.svg">
-	    				</div>
-	    				</a>
-	        		</div>
-		        	<div class = "col-xs-4 headingPad1">
-	    				<a href="#bucket">
-		    				<div class = "bucketsBub chosenHeadBub">
-		    					<div class = "col-xs-3">
-		        					<img class = "headBubImg" src = "/images/bucket.svg">
-		        				</div>
-		        				<div class = "col-xs-9">
-		        					<p id = "selPage">
-		    							bucket
-		    						</p>
-								</div>
-		    				</div>
-	    				</a>
-	    			</div>
-	    			<div class = "col-xs-2 headingPad2">
-	    				<a href="#group">
-		    				<div class = "groupsBub headBub">
-		    					<img class = "headBubImg" src = "/images/group.svg">
-		    				</div>
-	    				</a>
-	    			</div>
-	    		</div>
-
-	    		<div id="groupsHeader" class = "col-xs-5 headingPad hide">
-					<div class = "col-xs-2 headingPad2">
-	    				<a href="#dripp">
+				<div id = "headerDiv">
+				</div>
+				<script id="header-template" type="text/x-handlebars-template"> 
+		    		<div id="drippsHeader" class = "col-xs-5 headingPad">
+			        	<div class = "col-xs-4 headingPad1">
+			        		<a href="#dripp">
+			    				<div class = "drippsBub chosenHeadBub">
+			    					<div class = "col-xs-3">
+			        					<img class = "headBubImg" src = "/images/dropWhite.svg">
+			        				</div>
+			        				<div class = "col-xs-9">
+			        					<p id = "selPage">
+			    							find
+			    						</p>
+									</div>
+			    				</div>
+		    				</a>
+		    			</div>
+		    			<div class = "col-xs-2 headingPad2">
+		    				<a href="#bucket">
+			    				<div class = "bucketsBub headBub">
+			    					<div class = "notify"></div>
+			    					<img class = "headBubImg" src = "/images/bucket.svg">
+			    				</div>
+		    				</a>
+		    			</div>
+		    			<div class = "col-xs-2 headingPad2">
+		    				<a href="#group">
+			    				<div class = "groupsBub headBub">
+			    					<img class = "headBubImg" src = "/images/group.svg">
+			    				</div>
+		    				</a>
+		    			</div>
+		    		</div>
+		    		<div id="bucketsHeader" class = "col-xs-5 headingPad hide">
+						<div class = "col-xs-2 headingPad2">
+		    				<a href="#dripp">
 		    				<div class = "drippsBub headBub">
 		    					<img class = "headBubImg" src = "/images/dropWhite.svg">
 		    				</div>
-	    				</a>
-	        		</div>
-	    			<div class = "col-xs-2 headingPad2">
-	    				<a href="#bucket">
-		    				<div class = "bucketsBub headBub">
-		    					<div class = "notify"></div>
-		    					<img class = "headBubImg" src = "/images/bucket.svg">
-		    				</div>
-	    				</a>
-	    			</div>
-		        	<div class = "col-xs-4 headingPad1">
-		        		<a href="#group">
-		    				<div class = "groupsBub chosenHeadBub">
-		    					<div class = "col-xs-3">
-		        					<img class = "headBubImg" src = "/images/group.svg">
-		        				</div>
-		        				<div class = "col-xs-9">
-		        					<p id = "selPage">
-		    							groups
-		    						</p>
-								</div>
-		    				</div>
-		        		</a>
-	    			</div>
-	    		</div>
+		    				</a>
+		        		</div>
+			        	<div class = "col-xs-4 headingPad1">
+		    				<a href="#bucket">
+			    				<div class = "bucketsBub chosenHeadBub">
+			    					<div class = "col-xs-3">
+			        					<img class = "headBubImg" src = "/images/bucket.svg">
+			        				</div>
+			        				<div class = "col-xs-9">
+			        					<p id = "selPage">
+			    							bucket
+			    						</p>
+									</div>
+			    				</div>
+		    				</a>
+		    			</div>
+		    			<div class = "col-xs-2 headingPad2">
+		    				<a href="#group">
+			    				<div class = "groupsBub headBub">
+			    					<img class = "headBubImg" src = "/images/group.svg">
+			    				</div>
+		    				</a>
+		    			</div>
+		    		</div>
+		    		<div id="groupsHeader" class = "col-xs-5 headingPad hide">
+						<div class = "col-xs-2 headingPad2">
+		    				<a href="#dripp">
+			    				<div class = "drippsBub headBub">
+			    					<img class = "headBubImg" src = "/images/dropWhite.svg">
+			    				</div>
+		    				</a>
+		        		</div>
+		    			<div class = "col-xs-2 headingPad2">
+		    				<a href="#bucket">
+			    				<div class = "bucketsBub headBub">
+			    					<div class = "notify"></div>
+			    					<img class = "headBubImg" src = "/images/bucket.svg">
+			    				</div>
+		    				</a>
+		    			</div>
+			        	<div class = "col-xs-4 headingPad1">
+			        		<a href="#group">
+			    				<div class = "groupsBub chosenHeadBub">
+			    					<div class = "col-xs-3">
+			        					<img class = "headBubImg" src = "/images/group.svg">
+			        				</div>
+			        				<div class = "col-xs-9">
+			        					<p id = "selPage">
+			    							groups
+			    						</p>
+									</div>
+			    				</div>
+			        		</a>
+		    			</div>
+		    		</div>
+		    	</script>
 				<div class = "col-xs-2">
-		        	<div id = "dripprdiv">
+		        	<div class = "hide" id = "dripprdiv">
 		        		<a href = "http://drippr.me"> 
 		        			<img id = "logo" src = "images/logo.png">
 		        		</a>
 		        	</div>
 	        	</div>
 				<div class = "col-xs-5">
-					<div id = "fb">
+					<div class = "hide" id = "fb">
 						<div id = "user">
 						</div>
 						<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">

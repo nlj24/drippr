@@ -159,6 +159,7 @@ window.GROUP_METHOD = {
         });
 
         $("#tags").autocomplete( "option", "minLength", 3);
+        window.ARTICLE_METHOD.loadArticleData();
 
     },
 

@@ -314,6 +314,8 @@ window.bindDripps = function() {
             window.articlesData[articleId]['userReadItLater'] = true;
         }
     });
+
+    window.BUCKET_METHOD.loadArticleData();
 }
 
 window.positions = {};
