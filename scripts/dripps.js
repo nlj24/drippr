@@ -289,22 +289,6 @@ window.bindDripps = function() {
             window.articlesData[articleId]['userDisliked'] = true;
         };
     });
-    
-
-
-    // $(".sendGroup").click(function(){            
-    //     var groupSel = $('#tags').val();
-    //     console.log(groupSel);
-    //     var groupId = window.groupListDict[groupSel];
-    //     console.log(groupId);
-    //     if (groupId) {
-    //         $.ajax({
-    //             url: window.address + 'sendDripp',
-    //             data: {fromUserId: window.myID, recipientGroup: groupId, recipientFriendIds: -1, articleId: window.curArticle},
-    //             type:'get'
-    //         });
-    //     }
-    // });
 
     $(".readLater").click(function(){
         var articleId = window.curArticle;
