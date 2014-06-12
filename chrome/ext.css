@@ -1,4 +1,4 @@
-.derecha {
+.floatRight {
     font-size: 22px;
     float: right;
     margin-bottom: 10px;
@@ -6,9 +6,7 @@
 }
 
 .inputBox {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float: left;
+    margin-top: 13.5px;
 }
 
 .container {
@@ -21,23 +19,7 @@
 
 .bkg {
     background: white;
-}
-
-#topLeft {
-    border-top-left-radius: 10px;
-}
-
-#botLeft {
-    border-bottom-left-radius: 10px
-}
-
-#rhs {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.bl {
-  border-bottom-left-radius: 10px;
+    border-radius: 10px;
 }
 
 #fb-input-ext {
@@ -48,6 +30,7 @@
     background: white;
     border-radius: 10px;
     display: inline-block;
+    height: 200px;
 }
 
 #sendBtn {
