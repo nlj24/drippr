@@ -392,7 +392,12 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 					                	});
 
 					                    membersString = "";
+					                    window.my_members_dict[window.currentId] = {};
+					                	window.my_members_dict[window.currentId]['list'] = [{userId: window.myID}];
+
 					                	for(var person in window.groupsChosenFriends) {
+					                		window.my_members_dict[window.currentId]['list'].push({userId: window.groupsChosenFriends[person]['id']});
+
 					                		if(!window.friend_dict[window.groupsChosenFriends[person]['id']].isReal) { //SHADOW USER
 												membersString += "<div class='red_friends'>" + window.groupsChosenFriends[person]['name'] + "</div>";
 											} else {
@@ -401,7 +406,13 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 					                	}
 					                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
-					                    $("#my_group_container").append("<div group_name = 'group_" + groupName + "' class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8 namesList'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2'><div class = 'addMemsNew' data-toggle='modal' data-target='#myModal3'>add members</div><div class = 'deleteGroup2'>delete</div></div></div>");
+
+
+
+					                    $("#my_group_container").append("<div group_id=" + window.currentId +"  group_name = 'group_" + groupName + "' class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8 namesList'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2'><div group_id=" + window.currentId + " class = 'addMemsNew' data-toggle='modal' data-target='#myModal3'>add members</div><div class = 'deleteGroup2'>delete</div></div></div>");
+					                    window.currentId++;
+
+
 
 					                    $(".deleteGroup2").unbind("click", handler3);
 					                    
@@ -439,6 +450,12 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 								            $(".success").attr("class", "success hide");
 								            var groupRow = ($(e.target).parents(".groupRowStyle"));
 								            window.groupName = groupRow.find(".nameGroupsStyle").text();
+								            window.groupId = $(e.target).attr('group_id');
+
+								            window.currentGroupMembers = [];
+								            for (var ii = 0; ii < window.my_members_dict[window.groupId]['list'].length; ii++) {
+								                window.currentGroupMembers.push(window.my_members_dict[window.groupId]['list'][ii].userId);
+								            }
 								            $(".groupModalName").html("add members to " + window.groupName);
 								        });
 										
@@ -481,6 +498,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 				                    membersString = "";
 				                	for(var person in window.addChosenFriends) {
+				                		window.my_members_dict[window.groupId]['list'].push({userId: window.addChosenFriends[person]['id'] });
 				                		if(!window.friend_dict[window.addChosenFriends[person]['id']].isReal) { //SHADOW USER
 											membersString += "<div class='red_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
 										} else {
@@ -515,6 +533,8 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 				                    membersString = "";
 				                	for(var person in window.addChosenFriends) {
+				                		window.my_members_dict[window.groupId]['list'].push({userId: window.addChosenFriends[person]['id'] });
+
 				                		if(!window.friend_dict[window.addChosenFriends[person]['id']].isReal) { //SHADOW USER
 											membersString += "<div class='red_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
 										} else {

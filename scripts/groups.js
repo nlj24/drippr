@@ -1,3 +1,5 @@
+window.currentGroupMembers = [];
+window.currentId = -2;
 window.GROUP_METHOD = {
     
     groupData:function(res) {
@@ -147,6 +149,14 @@ window.GROUP_METHOD = {
             });
         });        
         
+
+        $("#fb-input-groups").click(function(){
+            window.currentGroupMembers = [];
+
+        });
+        
+
+
         $(".addMems").click(function(e){
             $(".addChosenCont").html('');
             window.addIds = [];
@@ -154,6 +164,11 @@ window.GROUP_METHOD = {
             $(".showForm").attr("class", "showForm");
             $(".success").attr("class", "success hide");
             window.groupId = $(e.target).attr('group_id');
+
+            window.currentGroupMembers = [];
+            for (var ii = 0; ii < window.my_members_dict[groupId]['list'].length; ii++) {
+                window.currentGroupMembers.push(window.my_members_dict[groupId]['list'][ii].userId);
+            }
             var groupRow = ($(e.target).parents(".groupRowStyle"));
             window.groupName = groupRow.find(".nameGroupsStyle").text();
             $(".groupModalName").html("add members to " + window.groupName);
