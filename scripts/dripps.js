@@ -5,46 +5,6 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
-window.onhashchange = function (e){
-
-
-    if (location.hash == "#dripp") {
-        window.ARTICLE_METHOD.loadArticleData();
-        window.setDrippLikes();
-        $("#buckets").attr("class", "container-fluid hide");
-        $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
-        $("#dripps").attr("class", "container-fluid");
-        $("#drippsHeader").attr("class", "col-md-5 headingPad");
-        $("#groups").attr("class", "container-fluid hide");
-        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
-        window.BUCKET_METHOD.loadArticleData();
-    }
-
-    if (location.hash == "#bucket") {
-
-        window.BUCKET_METHOD.loadArticleData();
-        $("#dripps").attr("class", "container-fluid hide");
-        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
-        $("#buckets").attr("class", "container-fluid");
-        $("#bucketsHeader").attr("class", "col-md-5 headingPad");
-        $("#groups").attr("class", "container-fluid hide");
-        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
-        window.resetFB();
-    }
-    if (location.hash == "#group") {
-
-        window.GROUP_METHOD.loadGroups();
-        $("#buckets").attr("class", "container-fluid hide");
-        $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
-        $("#dripps").attr("class", "container-fluid hide");
-        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
-        $("#groups").attr("class", "container-fluid");
-        $("#groupsHeader").attr("class", "col-md-5 headingPad");
-        window.BUCKET_METHOD.loadArticleData();
-    }
-
-}
-
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){

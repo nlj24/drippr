@@ -182,14 +182,15 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
                                         data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds},
                                         type:'get'
                                     });
-                                    $(".showForm").attr("class", "showForm hide");
-                                    $(".success").attr("class", "success");
+                                    
                                     window.drippsChosenFriends = {};
                                     window.drippsIds=[];
                                     window.selGroups = [];
-                                    $('#chosen').empty();
+                                    $('#chosen_ext').html('<div class = "createdSuccessStyleExt">your dripp has been sent!</div>');
                                     setTimeout(function() {
-                                        $('#myModal').modal('hide');
+                                        $('.createdSuccessStyleExt').fadeOut(400, function() {
+                                            $('#chosen_ext').html('');
+                                        });
                                     }, 3500);
                                 }                           
                             });

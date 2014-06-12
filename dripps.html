@@ -122,62 +122,62 @@
 			</div>
 		</div>
         <!-- end HEADER -->
-		<div id="dripps" class = "container-fluid">
-			<div id="drippsPromo" class = "row">
-				<div class = "col-xs-2">
-					<a href = "javascript:sliders2[0].goToPrev()">
-			        	<div class = "arrow" id = "prevArrow2">
-			        		<img src = "/images/revArrow.svg">
-						</div>
-					</a>
-				</div>
-				<div class = "col-xs-8">
-					<div id="drippsIntro">	
-						<div class="slider2">
-				            <ul>
-			                	<li>
-							        <img src = "/intro/Slide1.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide2.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide3.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide4.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide5.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide6.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide7.png">
-			                	</li> 
-			                	<li>
-							        <img src = "/intro/Slide8.png">
-			                	</li> 
-				            </ul>
-		            	</div>
-		            </div>
-				</div>
-				<div class = "col-xs-2">
-		            <a href = "javascript:sliders2[0].goToNext()">
-			        	<div class = "arrow" id = "nextArrow2">
-			        		<img src = "/images/arrow.svg">
-						</div>
-					</a>
-				</div>
-				<script>
-					var sliders2 = [];
-					$('.slider2').each(function() {
-					sliders2.push(new Slider2(this))
-					});
-				</script>
-			</div>    		
-			<div class = "row hide" id = "size1">
+		<div id="drippsPromo" class = "row">
+			<div class = "col-xs-2">
+				<a href = "javascript:sliders2[0].goToPrev()">
+		        	<div class = "arrow" id = "prevArrow2">
+		        		<img src = "/images/revArrow.svg">
+					</div>
+				</a>
+			</div>
+			<div class = "col-xs-8">
+				<div id="drippsIntro">	
+					<div class="slider2">
+			            <ul>
+		                	<li>
+						        <img src = "/intro/Slide1.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide2.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide3.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide4.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide5.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide6.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide7.png">
+		                	</li> 
+		                	<li>
+						        <img src = "/intro/Slide8.png">
+		                	</li> 
+			            </ul>
+	            	</div>
+	            </div>
+			</div>
+			<div class = "col-xs-2">
+	            <a href = "javascript:sliders2[0].goToNext()">
+		        	<div class = "arrow" id = "nextArrow2">
+		        		<img src = "/images/arrow.svg">
+					</div>
+				</a>
+			</div>
+			<script>
+				var sliders2 = [];
+				$('.slider2').each(function() {
+				sliders2.push(new Slider2(this))
+				});
+			</script>
+		</div>    		
+		<div id="dripps" class = "container-fluid hide">
+			<div class = "row" id = "size1">
 	        	<div class = "menuBar col-xs-3">
 		        	<div class = "mainCatDiv">
 		        		<div  class = "categ row topCat" category="All">
@@ -671,7 +671,7 @@
 					</div>
 					<div class="modal-body">
 						<form class = "showForm" id="fb-form" >
-							<div class = "addChosenCont">
+							<div id = "addChosenCont">
 								<div id = "chosenAdd">
 								</div>
 							</div>
@@ -699,11 +699,11 @@
 					</div>
 					<div class="modal-body">
 						<form class = "showForm" id="fb-form" >
-							<div class = "addChosenCont">
+							<div id = "addChosenContNew">
 								<div id = "chosenAdd">
 								</div>
 							</div>
-							select friends: <input class = "fb-input-add" type = "text" autocomplete="off" autofocus="autofocus">
+							select friends: <input class = "fb-input-add-new" type = "text" autocomplete="off" autofocus="autofocus">
 							<a class="btn addNew">
 								add friends
 							</a>

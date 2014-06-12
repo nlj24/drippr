@@ -100,7 +100,17 @@ darkGrey: #6D6E70*/
   border-radius: 6px;
 }
 
-.addChosenCont {
+#addChosenCont {
+  background-color: white;
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+}
+
+#addChosenContNew {
   background-color: white;
   height: 200px;
   width: 100%;

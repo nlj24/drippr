@@ -26,7 +26,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 // will be handled. 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		$("#drippsPromo").attr("class", "hide");
-		$("#size1").attr("class", "row");
+		$("#dripps").attr("class", "row");
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
@@ -223,14 +223,67 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 										if(add_to_dom) {
 											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-												$(".addChosenCont").append("<div class='red_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+												$("#addChosenCont").append("<div class='red_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
 											} else {
-												$(".addChosenCont").append("<div class='blue_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+												$("#addChosenCont").append("<div class='blue_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
 											}
 										}
 
 										$(".rm" ).unbind("click", handler2);
-					    				$(".rm").bind("click", handler2);
+
+					                    var handler2 = $('.rm').click(function(e) {
+					                        var id = $(e.target).attr('id');
+					                        delete window.addChosenFriends[id];
+					                        window.addIds.splice(window.addIds.indexOf(id),1);
+											$("#person_"+id).remove();
+					                    });
+									}
+									catch(e) {
+					                	return;
+					                }
+								}	
+							});
+
+							$('.fb-input-add-new').facebookAutocomplete({
+								showAvatars: true,
+								avatarSize: 50,
+								maxSuggestions: 8,
+								onpick: function (friend) {
+									try {
+										if(!window.friend_dict[friend.id]) { //need to make the SHADOW USER
+											$.ajax({
+								                // url:'json/articles.json',
+								                url: window.address + 'add_shadow_user',
+								                data: {id: friend.id, name: friend.name},
+								                method:'get'
+								            });
+								            window.friend_dict[friend.id] = {fName:"",id:friend.id,isReal:0,lName:""};
+										}
+
+										if(!window.friend_dict[friend.id].isReal) { // friend is a SHADOW USER
+											FB.ui({
+												to: friend.id,
+												method: 'send',
+												link: 'http://drippr.me',
+											});
+										} 
+
+										var add_to_dom = false;
+										if (!(friend.id in window.addChosenFriends)) {
+											window.addIds.push(friend.id);
+											add_to_dom = true;
+										}
+										window.addChosenFriends[friend.id] = friend;
+
+										if(add_to_dom) {
+											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
+												$("#addChosenContNew").append("<div class='red_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+											} else {
+												$("#addChosenContNew").append("<div class='blue_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+											}
+										}
+
+										$(".rm" ).unbind("click", handler2);
 
 					                    var handler2 = $('.rm').click(function(e) {
 					                        var id = $(e.target).attr('id');
@@ -485,6 +538,46 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 			            }
 
 						window.GROUP_METHOD.loadGroups();
+
+						window.onhashchange = function (e){
+
+
+						    if (location.hash == "#dripp") {
+						        window.ARTICLE_METHOD.loadArticleData();
+						        window.setDrippLikes();
+						        $("#buckets").attr("class", "container-fluid hide");
+						        $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#dripps").attr("class", "container-fluid");
+						        $("#drippsHeader").attr("class", "col-md-5 headingPad");
+						        $("#groups").attr("class", "container-fluid hide");
+						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+						        window.BUCKET_METHOD.loadArticleData();
+						    }
+
+						    if (location.hash == "#bucket") {
+
+						        window.BUCKET_METHOD.loadArticleData();
+						        $("#dripps").attr("class", "container-fluid hide");
+						        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#buckets").attr("class", "container-fluid");
+						        $("#bucketsHeader").attr("class", "col-md-5 headingPad");
+						        $("#groups").attr("class", "container-fluid hide");
+						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
+						        window.resetFB();
+						    }
+						    if (location.hash == "#group") {
+
+						        window.GROUP_METHOD.loadGroups();
+						        $("#buckets").attr("class", "container-fluid hide");
+						        $("#bucketsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#dripps").attr("class", "container-fluid hide");
+						        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
+						        $("#groups").attr("class", "container-fluid");
+						        $("#groupsHeader").attr("class", "col-md-5 headingPad");
+						        window.BUCKET_METHOD.loadArticleData();
+						    }
+
+						}
 						
 						window.bindDripps();
 						window.bindBucket();
