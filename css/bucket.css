@@ -100,7 +100,7 @@ darkGrey: #6D6E70*/
   border-radius: 6px;
 }
 
-#addChosenCont {
+.addChosenCont {
   background-color: white;
   height: 200px;
   width: 100%;
@@ -177,6 +177,7 @@ body {
   margin-top: 10px;
   border-radius: 10px;
   padding: 5px;
+  overflow-wrap: break-word;
 }
 
 #conversation {

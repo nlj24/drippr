@@ -425,6 +425,25 @@ app.get("/addMembers", function(req, res) {
     }
 });
 
+app.get("/addMembersNew", function(req, res) {
+    var groupName = req.query.groupName;
+    var members = req.query.members;
+    var creatorId = req.query.creatorId;
+
+    var get_group_id = "SELECT DISTINCT id FROM Groups WHERE name = '" + groupName + "' AND creatorId = '" + creatorId + "'";
+    connection.query(get_group_id, function(err,rows,fields) {
+        if (err) throw err;
+        groupId = rows[0].id;
+        for(var ii=0; ii < members.length; ii++) {    
+            var create_group = "INSERT INTO Groups (name, userId, id, creatorId) VALUES (\"" + groupName + "\",'" +  members[ii] + "'," + groupId + ",'" + creatorId + "')";
+            connection.query(create_group, function(err,rows,fields) {
+                if (err) throw err;
+                res.send(200);
+            });
+        }
+    });
+});
+
 app.get("/createGroup", function(req, res) {
     var groupName = req.query.groupName;
     var members = req.query.members;

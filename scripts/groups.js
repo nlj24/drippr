@@ -89,7 +89,7 @@ window.GROUP_METHOD = {
         }
 
         $('#chosenCont').html('');
-        $('#addChosenCont').html('');
+        $('.addChosenCont').html('');
 
         $(".deleteGroup").click(function(e){
             var groupId = $(e.target).attr('group_id');
@@ -124,7 +124,6 @@ window.GROUP_METHOD = {
                     method:'get',
                     success: function(data){return;}
                 });
-                alert('need to alert creator that group was deleted');
             }
             delete window.other_members_dict[groupId];
             var groupRowHeight = $("[group_id=" + "group_" + groupId + "]").height();
@@ -149,7 +148,7 @@ window.GROUP_METHOD = {
         });        
         
         $(".addMems").click(function(e){
-            $("#addChosenCont").html('');
+            $(".addChosenCont").html('');
             window.addIds = [];
             window.addChosenFriends = {};
             $(".showForm").attr("class", "showForm");
@@ -160,7 +159,6 @@ window.GROUP_METHOD = {
             $(".groupModalName").html("add members to " + window.groupName);
         });
 
-
         window.autoCompleteGroups = window.groupList;
         $(function() {
             $("#tags").autocomplete({
@@ -168,7 +166,8 @@ window.GROUP_METHOD = {
             });
         });
 
-        $("#tags").autocomplete( "option", "minLength", 3);
+        $("#tags").autocomplete( "option", "minLength", 1);
+        $("#tags").autocomplete({ autoFocus: true });
         window.ARTICLE_METHOD.loadArticleData();
 
     },
