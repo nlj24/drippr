@@ -10,7 +10,7 @@ xfbml      : true  // parse XFBML
 
 
 FB.Event.subscribe("auth.logout", function() {
-	window.location = 'http://drippr.me';
+	window.location = window.address;
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
@@ -223,9 +223,9 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 										if(add_to_dom) {
 											if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-												$("#addChosenCont").append("<div class='red_friends' id='" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+												$(".addChosenCont").append("<div class='red_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
 											} else {
-												$("#addChosenCont").append("<div class='blue_friends' id='" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
+												$(".addChosenCont").append("<div class='blue_friends' id='person_" + window.addIds[(window.addIds.length-1)] + "'>" + window.addChosenFriends[window.addIds[(window.addIds.length-1)]]['name'] + " " + "<div id='"+window.addIds[(window.addIds.length-1)]+"' class='rm'>X</div></div>");
 											}
 										}
 
@@ -236,7 +236,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 					                        var id = $(e.target).attr('id');
 					                        delete window.addChosenFriends[id];
 					                        window.addIds.splice(window.addIds.indexOf(id),1);
-											$("#"+id).remove();
+											$("#person_"+id).remove();
 					                    });
 									}
 									catch(e) {
@@ -305,91 +305,118 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 
 							// creating a group...
 							$("#groupBtn").click(function(){
-				                if ((window.groupsIds.length > 1) && (($('#groupName').val()!= ""))) {
-				                	var groupName = $('#groupName').val();
+				                if (window.groupsIds.length > 1) {
+				                	if ($('#groupName').val()!= "") {
+					                	var groupName = $('#groupName').val();
 
-				                	for(var kk = 0; kk < window.groupList.length; kk++){
-				                		if (groupName == window.groupList[kk]) {
-				                			alert("you already have a group with that name LOL");
-				                			return;
-				                		}
-				                	}
+					                	for(var kk = 0; kk < window.groupList.length; kk++){
+					                		if (groupName == window.groupList[kk]) {
+					                			$('#myModal4').modal('show');
+					                			setTimeout(function() {
+							                    	$('#myModal4').modal('hide');
+							                	}, 3000);
+					                			return;
+					                		}
+					                	}
 
-				                	if ($.isEmptyObject(window.my_members_dict)) {
-			                            $('#my_group_container').html("");
-			                        }
+					                	if ($.isEmptyObject(window.my_members_dict)) {
+				                            $('#my_group_container').html("");
+				                        }
 
-			                        window.my_members_dict[groupName] = {name: groupName};
+				                        window.my_members_dict[groupName] = {name: groupName};
 
-				                	for (var i = 0; i < groupName.length; i++) {
-				                		if(groupName[i] == "\"") {
-											var groupName = groupName.substring(0, i) + "'" + groupName.substring(i+1);
-				                		}
-				                	}
+					                	for (var i = 0; i < groupName.length; i++) {
+					                		if(groupName[i] == "\"") {
+												var groupName = groupName.substring(0, i) + "'" + groupName.substring(i+1);
+					                		}
+					                	}
 
-									window.groupsIds.push(window.myID);
-				                    $.ajax({
-				                        url: window.address + 'createGroup',
-				                        data: {groupName: groupName, members: window.groupsIds, creatorId: window.myID},
-				                        type:'get'
-				                	});
+										window.groupsIds.push(window.myID);
+					                    $.ajax({
+					                        url: window.address + 'createGroup',
+					                        data: {groupName: groupName, members: window.groupsIds, creatorId: window.myID},
+					                        type:'get'
+					                	});
 
-				                    membersString = "";
-				                	for(var person in window.groupsChosenFriends) {
-				                		if(!window.friend_dict[window.groupsChosenFriends[person]['id']].isReal) { //SHADOW USER
-											membersString += "<div class='red_friends'>" + window.groupsChosenFriends[person]['name'] + "</div>";
-										} else {
-											membersString += "<div class='blue_friends'>" + window.groupsChosenFriends[person]['name'] + "</div>";
-										}
-				                	}
-				                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
+					                    membersString = "";
+					                	for(var person in window.groupsChosenFriends) {
+					                		if(!window.friend_dict[window.groupsChosenFriends[person]['id']].isReal) { //SHADOW USER
+												membersString += "<div class='red_friends'>" + window.groupsChosenFriends[person]['name'] + "</div>";
+											} else {
+												membersString += "<div class='blue_friends'>" + window.groupsChosenFriends[person]['name'] + "</div>";
+											}
+					                	}
+					                	membersString += "<div class='blue_friends'>" + window.myName + "</div>";
 
-				                    $("#my_group_container").append("<div class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2 deleteGroup2'>delete</div></div>");
+					                    $("#my_group_container").append("<div group_name = 'group_" + groupName + "' class = 'row groupRowStyle'><div class = 'col-xs-2 nameGroupsStyle'>" + groupName + "</div><div class = 'col-xs-8 namesList'><div class='personName'>" + membersString + "</div></div><div class = 'col-xs-2'><div class = 'addMemsNew' data-toggle='modal' data-target='#myModal3'>add members</div><div class = 'deleteGroup2'>delete</div></div></div>");
 
-				                    $(".deleteGroup2").unbind("click", handler3);
-				                    
-				                    var handler3 = $(".deleteGroup2").click(function(e){
-							            var groupRow = ($(e.target).parents(".groupRowStyle"));
-							            groupName = groupRow.find(".nameGroupsStyle").text();
-							            delete window.my_members_dict[groupName];					                
-							            var groupRowHeight = $(groupRow).height();
-						                $(groupRow).html("<div class = 'groupDeletionStyle'> your group was deleted.</div>");
-						                $(groupRow).height(groupRowHeight);
-						                setTimeout(function() {
-						                    $(groupRow).fadeOut(400, function() {
-						                        $(groupRow).remove();
-						                        $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
-						                        $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
-						                        if ($.isEmptyObject(window.my_members_dict)) {
-							                        $('#my_group_container').html("you haven't created any groups");
-							                    }
+					                    $(".deleteGroup2").unbind("click", handler3);
+					                    
+					                    var handler3 = $(".deleteGroup2").click(function(e){
+								            var groupRow = ($(e.target).parents(".groupRowStyle"));
+								            groupName = groupRow.find(".nameGroupsStyle").text();
+								            delete window.my_members_dict[groupName];					                
+								            var groupRowHeight = $(groupRow).height();
+							                $(groupRow).html("<div class = 'groupDeletionStyle'> your group was deleted.</div>");
+							                $(groupRow).height(groupRowHeight);
+							                setTimeout(function() {
+							                    $(groupRow).fadeOut(400, function() {
+							                        $(groupRow).remove();
+							                        $(".groupRowStyle:nth-of-type(odd)").css("background-color", "azure");
+							                        $(".groupRowStyle:nth-of-type(even)").css("background-color", "#e9eaed");
+							                        if ($.isEmptyObject(window.my_members_dict)) {
+								                        $('#my_group_container').html("you haven't created any groups");
+								                    }
+							                    });
+							                }, 3500);
+							                $.ajax({
+							                    url: window.address + 'deleteNewGroup',
+							                    data: {creatorId: window.myID, groupName: groupName},
+							                    method:'get',
+							                    success: function(data){return;}
+							                });
+								        });
+										
+										$(".addMemsNew").unbind("click", handler4);
+										var handler4 = $(".addMemsNew").click(function(e){
+								            $(".addChosenCont").html('');
+								            window.addIds = [];
+								            window.addChosenFriends = {};
+								            $(".showForm").attr("class", "showForm");
+								            $(".success").attr("class", "success hide");
+								            var groupRow = ($(e.target).parents(".groupRowStyle"));
+								            window.groupName = groupRow.find(".nameGroupsStyle").text();
+								            $(".groupModalName").html("add members to " + window.groupName);
+								        });
+										
+										$('#chosenCont').html('<div class = "createdSuccessStyle">your group has been created!</div>');
+										setTimeout(function() {
+						                    $('.createdSuccessStyle').fadeOut(400, function() {
+						                        $('#chosenCont').html('');
 						                    });
 						                }, 3500);
-						                $.ajax({
-						                    url: window.address + 'deleteNewGroup',
-						                    data: {creatorId: window.myID, groupName: groupName},
-						                    method:'get',
-						                    success: function(data){return;}
-						                });
-							        });
-									
-									$('#chosenCont').html('<div class = "createdSuccessStyle">your group has been created!</div>');
-									setTimeout(function() {
-					                    $('.createdSuccessStyle').fadeOut(400, function() {
-					                        $('#chosenCont').html('');
-					                    });
-					                }, 3500);
-				                   
-									$('#groupName').val('');
-				                	window.groupsIds = [];
-				                	window.groupsChosenFriends = {};
+					                   
+										$('#groupName').val('');
+					                	window.groupsIds = [];
+					                	window.groupsChosenFriends = {};
+					                }
+					                else {
+					                	console.log('fdsf');
+					                	$('#myModal5').modal('show');
+			                			setTimeout(function() {
+					                    	$('#myModal5').modal('hide');
+					                	}, 3000);
+					                	return;
+					                }
 				                }
 			                	else {
-			                		alert("must add some members and have group name!!!");
+			                		$('#myModal6').modal('show');
+		                			setTimeout(function() {
+				                    	$('#myModal6').modal('hide');
+				                	}, 3000);
 			                		return;
 			                	}
 				            });
-							
 
 							$(".add").click(function(){
 				                if (window.addIds.length > 0) {
@@ -408,16 +435,50 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 										}
 				                	}
 
-				                    $(".namesList").append(membersString);
+				                    $("[group_id=" + "group_" + window.groupId + "]").find(".namesList").append(membersString);
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$("#addChosenCont").html('');
+									$(".addChosenCont").html('');
 				                   
 				                	window.addIds = [];
 				                	window.addChosenFriends = {};
 				                	setTimeout(function() {
 					                    $('#myModal2').modal('hide');
+					                }, 3500);
+				                }
+				            });
+
+							$(".addNew").click(function(){
+				                if (window.addIds.length > 0) {
+				                	console.log(window.groupName);
+				                	console.log(window.addIds);
+				                	console.log(window.myID);
+				                    $.ajax({
+				                        url: window.address + 'addMembersNew',
+				                        data: {groupName: window.groupName, members: window.addIds, creatorId: window.myID},
+				                        type:'get'
+				                	});
+
+				                    membersString = "";
+				                	for(var person in window.addChosenFriends) {
+				                		if(!window.friend_dict[window.addChosenFriends[person]['id']].isReal) { //SHADOW USER
+											membersString += "<div class='red_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
+										} else {
+											membersString += "<div class='blue_friends'>" + window.addChosenFriends[person]['name'] + "</div>";
+										}
+				                	}
+
+				                    $("[group_name=" + "group_" + window.groupName + "]").find(".namesList").append(membersString);
+				                    
+									$(".showForm").attr("class", "showForm hide");
+									$(".success").attr("class", "success");
+									$(".addChosenCont").html('');
+				                   
+				                	window.addIds = [];
+				                	window.addChosenFriends = {};
+				                	setTimeout(function() {
+					                    $('#myModal3').modal('hide');
 					                }, 3500);
 				                }
 				            });

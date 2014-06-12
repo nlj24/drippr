@@ -149,18 +149,21 @@ window.BUCKET_METHOD = {
                 feed = receiveList;
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
+                window.resetFB();
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'sent') {
                 feed = sendList;
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
+                window.resetFB();
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
                 feed = readItLater_data;
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
+                window.resetFB();
             }
 
             templateSource = $("#items-template").html(),
@@ -204,6 +207,18 @@ window.BUCKET_METHOD = {
 
         window.setBucketLikes();
         $('#messageInput').elastic();
+
+        $(".drippsBub").click(function() {
+            window.location = "#dripp";
+        });
+
+        $(".bucketsBub").click(function() {
+            window.location = "#bucket";
+        });
+
+        $(".groupsBub").click(function() {
+            window.location = "#group";
+        });
 
     },
 
@@ -260,6 +275,7 @@ window.BUCKET_METHOD = {
 
 function bindMessages(template, conversation_data){
     $('.messageItem').click(function(e){
+        window.resetFB();
         var id = $(e.target).attr('message_id');
         for (var i=0;i<feed.length;i++) {
             if (id == feed[i]['id']) {

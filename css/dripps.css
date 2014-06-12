@@ -118,6 +118,8 @@ body {
 #drippsIntro {
   width: 720px;
   height: 540px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .slider2 {
@@ -309,8 +311,53 @@ body {
 .ui-corner-all {
   z-index: 1050;
   list-style-type: none;
+  width: 442px;
+  max-height: 240px;
+  line-height: 40px;
+  background-color: white;
+  overflow: hidden;
+  color: #6D6E70 !important;
+  padding-left: 10px;
+  font-size: 17px;
+}
+
+.ui-autocomplete {
+  padding: 0px !important;
+  border: 1px solid #6D6E70;
+}
+
+.ui-menu-item {
+  border-bottom: 1px solid #e9eaed;
+  text-decoration: none;
 }
 
 .ui-helper-hidden-accessible {
   display: none;
+}
+
+.fbac-suggestion.fbac-selected {
+  background-color: #A3DCFF !important;
+  border-color: #e9eaed !important;
+  color: #6D6E70 !important;
+}
+
+.fbac-suggestion-avatar {
+  border-radius: 100% !important;
+  height: 33px !important;
+  width: 33px !important;
+}
+
+.fbac-suggestion-list {
+  font-family: Helvetica Neue !important;
+  font-size: 17px !important;
+  font-color: #6D6E70 !important;
+  border-width: 1px !important;
+  border-color: #6D6E70 !important;
+}
+
+.fbac-suggestion {
+  border: 1px solid #e9eaed !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-weight: normal !important;
 }

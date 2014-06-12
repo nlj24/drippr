@@ -56,3 +56,9 @@
   margin-right: auto;
 }
 
+#groupSelected {
+  width: 100%;
+  height: 50px;
+  overflow-y: scroll;
+  display: inline-block;
+}
