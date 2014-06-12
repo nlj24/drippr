@@ -26,7 +26,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 // will be handled. 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		$("#drippsPromo").attr("class", "hide");
-		$("#dripps").attr("class", "row");
+		$("#dripps").attr("class", "container-fluid");
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {

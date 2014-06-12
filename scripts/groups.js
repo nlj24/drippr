@@ -66,6 +66,15 @@ window.GROUP_METHOD = {
 
         }
 
+        window.autoCompleteGroups = window.groupList;
+        $(function() {
+            $("#tags").autocomplete({
+                source: window.autoCompleteGroups
+            });
+        });
+        $("#tags").autocomplete( "option", "minLength", 1);
+        $("#tags").autocomplete({ autoFocus: true });
+
         var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":window.my_members_dict, "other_groups":window.other_members_dict});
@@ -174,15 +183,7 @@ window.GROUP_METHOD = {
             $(".groupModalName").html("add members to " + window.groupName);
         });
 
-        window.autoCompleteGroups = window.groupList;
-        $(function() {
-            $("#tags").autocomplete({
-                source: window.autoCompleteGroups
-            });
-        });
 
-        $("#tags").autocomplete( "option", "minLength", 1);
-        $("#tags").autocomplete({ autoFocus: true });
         window.ARTICLE_METHOD.loadArticleData();
 
     },

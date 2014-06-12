@@ -10,7 +10,7 @@ articlesToAdd = []
 
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources where id =133"
+	sql = "SELECT * FROM Sources"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 	rss2 = []
@@ -26,13 +26,10 @@ try:
 
 	dateListFail = []
 	cutoff = datetime.utcnow() - timedelta(days=1)
-	b = 0
 	for (id, source, url, category) in rss2:
 		feed = feedparser.parse(url)
 		lst = feed['items']
 		for a in lst:
-			print lst
-			b = b + 1
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
 			try:
@@ -40,7 +37,7 @@ try:
 				date = datetime.fromtimestamp(mktime(date)) - timedelta(hours=1)
 				date2 = str(date)
 			except:
-				print "s"
+				pass
 			request = urllib2.Request(url_result)
 			request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
 			try:
@@ -53,7 +50,6 @@ try:
 			except:
 				image_result = '/images/drop.png'
 			if ((url_result) not in articleUrls2) and (date > cutoff):
-				print url_result
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
 
 	shuffle(articlesToAdd)
@@ -67,9 +63,7 @@ try:
 			db.rollback()
 
 	db.close()
-	print b
 except Exception as e:
-	print e
 	db.rollback()
 	db.close()
 

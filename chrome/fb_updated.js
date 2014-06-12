@@ -215,8 +215,6 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
 
                         window.GROUP_METHOD.loadGroups();
                         
-                        window.bindDripps();
-                        window.bindBucket();
                         
                     } else if (response.status === 'not_authorized') {
                         // In this case, the person is logged into Facebook, but not into the app, so we call
