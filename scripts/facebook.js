@@ -526,7 +526,7 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$(".addChosenCont").html('');
+									$(".addChosenContNew").html('');
 				                   
 				                	window.addIds = [];
 				                	window.addChosenFriends = {};
