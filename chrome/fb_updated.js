@@ -112,9 +112,9 @@ $("#extContScroll").css("height",windowHeight);
 
                                         if(add_to_dom) {
                                             if(!window.friend_dict[friend.id].isReal) { //SHADOW USER
-                                                $("#chosen_ext").append("<div class='red_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
+                                                $("#chosen_ext").append("<div class='red_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
                                             } else {
-                                                $("#chosen_ext").append("<div class='blue_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'> <img class = 'fbPics' src = http://graph.facebook.com/" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['id'] + "/picture?width=25&height=25>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
+                                                $("#chosen_ext").append("<div class='blue_friends' id='" + window.drippsIds[(window.drippsIds.length-1)] + "'>" + window.drippsChosenFriends[window.drippsIds[(window.drippsIds.length-1)]]['name'] + " " + "<div id='"+window.drippsIds[(window.drippsIds.length-1)]+"' class='rm'>X</div></div>");
                                             }
                                         }
 
@@ -220,13 +220,31 @@ $("#extContScroll").css("height",windowHeight);
 
                             // read it later
                             $("#saveBtn").click(function(){
-                                    $.ajax({
-                                        url:'http://drippr.me/readItLater/new',
-                                        data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
-                                        type:'get'
-                                    });
-                                    $(".showForm").attr("class", "showForm hide");
-                                    $(".success").attr("class", "success");
+                                if ($("#link").val()) {
+                                    if ($("#title").val()) {
+                                        $.ajax({
+                                            url:'http://drippr.me/readItLater/new',
+                                            data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
+                                            type:'get'
+                                        });
+                                        $(".showForm").attr("class", "showForm hide");
+                                        $(".success").attr("class", "success");
+                                    }
+                                    else {
+                                        $('#myModal10').modal('show');
+                                        setTimeout(function() {
+                                            $('#myModal7').modal('hide');
+                                        }, 3000);
+                                        return;
+                                    }
+                                }
+                                else {
+                                    $('#myModal11').modal('show');
+                                    setTimeout(function() {
+                                        $('#myModal7').modal('hide');
+                                    }, 3000);
+                                    return;
+                                }
                             });
 
 
