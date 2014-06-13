@@ -8,6 +8,7 @@ db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 articlesToAdd = []
 
+print "starting script"
 try:
 	# execute SQL query using execute() method.
 	sql = "SELECT * FROM Sources"
@@ -27,6 +28,7 @@ try:
 	dateListFail = []
 	cutoff = datetime.utcnow() - timedelta(days=1)
 	for (id, source, url, category) in rss2:
+		print "looking at feed: " + source
 		feed = feedparser.parse(url)
 		lst = feed['items']
 		for a in lst:
@@ -53,6 +55,7 @@ try:
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
 
 	shuffle(articlesToAdd)
+	print "going to add to database"
 	for article in articlesToAdd:
 		try:
 			# execute SQL query using execute() method.
@@ -64,6 +67,7 @@ try:
 
 	db.close()
 except Exception as e:
+	print e
 	db.rollback()
 	db.close()
 
