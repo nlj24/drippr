@@ -257,12 +257,8 @@ window.BUCKET_METHOD = {
 
             templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
-<<<<<<< HEAD
             itemHTML = template({"buckets":feed});
-=======
-            itemHTML = template({"buckets":feed });
             
->>>>>>> 4532917c81ee088e01b5383ad5ccec30f7b29f79
             $('#items').html(itemHTML);
             $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
