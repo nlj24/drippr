@@ -24,6 +24,18 @@ $(".listWidth").css("width",$(".fitIntroImg").width());
 console.log("width",$(".fitIntroImg").width());
 $(".arrowIntro").attr("class", "arrowIntro");
 
+$(document).keydown(function(e){
+
+    if (!$("#drippsPromo").hasClass("hide")) {
+        if (e.keyCode == 37) {
+            javascript:sliders2[0].goToPrev();
+        }
+        if (e.keyCode == 39) {
+            javascript:sliders2[0].goToNext();
+        }
+    }
+});
+
 //check if we're logged in
    //display a modal or something?
    //remove it if they do login with the subscribe function below 
