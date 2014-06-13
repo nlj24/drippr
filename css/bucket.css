@@ -136,7 +136,6 @@ body {
 }
 
 .mainItemDiv {
-  height: 689px;
   background-color: white;
   overflow: scroll;
   border-right: 1px solid #e5e5e5;
@@ -171,8 +170,8 @@ body {
   max-height: 90%;
   vertical-align: middle;
   border-radius: 10px;
-  min-width: 400px;
-  min-height: 275px;
+  height: 90%;
+  min-height: 90%;
 }
 
 #imageDivBucket {
@@ -240,10 +239,13 @@ body {
 }
 
 #convoDiv {
-  padding: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .friendPics{
-  padding-left: 15px;
+  padding: 0px;
+  max-height: 90px;
+  overflow-y: scroll;
 }
 .noPad {
   padding: 0;
@@ -301,9 +303,7 @@ body {
 #selDripp{
   overflow-y: scroll;
   overflow-x:hidden;
-  
-  height: 600px;
-
+  height: 100%;
 
   width: 100%;
 }
@@ -516,4 +516,22 @@ body {
 
 .centerCreator {
   text-align: center;
+}
+
+.circlePics {
+  border-radius: 100%;
+}
+
+.styleFriends {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #6D6E70;
+  margin: 5px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.padRightLeft {
+  padding-left: 15px;
+  padding-right: 15px;
 }

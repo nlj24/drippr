@@ -441,32 +441,30 @@
 	        				{{selItem.chrome}}
 	        			</a>
 	        		</div>
-	        		<div class = "row" id = "imageDivBucket">
+	        		<div id = "imageDivBucket">
 	        			<a href = {{selItem.url}} target="_blank">
 	        				<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
 	        			</a>
 	        		</div>
-
-	        		<div class = "row">
-	        			<div class = "col-xs-11 col-xs-offset-1" id = "convoDiv">
-	        				<div class = "friendPics">
-		        				{{#each friendNames}}
-		        					<img src = {{picture}}>
-		        					{{name}}
-		        				{{/each}}
-		        			</div>
-		        			<div id = "conversation">
-			        			{{#each messages}}
-			        				<div class = "indMess {{userId}}">
-			        					<img class="commentorPic" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-			        					<span class="comment">{{fullName}}: {{content}} </span> <span class="commentTime"> {{timeString}}</span>
-			        				</div>
-		        				{{/each}}
-		        			</div>
-			        	</div>
-	        		</div>
-	    			<div class = "row">
-	    				<div class = "col-xs-9 col-xs-offset-1 messageInputRow" >
+        			<div class id = "convoDiv">
+        				<div class = "friendPics">
+	        				{{#each friendNames}}
+	        					<div class = "styleFriends">
+		        					<img class = "circlePics" src = {{picture}}> {{name}}
+		        				</div>
+	        				{{/each}}
+	        			</div>
+	        			<div id = "conversation">
+		        			{{#each messages}}
+		        				<div class = "indMess {{userId}}">
+		        					<img class="commentorPic circlePics	" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
+		        					<span class="comment">{{fullName}}: {{content}} </span> <span class="commentTime"> {{timeString}}</span>
+		        				</div>
+	        				{{/each}}
+	        			</div>
+		        	</div>
+	    			<div class = "row padRightLeft">
+	    				<div class = "col-xs-11 messageInputRow" >
 	        				<textarea id = "messageInput" maxlength="1000" placeholder="Enter Message" cols="20"></textarea>
 	        			</div>
 	        			<div class = "col-xs-1 noPad">
@@ -676,24 +674,34 @@
 					<div class="modal-body">
 						<form class = "showForm" id="fb-form" >
 							<p>
-								Choose your facebook friends below. If your friend hasn't signed into drippr, we'll give you a chance to send them a message and they'll display red. Groups are green.
+								Choose your facebook friends below. If your friend hasn't signed into drippr, we'll give you a chance to send them a message and they'll display red. Groups display green.
 							</p>
 							<div id = "chosenCont">
 								<div id = "chosen">
 								</div>
 							</div>
-							select friends: <input class = "fb-input" type = "text" autocomplete="off" autofocus="autofocus">
-							<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
-								send
-							</a>
-							<br>
-							<div class="ui-widget row">
-								<div class = "col-xs-2">
-									select group:
+							<div class = "row topMargModal">
+								<div class = "col-xs-6 noRightPad">
+									<div class = "row topMargModal">
+										<div class = "col-xs-5 noPadRight">select friends:</div>
+										<div class = "col-xs-7 noPad">
+											<input class = "fb-input inputWidth" type = "text" autocomplete="off" autofocus="autofocus">
+										</div>
+									</div>
 								</div>
-								<div class = "col-xs-10">
-									<input id="tags">
+								<div class = "col-xs-6">
+									<div class="ui-widget row topMargModal">
+										<div class = "col-xs-5 noPadRight">select group:</div>
+										<div class = "col-xs-7 noPad">
+											<input class = "inputWidth" id="tags">
+										</div>
+									</div>
 								</div>
+							</div>
+							<div id = "centerSend">
+								<a class="btn send"><img class="buttonDrip" src="images/dropBlue.svg">
+									send
+								</a>
 							</div>
 						</form>
 						<div class = "success hide">

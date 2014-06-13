@@ -412,3 +412,23 @@ body {
 #chromeLogoStyle {
   max-height: 90%;
 }
+
+.noPadRight {
+  text-align: right;
+}
+
+.topMargModal {
+  margin-top: 5px;
+}
+
+#centerSend {
+  text-align: center;
+}
+
+.inputWidth {
+  width: 140px;
+}
+
+.noRightPad {
+  padding-right: 0px;
+}

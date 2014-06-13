@@ -160,6 +160,8 @@ window.BUCKET_METHOD = {
             itemHTML = template({"buckets":feed});
             $('#items').html(itemHTML);
 
+            $(".mainItemDiv").css("height",""+ ($(window).height()-136));
+
             for (var ii = 0; ii < feed.length; ii++) {
                 if (feed[ii]['unreadDripps']) {
                     $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
@@ -168,11 +170,21 @@ window.BUCKET_METHOD = {
                     $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
                 }
             }
-            console.log(dripps_data);
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource),
             drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
             $('#selDripp').html(drippsHTML);
+
+            if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
+                 $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+                $("#imageDivBucket").css("height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height()));
+                $("#imageDivBucket").css("line-height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height())+ "px");
+            }
+            else {
+                $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+                $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-267-$(".friendPics").height())+ "px");
+                $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
+            }
 
             $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
             bindMessages(messageListTemplate, conversation_data);     
@@ -212,8 +224,9 @@ window.BUCKET_METHOD = {
             templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
             itemHTML = template({"buckets":feed});
-            
             $('#items').html(itemHTML);
+            $(".mainItemDiv").css("height",""+ ($(window).height()-136));
+
             if (feed.length == 0 ) {
                 $('.mainItemDiv').text('You have nothing in this bucket.');
             } else {
@@ -420,6 +433,16 @@ function displayConvos(selItem, convoId, template, conversation_data){
     $('#selDripp').html(drippsHTML);
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
     bindButtons();
+    if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
+        $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+        $("#imageDivBucket").css("height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height()));
+        $("#imageDivBucket").css("line-height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height())+ "px");
+    }
+    else {
+        $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+        $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-267-$(".friendPics").height())+ "px");
+        $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
+    }
 }
 
 window.bindBucket = function() {
