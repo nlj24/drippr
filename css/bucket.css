@@ -13,6 +13,7 @@ darkGrey: #6D6E70*/
   height: 32px;
 }
 
+
 .blue_friends {
   display: inline-block;
   background-color: #A3DCFF;
@@ -129,11 +130,7 @@ darkGrey: #6D6E70*/
   height: 200px;
 }
 
-body {
-  background-color: #e9eaed;
-  font-family: Helvetica Neue;
-  color: #6D6E70;
-}
+
 
 .mainItemDiv {
   height: 689px;
