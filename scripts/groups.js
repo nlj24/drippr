@@ -79,8 +79,8 @@ window.GROUP_METHOD = {
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":window.my_members_dict, "other_groups":window.other_members_dict});
         $('#groups_placeholder').html(groupHTML);
-        $("#my_group_container").height($(window).height()-430);
-        $("#other_group_container").height($(window).height()-430);
+        $("#my_group_container").height($(window).height()-457);
+        $("#other_group_container").height($(window).height()-457);
 
         if ($.isEmptyObject(window.my_members_dict)) {
             $('#my_group_container').html("you haven't created any groups");

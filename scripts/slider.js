@@ -15,7 +15,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.setDrippLikes();
 					window.resetFB();
 					this.goTo(window.positions[window.curCategory]);
-					$('#sliderPad').height($(window).height()-270);
+					$('#sliderPad').height($(window).height()-230);
 					$('.mainBubble').width($(".slider").width());
 					$('.mainBubble').height($(".slider").height());
 					$('.imageDivDripp').height($(".slider").height()-87);
