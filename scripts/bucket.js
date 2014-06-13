@@ -206,12 +206,12 @@ window.BUCKET_METHOD = {
 
             if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
                  $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
-                $("#imageDivBucket").css("height",""+ ($(window).height()-272-$(".friendPics").height()-$("#conversation").height()));
-                $("#imageDivBucket").css("line-height",""+ ($(window).height()-272-$(".friendPics").height()-$("#conversation").height())+ "px");
+                $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
+                $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
             }
             else {
                 $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
-                $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-272-$(".friendPics").height())+ "px");
+                $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
             }
 
@@ -508,14 +508,14 @@ function displayConvos(selItem, convoId, template, conversation_data){
     $('#selDripp').html(drippsHTML);
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
     bindButtons();
-    if ($("#conversation").height() > ($(window).height()-272-$(".friendPics").height())) {
+    if ($("#conversation").height() > ($(window).height()-277-$(".friendPics").height())) {
         $("#conversation").css("max-height",""+ .4*($(window).height()-170-$(".friendPics").height())+ "px");
-        $("#imageDivBucket").css("height",""+ ($(window).height()-272-$(".friendPics").height()-$("#conversation").height()));
-        $("#imageDivBucket").css("line-height",""+ ($(window).height()-272-$(".friendPics").height()-$("#conversation").height())+ "px");
+        $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
+        $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
     }
     else {
         $("#conversation").css("max-height",""+ .4*($(window).height()-170-$(".friendPics").height())+ "px");
-        $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-272-$(".friendPics").height())+ "px");
+        $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
     }
 }
