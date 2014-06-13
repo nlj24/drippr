@@ -59,7 +59,7 @@ app.get("/articles/:category", function(req, res) {
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT DISTINCT Buckets.id, bucketId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+    var get_bucket_articles = "SELECT DISTINCT Buckets.id, bucketId, Buckets.articleId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
    
    connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
@@ -69,6 +69,7 @@ app.get("/buckets", function(req, res){
                 articles_dict[rows[ii].id] = rows[ii];
                 articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
                 articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
+                articles_dict[rows[ii].id]["isReadItLater"] = true;
                 //if there are other buckets need to note readitlater
                 articles_list.push( articles_dict[rows[ii].id]);
             }

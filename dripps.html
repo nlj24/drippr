@@ -6,9 +6,12 @@
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/dripps.css">
 		<link rel="stylesheet" href="css/bucket.css">
+	    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
 	    <link rel="stylesheet" href="css/facebook.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	    <script type="text/javascript" src="/scripts/handlebars.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="/scripts/dripps.js"></script>
 		<script type="text/javascript" src="/scripts/bucket.js"></script>
@@ -19,7 +22,6 @@
 		<script type="text/javascript" src="/scripts/moment.js"></script>
 		<script type="text/javascript" src="/scripts/facebook.js"></script>
 		<script type="text/javascript" src="/scripts/facebook_autocomplete.js"></script>
-		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
 	</head>
     <body>
     	<div id="fb-root"></div>
@@ -406,14 +408,23 @@
 	        	<script id="items-template" type="text/x-handlebars-template">
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
-		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemHead">{{headline}}</p>
-		        				<div message_id = {{id}} conversation_id = {{conversationId}} class = "row fullMessage">
-		        					<img message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
-		        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemSender">{{fullName}}</p>
-		        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemTime">{{timeSentString}}</p>
-		        				</div>
-		        			</div>
+		        			{{#if isReadItLater}}
+			        			<div class = "messageItem" saved_id = {{id}} >
+			        				<p saved_id = {{id}}  class = "messageItemHead">{{headline}}</p>
+			        				<div saved_id = {{id}}  class = "row fullMessage">
+			        					<p saved_id = {{id}}  class = "messageItemTime">{{dateAddedString}}</p>
+			        				</div>
+			        			</div>
+		        			{{else}}
+			        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
+			        				<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemHead">{{headline}}</p>
+			        				<div message_id = {{id}} conversation_id = {{conversationId}} class = "row fullMessage">
+			        					<img message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
+			        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemSender">{{fullName}}</p>
+			        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemTime">{{timeSentString}}</p>
+			        				</div>
+			        			</div>
+		        			{{/if}}
 		        		{{/each}}
 			        </div>
 		        </script>
@@ -487,7 +498,7 @@
 				</div>
 				<div class = "col-xs-2" id = "opContainer">
 					<div class = "row">
-	 					<div class = "opDiv col-xs-6 col-xs-offset-2">
+	 					<div class = "opDiv readItLaterDiv col-xs-6 col-xs-offset-2">
 	 						<img src = "images/readLater.svg" class="opinionBucket readLater2 grey2 hide">
 	 						<img src = "images/readLaterBlue.svg" class="opinionBucket readLater2 blue hide">
 	 					</div>

@@ -21,6 +21,7 @@
   z-index: 1000
 }
 
+
 .fbac-suggestion-list:empty {
   border: none;
 }
@@ -44,4 +45,27 @@
 
 .fbac-suggestion-name {
   margin-left: 10px;
+}
+.ui-autocomplete{
+  z-index: 1050;
+}
+
+
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  border: none;
+  background: #A3DCFF;
+  font-weight: bold;
+  color: white;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: none;
 }
