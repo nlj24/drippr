@@ -70,6 +70,7 @@ window.BUCKET_METHOD = {
         }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
+
             dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
             dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
             if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
@@ -79,13 +80,16 @@ window.BUCKET_METHOD = {
                 dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
             }
             if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
-                dripps_data[ii]['dateString'] = "Today, " + dripps_data[ii]['date'].format('h:mm a');
+                dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mm a');
             }
             else {
-                dripps_data[ii]['dateString'] = dripps_data[ii]['date'].format('MMMM Do, h:mm a');
+                dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mm a');
             }
             if (!dripps_data[ii]['collected']) {
                 dripps_data[ii]['chrome'] = "sent via chrome ext";
+            }
+            if (dripps_data[ii]['date']._i == 'Invalid date +0000'){
+                dripps_data[ii]['dateString'] = "";
             }
         }
 

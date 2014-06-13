@@ -13,10 +13,8 @@ FB.Event.subscribe("auth.logout", function() {
     window.location = 'http://drippr.me';
 });
 
-
-$(".derecha").css("height", ($(".inputBox").height()+4) + "px");
-$(".derecha").css("line-height", ($(".inputBox").height()+4) + "px");
-$("#chosen_ext").css("height", ($(".form").height()/3) + "px");
+var windowHeight = $(window).height()-91;
+$("#extContScroll").css("height",windowHeight);
 
 
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
@@ -163,36 +161,60 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
                             });
 
                             $("#sendBtn").click(function(){
-                                console.log("clicked it");
-                                if (window.drippsIds.length > 0 || window.selGroups.length > 0) {
-                                    var selGroupsDict = {}
-                                    if(window.selGroups.length > 0) {
-                                        for(var ii = 0; ii < selGroups.length; ii++) {
-                                            var friendLst = window.all_members_dict[selGroups[ii]].list;
-                                            selGroupsDict[selGroups[ii]] = [];
-                                            for(var jj = 0; jj < friendLst.length; jj++) {
-                                                selGroupsDict[selGroups[ii]].push(friendLst[jj].userId);
+                                if ($("#link").val()) {
+                                    if ($("#title").val()) {
+                                        if (window.drippsIds.length > 0 || window.selGroups.length > 0) {
+                                            var selGroupsDict = {}
+                                            if(window.selGroups.length > 0) {
+                                                for(var ii = 0; ii < selGroups.length; ii++) {
+                                                    var friendLst = window.all_members_dict[selGroups[ii]].list;
+                                                    selGroupsDict[selGroups[ii]] = [];
+                                                    for(var jj = 0; jj < friendLst.length; jj++) {
+                                                        selGroupsDict[selGroups[ii]].push(friendLst[jj].userId);
+                                                    }
+                                                    selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
+                                                }
                                             }
-                                            selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
+                                            console.log(selGroupsDict);
+                                            $.ajax({
+                                                url: window.address + 'sendDripp/new',
+                                                data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups},
+                                                type:'get'
+                                            });
+                                            
+                                            window.drippsChosenFriends = {};
+                                            window.drippsIds=[];
+                                            window.selGroups = [];
+                                            $('#chosen_ext').html('<div class = "createdSuccessStyleExt">congratulations! your dripp has been sent!</div>');
+                                            setTimeout(function() {
+                                                $('.createdSuccessStyleExt').fadeOut(400, function() {
+                                                    $('#chosen_ext').html('');
+                                                });
+                                            }, 3500);
+                                        }
+                                        else {
+                                             $('#myModal8').modal('show');
+                                        setTimeout(function() {
+                                            $('#myModal8').modal('hide');
+                                        }, 3000);
+                                        return;
                                         }
                                     }
-                                    console.log(selGroupsDict);
-                                    $.ajax({
-                                        url: window.address + 'sendDripp/new',
-                                        data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups},
-                                        type:'get'
-                                    });
-                                    
-                                    window.drippsChosenFriends = {};
-                                    window.drippsIds=[];
-                                    window.selGroups = [];
-                                    $('#chosen_ext').html('<div class = "createdSuccessStyleExt">your dripp has been sent!</div>');
+                                    else {
+                                        $('#myModal7').modal('show');
+                                        setTimeout(function() {
+                                            $('#myModal7').modal('hide');
+                                        }, 3000);
+                                        return;
+                                    }
+                                }
+                                else {
+                                    $('#myModal8').modal('show');
                                     setTimeout(function() {
-                                        $('.createdSuccessStyleExt').fadeOut(400, function() {
-                                            $('#chosen_ext').html('');
-                                        });
-                                    }, 3500);
-                                }                           
+                                        $('#myModal8').modal('hide');
+                                    }, 3000);
+                                    return;
+                                }                       
                             });
 
 

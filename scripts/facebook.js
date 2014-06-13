@@ -480,7 +480,6 @@ $(".arrowIntro").attr("class", "arrowIntro");
 					                	window.groupsChosenFriends = {};
 					                }
 					                else {
-					                	console.log('fdsf');
 					                	$('#myModal5').modal('show');
 			                			setTimeout(function() {
 					                    	$('#myModal5').modal('hide');
@@ -593,6 +592,8 @@ $(".arrowIntro").attr("class", "arrowIntro");
 						        $("#groups").attr("class", "container-fluid hide");
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
 						        window.resetFB();
+						        $(".selBucket").attr("class", "selBucket");
+                				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
 						    }
 						    if (location.hash == "#group") {
 
@@ -610,8 +611,6 @@ $(".arrowIntro").attr("class", "arrowIntro");
 						
 						window.bindDripps();
 						window.bindBucket();
-
-
 
 						switch(location.hash){
 							case "#bucket":

@@ -541,7 +541,7 @@ app.get("/sendDripp/new", function(req, res) {
     var convoId;
     var set_send_query;
 
-    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"',NOW(), 0, 0, 0)";
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"','', 0, 0, 0)";
     connection.query(add_article_query, function(err,result) {
         if (err) throw err;
         var articleId = result.insertId;
