@@ -34,6 +34,10 @@ window.BUCKET_METHOD = {
         window.conversation_data = conversation_data;
 
         window.setBucketLikes = function correctLikes() {
+
+            $(".up2").show();
+            $(".down2").show();
+
             if (articleDict[window.selItem.articleId]['userLiked']) {
                 $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
                 $(".like2.blue").attr("class", 'opinionBucket like2 blue');
@@ -68,9 +72,30 @@ window.BUCKET_METHOD = {
                 $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
                 $(".dripp2").attr("class", 'opinionBucket dripp2');
             }
+
+            if (window.readItLater) {
+                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
+                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+            }
         }
 
+        for (var ii = 0; ii < readItLater_data.length; ii++) {
+            var curItem = readItLater_data[ii];
+
+                curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
+                if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
+                    curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
+                }
+                else {
+                    curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
+                }
+               
+
+             }
+
         for (var ii = 0; ii < dripps_data.length; ii++) {
+
+           
 
             dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
             dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
@@ -92,6 +117,9 @@ window.BUCKET_METHOD = {
             if (dripps_data[ii]['date']._i == 'Invalid date +0000'){
                 dripps_data[ii]['dateString'] = "";
             }
+        
+
+
         }
 
         sendList = [];
@@ -182,6 +210,7 @@ window.BUCKET_METHOD = {
 
         $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
 
+        window.readItLater = false;
         $('.selBucket').click(function(e){
 
             $('#selItem').html("");
@@ -193,6 +222,7 @@ window.BUCKET_METHOD = {
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
+                window.readItLater = false;
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'sent') {
@@ -200,6 +230,7 @@ window.BUCKET_METHOD = {
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
+                window.readItLater = false;
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
@@ -207,20 +238,32 @@ window.BUCKET_METHOD = {
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
+                window.readItLater = true;
+
             }
 
             templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
-            itemHTML = template({"buckets":feed});
+            itemHTML = template({"buckets":feed });
             
             $('#items').html(itemHTML);
             if (feed.length == 0 ) {
                 $('.mainItemDiv').text('You have nothing in this bucket.');
+                 $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2 hide');
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
+                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+                    $(".up2").hide();
+                    $(".down2").hide();
+
             } else {
                 $(".noDrippsMain").attr("class", "noDrippsMain hide");
             }
 
-            if ( ($(e.target).attr('bucketIdentifier') === 'dripps') || ($(e.target).attr('bucketIdentifier') === 'sent')) {
+            if ( !(window.readItLater)) {
             
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource);
@@ -233,7 +276,7 @@ window.BUCKET_METHOD = {
 
             }
 
-            if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
+            if (window.readItLater) {
 
                 if (feed.length > 0) {
                     window.selItem = feed[0];
@@ -243,14 +286,42 @@ window.BUCKET_METHOD = {
                 messageListTemplate = Handlebars.compile(templateSource),
                 readItLaterHTML = messageListTemplate({"selItem":window.selItem});
                 $('#selDripp').html(readItLaterHTML);
+                window.setBucketLikes();
+
+                $('.messageItem').click(function(e){
+                    $('.messageItem').removeClass("selMessageItem");
+                    window.resetFB();
+                    var id = $(e.target).attr('saved_id');
+                    for (var i=0;i<feed.length;i++) {
+                        if ((id == feed[i]['id']) && feed[i]['isReadItLater']) {
+                            window.selItem = feed[i];
+                            break;
+                        }
+                    }
+                    readItLaterHTML = messageListTemplate({"selItem":window.selItem});
+                    $('#selDripp').html(readItLaterHTML);
+                    window.setBucketLikes();
+
+                    $(".up2").text(window.selItem.numLikes);
+                    $(".down2").text(window.selItem.numDislikes);
+                    
+                    $(e.target).closest('.messageItem').removeClass("unSelMessageItem");
+                    $(e.target).closest('.messageItem').addClass("selMessageItem");
+
+
+                });
+                
+                $("[saved_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+
+            }else{
+
+                bindMessages(messageListTemplate, conversation_data);
+                $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
             }
 
-            bindMessages(messageListTemplate, conversation_data);
             console.log(window.selItem);
-            $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
         });
 
-        window.setBucketLikes();
         $('#messageInput').elastic();
 
         $(".drippsBub").click(function() {
@@ -294,6 +365,7 @@ window.BUCKET_METHOD = {
             data: {user: window.myID},
             method:'get',
             success: function(data){
+                console.log(data);
                 BUCKET_METHOD.handlerData2(dripps_data, data);
             }
         });
@@ -324,7 +396,7 @@ function bindMessages(template, conversation_data){
         window.resetFB();
         var id = $(e.target).attr('message_id');
         for (var i=0;i<feed.length;i++) {
-            if (id == feed[i]['id']) {
+            if ((id == feed[i]['id']) && !(feed[i]['isReadItLater'])) {
                 window.selItem = feed[i];
             }
         }
@@ -363,6 +435,7 @@ function bindMessages(template, conversation_data){
         $(e.target).closest('.messageItem').removeClass("unreadComments");
 
         displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);   
+
         bindButtons();
     });
 }
