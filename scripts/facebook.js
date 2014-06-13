@@ -1,4 +1,4 @@
-window.address = "http://drippr.me";
+window.address = "http://drippr.me/";
 
 window.fbAsyncInit = function() {
 FB.init({
