@@ -57,8 +57,8 @@
 	    				</div>
 	        		</div>
 		        	<div class = "col-xs-4 headingPad1">
-    					<div class = "notify"></div>
 	    				<div class = "bucketsBub chosenHeadBub">
+    					<div class = "notify" style="margin-left:7px"></div>
 	    					<div class = "col-xs-3">
 	        					<img class = "headBubImg" src = "/images/bucket.svg">
 	        				</div>
@@ -407,11 +407,11 @@
 		        	<div class = "mainItemDiv">
 		        		{{#each buckets}}
 		        			<div class = "messageItem" message_id = {{id}} conversation_id = {{conversationId}}>
-		        				<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemHead">{{headline}}</p>
+		        				<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemHead">{{headline}}</p>
 		        				<div message_id = {{id}} conversation_id = {{conversationId}} class = "row fullMessage">
-		        					<img message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
-		        					<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemSender">{{fullName}}</p>
-		        					<p message_id = {{id}} conversation_id = {{conversationId}} id = "messageItemTime">{{timeSentString}}</p>
+		        					<img message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemPic" src = "http://graph.facebook.com/{{fromUserId}}/picture?width=25&height=25">
+		        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemSender">{{fullName}}</p>
+		        					<p message_id = {{id}} conversation_id = {{conversationId}} class = "messageItemTime">{{timeSentString}}</p>
 		        				</div>
 		        			</div>
 		        		{{/each}}
@@ -437,7 +437,7 @@
 	        			</a>
 	        		</div>
 	        		<div class = "row" id = "sendFromExtDiv">
-	        			<a id = "sendFromExt" href = "google.com">
+	        			<a id = "sendFromExt" href = "http://google.com">
 	        				{{selItem.chrome}}
 	        			</a>
 	        		</div>
@@ -458,15 +458,15 @@
 		        			<div id = "conversation">
 			        			{{#each messages}}
 			        				<div class = "indMess {{userId}}">
-			        					<img src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-			        					{{fullName}}: {{content}} Time: {{timeString}}
+			        					<img class="commentorPic" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
+			        					<span class="comment">{{fullName}}: {{content}} </span> <span class="commentTime"> {{timeString}}</span>
 			        				</div>
 		        				{{/each}}
 		        			</div>
 			        	</div>
 	        		</div>
 	    			<div class = "row">
-	    				<div class = "col-xs-10 col-xs-offset-1 messageInputRow" >
+	    				<div class = "col-xs-9 col-xs-offset-1 messageInputRow" >
 	        				<textarea id = "messageInput" maxlength="1000" placeholder="Enter Message" cols="20"></textarea>
 	        			</div>
 	        			<div class = "col-xs-1 noPad">

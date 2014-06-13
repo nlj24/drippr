@@ -323,7 +323,8 @@ body {
   position: absolute;
   height: 20px;
   width: 20px;
-  color: blue;
+  font-size: 14pt;
+  color: white;
 }
 
 .ui-corner-all {

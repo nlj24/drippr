@@ -28,6 +28,7 @@ window.BUCKET_METHOD = {
 
         articleDict = {};
         for (var i =0; i < conversation_data.length;i++) {
+            conversation_data[i]["isMe"] = (conversation_data[i]["userId"] == window.myID);
             conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
         };
         window.conversation_data = conversation_data;
@@ -80,10 +81,10 @@ window.BUCKET_METHOD = {
                 dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
             }
             if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
-                dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mm a');
+                dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mma');
             }
             else {
-                dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mm a');
+                dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mma');
             }
             if (!dripps_data[ii]['collected']) {
                 dripps_data[ii]['chrome'] = "sent via chrome ext";
@@ -126,12 +127,33 @@ window.BUCKET_METHOD = {
             }
             for (var ii = 0; ii < convo.length; ii++) {
                 if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-                    convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mm a');
+                    convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
                 }
                 else {
-                    convo[ii]['timeString'] = convo[ii]['time'].format('dddd MMMM Do YYYY, h:mm a');
+                    convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
                 }
             }
+
+            window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
+            window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+
+            window.notifications = 0;
+            for (var message_id in window.dripps_data_dict) {
+                if (window.dripps_data_dict[message_id]['unreadComments'] || window.dripps_data_dict[message_id]['unreadDripps']) {
+                    window.notifications +=1;
+                }
+               
+            }
+            if (window.notifications) {
+                $(".notify").text(window.notifications);
+                $(".notify").parents(".headBub").css("background-color", "red");
+            }else{
+                $(".notify").text("");
+                $(".notify").parents(".headBub").css("background-color", "#6D6E70");
+
+            }
+
+
 
             var templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
@@ -387,10 +409,10 @@ function displayConvos(selItem, convoId, template, conversation_data){
     }
     for (var ii = 0; ii < convo.length; ii++) {
         if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-            convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mm a');
+            convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
         }
         else {
-            convo[ii]['timeString'] = convo[ii]['time'].format('dddd MMMM Do YYYY, h:mm a');
+            convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
         }
     }
 
