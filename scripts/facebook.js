@@ -51,6 +51,7 @@ $(document).keydown(function(e){
 		$("#drippsPromo").attr("class", "hide");
 		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
+		$("#drippsHeader").attr("class", "col-xs-5 headingPad");
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
