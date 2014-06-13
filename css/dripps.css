@@ -290,11 +290,14 @@ body {
 
 #download {
   float: right;
-  font-size: 17px;
+  font-size: 15px;
   background-color: #6D6E70;
   color: white;
-  padding: 5px;
-  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  height: 22px;
+  line-height: 22px;
+  margin-top: 9px;
 }
 
 .fb-login-button {
@@ -404,4 +407,12 @@ body {
 
 .listWidth {
   width: 720px;
+}
+
+#floatRightArrow {
+  text-align: right;
+}
+
+#chromeLogoStyle {
+  max-height: 90%;
 }

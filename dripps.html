@@ -120,7 +120,7 @@
 							<div class = "col-xs-10 noPad">
 								<a href = "google.com">
 									<div id = "download">
-										chrome ext
+										<img id = "chromeLogoStyle" src= "/images/chromeLogo.png"> extension
 									</div>
 								</a>
 							</div>
@@ -135,14 +135,14 @@
 		</div>
 		<div id="drippsPromo">
 			<div class = "row" id = "promoSpacing">
-				<div class = "col-xs-2">
-					<a href = "javascript:sliders2[0].goToPrev()">
+				<a href = "javascript:sliders2[0].goToPrev()">
+					<div class = "col-xs-1">
 			        	<div class = "arrowIntro hide">
 			        		<img src = "/images/revArrow.svg">
 						</div>
-					</a>
-				</div>
-				<div class = "col-xs-8">
+					</div>
+				</a>
+				<div class = "col-xs-10">
 					<div id="drippsIntro">	
 						<div class="slider2">
 				            <ul>
@@ -176,13 +176,13 @@
 		            	</div>
 		            </div>
 				</div>
-				<div class = "col-xs-2">
-		            <a href = "javascript:sliders2[0].goToNext()">
-			        	<div class = "arrowIntro hide">
+		        <a href = "javascript:sliders2[0].goToNext()">
+					<div class = "col-xs-1">
+			        	<div class = "arrowIntro hide" id = "floatRightArrow">
 			        		<img src = "/images/arrow.svg">
 						</div>
-					</a>
-				</div>
+					</div>
+				</a>
 			</div>
 			<script>
 				var sliders2 = [];
@@ -526,8 +526,12 @@
 				<div class = "row col-xs-6">
 					<div class = "col-xs-1">
 					</div>
-					<div class = "col-xs-11 createGroupSyle">
-						create groups
+					<div class = "col-xs-4 row createGroupSyle">
+						<div class = "col-xs-3">
+						</div>
+						<div class = "col-xs-9">
+							create groups
+						</div>
 					</div>
 				</div>
 				<div class = "col-xs-6">
@@ -545,7 +549,7 @@
 								group name:
 							</div>
 							<div class = "col-xs-7 noPad">
-								<input id = "groupName" maxlength = "11" type = "text" autocomplete="off" autofocus="autofocus">
+								<input id = "groupName" maxlength = "11" type = "text" autocomplete="off">
 							</div>
 						</div>
 						<div class = "row">
@@ -599,6 +603,15 @@
 			<script id="groups-template" type="text/x-handlebars-template">
 				<div class = "row">
 					<div class = "col-xs-6">	
+						<div class = "row groupHeaderStyle">				
+							<div class = "col-xs-2 headerGroup">name</div>
+							<div class = "col-xs-8 headerGroup">
+								members
+							</div>
+							<div class = "col-xs-2 headerGroup">
+								modify
+							</div>
+						</div>
 						<div id = "my_group_container">
 							{{#each my_groups}}
 								<div class = "row groupRowStyle" group_id="group_{{this.id}}">				
@@ -608,10 +621,8 @@
 											<div class="personName {{userId}}">{{this.name}}</div>
 										{{/each}}
 									</div>
-									<div class = "col-xs-2">
-										<div class = "addMems" group_id={{this.id}} data-toggle="modal" data-target="#myModal2">
-											add members
-										</div>
+									<div class = "col-xs-2 noPad">
+										<div class = "addMems" group_id={{this.id}} data-toggle="modal" data-target="#myModal2">add members</div>
 										<div class = "deleteGroup" group_id={{this.id}}>
 											delete
 										</div>
@@ -621,11 +632,21 @@
 						</div>						
 					</div>
 					<div class = "col-xs-6">
+						<div class = "row groupHeaderStyle">
+							<div class = "col-xs-2 headerGroup">name</div>
+							<div class = "col-xs-2 headerGroup">creator</div>
+							<div class = "col-xs-6 headerGroup">
+								members
+							</div>
+							<div class = "col-xs-2 headerGroup">
+								leave
+							</div>
+						</div>
 						<div id = "other_group_container">
 							{{#each other_groups}}
 								<div class = "row groupRowStyle" group_id="group_{{this.id}}">
 									<div class = "col-xs-2 nameGroupsStyle">{{this.name}}</div>
-									<div class = "col-xs-2">{{this.creatorId}}</div>
+									<div class = "col-xs-2 centerCreator">{{this.creatorId}}</div>
 									<div class = "col-xs-6">
 										{{#each this.list}}
 											<div class="personName {{userId}}">
@@ -668,9 +689,13 @@
 								send
 							</a>
 							<br>
-							<div class="ui-widget">
-								select group:
-								<input id="tags">
+							<div class="ui-widget row">
+								<div class = "col-xs-2">
+									select group:
+								</div>
+								<div class = "col-xs-10">
+									<input id="tags">
+								</div>
 							</div>
 						</form>
 						<div class = "success hide">
