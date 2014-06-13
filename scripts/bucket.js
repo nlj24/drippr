@@ -84,6 +84,9 @@ window.BUCKET_METHOD = {
             else {
                 dripps_data[ii]['dateString'] = dripps_data[ii]['date'].format('MMMM Do, h:mm a');
             }
+            if (!dripps_data[ii]['collected']) {
+                dripps_data[ii]['chrome'] = "sent via chrome ext";
+            }
         }
 
         sendList = [];

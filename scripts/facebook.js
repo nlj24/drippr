@@ -15,6 +15,15 @@ FB.Event.subscribe("auth.logout", function() {
 
 $("#dripps").css("height",""+ ($(window).height()-91));
 $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
+
+$("#drippsPromo").css("height",""+ ($(window).height()-104));
+$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
+$("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
+$(".fitIntroImg").attr("class", "fitIntroImg");
+$(".listWidth").css("width",$(".fitIntroImg").width());
+console.log("width",$(".fitIntroImg").width());
+$(".arrowIntro").attr("class", "arrowIntro");
+
 //check if we're logged in
    //display a modal or something?
    //remove it if they do login with the subscribe function below 

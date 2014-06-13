@@ -47,10 +47,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					if (this.li.length  - index < 10) {
 						
 
-						console.log("index: " + index)
 						window.positions[window.curCategory] = Math.min(10, index);
 
-						console.log("position :" +window.positions[window.curCategory]);
 						var indexInArray = index;
 
 						for (var ii = index; ii < window.articlesData[window.curCategory].length; ii++) {
@@ -59,9 +57,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 								break;
 							}	
 						}
-						
-						console.log("index in array: "+ indexInArray);
-						
+												
 						var refreshTemplate = function(){
 							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
