@@ -12,10 +12,10 @@ window.ARTICLE_METHOD ={
         for (var ii = 0; ii < resJSON.length; ii++) {
             resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
             if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
-                resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mm a');
+                resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
             }
             else {
-                resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mm a');
+                resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
             }
         }
 

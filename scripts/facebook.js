@@ -1,4 +1,4 @@
-window.address = "drippr.me";
+window.address = "http://localhost:5000/";
 
 window.fbAsyncInit = function() {
 FB.init({

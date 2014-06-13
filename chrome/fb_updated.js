@@ -142,7 +142,7 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
                                     var groupId = groupListDict[name];
                                     if((selGroups.indexOf(groupId) == -1) && (window.groupList_ids.indexOf(groupId) != -1)) {
                                         window.selGroups.push(groupId);
-                                        $("#chosen").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
+                                        $("#chosen_ext").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
                                         $(".rm_group" ).unbind("click", handler3);
                                         $(".rm_group").bind("click", handler3);
 
@@ -179,7 +179,7 @@ $("#chosen_ext").css("height", ($(".form").height()/3) + "px");
                                     console.log(selGroupsDict);
                                     $.ajax({
                                         url: window.address + 'sendDripp/new',
-                                        data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds},
+                                        data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups},
                                         type:'get'
                                     });
                                     

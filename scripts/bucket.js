@@ -16,6 +16,7 @@ window.BUCKET_METHOD = {
                 dripps_data[ii].fullName = window.groupListDict2[dripps_data[ii].recipientGroup] + ": " + dripps_data[ii].fullName;
             }
         }
+
         if (window.notifications) {
             $(".notify").text(window.notifications);
             $(".notify").parents(".headBub").css("background-color", "red");
@@ -70,11 +71,18 @@ window.BUCKET_METHOD = {
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
             dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
             if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
-                dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mm a');
+                dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mma');
             }
             else {
-                dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mm a');
+                dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
+            }
+            if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
+                dripps_data[ii]['dateString'] = "Today, " + dripps_data[ii]['date'].format('h:mm a');
+            }
+            else {
+                dripps_data[ii]['dateString'] = dripps_data[ii]['date'].format('MMMM Do, h:mm a');
             }
         }
 
@@ -124,10 +132,14 @@ window.BUCKET_METHOD = {
             $('#items').html(itemHTML);
 
             for (var ii = 0; ii < feed.length; ii++) {
-                if (feed[ii]['isRead']) {
-                    $("[message_id='" + feed[ii]['id'] + "']").css("background", "#DFE0E0");
+                if (feed[ii]['unreadDripps']) {
+                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
+                }
+                if (feed[ii]['unreadComments']) {
+                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
                 }
             }
+            console.log(dripps_data);
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource),
             drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
@@ -138,6 +150,8 @@ window.BUCKET_METHOD = {
             bindButtons();
             window.setBucketLikes();
         }
+
+        $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
 
         $('.selBucket').click(function(e){
 
@@ -203,6 +217,8 @@ window.BUCKET_METHOD = {
             }
 
             bindMessages(messageListTemplate, conversation_data);
+            console.log(window.selItem);
+            $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
         });
 
         window.setBucketLikes();
@@ -275,6 +291,7 @@ window.BUCKET_METHOD = {
 
 function bindMessages(template, conversation_data){
     $('.messageItem').click(function(e){
+        $('.messageItem').removeClass("selMessageItem");
         window.resetFB();
         var id = $(e.target).attr('message_id');
         for (var i=0;i<feed.length;i++) {
@@ -311,11 +328,10 @@ function bindMessages(template, conversation_data){
 
 
 
-        $('.messageItem').css("background", "white");
-        $('.messageItem').css("color", "#6D6E70");
-        $(e.target).closest('.messageItem').css("background", "#6D6E70");
-        $(e.target).closest('.messageItem').css("color", "white");
-
+        $(e.target).closest('.messageItem').removeClass("unSelMessageItem");
+        $(e.target).closest('.messageItem').addClass("selMessageItem");
+        $(e.target).closest('.messageItem').removeClass("unreadDripps");
+        $(e.target).closest('.messageItem').removeClass("unreadComments");
 
         displayConvos(window.selItem, $(e.target).attr('conversation_id'), template, conversation_data);   
         bindButtons();
