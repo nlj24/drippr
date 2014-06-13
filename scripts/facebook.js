@@ -49,6 +49,7 @@ $(document).keydown(function(e){
 // will be handled. 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		$("#drippsPromo").attr("class", "hide");
+		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
 		FB.api(
 	    	"/me/friends",
