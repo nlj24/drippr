@@ -67,10 +67,8 @@ body {
 }
 
 #opContainer {
-  height: 500px;
   line-height: 125px;
   padding-left: 50px;
-  padding-top: 20px;
 }
 
 #prevArrow:hover {

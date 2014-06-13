@@ -205,12 +205,12 @@ window.BUCKET_METHOD = {
             $('#selDripp').html(drippsHTML);
 
             if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
-                 $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+                 $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height()));
                 $("#imageDivBucket").css("line-height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height())+ "px");
             }
             else {
-                $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+                $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-267-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
             }
@@ -509,12 +509,12 @@ function displayConvos(selItem, convoId, template, conversation_data){
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
     bindButtons();
     if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
-        $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+        $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height()));
         $("#imageDivBucket").css("line-height",""+ ($(window).height()-267-$(".friendPics").height()-$("#conversation").height())+ "px");
     }
     else {
-        $("#conversation").css("max-height",""+ .4*($(window).height()-150-$(".friendPics").height())+ "px");
+        $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-267-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
     }
