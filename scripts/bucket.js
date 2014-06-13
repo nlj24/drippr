@@ -81,6 +81,7 @@ window.BUCKET_METHOD = {
 
         for (var ii = 0; ii < readItLater_data.length; ii++) {
             var curItem = readItLater_data[ii];
+            
 
                 curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
                 if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
