@@ -37,45 +37,45 @@ window.BUCKET_METHOD = {
 
             $(".up2").show();
             $(".down2").show();
-
-            if (articleDict[window.selItem.articleId]['userLiked']) {
-                $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
-                $(".like2.blue").attr("class", 'opinionBucket like2 blue');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-                $(".up2").html(articleDict[window.selItem.articleId].numLikes);
-            }
-            if (articleDict[window.selItem.articleId]['userLiked'] === false) {
-                $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
-                $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-                $(".up2").html(articleDict[window.selItem.articleId].numLikes);
-            }
-            if (articleDict[window.selItem.articleId]['userDisliked']) {
-                $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
-                $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-                $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
-            }
-            if (articleDict[window.selItem.articleId]['userDisliked'] === false) {
-                $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
-                $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-                $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
-            }
-            if (articleDict[window.selItem.articleId]['userReadItLater']) {
-                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
-                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-            }
-            if (articleDict[window.selItem.articleId]['userReadItLater'] === false) {
-                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
-                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
-                $(".dripp2").attr("class", 'opinionBucket dripp2');
-            }
-
-            if (window.readItLater) {
-                $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
-                $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+            if (feed) {
+                if (articleDict[window.selItem.articleId]['userLiked']) {
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                    $(".up2").html(articleDict[window.selItem.articleId].numLikes);
+                }
+                if (articleDict[window.selItem.articleId]['userLiked'] === false) {
+                    $(".like2.grey2").attr("class", 'opinionBucket like2 grey2');
+                    $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                    $(".up2").html(articleDict[window.selItem.articleId].numLikes);
+                }
+                if (articleDict[window.selItem.articleId]['userDisliked']) {
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                    $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
+                }
+                if (articleDict[window.selItem.articleId]['userDisliked'] === false) {
+                    $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2');
+                    $(".dislike2.blue").attr("class", 'opinionBucket dislike2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                    $(".down2").html(articleDict[window.selItem.articleId].numDislikes);
+                }
+                if (articleDict[window.selItem.articleId]['userReadItLater']) {
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
+                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                }
+                if (articleDict[window.selItem.articleId]['userReadItLater'] === false) {
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2');
+                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+                    $(".dripp2").attr("class", 'opinionBucket dripp2');
+                }
+                if (window.readItLater) {
+                    $(".readLater2.grey2").attr("class", 'opinionBucket readLater2 grey2 hide');
+                    $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
+                }
             }
         }
 
@@ -327,13 +327,15 @@ window.BUCKET_METHOD = {
 
 
                 });
-                
-                $("[saved_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+                if (feed) {
+                    $("[saved_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+                }
 
             }else{
-
-                bindMessages(messageListTemplate, conversation_data);
-                $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+                if (feed) {
+                    bindMessages(messageListTemplate, conversation_data);
+                    $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+                }
             }
         });
 
