@@ -26,7 +26,7 @@ function getCurTab() {
                     // var url = dict["url"];
                     // var title = dict["title"];
                     //link to drippr page
-                    chrome.tabs.create({ url: 'drippr.me/extension' });
+                    chrome.tabs.create({ url: 'drippr.me/chrome/ext.html' });
                     //query to get the id of new tab
                     chrome.tabs.query(
                         { currentWindow: true, active: true },
