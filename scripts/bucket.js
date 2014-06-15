@@ -221,7 +221,9 @@ window.BUCKET_METHOD = {
             window.setBucketLikes();
         }
 
-        $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+        if (feed) {
+            $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
+        }
 
         window.readItLater = false;
         $('.selBucket').click(function(e){
