@@ -1,6 +1,0 @@
-Things To Do
-------------
-Styling (empty table, binding of initial buckets, chrome extension)
-Styling (some sort of notifcations for unread things, displaying before login, need to shrink text for long name (do …))
-
-Automatic article collection

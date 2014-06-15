@@ -170,9 +170,7 @@ window.bindDripps = function() {
     
     $(".like").click(function(){
         var articleId = window.curArticle;
-        console.log(window.curArticle);
         if($('.like.grey2').hasClass('hide')) {
-            console.log('ddd');
             $(".up").text(--window.articlesData[articleId].numLikes);
             $(".like.grey2").attr("class", 'opinionDripp like grey2');
             $(".like.blue").attr("class", 'opinionDripp like blue hide');

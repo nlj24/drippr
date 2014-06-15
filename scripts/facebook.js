@@ -23,7 +23,6 @@ $("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
 $("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
 $(".fitIntroImg").attr("class", "fitIntroImg");
 $(".listWidth").css("width",$(".fitIntroImg").width());
-console.log("width",$(".fitIntroImg").width());
 $(".arrowIntro").attr("class", "arrowIntro");
 
 $(document).keydown(function(e){
@@ -335,7 +334,6 @@ $(document).keydown(function(e){
 
 					                    var handler3 = $('.rm_group').click(function(e) {
 					                        var id = $(e.target).attr('id');
-					                        console.log(id);
 					                        window.selGroups.splice(window.selGroups.indexOf(id),1);
 											$("#group_"+id).remove();
 											window.autoCompleteGroups.push(window.groupListDict2[$(e.target).attr('id')]);
@@ -362,7 +360,6 @@ $(document).keydown(function(e){
 											selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
 										}
 									}
-									console.log(selGroupsDict);
 									$.ajax({
 						                url: window.address + 'sendDripp',
 						                data: {groupsDict: JSON.stringify(selGroupsDict), fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
@@ -546,9 +543,6 @@ $(document).keydown(function(e){
 
 							$(".addNew").click(function(){
 				                if (window.addIds.length > 0) {
-				                	console.log(window.groupName);
-				                	console.log(window.addIds);
-				                	console.log(window.myID);
 				                    $.ajax({
 				                        url: window.address + 'addMembersNew',
 				                        data: {groupName: window.groupName, members: window.addIds, creatorId: window.myID},

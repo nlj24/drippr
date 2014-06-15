@@ -333,8 +333,6 @@ window.BUCKET_METHOD = {
                 bindMessages(messageListTemplate, conversation_data);
                 $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
             }
-
-            console.log(window.selItem);
         });
 
         $('#messageInput').elastic();
@@ -380,11 +378,9 @@ window.BUCKET_METHOD = {
             data: {user: window.myID},
             method:'get',
             success: function(data){
-                console.log(data);
                 BUCKET_METHOD.handlerData2(dripps_data, data);
             }
         });
-
     },
 
     loadArticleData : function(){
@@ -641,8 +637,5 @@ function makeUserNameList(recIds) {
 
         list[zz] = {name:window.userNames[list[zz]], picture: "http://graph.facebook.com/" + list[zz] + "/picture?width=25&height=25"};
     }
-
-
-
     return list;
 }
