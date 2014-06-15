@@ -603,7 +603,6 @@ $(document).keydown(function(e){
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
 						        window.resetFB();
 						        $(".selBucket").attr("class", "selBucket");
-                				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
 						    }
 						    if (location.hash == "#group") {
 
