@@ -39,7 +39,7 @@ var injected = injected || (function(){
         }   
     });
 
-    return "darshan";
+    return;
     };
 
 
