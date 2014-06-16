@@ -142,7 +142,7 @@ window.BUCKET_METHOD = {
             template = Handlebars.compile(templateSource),
             itemHTML = template({"buckets":[]});
             $('#items').html(itemHTML);
-            $('.mainItemDiv').text('You have nothing in this bucket.');
+            $('.mainItemDiv').text('you have nothing in this bucket.');
         }
         else{
             feed = receiveList;
@@ -205,7 +205,7 @@ window.BUCKET_METHOD = {
             $('#selDripp').html(drippsHTML);
 
             if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
-                 $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
+                $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
                 $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
             }
@@ -265,7 +265,7 @@ window.BUCKET_METHOD = {
             $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
             if (feed.length == 0 ) {
-                $('.mainItemDiv').text('You have nothing in this bucket.');
+                $('.mainItemDiv').text('you have nothing in this bucket.');
                  $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
                     $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
                     $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');
@@ -347,11 +347,17 @@ window.BUCKET_METHOD = {
 
         $(".bucketsBub").click(function() {
             window.location = "#bucket";
+            refreshTemp();
         });
 
         $(".groupsBub").click(function() {
             window.location = "#group";
         });
+
+        function refreshTemp() {
+            var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
+            $('#selDripp').html(drippsHTML);
+        }
 
     },
 
