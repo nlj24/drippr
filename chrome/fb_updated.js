@@ -245,17 +245,6 @@ $("#extContScroll").css("height",windowHeight);
                                     return;
                                 }
                             });
-
-                            $(".blue3").click(function(){
-                                $.ajax({
-                                    url:'http://drippr.me/readItLater/new',
-                                    data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
-                                    type:'get'
-                                });
-                                $(".blue3").attr("class", "opinionButtons blue3 hide");
-                                $(".grey3").attr("class", "opinionButtons grey3");
-                            });
-                           
                         }
 
                         window.GROUP_METHOD.loadGroups();

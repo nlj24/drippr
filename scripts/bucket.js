@@ -235,11 +235,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                 feed = receiveList;
-                if(!feed.length) {
-                    $(".noDrippsMain").attr("class", "noDrippsMain");
-                } else {
-                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                }
+                // if(!feed.length) {
+                //     $(".noDrippsMain").attr("class", "noDrippsMain");
+                // } else {
+                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                // }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -248,11 +248,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'sent') {
                 feed = sendList;
-                if(!feed.length) {
-                    $(".noDrippsMain").attr("class", "noDrippsMain");
-                } else {
-                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                }
+                // if(!feed.length) {
+                //     $(".noDrippsMain").attr("class", "noDrippsMain");
+                // } else {
+                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                // }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -260,12 +260,12 @@ window.BUCKET_METHOD = {
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
-                feed = readItLater_data;
-                if(!feed.length) {
-                    $(".noDrippsMain").attr("class", "noDrippsMain");
-                } else {
-                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                }
+                // feed = readItLater_data;
+                // if(!feed.length) {
+                //     $(".noDrippsMain").attr("class", "noDrippsMain");
+                // } else {
+                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                // }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -363,20 +363,20 @@ window.BUCKET_METHOD = {
 
         $(".bucketsBub").click(function() {
             window.location = "#bucket";
-            refreshTemp();
+            // refreshTemp();
         });
 
         $(".groupsBub").click(function() {
             window.location = "#group";
         });
 
-        function refreshTemp() {
-            if(!feed.length) {
-                $(".noDrippsMain").attr("class", "noDrippsMain");
-            }
-            var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
-            $('#selDripp').html(drippsHTML);
-        }
+        // function refreshTemp() {
+        //     if(!feed.length) {
+        //         $(".noDrippsMain").attr("class", "noDrippsMain");
+        //     }
+        //     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
+        //     $('#selDripp').html(drippsHTML);
+        // }
 
     },
 

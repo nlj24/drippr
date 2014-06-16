@@ -127,7 +127,7 @@ $(document).keydown(function(e){
 											FB.ui({
 												to: friend.id,
 												method: 'send',
-												link: 'http://drippr.me',
+												link: 'http://espn.com',
 											});
 										} 
 
