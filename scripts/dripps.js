@@ -9,6 +9,8 @@ window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
 
+        console.log(resJSON);
+
         for (var ii = 0; ii < resJSON.length; ii++) {
             resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss"));
             if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
