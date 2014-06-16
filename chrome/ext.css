@@ -29,21 +29,17 @@
 #sendBtn {
     font-size: 22px;
     float: right;
-    background: #6D6E70;
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    color: white;
 }
 
 #saveBtn {
     font-size: 22px;
-    background: #6D6E70;
     padding: 10px;
     float: left;
     border-radius: 10px;
     cursor: pointer;
-    color: white;
 }
 
 
@@ -100,4 +96,9 @@
   height: 300px;
   padding-bottom: 20px;
   padding-top: 20px;
+}
+
+.opinionButtons {
+  height: 55px;
+  width: 70px;
 }

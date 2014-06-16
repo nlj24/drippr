@@ -1,4 +1,4 @@
-window.address = "http://drippr.me/";
+window.address = "http://localhost:5000/";
 
 window.fbAsyncInit = function() {
 FB.init({
@@ -185,12 +185,11 @@ $("#extContScroll").css("height",windowHeight);
                                             window.drippsChosenFriends = {};
                                             window.drippsIds=[];
                                             window.selGroups = [];
-                                            $('#chosen_ext').html('<div class = "createdSuccessStyleExt">congratulations! your dripp has been sent!</div>');
+                                            $('#chosen_ext').html('');
+                                            $('#myModal12').modal('show');
                                             setTimeout(function() {
-                                                $('.createdSuccessStyleExt').fadeOut(400, function() {
-                                                    $('#chosen_ext').html('');
-                                                });
-                                            }, 3500);
+                                                $('#myModal12').modal('hide');
+                                            }, 3000);
                                         }
                                         else {
                                              $('#myModal8').modal('show');
@@ -219,7 +218,7 @@ $("#extContScroll").css("height",windowHeight);
 
 
                             // read it later
-                            $("#saveBtn").click(function(){
+                            $(".grey3").click(function(){
                                 if ($("#link").val()) {
                                     if ($("#title").val()) {
                                         $.ajax({
@@ -227,13 +226,13 @@ $("#extContScroll").css("height",windowHeight);
                                             data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
                                             type:'get'
                                         });
-                                        $(".showForm").attr("class", "showForm hide");
-                                        $(".success").attr("class", "success");
+                                        $(".grey3").attr("class", "opinionButtons grey3 hide");
+                                        $(".blue3").attr("class", "opinionButtons blue3");
                                     }
                                     else {
                                         $('#myModal10').modal('show');
                                         setTimeout(function() {
-                                            $('#myModal7').modal('hide');
+                                            $('#myModal10').modal('hide');
                                         }, 3000);
                                         return;
                                     }
@@ -241,15 +240,21 @@ $("#extContScroll").css("height",windowHeight);
                                 else {
                                     $('#myModal11').modal('show');
                                     setTimeout(function() {
-                                        $('#myModal7').modal('hide');
+                                        $('#myModal11').modal('hide');
                                     }, 3000);
                                     return;
                                 }
                             });
 
-
-
-
+                            $(".blue3").click(function(){
+                                $.ajax({
+                                    url:'http://drippr.me/readItLater/new',
+                                    data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
+                                    type:'get'
+                                });
+                                $(".blue3").attr("class", "opinionButtons blue3 hide");
+                                $(".grey3").attr("class", "opinionButtons grey3");
+                            });
                            
                         }
 

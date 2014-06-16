@@ -1,4 +1,4 @@
-window.address = "http://drippr.me/";
+window.address = "http://localhost:5000/";
 
 window.fbAsyncInit = function() {
 FB.init({
@@ -603,6 +603,7 @@ $(document).keydown(function(e){
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
 						        window.resetFB();
 						        $(".selBucket").attr("class", "selBucket");
+                				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
 						    }
 						    if (location.hash == "#group") {
 
