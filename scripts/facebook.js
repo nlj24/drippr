@@ -632,7 +632,6 @@ $(document).keydown(function(e){
 						        $("#bucketsHeader").attr("class", "col-md-5 headingPad");
 						        $("#groups").attr("class", "container-fluid hide");
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
-						        refreshTemp();
 								break;
 							case "#group":
 								$("#buckets").attr("class", "container-fluid hide");
