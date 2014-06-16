@@ -8,14 +8,15 @@ window.callingback = {};
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
+        console.log(resJSON);
 
         for (var ii = 0; ii < resJSON.length; ii++) {
-            // if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
-            //     resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
-            // }
-            // else {
+            if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
+                resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
+            }
+            else {
                 resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
-            // }
+            }
         }
 
         article_results = resJSON;
