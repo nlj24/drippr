@@ -10,7 +10,6 @@ window.ARTICLE_METHOD ={
     handlerData:function(resJSON){
 
         for (var ii = 0; ii < resJSON.length; ii++) {
-            resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss"));
             if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
                 resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
             }
@@ -81,7 +80,6 @@ window.ARTICLE_METHOD ={
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
-                    data[ii]["date"] = moment(moment(data[ii]["date"]).format("YYYY MM DD H:mm:ss"));
                     if (moment().format('MMMM Do YYYY') === data[ii]['date'].format('MMMM Do YYYY')) {
                         data[ii]['date'] = "Today, " + data[ii]['date'].format('h:mm a');
                     }
