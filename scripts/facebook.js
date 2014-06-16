@@ -605,7 +605,6 @@ $(document).keydown(function(e){
 						        window.resetFB();
 						        $(".selBucket").attr("class", "selBucket");
                 				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
-                				refreshTemp();
 						    }
 						    if (location.hash == "#group") {
 
