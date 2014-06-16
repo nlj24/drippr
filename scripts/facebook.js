@@ -1,4 +1,4 @@
-window.address = "http://drippr.me/";
+window.address = "http://localhost:5000/";
 window.timezone = (new Date().getTimezoneOffset())/60;
 
 window.fbAsyncInit = function() {

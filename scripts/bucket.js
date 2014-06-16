@@ -5,6 +5,7 @@ var feed;
 window.BUCKET_METHOD = {
 
     compileBuckets:function(dripps_data, readItLater_data, conversation_data){
+        console.log(readItLater_data);
         window.notifications = 0;
         window.dripps_data_dict = {};
         for (var ii = 0; ii <dripps_data.length; ii++) {
@@ -83,16 +84,16 @@ window.BUCKET_METHOD = {
             var curItem = readItLater_data[ii];
             
 
-                curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
-                if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
-                    curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
-                }
-                else {
-                    curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
-                }
-               
+            curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
+                curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
+            }
+            else {
+                curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
+            }
+           
 
-             }
+         }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
 
@@ -234,6 +235,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                 feed = receiveList;
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -242,6 +248,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'sent') {
                 feed = sendList;
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -250,6 +261,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
                 feed = readItLater_data;
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -327,12 +343,12 @@ window.BUCKET_METHOD = {
 
 
                 });
-                if (feed) {
+                if (feed.length) {
                     $("[saved_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
                 }
 
             }else{
-                if (feed) {
+                if (feed.length) {
                     bindMessages(messageListTemplate, conversation_data);
                     $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
                 }
@@ -355,6 +371,9 @@ window.BUCKET_METHOD = {
         });
 
         function refreshTemp() {
+            if(!feed.length) {
+                $(".noDrippsMain").attr("class", "noDrippsMain");
+            }
             var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
             $('#selDripp').html(drippsHTML);
         }
