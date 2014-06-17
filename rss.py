@@ -11,7 +11,7 @@ articlesToAdd = []
 print "starting script"
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources where id = 5"
+	sql = "SELECT * FROM Sources where id = 53"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 	rss2 = []
