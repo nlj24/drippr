@@ -140,6 +140,11 @@ window.BUCKET_METHOD = {
             articleDict[dripps_data[jj]['articleId']] = dripps_data[jj];
         }
 
+        for (var kk = 0; kk < readItLater_data.length; kk++) {
+            articleDict[readItLater_data[kk]['articleId']] = readItLater_data[kk];
+
+        }
+
         if (receiveList.length == 0 ) {
             $(".noDrippsMain").attr("class", "noDrippsMain");
             var templateSource = $("#items-template").html(),
