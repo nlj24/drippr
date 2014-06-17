@@ -38,6 +38,7 @@ try:
 				date = a['published_parsed']
 				date = datetime.fromtimestamp(mktime(date)) - timedelta(hours=1)
 				date2 = str(date)
+				print date2
 			except:
 				pass
 			request = urllib2.Request(url_result)

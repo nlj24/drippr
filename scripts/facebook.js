@@ -128,6 +128,7 @@ $(document).keydown(function(e){
 												to: friend.id,
 												method: 'send',
 												link: 'http://drippr.me',
+												picture: "http://a.espncdn.com/photo/2014/0615/nba_u_leonard11_134x75.jpg",
 											});
 										} 
 

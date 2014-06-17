@@ -10,15 +10,17 @@ window.ARTICLE_METHOD ={
     handlerData:function(resJSON){
 
         for (var ii = 0; ii < resJSON.length; ii++) {
-            resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss"));
-            if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
-                resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
-            }
-            else {
-                resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
-            }
+            // resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss"));
+            // if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
+            //     resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
+            // }
+            // else {
+            //     resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
+            // }
+            resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+            console.log(Date.create(resJSON[ii]["date"]).isUTC());
         }
-
+        console.log(resJSON);
         article_results = resJSON;
 
         window.article_results = resJSON;
