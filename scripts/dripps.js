@@ -8,17 +8,16 @@ window.callingback = {};
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
+        console.log(Date.create());
 
         for (var ii = 0; ii < resJSON.length; ii++) {
-            // resJSON[ii]["date"] = moment(moment(resJSON[ii]["date"]).format("YYYY MM DD H:mm:ss"));
-            // if (moment().format('MMMM Do YYYY') === resJSON[ii]['date'].format('MMMM Do YYYY')) {
-            //     resJSON[ii]['date'] = "Today, " + resJSON[ii]['date'].format('h:mma');
-            // }
-            // else {
-            //     resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
-            // }
-            // resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format("{YYYY} {MM} {DD} {H}:{mm}:{ss}") + '0000';
-            // resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+            resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).addHours(-4);
+            if (Date.create().format('{M}{d}{yy}') == Date.create(resJSON[ii]["date"]).format('{M}{d}{yy}')) {
+                resJSON[ii]["date"] = "Today, " + Date.create(resJSON[ii]["date"]).format('{12hr}:{mm}{tt}');
+            }
+            else {
+               resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+            }
         }
         console.log(resJSON);
         article_results = resJSON;
@@ -83,14 +82,13 @@ window.ARTICLE_METHOD ={
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
-                    // data[ii]["date"] = moment(moment(data[ii]["date"]).format("YYYY MM DD H:mm:ss"));
-                    // if (moment().format('MMMM Do YYYY') === data[ii]['date'].format('MMMM Do YYYY')) {
-                    //     data[ii]['date'] = "Today, " + data[ii]['date'].format('h:mm a');
-                    // }
-                    // else {
-                    //     data[ii]['date'] = data[ii]['date'].format('MMMM Do, h:mm a');
-                    // }
-                    data[ii]["date"] = Date.create(data[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+                    data[ii]["date"] = Date.create(data[ii]["date"]).addHours(-4);
+                    if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
+                        data[ii]["date"] = "Today, " + Date.create(data[ii]["date"]).format('{12hr}:{mm}{tt}');
+                    }
+                    else {
+                       data[ii]["date"] = Date.create(data[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+                    }
                     window.article_results.push(data[ii]);
                 }
 

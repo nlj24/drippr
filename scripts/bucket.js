@@ -91,7 +91,7 @@ window.BUCKET_METHOD = {
             // else {
             //     curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
             // }
-            curItem[ii]["dateAddedString"] = Date.create(curItem[ii]["dateAddedString"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+            curItem[ii]["dateAddedString"] = Date.create(curItem[ii]["dateAddedString"]).format('{Month} {d}, {12hr}:{mm}{tt}');
          }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
@@ -113,8 +113,8 @@ window.BUCKET_METHOD = {
             //     dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mma');
             // }
 
-            dripps_data[ii]["timeSentString"] = Date.create(dripps_data[ii]["timeSent"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
-            dripps_data[ii]["dateString"] = Date.create(dripps_data[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+            dripps_data[ii]["timeSentString"] = Date.create(dripps_data[ii]["timeSent"]).format('{Month} {d}, {12hr}:{mm}{tt}');
+            dripps_data[ii]["dateString"] = Date.create(dripps_data[ii]["date"]).format('{Month} {d}, {12hr}:{mm}{tt}');
 
             if (!dripps_data[ii]['collected']) {
                 dripps_data[ii]['chrome'] = "sent via chrome ext";
@@ -170,7 +170,7 @@ window.BUCKET_METHOD = {
                 // else {
                 //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
                 // }
-                convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+                convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {d}, {12hr}:{mm}{tt}');
             }
 
             window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
@@ -536,7 +536,7 @@ function displayConvos(selItem, convoId, template, conversation_data){
         // else {
         //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
         // }
-        convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+        convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {d}, {12hr}:{mm}{tt}');
     }
 
     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
