@@ -375,6 +375,7 @@ window.BUCKET_METHOD = {
 
         $(".bucketsBub").click(function() {
             window.location = "#bucket";
+            console.log(feed);
             // console.log(receiveList);
             // feed = receiveList;
             // window.selItem = feed[0];
@@ -446,7 +447,6 @@ function bindMessages(template, conversation_data){
                 window.selItem = feed[i];
             }
         }
-        console.log(feed);
         $(".up2").text(window.selItem.numLikes);
         $(".down2").text(window.selItem.numDislikes);
         $.ajax({
