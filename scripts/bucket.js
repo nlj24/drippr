@@ -269,7 +269,7 @@ window.BUCKET_METHOD = {
             }
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
-                // feed = readItLater_data;
+                feed = readItLater_data;
                 // if(!feed.length) {
                 //     $(".noDrippsMain").attr("class", "noDrippsMain");
                 // } else {
