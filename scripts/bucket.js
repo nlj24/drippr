@@ -211,7 +211,7 @@ window.BUCKET_METHOD = {
                 drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
                 $('#selDripp').html(drippsHTML);
 
-                if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
+                if ($("#conversation").height() > ($(window).height()-277-$(".friendPics").height())) {
                     $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
                     $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
                     $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
@@ -350,7 +350,7 @@ window.BUCKET_METHOD = {
                     
                     $(e.target).closest('.messageItem').removeClass("unSelMessageItem");
                     $(e.target).closest('.messageItem').addClass("selMessageItem");
-
+                    $('#imageDivRead').css("height",""+ ($(window).height()-186));
 
                 });
                 if (feed.length) {
