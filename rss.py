@@ -11,7 +11,7 @@ articlesToAdd = []
 print "starting script"
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources"
+	sql = "SELECT * FROM Sources where id = 2"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 	rss2 = []
@@ -36,7 +36,7 @@ try:
 			url_result = a['link']
 			try:
 				date = a['published_parsed']
-				date = datetime.fromtimestamp(mktime(date)) - timedelta(hours=1)
+				date = datetime.fromtimestamp(mktime(date))
 				date2 = str(date)
 				print date2
 			except:
