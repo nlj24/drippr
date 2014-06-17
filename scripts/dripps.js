@@ -17,8 +17,8 @@ window.ARTICLE_METHOD ={
             // else {
             //     resJSON[ii]['date'] = resJSON[ii]['date'].format('MMMM Do, h:mma');
             // }
-            resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
-            console.log(Date.create(resJSON[ii]["date"]).isUTC());
+            // resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format("{YYYY} {MM} {DD} {H}:{mm}:{ss}") + '0000';
+            // resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
         }
         console.log(resJSON);
         article_results = resJSON;
@@ -83,13 +83,14 @@ window.ARTICLE_METHOD ={
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
-                    data[ii]["date"] = moment(moment(data[ii]["date"]).format("YYYY MM DD H:mm:ss"));
-                    if (moment().format('MMMM Do YYYY') === data[ii]['date'].format('MMMM Do YYYY')) {
-                        data[ii]['date'] = "Today, " + data[ii]['date'].format('h:mm a');
-                    }
-                    else {
-                        data[ii]['date'] = data[ii]['date'].format('MMMM Do, h:mm a');
-                    }
+                    // data[ii]["date"] = moment(moment(data[ii]["date"]).format("YYYY MM DD H:mm:ss"));
+                    // if (moment().format('MMMM Do YYYY') === data[ii]['date'].format('MMMM Do YYYY')) {
+                    //     data[ii]['date'] = "Today, " + data[ii]['date'].format('h:mm a');
+                    // }
+                    // else {
+                    //     data[ii]['date'] = data[ii]['date'].format('MMMM Do, h:mm a');
+                    // }
+                    data[ii]["date"] = Date.create(data[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
                     window.article_results.push(data[ii]);
                 }
 

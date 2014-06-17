@@ -30,7 +30,7 @@ window.BUCKET_METHOD = {
         articleDict = {};
         for (var i =0; i < conversation_data.length;i++) {
             conversation_data[i]["isMe"] = (conversation_data[i]["userId"] == window.myID);
-            conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            // conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
         };
         window.conversation_data = conversation_data;
 
@@ -84,35 +84,38 @@ window.BUCKET_METHOD = {
             var curItem = readItLater_data[ii];
             
 
-            curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
-                curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
-            }
-            else {
-                curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
-            }
-           
-
+            // curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            // if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
+            //     curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
+            // }
+            // else {
+            //     curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
+            // }
+            curItem[ii]["dateAddedString"] = Date.create(curItem[ii]["dateAddedString"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
          }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
 
            
 
-            dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
-                dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mma');
-            }
-            else {
-                dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
-            }
-            if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
-                dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mma');
-            }
-            else {
-                dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mma');
-            }
+            // dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            // dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            // if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
+            //     dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mma');
+            // }
+            // else {
+            //     dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
+            // }
+            // if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
+            //     dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mma');
+            // }
+            // else {
+            //     dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mma');
+            // }
+
+            dripps_data[ii]["timeSentString"] = Date.create(dripps_data[ii]["timeSent"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+            dripps_data[ii]["dateString"] = Date.create(dripps_data[ii]["date"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
+
             if (!dripps_data[ii]['collected']) {
                 dripps_data[ii]['chrome'] = "sent via chrome ext";
             }
@@ -156,12 +159,13 @@ window.BUCKET_METHOD = {
                 }
             }
             for (var ii = 0; ii < convo.length; ii++) {
-                if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-                    convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
-                }
-                else {
-                    convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
-                }
+                // if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
+                //     convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
+                // }
+                // else {
+                //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
+                // }
+                convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
             }
 
             window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
@@ -499,7 +503,7 @@ function bindButtons(){
             $('#messageInput').val('');
             var templateSource = $("#selDripp-template").html(),
             messageListTemplate = Handlebars.compile(templateSource);
-            window.conversation_data.push({content: content, conversationId: window.selItem['conversationId'], fullName:"me", userId:window.myID, time:moment()});
+            window.conversation_data.push({content: content, conversationId: window.selItem['conversationId'], fullName:"me", userId:window.myID, time:Date.create()});
 
             displayConvos(window.selItem, window.selItem['conversationId'], messageListTemplate, window.conversation_data);
         }
@@ -521,12 +525,13 @@ function displayConvos(selItem, convoId, template, conversation_data){
         }
     }
     for (var ii = 0; ii < convo.length; ii++) {
-        if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-            convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
-        }
-        else {
-            convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
-        }
+        // if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
+        //     convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
+        // }
+        // else {
+        //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
+        // }
+        convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {dd}, {12hr}:{mm}{tt}');
     }
 
     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
