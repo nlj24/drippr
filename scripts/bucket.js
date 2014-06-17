@@ -446,6 +446,7 @@ function bindMessages(template, conversation_data){
                 window.selItem = feed[i];
             }
         }
+        console.log(feed);
         $(".up2").text(window.selItem.numLikes);
         $(".down2").text(window.selItem.numDislikes);
         $.ajax({
