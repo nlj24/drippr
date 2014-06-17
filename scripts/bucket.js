@@ -81,21 +81,20 @@ window.BUCKET_METHOD = {
         }
 
          for (var ii = 0; ii < readItLater_data.length; ii++) {
-            var curItem = readItLater_data[ii];
-            if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["dateAdded"]).format('{M}{d}{yy}')) {
-                curItem["dateAddedString"] = "Today, " + Date.create(curItem["dateAdded"]).format('{12hr}:{mm}{tt}');
+            if (Date.create().format('{M}{d}{yy}') == Date.create(readItLater_data[ii]["dateAdded"]).format('{M}{d}{yy}')) {
+                readItLater_data[ii]["dateAddedString"] = "Today, " + Date.create(readItLater_data[ii]["dateAdded"]).format('{12hr}:{mm}{tt}');
             }
             else {
-               curItem["dateAddedString"] = Date.create(curItem["dateAdded"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+               readItLater_data[ii]["dateAddedString"] = Date.create(readItLater_data[ii]["dateAdded"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
-            if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["date"]).format('{M}{d}{yy}')) {
-                curItem["dateReadString"] = " - Today, " + Date.create(curItem["date"]).format('{12hr}:{mm}{tt}');
+            if (Date.create().format('{M}{d}{yy}') == Date.create(readItLater_data[ii]["date"]).format('{M}{d}{yy}')) {
+                readItLater_data[ii]["dateReadString"] = " - Today, " + Date.create(readItLater_data[ii]["date"]).format('{12hr}:{mm}{tt}');
             }
             else {
-               curItem["dateReadString"] = " - " + Date.create(curItem["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+               readItLater_data[ii]["dateReadString"] = " - " + Date.create(readItLater_data[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
-            if (Date.create(dripps_data[ii]["date"]).format('{yy}') == '-1') {
-                dripps_data[ii]['dateString'] = "";
+            if (Date.create(readItLater_data[ii]["date"]).format('{yy}') == '-1') {
+                readItLater_data[ii]['dateReadString'] = "";
             }
         }
 
@@ -150,83 +149,83 @@ window.BUCKET_METHOD = {
             $('#items').html(itemHTML);
             $('.mainItemDiv').text('you have nothing in this bucket.');
         }
-        else{
-            feed = receiveList;
-            window.selItem = feed[0];
-            var convo = [];
-            var convoId = feed[0]['conversationId'];
-            for (var i=0;i<conversation_data.length;i++) {
-                if (convoId == conversation_data[i]['conversationId']) {
-                    convo.push(conversation_data[i]);
-                }
-            }
-            for (var ii = 0; ii < convo.length; ii++) {
+        // else{
+        //     feed = receiveList;
+        //     window.selItem = feed[0];
+        //     var convo = [];
+        //     var convoId = feed[0]['conversationId'];
+        //     for (var i=0;i<conversation_data.length;i++) {
+        //         if (convoId == conversation_data[i]['conversationId']) {
+        //             convo.push(conversation_data[i]);
+        //         }
+        //     }
+        //     for (var ii = 0; ii < convo.length; ii++) {
 
-                if (Date.create().format('{M}{d}{yy}') == Date.create(convo[ii]["time"]).format('{M}{d}{yy}')) {
-                    convo[ii]["timeString"] = "Today, " + Date.create(convo[ii]["time"]).format('{12hr}:{mm}{tt}');
-                }
-                else {
-                   convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
-                }
-            }
+        //         if (Date.create().format('{M}{d}{yy}') == Date.create(convo[ii]["time"]).format('{M}{d}{yy}')) {
+        //             convo[ii]["timeString"] = "Today, " + Date.create(convo[ii]["time"]).format('{12hr}:{mm}{tt}');
+        //         }
+        //         else {
+        //            convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+        //         }
+        //     }
 
-            window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
-            window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+        //     window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
+        //     window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
 
-            window.notifications = 0;
-            for (var message_id in window.dripps_data_dict) {
-                if (window.dripps_data_dict[message_id]['unreadComments'] || window.dripps_data_dict[message_id]['unreadDripps']) {
-                    window.notifications +=1;
-                }
+        //     window.notifications = 0;
+        //     for (var message_id in window.dripps_data_dict) {
+        //         if (window.dripps_data_dict[message_id]['unreadComments'] || window.dripps_data_dict[message_id]['unreadDripps']) {
+        //             window.notifications +=1;
+        //         }
                
-            }
-            if (window.notifications) {
-                $(".notify").text(window.notifications);
-                $(".notify").parents(".headBub").css("background-color", "red");
-            }else{
-                $(".notify").text("");
-                $(".notify").parents(".headBub").css("background-color", "#6D6E70");
+        //     }
+        //     if (window.notifications) {
+        //         $(".notify").text(window.notifications);
+        //         $(".notify").parents(".headBub").css("background-color", "red");
+        //     }else{
+        //         $(".notify").text("");
+        //         $(".notify").parents(".headBub").css("background-color", "#6D6E70");
 
-            }
+        //     }
 
 
 
-            var templateSource = $("#items-template").html(),
-            template = Handlebars.compile(templateSource),
-            itemHTML = template({"buckets":feed});
-            $('#items').html(itemHTML);
+        //     var templateSource = $("#items-template").html(),
+        //     template = Handlebars.compile(templateSource),
+        //     itemHTML = template({"buckets":feed});
+        //     $('#items').html(itemHTML);
 
-            $(".mainItemDiv").css("height",""+ ($(window).height()-136));
+        //     $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
-            for (var ii = 0; ii < feed.length; ii++) {
-                if (feed[ii]['unreadDripps']) {
-                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
-                }
-                if (feed[ii]['unreadComments']) {
-                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
-                }
-            }
-            var templateSource = $("#selDripp-template").html(),
-            messageListTemplate = Handlebars.compile(templateSource),
-            drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
-            $('#selDripp').html(drippsHTML);
+        //     for (var ii = 0; ii < feed.length; ii++) {
+        //         if (feed[ii]['unreadDripps']) {
+        //             $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
+        //         }
+        //         if (feed[ii]['unreadComments']) {
+        //             $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
+        //         }
+        //     }
+        //     var templateSource = $("#selDripp-template").html(),
+        //     messageListTemplate = Handlebars.compile(templateSource),
+        //     drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
+        //     $('#selDripp').html(drippsHTML);
 
-            if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
-                $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
-                $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
-                $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
-            }
-            else {
-                $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
-                $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
-                $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
-            }
+        //     if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
+        //         $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
+        //         $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
+        //         $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
+        //     }
+        //     else {
+        //         $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
+        //         $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
+        //         $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
+        //     }
 
-            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
-            bindMessages(messageListTemplate, conversation_data);     
-            bindButtons();
-            window.setBucketLikes();
-        }
+        //     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
+        //     bindMessages(messageListTemplate, conversation_data);     
+        //     bindButtons();
+        //     window.setBucketLikes();
+        // }
 
         if (feed) {
             $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
