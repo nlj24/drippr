@@ -198,14 +198,6 @@ window.BUCKET_METHOD = {
 
                 $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
-                for (var ii = 0; ii < feed.length; ii++) {
-                    if (feed[ii]['unreadDripps']) {
-                        $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
-                    }
-                    if (feed[ii]['unreadComments']) {
-                        $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
-                    }
-                }
                 var templateSource = $("#selDripp-template").html(),
                 messageListTemplate = Handlebars.compile(templateSource),
                 drippsHTML = messageListTemplate({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
@@ -230,7 +222,14 @@ window.BUCKET_METHOD = {
             window.firstBucket += 1;
         }
 
-
+        for (var ii = 0; ii < feed.length; ii++) {
+            if (feed[ii]['unreadDripps']) {
+                $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
+            }
+            if (feed[ii]['unreadComments']) {
+                $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
+            }
+        }
 
         if (feed) {
             $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
