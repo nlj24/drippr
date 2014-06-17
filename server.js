@@ -59,7 +59,7 @@ app.get("/articles/:category", function(req, res) {
 app.get("/buckets", function(req, res){
     var userId = req.query.user;
 
-    var get_bucket_articles = "SELECT DISTINCT Buckets.id, bucketId, Buckets.articleId, Buckets.name, dateAdded, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId;
+    var get_bucket_articles = "SELECT DISTINCT Buckets.id, bucketId, Buckets.articleId, Buckets.name, dateAdded, date, headline, source, url, imgUrl, numLikes, numDislikes, l1.userId AS l_user, d1.userId As d_user FROM (Buckets INNER JOIN Articles ON Buckets.articleId = Articles.id LEFT JOIN (SELECT * FROM Likes WHERE Likes.userId=" + userId + ") AS l1 ON l1.articleId = Buckets.articleId LEFT JOIN (SELECT * FROM Dislikes WHERE Dislikes.userId=" + userId + ") AS d1 ON d1.articleId = Buckets.articleId) WHERE Buckets.userId=" + userId + " ORDER BY dateAdded DESC";
    
    connection.query(get_bucket_articles, function(err,rows,fields) {
             if (err) throw err;
@@ -88,6 +88,7 @@ app.get("/dripps", function(req, res){
         var articles_dict = {};
         var articles_list = [];
         var members = "";
+        console.log(rows);
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
@@ -108,6 +109,7 @@ app.get("/dripps", function(req, res){
             connection.query(get_names_query, function(err,rows,fields) {
                 if (err) throw err; 
                 res.send({article: articles_list, names: rows});
+                console.log(articles_list);
             });
         } else{
             res.send({article: [], names: []});
@@ -488,7 +490,6 @@ app.get("/deleteNewGroup", function(req, res) {
         connection.query(get_group_id, function(err,rows,fields) {
             if (err) throw err;
             groupId = rows[0].id;
-            console.log(groupId);
             var delete_group = 'DELETE FROM Groups WHERE id =' + groupId;
             connection.query(delete_group, function(err,rows,fields) {
                 if (err) throw err;
@@ -560,7 +561,6 @@ app.get("/sendDripp/new", function(req, res) {
                 for(var jj=0; jj < recipientFriendIds.length; jj++){
                     set_send_query = "INSERT INTO Dripps (recipientUserId, fromUserId, recipientGroup, recipientFriendIds, articleId, timeSent, conversationId,  unreadComments, unreadDripps, inInbox) VALUES ('"
                         + recipientFriendIds[jj] + "','" +  fromUserId+ "',-1,'" + recipientFriendIds + "'," +  articleId + ", NOW()," + convoId + ",0, 1, 1)";
-                    console.log(set_send_query);
                     connection.query(set_send_query, function(err,rows,fields) {
                         if (err) throw err;
                     });   
@@ -649,7 +649,7 @@ app.get("/readItLater/new", function(req, res) {
     var url = req.query.url;
     var source = req.query.source;
     var category = req.query.category;
-    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"',NOW(), 0, 0, 0)";
+    var add_article_query = "INSERT INTO Articles (headline, imgUrl, url, source, category, date, numLikes, numDislikes, collected) VALUES ('"+headline+"','"+imgUrl+"','"+url+"','"+source+"','"+category+"','', 0, 0, 0)";
 
     connection.query(add_article_query, function(err,result) {
         if (err) throw err;

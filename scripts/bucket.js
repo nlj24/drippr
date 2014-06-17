@@ -5,7 +5,7 @@ var feed;
 window.BUCKET_METHOD = {
 
     compileBuckets:function(dripps_data, readItLater_data, conversation_data){
-        console.log(readItLater_data);
+        console.log(dripps_data);
         window.notifications = 0;
         window.dripps_data_dict = {};
         for (var ii = 0; ii <dripps_data.length; ii++) {
@@ -30,8 +30,9 @@ window.BUCKET_METHOD = {
         articleDict = {};
         for (var i =0; i < conversation_data.length;i++) {
             conversation_data[i]["isMe"] = (conversation_data[i]["userId"] == window.myID);
-            // conversation_data[i]["time"] = moment(moment(conversation_data[i]["time"]).format("YYYY MM DD H:mm:ss") + " +0000");
+            conversation_data[i]["time"] = Date.create(conversation_data[i]["time"]).addHours(-4);
         };
+
         window.conversation_data = conversation_data;
 
         window.setBucketLikes = function correctLikes() {
@@ -80,46 +81,49 @@ window.BUCKET_METHOD = {
             }
         }
 
-        for (var ii = 0; ii < readItLater_data.length; ii++) {
+         for (var ii = 0; ii < readItLater_data.length; ii++) {
             var curItem = readItLater_data[ii];
-            
-
-            // curItem["dateAdded"] = moment(moment(curItem["dateAdded"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            // if (moment().format('MMMM Do YYYY') === curItem['dateAdded'].format('MMMM Do YYYY')) {
-            //     curItem['dateAddedString'] = "Today, " + curItem['dateAdded'].format('h:mma');
-            // }
-            // else {
-            //     curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
-            // }
-            curItem["dateAddedString"] = Date.create(curItem["dateAdded"]).format('{Month} {d}, {12hr}:{mm}{tt}');
-         }
+            curItem["dateAdded"] = Date.create(curItem["dateAdded"]).addHours(-4);
+            if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["dateAdded"]).format('{M}{d}{yy}')) {
+                curItem["dateAddedString"] = "Today, " + Date.create(curItem["dateAdded"]).format('{12hr}:{mm}{tt}');
+            }
+            else {
+               curItem["dateAddedString"] = Date.create(curItem["dateAdded"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+            }
+            curItem["date"] = Date.create(curItem["date"]).addHours(-4);
+            if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["date"]).format('{M}{d}{yy}')) {
+                curItem["dateReadString"] = " - Today, " + Date.create(curItem["date"]).format('{12hr}:{mm}{tt}');
+            }
+            else {
+               curItem["dateReadString"] = " - " + Date.create(curItem["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+            }
+            if (Date.create(dripps_data[ii]["date"]).format('{yy}') == '-1') {
+                dripps_data[ii]['dateString'] = "";
+            }
+        }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
 
-           
+            dripps_data[ii]["timeSent"] = Date.create(dripps_data[ii]["timeSent"]).addHours(-4);
+            dripps_data[ii]["date"] = Date.create(dripps_data[ii]["date"]).addHours(-4);
 
-            // dripps_data[ii]["timeSent"] = moment(moment(dripps_data[ii]["timeSent"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            // dripps_data[ii]["date"] = moment(moment(dripps_data[ii]["date"]).format("YYYY MM DD H:mm:ss") + " +0000");
-            // if (moment().format('MMMM Do YYYY') === dripps_data[ii]['timeSent'].format('MMMM Do YYYY')) {
-            //     dripps_data[ii]['timeSentString'] = "Today, " + dripps_data[ii]['timeSent'].format('h:mma');
-            // }
-            // else {
-            //     dripps_data[ii]['timeSentString'] = dripps_data[ii]['timeSent'].format('MMMM Do, h:mma');
-            // }
-            // if (moment().format('MMMM Do YYYY') === dripps_data[ii]['date'].format('MMMM Do YYYY')) {
-            //     dripps_data[ii]['dateString'] = " - " + "Today, " + dripps_data[ii]['date'].format('h:mma');
-            // }
-            // else {
-            //     dripps_data[ii]['dateString'] = " - " + dripps_data[ii]['date'].format('MMMM Do, h:mma');
-            // }
-
-            dripps_data[ii]["timeSentString"] = Date.create(dripps_data[ii]["timeSent"]).format('{Month} {d}, {12hr}:{mm}{tt}');
-            dripps_data[ii]["dateString"] = Date.create(dripps_data[ii]["date"]).format('{Month} {d}, {12hr}:{mm}{tt}');
+            if (Date.create().format('{M}{d}{yy}') == Date.create(dripps_data[ii]["timeSent"]).format('{M}{d}{yy}')) {
+                dripps_data[ii]["timeSentString"] = "Today, " + Date.create(dripps_data[ii]["timeSent"]).format('{12hr}:{mm}{tt}');
+            }
+            else {
+               dripps_data[ii]["timeSentString"] = Date.create(dripps_data[ii]["timeSent"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+            }
+            if (Date.create().format('{M}{d}{yy}') == Date.create(dripps_data[ii]["date"]).format('{M}{d}{yy}')) {
+                dripps_data[ii]["dateString"] = " - Today, " + Date.create(dripps_data[ii]["date"]).format('{12hr}:{mm}{tt}');
+            }
+            else {
+               dripps_data[ii]["dateString"] = " - " + Date.create(dripps_data[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+            }
 
             if (!dripps_data[ii]['collected']) {
                 dripps_data[ii]['chrome'] = "sent via chrome ext";
             }
-            if (dripps_data[ii]['date']._i == 'Invalid date +0000'){
+            if (Date.create(dripps_data[ii]["date"]).format('{yy}') == '-1') {
                 dripps_data[ii]['dateString'] = "";
             }
         
@@ -164,13 +168,13 @@ window.BUCKET_METHOD = {
                 }
             }
             for (var ii = 0; ii < convo.length; ii++) {
-                // if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-                //     convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
-                // }
-                // else {
-                //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
-                // }
-                convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {d}, {12hr}:{mm}{tt}');
+
+                if (Date.create().format('{M}{d}{yy}') == Date.create(convo[ii]["time"]).format('{M}{d}{yy}')) {
+                    convo[ii]["timeString"] = "Today, " + Date.create(convo[ii]["time"]).format('{12hr}:{mm}{tt}');
+                }
+                else {
+                   convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+                }
             }
 
             window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
@@ -215,12 +219,12 @@ window.BUCKET_METHOD = {
             $('#selDripp').html(drippsHTML);
 
             if ($("#conversation").height() > ($(window).height()-267-$(".friendPics").height())) {
-                $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
+                $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
                 $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
             }
             else {
-                $("#conversation").css("max-height",""+ .4*($(window).height()-160-$(".friendPics").height())+ "px");
+                $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
                 $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
             }
@@ -244,11 +248,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'dripps') {
                 feed = receiveList;
-                // if(!feed.length) {
-                //     $(".noDrippsMain").attr("class", "noDrippsMain");
-                // } else {
-                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                // }
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -257,11 +261,11 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'sent') {
                 feed = sendList;
-                // if(!feed.length) {
-                //     $(".noDrippsMain").attr("class", "noDrippsMain");
-                // } else {
-                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                // }
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
@@ -270,16 +274,15 @@ window.BUCKET_METHOD = {
 
             if ($(e.target).attr('bucketIdentifier') === 'readItLater') {
                 feed = readItLater_data;
-                // if(!feed.length) {
-                //     $(".noDrippsMain").attr("class", "noDrippsMain");
-                // } else {
-                //      $(".noDrippsMain").attr("class", "noDrippsMain hide");
-                // }
+                if(!feed.length) {
+                    $(".noDrippsMain").attr("class", "noDrippsMain");
+                } else {
+                     $(".noDrippsMain").attr("class", "noDrippsMain hide");
+                }
                 $(".selBucket").attr("class", "selBucket");
                 $(e.target).attr("class", "selBucket selectedBucket");
                 window.resetFB();
                 window.readItLater = true;
-
             }
 
             templateSource = $("#items-template").html(),
@@ -362,6 +365,8 @@ window.BUCKET_METHOD = {
                     $("[message_id=" + feed[0].id + "].messageItem").addClass("selMessageItem");
                 }
             }
+
+            $('#imageDivRead').css("height",""+ ($(window).height()-186));
         });
 
         $('#messageInput').elastic();
@@ -372,20 +377,14 @@ window.BUCKET_METHOD = {
 
         $(".bucketsBub").click(function() {
             window.location = "#bucket";
-            // refreshTemp();
+            // console.log(receiveList);
+            // feed = receiveList;
+            // window.selItem = feed[0];
         });
 
         $(".groupsBub").click(function() {
             window.location = "#group";
         });
-
-        // function refreshTemp() {
-        //     if(!feed.length) {
-        //         $(".noDrippsMain").attr("class", "noDrippsMain");
-        //     }
-        //     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
-        //     $('#selDripp').html(drippsHTML);
-        // }
 
     },
 
@@ -530,13 +529,12 @@ function displayConvos(selItem, convoId, template, conversation_data){
         }
     }
     for (var ii = 0; ii < convo.length; ii++) {
-        // if (moment().format('MMMM Do YYYY') === convo[ii]['time'].format('MMMM Do YYYY')) {
-        //     convo[ii]['timeString'] = "Today, " + convo[ii]['time'].format('h:mma');
-        // }
-        // else {
-        //     convo[ii]['timeString'] = convo[ii]['time'].format('MMMM Do YYYY, h:mma');
-        // }
-        convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {d}, {12hr}:{mm}{tt}');
+         if (Date.create().format('{M}{d}{yy}') == Date.create(convo[ii]["time"]).format('{M}{d}{yy}')) {
+            convo[ii]["timeString"] = "Today, " + Date.create(convo[ii]["time"]).format('{12hr}:{mm}{tt}');
+        }
+        else {
+           convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+        }
     }
 
     var drippsHTML = template({"selItem":window.selItem, "messages":convo, "friendNames":makeUserNameList(window.selItem.recipientFriendIds)});
@@ -544,12 +542,12 @@ function displayConvos(selItem, convoId, template, conversation_data){
     $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);
     bindButtons();
     if ($("#conversation").height() > ($(window).height()-277-$(".friendPics").height())) {
-        $("#conversation").css("max-height",""+ .4*($(window).height()-170-$(".friendPics").height())+ "px");
+        $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height()));
         $("#imageDivBucket").css("line-height",""+ ($(window).height()-277-$(".friendPics").height()-$("#conversation").height())+ "px");
     }
     else {
-        $("#conversation").css("max-height",""+ .4*($(window).height()-170-$(".friendPics").height())+ "px");
+        $("#conversation").css("max-height",""+ .4*($(window).height()-145-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("max-height",""+ .4*($(window).height()-277-$(".friendPics").height())+ "px");
         $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
     }
@@ -644,7 +642,7 @@ window.bindBucket = function() {
             $(".readLater2.blue").attr("class", 'opinionBucket readLater2 blue hide');
             $.ajax({
                 url: window.address + 'removeReadItLater',
-                data: {userId: window.myID, name: "readLater", articleId: articleId, dateAdded: "2014-04-29 17:12:58", bucketId: 2},
+                data: {userId: window.myID, name: "readLater", articleId: articleId, bucketId: 2},
                 type:'get'
             });
             articleDict[window.selItem.articleId]['userReadItLater'] = false;

@@ -8,7 +8,6 @@ window.callingback = {};
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
-        console.log(Date.create());
 
         for (var ii = 0; ii < resJSON.length; ii++) {
             resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).addHours(-4);
@@ -19,7 +18,6 @@ window.ARTICLE_METHOD ={
                resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
         }
-        console.log(resJSON);
         article_results = resJSON;
 
         window.article_results = resJSON;

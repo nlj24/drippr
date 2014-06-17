@@ -146,7 +146,6 @@ $("#extContScroll").css("height",windowHeight);
 
                                         var handler3 = $('.rm_group').click(function(e) {
                                             var id = $(e.target).attr('id');
-                                            console.log(id);
                                             window.selGroups.splice(window.selGroups.indexOf(id),1);
                                             $("#group_"+id).remove();
                                             window.autoCompleteGroups.push(window.groupListDict2[$(e.target).attr('id')]);
@@ -175,7 +174,6 @@ $("#extContScroll").css("height",windowHeight);
                                                     selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
                                                 }
                                             }
-                                            console.log(selGroupsDict);
                                             $.ajax({
                                                 url: window.address + 'sendDripp/new',
                                                 data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups},
@@ -192,9 +190,9 @@ $("#extContScroll").css("height",windowHeight);
                                             }, 3000);
                                         }
                                         else {
-                                             $('#myModal8').modal('show');
+                                            $('#myModal9').modal('show');
                                         setTimeout(function() {
-                                            $('#myModal8').modal('hide');
+                                            $('#myModal9').modal('hide');
                                         }, 3000);
                                         return;
                                         }
@@ -222,7 +220,7 @@ $("#extContScroll").css("height",windowHeight);
                                 if ($("#link").val()) {
                                     if ($("#title").val()) {
                                         $.ajax({
-                                            url:'http://drippr.me/readItLater/new',
+                                            url: window.address + 'readItLater/new',
                                             data: {headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", userId: window.myID},
                                             type:'get'
                                         });

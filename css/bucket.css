@@ -166,9 +166,8 @@ darkGrey: #6D6E70*/
   border-radius: 10px;
   max-height: 90%;
   vertical-align: middle;
-  border-radius: 10px;
-  height: 90%;
   min-height: 90%;
+  max-width: 90%;
 }
 
 #imageDivBucket {
@@ -531,4 +530,15 @@ darkGrey: #6D6E70*/
 .padRightLeft {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#imageDivRead {
+  text-align: center;
+}
+
+#fitImageRead {
+  border-radius: 10px;
+  max-height: 90%;
+  min-height: 50%;
+  max-width: 90%;
 }

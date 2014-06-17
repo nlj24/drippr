@@ -505,13 +505,18 @@
 	        	</div>
 		        	<script id="selItem-template" type="text/x-handlebars-template">
 			        	<div>
+			        		<div class = "row">
+			        			<h4 id = "source"> 
+									{{ selItem.source }}{{selItem.dateReadString}}
+								</h4>
+							</div>
 			        		<div class = "row" id = "headlineBucket">
 			        	     	<a class = "headlineDripp" href = "{{ selItem.url }}" target="_blank">
 				        			{{selItem.headline}}
 						  		</a>
 			        		</div>
-			        		<div class = "row" id = "imageDivBucket">
-			        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
+			        		<div class = "row" id = "imageDivRead">
+			        			<img id = "fitImageRead" src = {{selItem.imgUrl}}>
 			        		</div>
 		        		</div>
 					</script>
