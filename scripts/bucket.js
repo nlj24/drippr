@@ -91,7 +91,7 @@ window.BUCKET_METHOD = {
             // else {
             //     curItem['dateAddedString'] = curItem['dateAdded'].format('MMMM Do, h:mma');
             // }
-            curItem[ii]["dateAddedString"] = Date.create(curItem[ii]["dateAddedString"]).format('{Month} {d}, {12hr}:{mm}{tt}');
+            curItem[ii]["dateAddedString"] = Date.create(curItem[ii]["dateAdded"]).format('{Month} {d}, {12hr}:{mm}{tt}');
          }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
