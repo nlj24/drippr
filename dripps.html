@@ -506,7 +506,9 @@
 		        	<script id="selItem-template" type="text/x-handlebars-template">
 			        	<div>
 			        		<div class = "row" id = "headlineBucket">
-			        			{{selItem.headline}}
+			        	     	<a class = "headlineDripp" href = "{{ selItem.url }}" target="_blank">
+				        			{{selItem.headline}}
+						  		</a>
 			        		</div>
 			        		<div class = "row" id = "imageDivBucket">
 			        			<img id = "fitImageBucket" src = {{selItem.imgUrl}}>
