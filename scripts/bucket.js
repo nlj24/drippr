@@ -30,7 +30,6 @@ window.BUCKET_METHOD = {
         articleDict = {};
         for (var i =0; i < conversation_data.length;i++) {
             conversation_data[i]["isMe"] = (conversation_data[i]["userId"] == window.myID);
-            conversation_data[i]["time"] = Date.create(conversation_data[i]["time"]).addHours(-4);
         };
 
         window.conversation_data = conversation_data;
@@ -83,14 +82,12 @@ window.BUCKET_METHOD = {
 
          for (var ii = 0; ii < readItLater_data.length; ii++) {
             var curItem = readItLater_data[ii];
-            curItem["dateAdded"] = Date.create(curItem["dateAdded"]).addHours(-4);
             if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["dateAdded"]).format('{M}{d}{yy}')) {
                 curItem["dateAddedString"] = "Today, " + Date.create(curItem["dateAdded"]).format('{12hr}:{mm}{tt}');
             }
             else {
                curItem["dateAddedString"] = Date.create(curItem["dateAdded"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
-            curItem["date"] = Date.create(curItem["date"]).addHours(-4);
             if (Date.create().format('{M}{d}{yy}') == Date.create(curItem["date"]).format('{M}{d}{yy}')) {
                 curItem["dateReadString"] = " - Today, " + Date.create(curItem["date"]).format('{12hr}:{mm}{tt}');
             }
@@ -103,9 +100,6 @@ window.BUCKET_METHOD = {
         }
 
         for (var ii = 0; ii < dripps_data.length; ii++) {
-
-            dripps_data[ii]["timeSent"] = Date.create(dripps_data[ii]["timeSent"]).addHours(-4);
-            dripps_data[ii]["date"] = Date.create(dripps_data[ii]["date"]).addHours(-4);
 
             if (Date.create().format('{M}{d}{yy}') == Date.create(dripps_data[ii]["timeSent"]).format('{M}{d}{yy}')) {
                 dripps_data[ii]["timeSentString"] = "Today, " + Date.create(dripps_data[ii]["timeSent"]).format('{12hr}:{mm}{tt}');
