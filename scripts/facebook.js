@@ -595,7 +595,6 @@ $(document).keydown(function(e){
 						    }
 
 						    if (location.hash == "#bucket") {
-
 						        window.BUCKET_METHOD.loadArticleData();
 						        $("#dripps").attr("class", "container-fluid hide");
 						        $("#drippsHeader").attr("class", "col-md-5 headingPad hide");
@@ -604,8 +603,6 @@ $(document).keydown(function(e){
 						        $("#groups").attr("class", "container-fluid hide");
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
 						        window.resetFB();
-						        $(".selBucket").attr("class", "selBucket");
-                				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
 						    }
 						    if (location.hash == "#group") {
 
