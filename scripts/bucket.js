@@ -150,7 +150,6 @@ window.BUCKET_METHOD = {
         }
 
         if (receiveList.length == 0 ) {
-            $(".noDrippsMain").attr("class", "noDrippsMain");
             var templateSource = $("#items-template").html(),
             template = Handlebars.compile(templateSource),
             itemHTML = template({"buckets":[]});
@@ -325,13 +324,14 @@ window.BUCKET_METHOD = {
 
                 if (feed.length > 0) {
                     window.selItem = feed[0];
-                }
+                
 
-                var templateSource = $("#selItem-template").html(),
-                messageListTemplate = Handlebars.compile(templateSource),
-                readItLaterHTML = messageListTemplate({"selItem":window.selItem});
-                $('#selDripp').html(readItLaterHTML);
-                window.setBucketLikes();
+                    var templateSource = $("#selItem-template").html(),
+                    messageListTemplate = Handlebars.compile(templateSource),
+                    readItLaterHTML = messageListTemplate({"selItem":window.selItem});
+                    $('#selDripp').html(readItLaterHTML);
+                    window.setBucketLikes();
+                }
 
                 $('.messageItem').click(function(e){
                     $('.messageItem').removeClass("selMessageItem");
@@ -368,6 +368,10 @@ window.BUCKET_METHOD = {
 
             $('#imageDivRead').css("height",""+ ($(window).height()-186));
         });
+    
+        if (!feed) {
+            $(".noDrippsMain").attr("class", "noDrippsMain");
+        }
 
         $('#messageInput').elastic();
 
