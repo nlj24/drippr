@@ -18,24 +18,29 @@ $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 $("#arrowIntro").css("height",""+ ($(window).height()-91));
 $("#arrowIntro").css("line-height",""+ ($(window).height()-91));
 
-$("#drippsPromo").css("height",""+ ($(window).height()-104));
-$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
-$("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
+
 $(".fitIntroImg").attr("class", "fitIntroImg");
 $(".listWidth").css("width",$(".fitIntroImg").width());
 $(".arrowIntro").attr("class", "arrowIntro");
 
-$(document).keydown(function(e){
 
-    if (!$("#drippsPromo").hasClass("hide")) {
-        if (e.keyCode == 37) {
-            javascript:sliders2[0].goToPrev();
-        }
-        if (e.keyCode == 39) {
-            javascript:sliders2[0].goToNext();
-        }
-    }
-});
+setTimeout(function() {
+	$("#drippsPromo").attr("class", "");   
+	$("#drippsPromo").css("height",""+ ($(window).height()-104));
+	$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
+	$("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
+	$(document).keydown(function(e){
+
+	    if (!$("#drippsPromo").hasClass("hide")) {
+	        if (e.keyCode == 37) {
+	            javascript:sliders2[0].goToPrev();
+	        }
+	        if (e.keyCode == 39) {
+	            javascript:sliders2[0].goToNext();
+	        }
+	    }
+	});
+}, 1000);
 
 //check if we're logged in
    //display a modal or something?
