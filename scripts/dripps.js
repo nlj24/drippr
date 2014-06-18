@@ -16,17 +16,6 @@ window.ARTICLE_METHOD ={
             else {
                resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
-            try{
-                resJSON[ii]['imgUrl'];
-            }
-            catch(e) {
-                console.log('fsdfddfsd');
-                resJSON[ii]['imgUrl'] = "/images/drop.png";
-            }
-            finally {
-                console.log('finally');
-                resJSON[ii]['imgUrl'] = "/images/drop.png";
-            }
         }
         article_results = resJSON;
 
@@ -38,9 +27,9 @@ window.ARTICLE_METHOD ={
             if(!(cat in window.articlesData)){
                 window.articlesData[cat] = [];
             }
-                window.articlesData[cat].push(resJSON[i]);
-                window.articlesData["All"].push(resJSON[i]);
-                window.articlesData[resJSON[i].id] = resJSON[i];
+            window.articlesData[cat].push(resJSON[i]);
+            window.articlesData["All"].push(resJSON[i]);
+            window.articlesData[resJSON[i].id] = resJSON[i];
         }
 
         window.articlesResults = window.articlesData;
@@ -50,7 +39,6 @@ window.ARTICLE_METHOD ={
             if(!(categories[ii] in window.positions)){
                 window.positions[categories[ii]] = 0;
             }
-
         }
 
         var feed = window.articlesData[window.curCategory].slice(0, 50);
