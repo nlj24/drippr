@@ -20,7 +20,8 @@ window.ARTICLE_METHOD ={
                 resJSON[ii]['imgUrl'];
             }
             catch(e) {
-                resJSON[ii]['imgUrl'] = "/images/dropBlue.svg";
+                console.log('fsdfddfsd');
+                resJSON[ii]['imgUrl'] = "/images/drop.png";
             }
         }
         article_results = resJSON;
