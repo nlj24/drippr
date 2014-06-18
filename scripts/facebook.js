@@ -26,7 +26,7 @@ $(".arrowIntro").attr("class", "arrowIntro");
 window.logged = false;
 
 setTimeout(function() {
-	if (!window.logged) {
+	if (window.logged == false) {
 		$("#drippsPromo").attr("class", "");   
 		$("#drippsPromo").css("height",""+ ($(window).height()-104));
 		$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
