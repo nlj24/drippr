@@ -150,6 +150,7 @@ window.BUCKET_METHOD = {
             $('.mainItemDiv').text('you have nothing in this bucket.');
         }
         else{
+            $('.noDrippsMain').attr("class", "noDrippsMain hide"));
             feed = receiveList;
             window.selItem = feed[0];
             var convo = [];

@@ -407,12 +407,13 @@ darkGrey: #6D6E70*/
 
 .unreadDripps {
   font-weight: bolder;
-  -moz-box-shadow: inset 0 0 4px 4px #1C75BB;
-  -webkit-box-shadow: inset 0 0 4px 4px #1C75BB;
-  box-shadow: inset 0 0 4px 4px #1C75BB;
+  -moz-box-shadow: inset 0 0 30px #1C75BB;
+  -webkit-box-shadow: inset 0 0 30px #1C75BB;
+  box-shadow: inset 0 0 30px #1C75BB;
 }
 
 .unreadComments {
+  font-style: italic;
   -moz-box-shadow: inset 0 0 30px #A3DCFF;
   -webkit-box-shadow: inset 0 0 30px #A3DCFF;
   box-shadow: inset 0 0 30px #A3DCFF;
