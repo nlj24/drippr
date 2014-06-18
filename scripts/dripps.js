@@ -16,6 +16,12 @@ window.ARTICLE_METHOD ={
             else {
                resJSON[ii]["date"] = Date.create(resJSON[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
             }
+            try{
+                resJSON[ii]['imgUrl'];
+            }
+            catch(e) {
+                resJSON[ii]['imgUrl'] = "/images/dropBlue.svg";
+            }
         }
         article_results = resJSON;
 
