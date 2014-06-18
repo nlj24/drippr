@@ -547,8 +547,17 @@ darkGrey: #6D6E70*/
 #continueFind {
   background-color: #6D6E70;
   color: white;
-  border-radius: 10px;
-  width: 350px;
-  font-size: 40px;
-  height: 60px;
+  border-radius: 50px;
+  width: 520px;
+  font-size: 49px;
+  height: 120px;
+  margin-left: auto;
+  margin-top: 100px;
+  line-height: 120px;
+  text-align: center;
+  margin-right: auto;
+}
+
+#leftDrop {
+  left: 15px;
 }
