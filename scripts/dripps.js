@@ -23,6 +23,10 @@ window.ARTICLE_METHOD ={
                 console.log('fsdfddfsd');
                 resJSON[ii]['imgUrl'] = "/images/drop.png";
             }
+            finally {
+                console.log('finally');
+                resJSON[ii]['imgUrl'] = "/images/drop.png";
+            }
         }
         article_results = resJSON;
 
