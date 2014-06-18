@@ -24,7 +24,6 @@ $("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
 $(".fitIntroImg").attr("class", "fitIntroImg");
 $(".listWidth").css("width",$(".fitIntroImg").width());
 $(".arrowIntro").attr("class", "arrowIntro");
-window.firstBucket = 0;
 
 $(document).keydown(function(e){
 
@@ -603,6 +602,8 @@ $(document).keydown(function(e){
 						        $("#groups").attr("class", "container-fluid hide");
 						        $("#groupsHeader").attr("class", "col-md-5 headingPad hide");
 						        window.resetFB();
+						        $(".selBucket").attr("class", "selBucket");
+                				$("[bucketidentifier=dripps]").attr("class", "selBucket selectedBucket");
 						    }
 						    if (location.hash == "#group") {
 
