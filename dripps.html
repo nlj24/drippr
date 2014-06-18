@@ -321,9 +321,9 @@
 				            	{{#each articles}}
 				                	<li id = {{this.id}} numlikes={{this.numLikes}} numDislikes={{this.numDislikes}}>
 						                <div class = "mainBubble">
-											<h3 id = "source"> 
+											<div id = "source"> 
 												{{ this.source }} - {{this.date}}
-											</h3>
+											</div>
 							                <div class = "headlineDiv">
 							                	<a class = "headlineDripp" href = "{{ this.url }}" target="_blank">
 								                	{{ this.headline }}
@@ -466,9 +466,9 @@
     			</div>
 	        	<script id="selDripp-template" type="text/x-handlebars-template">
 	        		<div class = "row">
-	        			<h4 id = "source"> 
+	        			<div id = "source"> 
 							{{ selItem.source }}{{selItem.dateString}}
-						</h4>
+						</div>
 					</div>
 					<div class = "row" id = "headlineBucket">
 	        			<a class = "headlineDripp" href = {{selItem.url}} target="_blank">
