@@ -549,5 +549,6 @@ darkGrey: #6D6E70*/
   color: white;
   border-radius: 10px;
   width: 300px;
-  font-size: 20px;
+  font-size: 25px;
+  height: 60px;
 }
