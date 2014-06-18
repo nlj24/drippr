@@ -23,23 +23,26 @@ $(".fitIntroImg").attr("class", "fitIntroImg");
 $(".listWidth").css("width",$(".fitIntroImg").width());
 $(".arrowIntro").attr("class", "arrowIntro");
 
+window.logged = false;
 
 setTimeout(function() {
-	$("#drippsPromo").attr("class", "");   
-	$("#drippsPromo").css("height",""+ ($(window).height()-104));
-	$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
-	$("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
-	$(document).keydown(function(e){
+	if (!window.logged) {
+		$("#drippsPromo").attr("class", "");   
+		$("#drippsPromo").css("height",""+ ($(window).height()-104));
+		$("#drippsPromo").css("line-height",""+ ($(window).height()-134 + "px"));
+		$("#drippsIntro").css("width",""+ ($(window).height()-134)*720/540);
+		$(document).keydown(function(e){
 
-	    if (!$("#drippsPromo").hasClass("hide")) {
-	        if (e.keyCode == 37) {
-	            javascript:sliders2[0].goToPrev();
-	        }
-	        if (e.keyCode == 39) {
-	            javascript:sliders2[0].goToNext();
-	        }
-	    }
-	});
+		    if (!$("#drippsPromo").hasClass("hide")) {
+		        if (e.keyCode == 37) {
+		            javascript:sliders2[0].goToPrev();
+		        }
+		        if (e.keyCode == 39) {
+		            javascript:sliders2[0].goToNext();
+		        }
+		    }
+		});
+	}
 }, 1000);
 
 //check if we're logged in
@@ -52,6 +55,7 @@ setTimeout(function() {
 // whenever someone who was previously logged out tries to log in again, the correct case below 
 // will be handled. 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
+		window.logged = true;
 		$("#drippsPromo").attr("class", "hide");
 		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
