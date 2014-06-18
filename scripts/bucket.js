@@ -147,7 +147,7 @@ window.BUCKET_METHOD = {
             template = Handlebars.compile(templateSource),
             itemHTML = template({"buckets":[]});
             $('#items').html(itemHTML);
-            $('.mainItemDiv').text('you have nothing in this bucket.');
+            $('.mainItemDiv').text(' you have nothing in this bucket.');
         }
         else{
             $('.noDrippsMain').attr("class", "noDrippsMain hide");
@@ -286,7 +286,7 @@ window.BUCKET_METHOD = {
             $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
             if (feed.length == 0 ) {
-                $('.mainItemDiv').text('you have nothing in this bucket.');
+                $('.mainItemDiv').text(' you have nothing in this bucket.');
                  $(".like2.grey2").attr("class", 'opinionBucket like2 grey2 hide');
                     $(".like2.blue").attr("class", 'opinionBucket like2 blue hide');
                     $(".dislike2.grey2").attr("class", 'opinionBucket dislike2 grey2 hide');

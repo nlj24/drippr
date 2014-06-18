@@ -543,3 +543,11 @@ darkGrey: #6D6E70*/
   min-height: 50%;
   max-width: 90%;
 }
+
+#continueFind {
+  background-color: #6D6E70;
+  color: white;
+  border-radius: 10px;
+  width: 300px;
+  font-size: 20px;
+}
