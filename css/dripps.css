@@ -288,6 +288,7 @@ body {
   height: 22px;
   line-height: 22px;
   margin-top: 10px;
+  border-radius: 2px;
 }
 
 .fb-login-button {
