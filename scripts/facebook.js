@@ -126,7 +126,7 @@ $(document).keydown(function(e){
 											FB.ui({
 												to: friend.id,
 												method: 'send',
-												link: 'http://www.ournameisfun.com/',
+												link: 'http://drippr.me/',
 											});
 										} 
 
