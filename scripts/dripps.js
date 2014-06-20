@@ -59,7 +59,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: window.address + 'articles',
             data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
-            method:'post',
+            method:'get',
             success:this.handlerData
         });
     },
@@ -74,7 +74,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: url,
             data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
-            method:'post',
+            method:'get',
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
