@@ -222,7 +222,7 @@ window.BUCKET_METHOD = {
                 $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
             }
 
-            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
+            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID, "row");          
             bindMessages(messageListTemplate, conversation_data);     
             bindButtons();
             window.setBucketLikes();
