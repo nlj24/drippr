@@ -409,12 +409,12 @@ darkGrey: #6D6E70*/
 
 .unreadDripps {
   font-weight: bolder;
-  border-left: 4px solid #1C75BB;
+  border-left: 7px solid #1C75BB;
 }
 
 .unreadComments {
   font-style: italic;
-  border-left: 4px solid green;
+  border-left: 7px solid green;
 }
 
 #sendFromExt {
