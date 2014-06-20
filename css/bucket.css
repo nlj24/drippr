@@ -188,12 +188,10 @@ darkGrey: #6D6E70*/
 
 .comment{
     text-align: left;
-    display: inline-block;
 }
 
 .commentorPic {
   margin-left: 2px;
-  display: inline-block;
 }
 .commentTime{
   text-align: right;
