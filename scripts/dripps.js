@@ -70,6 +70,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: window.address + 'articles',
             data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}), //need to fix for current user
+            dataType:'json',
             method:'post',
             success:this.handlerData
         });
@@ -85,6 +86,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: url,
             data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}), //need to fix for current user
+            dataType: 'json',
             method:'post',
             success:function(data){
 
