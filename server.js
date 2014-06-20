@@ -100,7 +100,7 @@ app.get("/dripps", function(req, res){
         var articles_dict = {};
         var articles_list = [];
         var members = "";
-        console.log(rows);
+        // //console.log(rows);
         for(var ii=0; ii < rows.length; ii++){
             articles_dict[rows[ii].id] = rows[ii];
             articles_dict[rows[ii].id]["userLiked"] = (rows[ii]['l_user'] != null);
@@ -121,7 +121,7 @@ app.get("/dripps", function(req, res){
             connection.query(get_names_query, function(err,rows,fields) {
                 if (err) throw err; 
                 res.send({article: articles_list, names: rows});
-                console.log(articles_list);
+                //console.log(articles_list);
             });
         } else{
             res.send({article: [], names: []});

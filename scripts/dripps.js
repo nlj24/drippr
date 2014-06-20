@@ -14,7 +14,7 @@ $("img[title='send'").click(function(){
 
     window.selGroups = [];
 
-}
+});
 
 window.ARTICLE_METHOD ={
 
