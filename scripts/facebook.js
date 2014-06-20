@@ -393,6 +393,7 @@ $(document).keydown(function(e){
 
 							// creating a group...
 							$("#groupBtn").click(function(){
+
 				                if (window.groupsIds.length > 1) {
 				                	if ($('#groupName').val()!= "") {
 					                	var groupName = $('#groupName').val();
@@ -548,14 +549,14 @@ $(document).keydown(function(e){
 										}
 				                	}
 
+				                	window.addIds = [];
+				                	window.addChosenFriends = {};
 				                    $("[group_id=" + "group_" + window.groupId + "]").find(".namesList").append(membersString);
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
 									$("#addChosenCont").html('');
 				                   
-				                	window.addIds = [];
-				                	window.addChosenFriends = {};
 				                	setTimeout(function() {
 					                    $('#myModal2').modal('hide');
 					                }, 3500);
