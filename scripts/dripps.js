@@ -71,6 +71,7 @@ window.ARTICLE_METHOD ={
         } else{
              url = window.address + 'articles/' + category;
         }
+        console.log(lastId);
         $.ajax({
             url: url,
             data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
