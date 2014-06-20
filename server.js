@@ -34,7 +34,7 @@ var connection;
 });
 });
 
-app.get("/articles/:category", function(req, res) {
+app.post("/articles/:category", function(req, res) {
 
     req.setEncoding('utf8');
     req.on('data', function(chunk) {
