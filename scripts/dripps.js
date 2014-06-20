@@ -1,20 +1,9 @@
 var article_results;
-window.chunkSize = 80;
+window.chunkSize = 100;
 window.articlesData = {};
 window.articlesData["All"] = [];
 window.callingback = {};
 
-$("img[title='send'").click(function(){
-        window.drippsChosenFriends = {};
-    window.groupsChosenFriends = {};
-    window.addChosenFriends = {};
-    window.drippsIds = [];
-    window.groupsIds = [];
-    window.addIds = [];
-
-    window.selGroups = [];
-
-});
 
 window.ARTICLE_METHOD ={
 
@@ -69,9 +58,8 @@ window.ARTICLE_METHOD ={
     loadArticleData : function(){
         $.ajax({
             url: window.address + 'articles',
-            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}), //need to fix for current user
-            dataType:'json',
-            method:'post',
+            data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
+            method:'get',
             success:this.handlerData
         });
     },
@@ -85,9 +73,8 @@ window.ARTICLE_METHOD ={
         }
         $.ajax({
             url: url,
-            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}), //need to fix for current user
-            dataType: 'json',
-            method:'post',
+            data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
+            method:'get',
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
