@@ -5,6 +5,17 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
+("img[title='send'").click(function(){
+         window.drippsChosenFriends = {};
+     window.groupsChosenFriends = {};
+     window.addChosenFriends = {};
+     window.drippsIds = [];
+     window.groupsIds = [];
+     window.addIds = [];
+ 
+     window.selGroups = [];
+ 
+ });
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
@@ -58,8 +69,9 @@ window.ARTICLE_METHOD ={
     loadArticleData : function(){
         $.ajax({
             url: window.address + 'articles',
-            data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
-            method:'get',
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}), //need to fix for current user
+            dataType: 'json',
+            method:'post',
             success:this.handlerData
         });
     },
@@ -74,8 +86,9 @@ window.ARTICLE_METHOD ={
         console.log(lastId);
         $.ajax({
             url: url,
-            data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
-            method:'get',
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}), //need to fix for current user
+            dataType: 'json',
+            method:'post',
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
