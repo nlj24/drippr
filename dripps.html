@@ -509,7 +509,7 @@
 	        			</div>
 	        			<div id = "conversation">
 		        			{{#each messages}}
-		        				<div class = "indMess {{userId}}">
+		        				<div class = "indMess {{userId}} row">
 		        					<img class="commentorPic circlePics	" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
 		        					<span class="comment">{{fullName}}: {{content}} </span> <span class="commentTime"> {{timeString}}</span>
 		        				</div>
@@ -710,8 +710,10 @@
 											</div>
 										{{/each}}
 									</div>
-									<div class = "col-xs-2 leaveGroup" group_id={{this.id}}>
-										leave group
+									<div class = "col-xs-2 noPad">
+										<div class = "leaveGroup" group_id={{this.id}}>
+											leave group
+										</div>
 									</div>
 								</div>
 							{{/each}}
