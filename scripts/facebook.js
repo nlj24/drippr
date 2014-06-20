@@ -393,7 +393,7 @@ $(document).keydown(function(e){
 
 							// creating a group...
 							$("#groupBtn").click(function(){
-								
+
 				                if (window.groupsIds.length > 1) {
 				                	if ($('#groupName').val()!= "") {
 					                	var groupName = $('#groupName').val();
@@ -556,7 +556,7 @@ $(document).keydown(function(e){
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$(".addChosenCont").html('');
+									$("#addChosenCont").html('');
 				                   
 				                	setTimeout(function() {
 					                    $('#myModal2').modal('hide');
@@ -587,7 +587,7 @@ $(document).keydown(function(e){
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$(".addChosenContNew").html('');
+									$("#addChosenContNew").html('');
 				                   
 				                	window.addIds = [];
 				                	window.addChosenFriends = {};
