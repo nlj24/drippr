@@ -5,7 +5,7 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 
-("img[title='send'").click(function(){
+$("img[title='send'").click(function(){
          window.drippsChosenFriends = {};
      window.groupsChosenFriends = {};
      window.addChosenFriends = {};
