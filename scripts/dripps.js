@@ -4,6 +4,17 @@ window.articlesData = {};
 window.articlesData["All"] = [];
 window.callingback = {};
 
+$("img[title='send'").click(function(){
+    window.drippsChosenFriends = {};
+    window.groupsChosenFriends = {};
+    window.addChosenFriends = {};
+    window.drippsIds = [];
+    window.groupsIds = [];
+    window.addIds = [];
+
+    window.selGroups = [];
+
+}
 
 window.ARTICLE_METHOD ={
 

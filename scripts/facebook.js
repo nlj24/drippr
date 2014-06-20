@@ -13,6 +13,18 @@ FB.Event.subscribe("auth.logout", function() {
 	window.location = window.address;
 });
 
+
+$(document).ready(function(){
+	window.drippsChosenFriends = {};
+	window.groupsChosenFriends = {};
+	window.addChosenFriends = {};
+	window.drippsIds = [];
+	window.groupsIds = [];
+	window.addIds = [];
+
+	window.selGroups = [];
+
+})
 $("#dripps").css("height",""+ ($(window).height()-91));
 $(".arrow").css("margin-top",""+ (($(window).height()-90)/2) - 91);
 $("#arrowIntro").css("height",""+ ($(window).height()-91));
@@ -348,6 +360,7 @@ $(document).keydown(function(e){
 							});
 
 							$(".send").click(function(){
+
 								if (window.drippsIds.length > 0 || window.selGroups.length > 0) {
 									var selGroupsDict = {}
 									if(window.selGroups.length > 0) {
@@ -507,6 +520,15 @@ $(document).keydown(function(e){
 				                	}, 3000);
 			                		return;
 			                	}
+								window.drippsChosenFriends = {};
+								window.groupsChosenFriends = {};
+								window.addChosenFriends = {};
+								window.drippsIds = [];
+								window.groupsIds = [];
+								window.addIds = [];
+
+								window.selGroups = [];
+
 				            });
 
 							$(".add").click(function(){
