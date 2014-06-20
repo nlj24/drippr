@@ -70,7 +70,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 							if (!(window.callingback[window.curCategory])) {
-								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.curArticle, refreshTemplate);
+								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1], refreshTemplate);
 								
 							}
 
