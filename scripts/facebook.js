@@ -478,8 +478,6 @@ $(document).keydown(function(e){
 										
 										$(".addMemsNew").unbind("click", handler4);
 										var handler4 = $(".addMemsNew").click(function(e){
-								            $("#addChosenCont").html('');
-								            $("#chosenAdd").html('');
 								            window.addIds = [];
 								            window.addChosenFriends = {};
 								            $(".showForm").attr("class", "showForm");
@@ -554,7 +552,7 @@ $(document).keydown(function(e){
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$(".addChosenCont").html('');
+									$("#addChosenCont").html('');
 				                   
 				                	window.addIds = [];
 				                	window.addChosenFriends = {};
@@ -587,7 +585,7 @@ $(document).keydown(function(e){
 				                    
 									$(".showForm").attr("class", "showForm hide");
 									$(".success").attr("class", "success");
-									$(".addChosenContNew").html('');
+									$("#addChosenContNew").html('');
 				                   
 				                	window.addIds = [];
 				                	window.addChosenFriends = {};
