@@ -5,7 +5,7 @@ window.articlesData["All"] = [];
 window.callingback = {};
 
 $("img[title='send'").click(function(){
-    window.drippsChosenFriends = {};
+        window.drippsChosenFriends = {};
     window.groupsChosenFriends = {};
     window.addChosenFriends = {};
     window.drippsIds = [];
@@ -70,7 +70,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: window.address + 'articles',
             data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
-            method:'get',
+            method:'post',
             success:this.handlerData
         });
     },
@@ -85,7 +85,7 @@ window.ARTICLE_METHOD ={
         $.ajax({
             url: url,
             data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
-            method:'get',
+            method:'post',
             success:function(data){
 
                 for (var ii = 0; ii < data.length; ii++) {
