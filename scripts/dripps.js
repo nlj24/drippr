@@ -69,7 +69,7 @@ window.ARTICLE_METHOD ={
     loadArticleData : function(){
         $.ajax({
             url: window.address + 'articles',
-            data: {user: window.myID, numArticles: window.chunkSize}, //need to fix for current user
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}), //need to fix for current user
             method:'post',
             success:this.handlerData
         });
@@ -84,7 +84,7 @@ window.ARTICLE_METHOD ={
         }
         $.ajax({
             url: url,
-            data: {user: window.myID, numArticles: window.chunkSize, lastId: lastId}, //need to fix for current user
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}), //need to fix for current user
             method:'post',
             success:function(data){
 
