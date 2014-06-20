@@ -479,6 +479,7 @@ $(document).keydown(function(e){
 										$(".addMemsNew").unbind("click", handler4);
 										var handler4 = $(".addMemsNew").click(function(e){
 								            $("#addChosenCont").html('');
+								            $("#chosenAdd").html('');
 								            window.addIds = [];
 								            window.addChosenFriends = {};
 								            $(".showForm").attr("class", "showForm");
