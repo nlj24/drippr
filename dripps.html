@@ -497,9 +497,14 @@
 	        			</div>
 	        			<div id = "conversation">
 		        			{{#each messages}}
-		        				<div class = "indMess {{userId}}">
-		        					<img class="commentorPic circlePics	" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
-		        					<span class="comment">{{fullName}}: {{content}} </span> <span class="commentTime"> {{timeString}}</span>
+		        				<div class = "indMess {{userId}} row">
+		        					<div class = "col-xs-9">
+		        						<img class="commentorPic circlePics" src = "http://graph.facebook.com/{{userId}}/picture?width=25&height=25">
+		        						<div class="comment">{{fullName}}: {{content}} </div> 
+		        					</div>
+		        					<div class = "col-xs-3">
+		        						<div class="commentTime"> {{timeString}}</div>
+		        					</div>
 		        				</div>
 	        				{{/each}}
 	        			</div>
