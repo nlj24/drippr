@@ -515,6 +515,11 @@ app.get("/leaveGroup", function(req, res) {
         if (err) throw err;
         res.send(200);
     });
+    var delete_records = "DELETE FROM Dripps WHERE recipientGroup = " + groupId + " AND recipientUserId = " + myId;
+    connection.query(delete_records, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(200);
+    });
 });
 
 app.get("/groups", function(req, res) {
