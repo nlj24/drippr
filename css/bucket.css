@@ -110,7 +110,7 @@ darkGrey: #6D6E70*/
   margin-left: auto;
   margin-right: auto;
   border-radius: 6px;
-  padding: 5px;
+  padding: 10px;
 }
 
 #addChosenContNew {
@@ -321,10 +321,6 @@ darkGrey: #6D6E70*/
 }
 
 #chosen {
-  padding: 5px;
-}
-
-#chosenAdd {
   padding: 5px;
 }
 
