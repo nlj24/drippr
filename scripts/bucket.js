@@ -188,6 +188,13 @@ window.BUCKET_METHOD = {
                 $(".notify").parents(".headBub").css("background-color", "#6D6E70");
             }
 
+
+
+            var templateSource = $("#items-template").html(),
+            template = Handlebars.compile(templateSource),
+            itemHTML = template({"buckets":feed});
+            $('#items').html(itemHTML);
+
             setTimeout(function() {
                 if ((location.hash == "#bucket") && (window.selItem.id == window.firstID)) {
                     if ((window.dripps_data_dict[window.selItem.id]['unreadDripps']) || (window.dripps_data_dict[window.selItem.id]['unreadComments'])) {
@@ -203,21 +210,13 @@ window.BUCKET_METHOD = {
                         });
                         if (window.notifications) {
                             $(".notify").text(window.notifications);
-                            $(".notify").parents(".headBub").css("background-color", "red");
                         }else{
                             $(".notify").text("");
-                            $(".notify").parents(".headBub").css("background-color", "#6D6E70");
                         }
                     }
                     
                 }
             }, 3500);
-
-
-            var templateSource = $("#items-template").html(),
-            template = Handlebars.compile(templateSource),
-            itemHTML = template({"buckets":feed});
-            $('#items').html(itemHTML);
 
             $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
@@ -227,6 +226,7 @@ window.BUCKET_METHOD = {
                 }
                 if (feed[ii]['unreadDripps']) {
                     $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
+                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").removeClass("unreadComments");
                 }
             }
             var templateSource = $("#selDripp-template").html(),
