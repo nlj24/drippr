@@ -153,6 +153,7 @@ window.BUCKET_METHOD = {
             $('.noDrippsMain').attr("class", "noDrippsMain hide");
             feed = receiveList;
             window.selItem = feed[0];
+            window.firstID = feed[0].id;
             var convo = [];
             var convoId = feed[0]['conversationId'];
             for (var i=0;i<conversation_data.length;i++) {
@@ -169,9 +170,19 @@ window.BUCKET_METHOD = {
                    convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
                 }
             }
-
-            // window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
-            // window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+        
+            setTimeout(function() {
+                if ((location.hash == "#bucket") && (window.selItem.id == window.firstID)) {
+                    window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
+                    window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+                    $.ajax({
+                        url: window.address + 'isRead',
+                        data: {drippId: id},
+                        type:'get'
+                    });
+                }
+            }, 3500);
+            
 
             window.notifications = 0;
             for (var message_id in window.dripps_data_dict) {
