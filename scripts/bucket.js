@@ -172,7 +172,9 @@ window.BUCKET_METHOD = {
             }
         
             setTimeout(function() {
+                console.log('works1');
                 if ((location.hash == "#bucket") && (window.selItem.id == window.firstID)) {
+                    console.log('works2');
                     window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
                     window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
                     $.ajax({
