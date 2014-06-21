@@ -167,7 +167,7 @@ window.GROUP_METHOD = {
 
 
         $(".addMems").click(function(e){
-            $(".addChosenCont").html('');
+            $("#addChosenCont").html('');
             window.addIds = [];
             window.addChosenFriends = {};
             $(".showForm").attr("class", "showForm");
