@@ -26,7 +26,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			 
 			    goTo: function(index) {
 					// filter invalid indices
-					if (index = this.li.length + 1) {
+					console.log("index is :" + index + "and li length is: " + this.li.length);
+					if (index == this.li.length) {
 						return this.goTo(0);
 					}
 
