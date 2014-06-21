@@ -172,14 +172,14 @@ window.BUCKET_METHOD = {
             }
         
             setTimeout(function() {
-                console.log('works1');
                 if ((location.hash == "#bucket") && (window.selItem.id == window.firstID)) {
-                    console.log('works2');
                     window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
                     window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+                    $("[message_id='" + firstID + "']").removeClass("unreadDripps");
+                    $("[message_id='" + firstID + "']").removeClass("unreadComments");
                     $.ajax({
                         url: window.address + 'isRead',
-                        data: {drippId: id},
+                        data: {drippId: firstID},
                         type:'get'
                     });
                 }
