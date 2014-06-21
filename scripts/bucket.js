@@ -170,8 +170,8 @@ window.BUCKET_METHOD = {
                 }
             }
 
-            window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
-            window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+            // window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
+            // window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
 
             window.notifications = 0;
             for (var message_id in window.dripps_data_dict) {
