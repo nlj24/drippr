@@ -189,13 +189,14 @@ darkGrey: #6D6E70*/
 
 .comment{
     text-align: left;
+    font-weight: bold;
 }
 
 .commentorPic {
   margin-left: 2px;
 }
 .commentTime{
-  float: right;
+  font-style: italic;
 }
 #conversation {
   overflow: scroll;
