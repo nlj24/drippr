@@ -75,7 +75,7 @@ window.ARTICLE_METHOD ={
             success:this.handlerData
         });
     },
-    loadArticleDataCategory : function(category, lastId, callback){
+    loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
         window.callingback[category] = true;
         var url;
         if (category == "All") {
@@ -111,7 +111,7 @@ window.ARTICLE_METHOD ={
                     window.articlesData[data[i].id] = data[i];
                 }
              window.callingback[category] = false;
-            callback();
+            callback(index, indexInArray);
             }
         });
     }

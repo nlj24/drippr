@@ -49,7 +49,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					if (this.li.length  - index < 10) {
 						
 
-						window.positions[window.curCategory] = Math.min(10, index);
 
 						var indexInArray = index;
 						
@@ -60,7 +59,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 							}	
 						}
 												
-						var refreshTemplate = function(){
+						var refreshTemplate = function(index, indexInArray2){
+
+							window.positions[window.curCategory] = Math.min(10, index);
 							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
 					        var templateSource = $("#article-template").html(), 
@@ -72,13 +73,13 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 							if (!(window.callingback[window.curCategory])) {
-								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, refreshTemplate);
+								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray refreshTemplate);
 								
 							}
 
 						}
 						else{
-							refreshTemplate();
+							refreshTemplate(index, indexInArray2);
 						}
 
 
