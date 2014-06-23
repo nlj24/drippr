@@ -146,7 +146,7 @@ window.bindDripps = function() {
         var id = $(e.target).parents('.categ').attr("category");
 
         if (window.positions[id] > 15) {
-            feed = window.articlesData[id].slice(window.positions[id] - 10, Math.min(window.positions[id] + 40, window.articlesData[id].length));
+            feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
         }else{
             feed = window.articlesData[id];
             

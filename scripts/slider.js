@@ -27,9 +27,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    goTo: function(index) {
 					// filter invalid indices
 					console.log("index is :" + index + "and li length is: " + this.li.length);
-					if (index == this.li.length) {
-						return this.goTo(0);
-					}
 
 					if (index < 0 || index > this.li.length - 1)
 					return;
@@ -55,8 +52,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						window.positions[window.curCategory] = Math.min(10, index);
 
 						var indexInArray = index;
-
-						for (var ii = index; ii < window.articlesData[window.curCategory].length; ii++) {
+						
+						for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
 							if(window.articlesData[window.curCategory][ii].id == window.curArticle){
 								indexInArray = ii;
 								break;
