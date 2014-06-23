@@ -167,7 +167,7 @@ window.GROUP_METHOD = {
 
 
         $(".addMems").click(function(e){
-            $(".addChosenCont").html('');
+            $("#addChosenCont").html('');
             window.addIds = [];
             window.addChosenFriends = {};
             $(".showForm").attr("class", "showForm");
@@ -183,6 +183,17 @@ window.GROUP_METHOD = {
             $(".groupModalName").html("add members to " + window.groupName);
         });
 
+        $('.fb-input-add').keypress(function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+            }
+        });
+
+        $('.fb-input-add-new').keypress(function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+            }
+        });
 
         window.ARTICLE_METHOD.loadArticleData();
 

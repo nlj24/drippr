@@ -153,6 +153,7 @@ window.BUCKET_METHOD = {
             $('.noDrippsMain').attr("class", "noDrippsMain hide");
             feed = receiveList;
             window.selItem = feed[0];
+            window.firstID = feed[0].id;
             var convo = [];
             var convoId = feed[0]['conversationId'];
             for (var i=0;i<conversation_data.length;i++) {
@@ -169,26 +170,48 @@ window.BUCKET_METHOD = {
                    convo[ii]["timeString"] = Date.create(convo[ii]["time"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
                 }
             }
-
-            window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
-            window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+        
+            
 
             window.notifications = 0;
             for (var message_id in window.dripps_data_dict) {
                 if (window.dripps_data_dict[message_id]['unreadComments'] || window.dripps_data_dict[message_id]['unreadDripps']) {
                     window.notifications +=1;
-                }
-               
+                }   
             }
+
             if (window.notifications) {
                 $(".notify").text(window.notifications);
                 $(".notify").parents(".headBub").css("background-color", "red");
             }else{
                 $(".notify").text("");
                 $(".notify").parents(".headBub").css("background-color", "#6D6E70");
-
             }
 
+            setTimeout(function() {
+                if ((location.hash == "#bucket") && (window.selItem.id == window.firstID)) {
+                    if ((window.dripps_data_dict[window.selItem.id]['unreadDripps']) || (window.dripps_data_dict[window.selItem.id]['unreadComments'])) {
+                        window.notifications -= 1;
+                        window.dripps_data_dict[window.selItem.id]['unreadDripps'] = 0;
+                        window.dripps_data_dict[window.selItem.id]['unreadComments'] = 0;
+                        $("[message_id='" + firstID + "']").removeClass("unreadDripps");
+                        $("[message_id='" + firstID + "']").removeClass("unreadComments");
+                        $.ajax({
+                            url: window.address + 'isRead',
+                            data: {drippId: firstID},
+                            type:'get'
+                        });
+                        if (window.notifications) {
+                            $(".notify").text(window.notifications);
+                            $(".notify").parents(".headBub").css("background-color", "red");
+                        }else{
+                            $(".notify").text("");
+                            $(".notify").parents(".headBub").css("background-color", "#6D6E70");
+                        }
+                    }
+                    
+                }
+            }, 3500);
 
 
             var templateSource = $("#items-template").html(),
@@ -199,11 +222,11 @@ window.BUCKET_METHOD = {
             $(".mainItemDiv").css("height",""+ ($(window).height()-136));
 
             for (var ii = 0; ii < feed.length; ii++) {
-                if (feed[ii]['unreadDripps']) {
-                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
-                }
                 if (feed[ii]['unreadComments']) {
                     $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadComments");
+                }
+                if (feed[ii]['unreadDripps']) {
+                    $("[message_id='" + feed[ii]['id'] + "'].messageItem").addClass("unreadDripps");
                 }
             }
             var templateSource = $("#selDripp-template").html(),
@@ -222,7 +245,7 @@ window.BUCKET_METHOD = {
                 $("#imageDivBucket").css("line-height","" + $("#imageDivBucket").height() + "px");
             }
 
-            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID, "row");          
+            $('.indMess.' + window.myID).attr("class", "indMess ownMess " + window.myID);          
             bindMessages(messageListTemplate, conversation_data);     
             bindButtons();
             window.setBucketLikes();

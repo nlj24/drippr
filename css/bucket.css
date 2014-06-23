@@ -196,7 +196,6 @@ darkGrey: #6D6E70*/
 }
 .commentTime{
   float: right;
-  font-style: italic;
 }
 #conversation {
   overflow: scroll;
@@ -406,12 +405,12 @@ darkGrey: #6D6E70*/
 
 .unreadDripps {
   font-weight: bolder;
-  border-left: 7px solid #1C75BB;
+  border-left: 7px solid #A3DCFF;
 }
 
 .unreadComments {
   font-style: italic;
-  border-left: 7px solid green;
+  border-left: 7px solid #00CC00;
 }
 
 #sendFromExt {
