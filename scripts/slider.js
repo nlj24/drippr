@@ -70,6 +70,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					        articleHTML = template({"articles":feed});
 					        $('#articles').html(articleHTML);
 
+					        window.setDrippLikes();
+		            
+		           			window.resetFB();
+
 						}
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
