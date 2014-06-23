@@ -14,7 +14,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
 					window.resetFB();
-					this.goTo(window.positions[window.curCategory]);
 					$('#sliderPad').height($(window).height()-230);
 					$('.mainBubble').width($(".slider").width());
 					$('.mainBubble').height($(".slider").height());
@@ -22,6 +21,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 					$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 					$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
+					this.goTo(window.positions[window.curCategory]);
 			    },
 			 
 			    goTo: function(index) {
