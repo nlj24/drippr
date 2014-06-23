@@ -47,7 +47,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		           	window.resetFB();
 
 					if (this.li.length  - index < 10) {
-						
+						if (!(window.callingback[window.curCategory])) {
+
 
 
 						var indexInArray = index;
@@ -83,7 +84,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						}
 
 
-
+					}
 
 					} 
 
