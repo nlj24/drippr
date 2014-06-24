@@ -52,11 +52,11 @@ window.ARTICLE_METHOD ={
             }
         }
 
-        var feed = window.articlesData[window.curCategory].slice(0, 50);
+         window.feed = window.articlesData[window.curCategory].slice(0, 50);
 
         var templateSource = $("#article-template").html(),
         template = Handlebars.compile(templateSource),
-        articleHTML = template({"articles":feed});
+        articleHTML = template({"articles":window.feed});
         $('#articles').html(articleHTML);
 
         $(".dripp").click(function(){
@@ -146,9 +146,9 @@ window.bindDripps = function() {
         var id = $(e.target).parents('.categ').attr("category");
 
         if (window.positions[id] > 15) {
-            feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
+            window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
         }else{
-            feed = window.articlesData[id];
+            window.feed = window.articlesData[id];
             
         }
 
@@ -156,7 +156,7 @@ window.bindDripps = function() {
 
         var templateSource = $("#article-template").html(), 
         template = Handlebars.compile(templateSource),
-        articleHTML = template({"articles":feed});
+        articleHTML = template({"articles":window.feed});
         $('#articles').html(articleHTML);
 
         $('.categ').css("background", "white");

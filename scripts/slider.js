@@ -63,16 +63,13 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						var refreshTemplate = function(index, indexInArray2){
 
 							window.positions[window.curCategory] = Math.min(10, index);
-							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
 					        var templateSource = $("#article-template").html(), 
 					        template = Handlebars.compile(templateSource),
-					        articleHTML = template({"articles":feed});
+					        articleHTML = template({"articles":window.feed});
 					        $('#articles').html(articleHTML);
 
-					        window.setDrippLikes();
-		            
-		           			window.resetFB();
 
 						}
 
@@ -89,6 +86,14 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 
 					}
+
+					} else if((index % 5) == 0){
+
+						var templateSource = $("#article-template").html(), 
+					        template = Handlebars.compile(templateSource),
+					        articleHTML = template({"articles":window.feed});
+					        $('#articles').html(articleHTML);
+						
 
 					} 
 
