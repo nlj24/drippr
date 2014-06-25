@@ -67,7 +67,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					        var templateSource = $("#article-template").html(), 
 					        template = Handlebars.compile(templateSource),
-					        articleHTML = template({"articles":feed});
+					        articleHTML = template({"articles":window.feed});
 					        $('#articles').html(articleHTML);
 
 
