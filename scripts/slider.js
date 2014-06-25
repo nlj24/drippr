@@ -51,48 +51,48 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		            
 		           	window.resetFB();
 
-					// if (this.li.length  - index < 10) {
-					// 	if (!(window.callingback[window.curCategory])) {
+					if (this.li.length  - index < 10) {
+						if (!(window.callingback[window.curCategory])) {
 
 
 
-					// 	var indexInArray = index;
+						var indexInArray = index;
 						
-					// 	for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
-					// 		if(window.articlesData[window.curCategory][ii].id == window.curArticle){
-					// 			indexInArray = ii;
-					// 			break;
-					// 		}	
-					// 	}
+						for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
+							if(window.articlesData[window.curCategory][ii].id == window.curArticle){
+								indexInArray = ii;
+								break;
+							}	
+						}
 												
-					// 	var refreshTemplate = function(index, indexInArray2){
+						var refreshTemplate = function(index, indexInArray2){
 
-					// 		window.positions[window.curCategory] = Math.min(10, index);
-					//         window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+							window.positions[window.curCategory] = Math.min(10, index);
+					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
-					//         var templateSource = $("#article-template").html(), 
-					//         template = Handlebars.compile(templateSource),
-					//         articleHTML = template({"articles":window.feed});
-					//         $('#articles').html(articleHTML);
+					        var templateSource = $("#article-template").html(), 
+					        template = Handlebars.compile(templateSource),
+					        articleHTML = template({"articles":window.feed});
+					        $('#articles').html(articleHTML);
 
 
-					// 	}
+						}
 
-					// 	if ( window.articlesData[window.curCategory].length - indexInArray < 40){
-					// 		if (!(window.callingback[window.curCategory])) {
-					// 			window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
+						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
+							if (!(window.callingback[window.curCategory])) {
+								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
 								
-					// 		}
+							}
 
-					// 	}
-					// 	else{
-					// 		refreshTemplate(index, indexInArray);
-					// 	}
+						}
+						else{
+							refreshTemplate(index, indexInArray);
+						}
 
 
-					// }
+					}
 
-					// } 
+					} 
 
 
 			    },
