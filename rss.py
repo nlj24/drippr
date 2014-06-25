@@ -13,7 +13,7 @@ noPics = {"ABC News": "/images/abcnews.png", "Reuters": "/images/reuters.jpg","S
 print "starting script"
 try:
 	# execute SQL query using execute() method.
-	sql = "SELECT * FROM Sources"
+	sql = "SELECT * FROM Sources where source = 'SFGate'"
 	cursor.execute(sql)
 	rss = cursor.fetchall()
 	rss2 = []
