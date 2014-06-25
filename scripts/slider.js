@@ -29,9 +29,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					console.log("index is :" + index + "and li length is: " + this.li.length);
 
 
-					if (index == this.li.length) {
-						this.goTo(0);
-					}
+					// if (index == this.li.length) {
+					// 	this.goTo(0);
+					// }
 
 					if (index < 0 || index > this.li.length - 1)
 					return;
