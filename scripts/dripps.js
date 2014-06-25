@@ -1,5 +1,5 @@
 var article_results;
-window.chunkSize = 100;
+window.chunkSize = 200;
 window.articlesData = {};
 window.articlesData["All"] = [];
 window.callingback = {};
