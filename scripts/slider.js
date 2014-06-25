@@ -8,8 +8,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					this.li = this.ul.children;
 
 					// make <ul> as large as all <li>’s
-					this.ul.style.width = (this.li[0].clientWidth * this.li.length) + 'px';
-
+					this.ul.style.width = ($(window).width() * 7/12 * this.li.length) + 'px';
+					console.log("client width is: " + ($(window).width() * 7/12) + " and ul width is: " + this.ul.style.width);
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
@@ -27,6 +27,11 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    goTo: function(index) {
 					// filter invalid indices
 					console.log("index is :" + index + "and li length is: " + this.li.length);
+
+
+					// if (index == this.li.length) {
+					// 	this.goTo(0);
+					// }
 
 					if (index < 0 || index > this.li.length - 1)
 					return;
@@ -67,7 +72,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					        var templateSource = $("#article-template").html(), 
 					        template = Handlebars.compile(templateSource),
-					        articleHTML = template({"articles":feed});
+					        articleHTML = template({"articles":window.feed});
 					        $('#articles').html(articleHTML);
 
 

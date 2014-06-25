@@ -148,9 +148,11 @@ window.bindDripps = function() {
         if (window.positions[id] > 15) {
             window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
         }else{
-            window.feed = window.articlesData[id];
+            window.feed = window.articlesData[id].slice(0, 50);
             
         }
+
+//        window.feed = window.articlesData[id];
 
         window.curCategory = $(e.target).parents('.categ').attr("category");
 
