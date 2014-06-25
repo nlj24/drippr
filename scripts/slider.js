@@ -14,7 +14,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
 					window.resetFB();
-					this.goTo(window.positions[window.curCategory]);
 					$('#sliderPad').height($(window).height()-230);
 					$('.mainBubble').width($(".slider").width());
 					$('.mainBubble').height($(".slider").height());
@@ -22,14 +21,12 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 					$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 					$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
+					this.goTo(window.positions[window.curCategory]);
 			    },
 			 
 			    goTo: function(index) {
 					// filter invalid indices
 					console.log("index is :" + index + "and li length is: " + this.li.length);
-					if (index == this.li.length) {
-						return this.goTo(0);
-					}
 
 					if (index < 0 || index > this.li.length - 1)
 					return;
@@ -50,45 +47,47 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		           	window.resetFB();
 
 					if (this.li.length  - index < 10) {
-						
+						if (!(window.callingback[window.curCategory])) {
 
-						window.positions[window.curCategory] = Math.min(10, index);
+
 
 						var indexInArray = index;
-
-						for (var ii = index; ii < window.articlesData[window.curCategory].length; ii++) {
+						
+						for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
 							if(window.articlesData[window.curCategory][ii].id == window.curArticle){
 								indexInArray = ii;
 								break;
 							}	
 						}
 												
-						var refreshTemplate = function(){
-							feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+						var refreshTemplate = function(index, indexInArray2){
+
+							window.positions[window.curCategory] = Math.min(10, index);
+					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
 					        var templateSource = $("#article-template").html(), 
 					        template = Handlebars.compile(templateSource),
 					        articleHTML = template({"articles":feed});
 					        $('#articles').html(articleHTML);
 
+
 						}
 
 						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 							if (!(window.callingback[window.curCategory])) {
-								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, refreshTemplate);
+								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
 								
 							}
 
 						}
 						else{
-							refreshTemplate();
+							refreshTemplate(index, indexInArray);
 						}
 
 
-
+					}
 
 					} 
-
 
 
 			    },
