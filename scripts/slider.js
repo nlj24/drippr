@@ -26,6 +26,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			 
 			    goTo: function(index) {
 					// filter invalid indices
+					if (index == 0) {
+						window.count = 0;
+					};
+
 					console.log("index is :" + index + "and li length is: " + this.li.length);
 
 					if (index < 0 || index > this.li.length - 1)
@@ -87,7 +91,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					}
 
-					} else if((index % 5) == 0){
+					} else {
+						window.count++;
+						if((window.count % 5) == 0){
 
 						var templateSource = $("#article-template").html(), 
 					        template = Handlebars.compile(templateSource),
@@ -96,7 +102,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 						
 
 					} 
-
+				}
 
 
 			    },
