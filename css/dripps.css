@@ -428,3 +428,619 @@ body {
 .noRightPad {
   padding-right: 0px;
 }
+
+.fbac-suggestion-list {
+  width: 444px !important;
+  margin-left: 78px;
+}
+
+.buttonDrip{
+  width: 32px;
+  height: 32px;
+}
+
+
+.blue_friends {
+  display: inline-block;
+  background-color: #A3DCFF;
+  padding: 5px;
+  border: 1px solid #6D6E70;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.red_friends {
+  color: white;
+  display: inline-block;
+  background-color: #E00000;
+  padding: 5px;
+  border: 1px solid #6D6E70;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.green_friends {
+  color: white;
+  display: inline-block;
+  background-color: #00CC00;
+  padding: 5px;
+  border: 1px solid #6D6E70;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.rm {
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #6D6E70;
+  color: white;
+  border-radius: 5px;
+}
+.rm_group {
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #6D6E70;
+  color: white;
+  border-radius: 5px;
+}
+
+.fbPics {
+  border-radius: 10px;
+  margin-right: 10px;
+  height: 25px;
+  width: 25px;
+}
+
+.fbPics2 {
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+}
+
+#fb-input {
+  margin-top: 25px;
+}
+
+#close {
+  float: right;
+}
+
+
+
+#chosenCont {
+  background-color: white;
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+#addChosenCont {
+  background-color: white;
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+#addChosenContNew {
+  background-color: white;
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+}
+
+.groupCont {
+  margin-top: 15px;
+}
+
+#groupInput {
+  height: 200px;
+}
+
+
+
+.mainItemDiv {
+  background-color: white;
+  overflow: scroll;
+  border-right: 1px solid #e5e5e5;
+}
+
+.messageItem {
+  height: 70px;
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+#selPage {
+  font-size: 25px;
+  color:white;
+  text-align: center;
+}
+
+#headlineBucket {
+  text-align: center;
+  font-size: 25px;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  height: 57px;
+  font-weight: bold;
+}
+
+#fitImageBucket {
+  border-radius: 10px;
+  max-height: 90%;
+  vertical-align: middle;
+  min-height: 90%;
+  max-width: 90%;
+}
+
+#imageDivBucket {
+  text-align: center;
+  height: 350px;
+  line-height: 350px;
+}
+
+.indMess {
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  overflow-wrap: break-word;
+}
+
+.comment{
+    text-align: left;
+    font-weight: bold;
+}
+
+.commentorPic {
+  margin-left: 2px;
+}
+.commentTime{
+  font-style: italic;
+}
+#conversation {
+  overflow: scroll;
+}
+
+.opinionBucket {
+  height: 70px;
+  width: 70px;
+  cursor: pointer;
+}
+
+.ownMess {
+  background-color: #A3DCFF;
+
+}
+
+#messageSend {
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #6D6E70;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 10px;
+  width: 90%;
+  text-align: center;
+  padding: 0;
+}
+
+#messageInput {
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+  max-height: 70px;
+  border-radius: 5px;
+}
+
+#convoDiv {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.friendPics{
+  padding: 0px;
+  max-height: 90px;
+  overflow-y: scroll;
+}
+.noPad {
+  padding: 0;
+}
+
+.messageInputRow{
+/*  padding-left: 3px;
+  padding-right: 7px;
+*/}
+
+.messageItemHead {
+  padding: 5px;
+  margin: 0;
+  font-size: 20px;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.messageItemPic {
+  padding-left: 5px;
+  padding-right: 5px;
+  max-width: 35px;
+  max-height: 35px;
+  display: inline-block;
+}
+
+.messageItemSender {
+  display: inline-block;
+}
+
+.messageItemTime {
+  display: inline-block;
+  float: right;
+  padding-right: 5px;
+}
+
+
+.selBucket {
+  text-align: center;
+  font-size: 20px;
+  height: 45px;
+  line-height: 45px;
+  background-color: white;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
+}
+
+#selDripps {
+  padding-right: 0px;
+}
+
+#selDripp{
+  overflow-y: scroll;
+  overflow-x:hidden;
+  height: 100%;
+
+  width: 100%;
+}
+
+#selSent {
+  padding: 0px;
+}
+
+#selBucket {
+  padding-left: 0px;
+}
+
+.selectedBucket {
+  background-color: #6D6E70;
+  color: white;
+}
+
+#chosen {
+  padding: 5px;
+}
+
+.fullMessage {
+  width: 100%;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fb-input-groups {
+  margin-top: 5px;
+}
+
+#groupNameStyle {
+  font-size: 15px;
+  line-height: 25px;
+}
+
+#selFriendsStyle {
+  margin-top: 5px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+#centerWel {
+  display: inline-block;
+  margin-top: 5.5px;
+  margin-bottom: 0px;
+}
+
+.createGroupSyle {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.groupRowStyle {
+  margin: 0px;
+  padding-top: 10px;
+}
+
+#my_group_container {
+  overflow: scroll;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#other_group_container {
+  overflow: scroll;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.nameGroupsStyle {
+  font-size: 20px;
+}
+
+.groupRowStyle:nth-of-type(odd) { 
+  background:azure;
+}
+/*#groupContainer .groupRowStyle:nth-child(even) { background-color:#fff; }*/
+
+.groupDeletionStyle {
+  text-align: center;
+  font-size: 30px;
+}
+
+.createdSuccessStyle {
+  text-align: center;
+  font-size: 20px;
+  line-height: 200px;
+}
+
+.selMessageItem {
+  color: white;
+  background-color: #6D6E70;
+}
+
+.unSelMessageItem {
+  background-color: white;
+  color: #6D6E70;
+}
+
+.unreadDripps {
+  font-weight: bolder;
+  border-left: 7px solid #A3DCFF;
+}
+
+.unreadComments {
+  font-style: italic;
+  border-left: 7px solid #00CC00;
+}
+
+#sendFromExt {
+  float: right;
+  font-style: italic;
+  color: #1C75BB;
+}
+
+#sendFromExtDiv {
+  width: 100%;
+  height: 20px;
+}
+
+.addMems {
+  background-color: #6D6E70;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 102px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deleteGroup {
+  background-color: #6D6E70;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 102px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addMemsNew {
+  background-color: #6D6E70;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 102px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deleteGroup2 {
+  background-color: #6D6E70;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 102px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leaveGroup {
+  background-color: #6D6E70;
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 102px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.headerGroup {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.groupHeaderStyle {
+  background:azure;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.centerCreator {
+  text-align: center;
+}
+
+.circlePics {
+  border-radius: 100%;
+}
+
+.styleFriends {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #6D6E70;
+  margin: 5px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.padRightLeft {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#imageDivRead {
+  text-align: center;
+}
+
+#fitImageRead {
+  border-radius: 10px;
+  max-height: 90%;
+  min-height: 50%;
+  max-width: 90%;
+}
+
+#continueFind {
+  background-color: #6D6E70;
+  color: white;
+  border-radius: 50px;
+  width: 520px;
+  font-size: 49px;
+  height: 120px;
+  margin-left: auto;
+  margin-top: 100px;
+  line-height: 120px;
+  text-align: center;
+  margin-right: auto;
+}
+
+#leftDrop {
+  left: 15px;
+}
+
+.fbac-suggestion-list {
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  font-color: #333;
+  text-align: left;
+  border: solid;
+  border-width: 1px 1px 2px;
+  border-color: #333 #333 #293e6a;
+  padding: 2px 0px;
+  z-index: 1000
+}
+
+
+.fbac-suggestion-list:empty {
+  border: none;
+}
+
+.fbac-suggestion {
+  padding: 2px 5px 2px 5px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.fbac-suggestion.fbac-selected {
+  background-color: #6d84b4;
+  border-color: #3b5998;
+  color: #fff;
+}
+
+.fbac-suggestion-avatar {
+  vertical-align: top;
+}
+
+.fbac-suggestion-name {
+  margin-left: 10px;
+}
+.ui-autocomplete{
+  z-index: 1050;
+}
+
+
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  border: none;
+  background: #A3DCFF;
+  font-weight: bold;
+  color: white;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: none;
+}
