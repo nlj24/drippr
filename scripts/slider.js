@@ -9,7 +9,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					// make <ul> as large as all <li>’s
 					this.ul.style.width = (this.li[0].clientWidth * this.li.length) + 'px';
-
+					console.log("client width is: " + this.li[0].clientWidth + " and ul width is: " + this.ul.style.width);
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
 					window.setDrippLikes();
