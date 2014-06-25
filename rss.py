@@ -8,6 +8,8 @@ db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 articlesToAdd = []
 
+noPics = {"ABC News": "/images/abcnews.png", "Reuters": "/images/reuters.jpg","SFGate":"/images/sfgate.png"}
+
 print "starting script"
 try:
 	# execute SQL query using execute() method.
@@ -41,17 +43,20 @@ try:
 				print date2
 			except:
 				pass
-			request = urllib2.Request(url_result)
-			request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
-			try:
-				usock = urllib2.urlopen(request)
-				data = usock.read()
-				usock.close()
-				beg = data.rindex('"',0,data.find('jpg')) + 1
-				end = data.index('"',data.find('jpg'))
-				image_result = data[beg:end]
-			except:
-				image_result = '/images/drop.png'
+			if source in noPics:
+				image_result = noPics[source]
+			else:
+				request = urllib2.Request(url_result)
+				request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
+				try:
+					usock = urllib2.urlopen(request)
+					data = usock.read()
+					usock.close()
+					beg = data.rindex('"',0,data.find('jpg')) + 1
+					end = data.index('"',data.find('jpg'))
+					image_result = data[beg:end]
+				except:
+					image_result = '/images/drop.png'
 			if ((url_result) not in articleUrls2) and (date > cutoff):
 				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
 
