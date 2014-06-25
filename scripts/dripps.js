@@ -52,7 +52,7 @@ window.ARTICLE_METHOD ={
             }
         }
 
-         window.feed = window.articlesData[window.curCategory].slice(0, 50);
+         window.feed = window.articlesData[window.curCategory]; //.slice(0, 50);
 
         var templateSource = $("#article-template").html(),
         template = Handlebars.compile(templateSource),
