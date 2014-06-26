@@ -36,29 +36,30 @@ try:
 		for a in lst:
 			headline_result = a['title'].encode('utf-8')
 			url_result = a['link']
-			try:
-				date = a['published_parsed']
-				date = datetime.fromtimestamp(mktime(date))
-				date2 = str(date)
-				print date2
-			except:
-				pass
-			if source in noPics:
-				image_result = noPics[source]
-			else:
-				request = urllib2.Request(url_result)
-				request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
+			if url_result not in articleUrls2:
 				try:
-					usock = urllib2.urlopen(request)
-					data = usock.read()
-					usock.close()
-					beg = data.rindex('"',0,data.find('jpg')) + 1
-					end = data.index('"',data.find('jpg'))
-					image_result = data[beg:end]
+					date = a['published_parsed']
+					date = datetime.fromtimestamp(mktime(date))
+					date2 = str(date)
+					print date2
 				except:
-					image_result = '/images/drop.png'
-			if ((url_result) not in articleUrls2) and (date > cutoff):
-				articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
+					pass
+				if date > cutoff:
+					if source in noPics:
+						image_result = noPics[source]
+					else:
+						request = urllib2.Request(url_result)
+						request.add_header("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5")
+						try:
+							usock = urllib2.urlopen(request)
+							data = usock.read()
+							usock.close()
+							beg = data.rindex('"',0,data.find('jpg')) + 1
+							end = data.index('"',data.find('jpg'))
+							image_result = data[beg:end]
+						except:
+							image_result = '/images/drop.png'
+					articlesToAdd.append({'headline':headline_result,'image':image_result,'url':url_result,'source':source,'date': date2, 'category':category})
 
 	shuffle(articlesToAdd)
 	print "going to add to database"
