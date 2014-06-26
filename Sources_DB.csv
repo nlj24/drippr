@@ -1,0 +1,166 @@
+id,source,rssUrl,category
+1,"Washington Post",http://feeds.washingtonpost.com/rss/politics,Politics
+2,"Washington Post",http://feeds.washingtonpost.com/rss/business,Business
+3,"Washington Post",http://feeds.washingtonpost.com/rss/world,World
+4,"USA Today",http://rssfeeds.usatoday.com/UsatodaycomSports-TopStories,Sports
+5,"USA Today",http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories,USA
+6,"USA Today",http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories,Politics
+7,"USA Today","http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories
+",World
+8,"Perez Hilton",http://perezhilton.com/rss,Entertainment
+9,"USA Today","http://rssfeeds.usatoday.com/usatoday-LifeTopStories
+",Entertainment
+10,"USA Today",http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories,Business
+11,"USA Today",http://rssfeeds.usatoday.com/usatoday-TechTopStories,Tech
+12,"LA Times",http://www.latimes.com/entertainment/rss2.0.xml,Entertainment
+13,"LA Times",http://www.latimes.com/nation/politics/rss2.0.xml,Politics
+14,"LA Times",http://www.latimes.com/travel/rss2.0.xml,Lifestyle
+15,"LA Times",http://www.latimes.com/world/rss2.0.xml,World
+16,"LA Times",http://www.latimes.com/business/rss2.0.xml,Business
+17,"LA Times",http://www.latimes.com/nation/nationnow/rss2.0.xml,USA
+18,"LA Times",http://www.latimes.com/style/rss2.0.xml,Lifestyle
+19,"New York Daily News",http://www.nydailynews.com/news/national/index_rss.xml,USA
+20,"New York Daily News",http://www.nydailynews.com/news/world/index_rss.xml,World
+21,"New York Daily News",http://www.nydailynews.com/news/politics/index_rss.xml,Politics
+22,"New York Daily News",http://www.nydailynews.com/entertainment/index_rss.xml,Entertainment
+23,"New York Daily News",http://www.nydailynews.com/life-style/index_rss.xml,Lifestyle
+24,"Business Insider",http://www.businessinsider.com/rss,Business
+25,"Fox Business",http://feeds.foxbusiness.com/foxbusiness/latest,Business
+26,Gizmag,http://feeds.feedblitz.com/Gizmag,Tech
+27,ZDNet,http://www.zdnet.com/news/rss.xml,Tech
+28,Wired,http://www.wired.com/rss,Tech
+29,Engadget,http://www.engadget.com/rss.xml,Tech
+30,"The Blaze",http://www.theblaze.com/feed/,USA
+31,"NY Post",http://nypost.com/sports/feed/,Sports
+32,"NY Post",http://nypost.com/business/feed/,Business
+33,"NY Post",http://nypost.com/entertainment/feed/,Entertainment
+34,"NY Post",http://nypost.com/fashion/feed/,Lifestyle
+35,"NY Post",http://nypost.com/living/feed/,Lifestyle
+36,"NY Post",http://nypost.com/tech/feed/,Tech
+37,"SF Gate",http://www.sfgate.com/rss/feed/Travel-News-and-Features-520.php,Lifestyle
+38,"SF Gate",http://www.sfgate.com/rss/feed/Business-and-Technology-News-448.php,Business
+39,"SF Gate",http://www.sfgate.com/rss/feed/Entertainment-530.php,Entertainment
+40,"SF Gate",http://www.sfgate.com/rss/feed/Food-Dining-550.php,Lifestyle
+41,"SF Gate",http://www.sfgate.com/rss/feed/Politics-RSS-Feed-436.php,Politics
+42,"SF Gate",http://www.sfgate.com/rss/feed/World-News-From-SFGate-432.php,World
+43,"SF Gate",http://www.sfgate.com/weird/feed/Weird-News-RSS-Feed-433.php,Weird
+44,"SF Gate",http://www.sfgate.com/rss/feed/Top-Sports-Stories-RSS-Feed-487.php,Sports
+45,"Tom's Hardware",http://www.tomshardware.com/feeds/rss2/articles.xml,Tech
+46,Yahoo!,http://news.yahoo.com/rss/tech,Tech
+47,cNet,http://www.cnet.com/rss/news/,Tech
+48,Gawker,http://feeds.gawker.com/gawker/full,Entertainment
+49,"US Magazine",http://www.usmagazine.com/celebrity_news/rss,Entertainment
+50,People,http://feeds.people.com/people/headlines,Entertainment
+51,TMZ,http://www.tmz.com/rss.xml,Entertainment
+52,"Seeking Alpha",http://seekingalpha.com/market_currents.xml,Business
+53,CNBC,http://www.cnbc.com/id/100727362/device/rss/rss.html,World
+54,CNBC,http://www.cnbc.com/id/15837362/device/rss/rss.html,USA
+55,CNBC,http://www.cnbc.com/id/10001147/device/rss/rss.html,Business
+56,CNBC,http://www.cnbc.com/id/20910258/device/rss/rss.html,Business
+57,CNBC,http://www.cnbc.com/id/10000664/device/rss/rss.html,Business
+58,CNBC,http://www.cnbc.com/id/19854910/device/rss/rss.html,Tech
+59,CNBC,http://www.cnbc.com/id/10000113/device/rss/rss.html,Politics
+60,CNBC,http://www.cnbc.com/id/10000739/device/rss/rss.html,Lifestyle
+61,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/669325/index.rss,Politics
+62,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/622881/index.rss,Sports
+63,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/669329/index.rss,Business
+64,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/669330/index.rss,Tech
+65,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/669314/index.rss,Lifestyle
+66,"Chicago Tribune",http://chicagotribune.feedsportal.com/c/34253/f/622896/index.rss,Entertainment
+67,"Daily Mail",http://www.dailymail.co.uk/travel/index.rss,Lifestyle
+68,"Daily Mail",http://www.dailymail.co.uk/tvshowbiz/index.rss,Entertainment
+69,"NBC News",http://feeds.nbcnews.com/feeds/worldnews,World
+70,"NBC News",http://feeds.nbcnews.com/feeds/science,Science
+71,"NBC News",http://feeds.nbcnews.com/feeds/health,Health
+72,"NBC News",http://feeds.nbcnews.com/feeds/entertainment,Entertainment
+73,"NBC News",http://feeds.nbcnews.com/feeds/travel,Lifestyle
+74,"NBC News",http://feeds.nbcnews.com/feeds/weird,Weird
+75,"NBC News",http://feeds.nbcnews.com/feeds/nbcpolitics,Politics
+76,"NBC Sports",http://www.nbcsports.com/rss/section/all/feed,Sports
+77,"Motley Fool",http://feeds.fool.com/usmf/foolwatch,Business
+78,CNN,http://rss.cnn.com/rss/money_latest.rss,Business
+79,Forbes,http://www.forbes.com/real-time/feed2/,USA
+80,Forbes,http://www.forbes.com/business/feed/,Business
+81,Forbes,http://www.forbes.com/technology/feed/,Tech
+82,Yahoo!,http://finance.yahoo.com/rss/topfinstories,Business
+84,Deadspin,http://deadspin.com/rss,Sports
+85,"SB Nation",http://feeds.feedburner.com/sportsblogs/sbnation.xml,Sports
+86,"CBS Sports",http://www.cbssports.com/partners/feeds/rss/home_news,Sports
+87,"Bleacher Report",http://bleacherreport.com/articles/feed,Sports
+88,ESPN,http://sports.espn.go.com/espn/rss/news,Sports
+89,Yahoo!,http://sports.yahoo.com/top/rss.xml,Sports
+90,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/arts/index.xml,Lifestyle
+91,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/business/index.xml,Business
+92,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/entertainment/index.xml,Entertainment
+93,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/food/index.xml,Lifestyle
+94,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/healthy-living/index.xml,Health
+95,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/money/index.xml,Business
+96,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/politics/index.xml,Politics
+97,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/science/index.xml,Science
+98,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/sports/index.xml,Sports
+99,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/style/index.xml,Lifestyle
+100,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/taste/index.xml,Lifestyle
+101,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/technology/index.xml,Tech
+102,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/travel/index.xml,Lifestyle
+103,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/weird-news/index.xml,Weird
+104,"Huffington Post",http://www.huffingtonpost.com/feeds/verticals/world/index.xml,World
+118,Yahoo!,http://news.yahoo.com/rss/,USA
+119,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/386c25518f464186bf7a2ac026580ce7,USA
+120,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/cae69a7523db45408eeb2b3a98c0c9c5,World
+121,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/89ae8247abe8493fae24405546e9a1aa,Politics
+122,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/f70471f764144b2fab526d39972d37b3,Business
+123,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/495d344a0d10421e9baa8ee77029cfbd,Tech
+124,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/347875155d53465d95cec892aeb06419,Sports
+125,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/4e67281c3f754d0696fbfdee0f3f1469,Entertainment
+126,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/bbd825583c8542898e6fa7d440b9febc,Lifestyle
+127,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/b2f0ca3a594644ee9e50a8ec4ce2d6de,Science
+128,"Associated Press",http://hosted2.ap.org/atom/APDEFAULT/aa9398e6757a46fa93ed5dea7bd3729e,Weird
+129,Reuters,"http://feeds.reuters.com/news/artsculture	",Lifestyle
+130,Reuters,http://feeds.reuters.com/reuters/businessNews,Business
+131,Reuters,http://feeds.reuters.com/reuters/entertainment,Entertainment
+132,Reuters,http://feeds.reuters.com/reuters/healthNews,Health
+133,Reuters,http://feeds.reuters.com/reuters/lifestyle,Lifestyle
+134,Reuters,http://feeds.reuters.com/news/wealth,Business
+135,Reuters,http://feeds.reuters.com/reuters/oddlyEnoughNews,Weird
+136,Reuters,http://feeds.reuters.com/Reuters/PoliticsNews,Politics
+137,Reuters,http://feeds.reuters.com/reuters/scienceNews,Science
+138,Reuters,http://feeds.reuters.com/reuters/sportsNews,Sports
+139,Reuters,http://feeds.reuters.com/reuters/technologyNews,Tech
+140,Reuters,http://feeds.reuters.com/Reuters/domesticNews,USA
+141,Reuters,http://feeds.reuters.com/Reuters/worldNews,World
+142,"Washington Post",http://feeds.washingtonpost.com/rss/lifestyle,Lifestyle
+143,"Washington Post",http://feeds.washingtonpost.com/rss/entertainment,Entertainment
+144,"Daily Mail",http://www.dailymail.co.uk/sciencetech/index.rss,Science
+145,"ABC News",http://feeds.abcnews.com/abcnews/internationalheadlines,World
+146,"ABC News",http://feeds.abcnews.com/abcnews/usheadlines,USA
+147,"ABC News",http://feeds.abcnews.com/abcnews/politicsheadlines,Politics
+148,"ABC News",http://feeds.abcnews.com/abcnews/healthheadlines,Health
+149,"ABC News",http://feeds.abcnews.com/abcnews/entertainmentheadlines,Entertainment
+150,"ABC News",http://feeds.abcnews.com/abcnews/technologyheadlines,Tech
+151,"ABC News",http://feeds.abcnews.com/abcnews/travelheadlines,Lifestyle
+152,"Fox News",http://feeds.foxnews.com/foxnews/entertainment,Entertainment
+153,"Fox News",http://feeds.foxnews.com/foxnews/health,Health
+154,Ripleys,http://www.ripleys.com/weird/category/daily-dose-of-weird-wtf-blog/feed/,Weird
+155,"Fox News",http://feeds.foxnews.com/foxnews/section/lifestyle,Lifestyle
+156,"Fox News",http://feeds.foxnews.com/foxnews/politics,Politics
+157,"Fox News",http://feeds.foxnews.com/foxnews/science,Science
+158,"Fox News",http://feeds.foxnews.com/foxnews/sports,Sports
+159,"Fox News",http://feeds.foxnews.com/foxnews/tech,Tech
+160,"Fox News",http://feeds.foxnews.com/foxnews/internal/travel/mixed,Lifestyle
+161,"Fox News",http://feeds.foxnews.com/foxnews/national,USA
+162,"Fox News",http://feeds.foxnews.com/foxnews/world,World
+163,"CBS News",http://www.cbsnews.com/latest/rss/us,USA
+164,"CBS News",http://www.cbsnews.com/latest/rss/world,World
+165,"CBS News",http://www.cbsnews.com/latest/rss/tech,Tech
+166,"CBS News",http://www.cbsnews.com/latest/rss/politics,Politics
+168,"CBS News",http://www.cbsnews.com/latest/rss/health,Health
+169,"CBS News",http://www.cbsnews.com/latest/rss/entertainment,Entertainment
+170,"CBS News",http://www.cbsnews.com/latest/rss/moneywatch-ap-business,Business
+171,"BBC News",http://feeds.bbci.co.uk/news/world/rss.xml,World
+172,"BBC News",http://feeds.bbci.co.uk/news/business/rss.xml,Business
+173,"BBC News",http://feeds.bbci.co.uk/news/politics/rss.xml,Politics
+174,"BBC News",http://feeds.bbci.co.uk/news/health/rss.xml,Health
+175,"BBC News",http://feeds.bbci.co.uk/news/science_and_environment/rss.xml,Science
+176,"BBC News",http://feeds.bbci.co.uk/news/technology/rss.xml,Tech
+177,"BBC News",http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml,Entertainment
+178,"BBC News",http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml,USA
