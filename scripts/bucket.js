@@ -5,7 +5,6 @@ var feed;
 window.BUCKET_METHOD = {
 
     compileBuckets:function(dripps_data, readItLater_data, conversation_data){
-        console.log(dripps_data);
         window.notifications = 0;
         window.dripps_data_dict = {};
         for (var ii = 0; ii <dripps_data.length; ii++) {
