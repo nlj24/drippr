@@ -145,6 +145,7 @@ window.bindDripps = function() {
 
     
     $('.categ').click(function(e){
+        window.articlesReceived = 1;
         var id = $(e.target).parents('.categ').attr("category");
 
         if (window.positions[id] > 15) {
@@ -153,8 +154,6 @@ window.bindDripps = function() {
             window.feed = window.articlesData[id].slice(0, 50);
             
         }
-
-//        window.feed = window.articlesData[id];
 
         window.curCategory = $(e.target).parents('.categ').attr("category");
 
