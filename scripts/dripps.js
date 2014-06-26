@@ -75,44 +75,46 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
-        console.log("works");
-        window.callingback[category] = true;
-        var url;
-        if (category == "All") {
-            url = window.address + 'articles';
-        } else{
-            url = window.address + 'articles/' + category;
-        }
-        $.ajax({
-            url: url,
-            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
-            dataType: 'json',
-            method:'post',
-            success:function(data){
-
-                for (var ii = 0; ii < data.length; ii++) {
-                    if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
-                        data[ii]["date"] = "Today, " + Date.create(data[ii]["date"]).format('{12hr}:{mm}{tt}');
-                    }
-                    else {
-                       data[ii]["date"] = Date.create(data[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
-                    }
-                    window.article_results.push(data[ii]);
-                }
-
-                var cat;
-
-                for (var i=0;i<  data.length;i++) {
-                    cat = data[i].category;
-                    
-                    window.articlesData[cat].push(data[i]);
-                    window.articlesData["All"].push(data[i]);
-                    window.articlesData[data[i].id] = data[i];
-                }
-             window.callingback[category] = false;
-            callback(index, indexInArray);
+        if (window.articlesReceived > 0) {
+            window.callingback[category] = true;
+            var url;
+            if (category == "All") {
+                url = window.address + 'articles';
+            } else{
+                url = window.address + 'articles/' + category;
             }
-        });
+            $.ajax({
+                url: url,
+                data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
+                dataType: 'json',
+                method:'post',
+                success:function(data){
+                    window.articlesReceived = data.length;
+
+                    for (var ii = 0; ii < data.length; ii++) {
+                        if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
+                            data[ii]["date"] = "Today, " + Date.create(data[ii]["date"]).format('{12hr}:{mm}{tt}');
+                        }
+                        else {
+                           data[ii]["date"] = Date.create(data[ii]["date"]).format('{Month} {ord}, {12hr}:{mm}{tt}');
+                        }
+                        window.article_results.push(data[ii]);
+                    }
+
+                    var cat;
+
+                    for (var i=0;i<  data.length;i++) {
+                        cat = data[i].category;
+                        
+                        window.articlesData[cat].push(data[i]);
+                        window.articlesData["All"].push(data[i]);
+                        window.articlesData[data[i].id] = data[i];
+                    }
+                window.callingback[category] = false;
+                callback(index, indexInArray);
+                }
+            });
+        }
     }
 };
 
