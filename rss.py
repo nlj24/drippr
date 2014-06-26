@@ -8,7 +8,7 @@ db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 articlesToAdd = []
 
-noPics = {"ABC News": "/images/abcnews.png", "Reuters": "/images/reuters.jpg","SFGate":"/images/sfgate.png"}
+noPics = {"ABC News": "/images/abcnews.png", "Reuters": "/images/reuters.jpg","SF Gate":"/images/sfgate.png"}
 
 print "starting script"
 try:
