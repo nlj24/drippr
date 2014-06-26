@@ -115,6 +115,11 @@ window.ARTICLE_METHOD ={
                 callback(index, indexInArray);
                 }
             });
+        } else {
+            $('#noMoreDripps').modal('show');
+            setTimeout(function() {
+                $('#noMoreDripps').modal('hide');
+            }, 3500);
         }
     }
 };
