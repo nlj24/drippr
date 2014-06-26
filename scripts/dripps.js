@@ -6,16 +6,15 @@ window.callingback = {};
 
 
 $("img[title='send'").click(function(){
-         window.drippsChosenFriends = {};
-     window.groupsChosenFriends = {};
-     window.addChosenFriends = {};
-     window.drippsIds = [];
-     window.groupsIds = [];
-     window.addIds = [];
- 
-     window.selGroups = [];
- 
- });
+    window.drippsChosenFriends = {};
+    window.groupsChosenFriends = {};
+    window.addChosenFriends = {};
+    window.drippsIds = [];
+    window.groupsIds = [];
+    window.addIds = [];
+    window.selGroups = [];
+});
+
 window.ARTICLE_METHOD ={
 
     handlerData:function(resJSON){
@@ -69,23 +68,24 @@ window.ARTICLE_METHOD ={
     loadArticleData : function(){
         $.ajax({
             url: window.address + 'articles',
-            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}), //need to fix for current user
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize}),
             dataType: 'json',
             method:'post',
             success:this.handlerData
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
+        console.log("works");
         window.callingback[category] = true;
         var url;
         if (category == "All") {
             url = window.address + 'articles';
         } else{
-             url = window.address + 'articles/' + category;
+            url = window.address + 'articles/' + category;
         }
         $.ajax({
             url: url,
-            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}), //need to fix for current user
+            data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
             dataType: 'json',
             method:'post',
             success:function(data){
