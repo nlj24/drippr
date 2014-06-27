@@ -22,8 +22,9 @@ $(document).ready(function(){
 	window.groupsIds = [];
 	window.addIds = [];
 	window.selGroups = [];
-	window.articlesReceived = 1;
-	
+	window.articlesReceived = {};
+	// window.articlesReceived = 1;
+
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
