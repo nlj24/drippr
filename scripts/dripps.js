@@ -108,7 +108,6 @@ window.ARTICLE_METHOD ={
                         cat = data[i].category;
                         
                         window.articlesData[cat].push(data[i]);
-                        window.articlesData["All"].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
                 window.callingback[category] = false;
@@ -162,8 +161,8 @@ window.bindDripps = function() {
             }
         } else {
             $.ajax({
-                url: url,
-                data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
+                url: window.address + 'articles/' + window.curCategory;
+                data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
                 success:function(data){
@@ -185,7 +184,6 @@ window.bindDripps = function() {
                         cat = data[i].category;
                         
                         window.articlesData[cat].push(data[i]);
-                        window.articlesData["All"].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
                 window.callingback[category] = false;
