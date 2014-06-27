@@ -76,7 +76,6 @@ window.ARTICLE_METHOD ={
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
         if (window.articlesReceived > 0) {
-            console.log('works');
             window.callingback[category] = true;
             var url;
             if (category == "All") {
@@ -156,7 +155,6 @@ window.bindDripps = function() {
         window.curCategory = $(e.target).parents('.categ').attr("category");
 
         if (window.articlesData[id]) {
-            console.log("bily");
             if (window.positions[id] > 15) {
                 window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
             }else{
@@ -168,14 +166,12 @@ window.bindDripps = function() {
             articleHTML = template({"articles":window.feed});
             $('#articles').html(articleHTML);
         } else {
-            console.log("jamaes");
             $.ajax({
                 url: window.address + 'articles/' + window.curCategory,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
                 success:function(data){
-                    console.log(data);
                     window.articlesReceived = data.length;
 
                     for (var ii = 0; ii < data.length; ii++) {
