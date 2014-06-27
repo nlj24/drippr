@@ -68,18 +68,15 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 							window.positions[window.curCategory] = Math.min(10, index);
 					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
-					        if (window.feed.length >10) {
-
-						        var templateSource = $("#article-template").html(), 
-						        template = Handlebars.compile(templateSource),
-						        articleHTML = template({"articles":window.feed});
-						        $('#articles').html(articleHTML);
-					        };
+					        var templateSource = $("#article-template").html(), 
+					        template = Handlebars.compile(templateSource),
+					        articleHTML = template({"articles":window.feed});
+					        $('#articles').html(articleHTML);
 
 
 						}
 
-						if ( window.articlesData[window.curCategory].length - indexInArray < 40 && (window.articlesReceived[window.curCategory] !=0)){
+						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 							if (!(window.callingback[window.curCategory])) {
 								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
 								
