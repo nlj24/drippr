@@ -163,6 +163,10 @@ window.bindDripps = function() {
                 window.feed = window.articlesData[id].slice(0, 50);
                 
             }
+            var templateSource = $("#article-template").html(), 
+            template = Handlebars.compile(templateSource),
+            articleHTML = template({"articles":window.feed});
+            $('#articles').html(articleHTML);
         } else {
             console.log("jamaes");
             $.ajax({
