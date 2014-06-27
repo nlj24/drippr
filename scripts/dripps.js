@@ -161,7 +161,7 @@ window.bindDripps = function() {
             }
         } else {
             $.ajax({
-                url: window.address + 'articles/' + window.curCategory;
+                url: window.address + 'articles/' + window.curCategory,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
