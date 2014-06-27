@@ -115,10 +115,12 @@ window.ARTICLE_METHOD ={
                 }
             });
         } else {
-            $('#noMoreDripps').modal('show');
-            setTimeout(function() {
-                $('#noMoreDripps').modal('hide');
-            }, 3500);
+            if (window.curArticle == window.articlesData[window.curCategory][-1].id) {
+                $('#noMoreDripps').modal('show');
+                setTimeout(function() {
+                    $('#noMoreDripps').modal('hide');
+                }, 3500);
+            }
         }
     }
 };
