@@ -68,10 +68,13 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 							window.positions[window.curCategory] = Math.min(10, index);
 					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
-					        var templateSource = $("#article-template").html(), 
-					        template = Handlebars.compile(templateSource),
-					        articleHTML = template({"articles":window.feed});
-					        $('#articles').html(articleHTML);
+					        if (window.feed.length >10) {
+
+						        var templateSource = $("#article-template").html(), 
+						        template = Handlebars.compile(templateSource),
+						        articleHTML = template({"articles":window.feed});
+						        $('#articles').html(articleHTML);
+					        };
 
 
 						}
