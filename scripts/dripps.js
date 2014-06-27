@@ -75,7 +75,7 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
-        if (window.articlesReceived > 0) {
+        
             console.log('works');
             window.callingback[category] = true;
             var url;
@@ -114,12 +114,7 @@ window.ARTICLE_METHOD ={
                 callback(index, indexInArray);
                 }
             });
-        } else {
-            $('#noMoreDripps').modal('show');
-            setTimeout(function() {
-                $('#noMoreDripps').modal('hide');
-            }, 3500);
-        }
+        
     }
 };
 
