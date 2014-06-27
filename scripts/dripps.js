@@ -182,7 +182,8 @@ window.bindDripps = function() {
                     }
 
                     var cat;
-
+                    window.articlesData[cat] = [];
+                    
                     for (var i=0;i<  data.length;i++) {
                         cat = data[i].category;
                         
