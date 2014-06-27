@@ -31,10 +31,13 @@ window.ARTICLE_METHOD ={
 
         window.article_results = resJSON;
         var cat;
+        window.articlesReceived["All"] = 1;
+
 
         for (var i=0;i<  resJSON.length;i++) {
             cat = resJSON[i].category;
             if(!(cat in window.articlesData)){
+                window.articlesReceived[cat] = 1;
                 window.articlesData[cat] = [];
             }
             window.articlesData[cat].push(resJSON[i]);
@@ -75,7 +78,7 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
-        if (window.articlesReceived > 0) {
+        if (window.articlesReceived[category] > 0) {
             window.callingback[category] = true;
             var url;
             if (category == "All") {
@@ -89,7 +92,7 @@ window.ARTICLE_METHOD ={
                 dataType: 'json',
                 method:'post',
                 success:function(data){
-                    window.articlesReceived = data.length;
+                    window.articlesReceived[category] = data.length;
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
@@ -150,13 +153,29 @@ window.bindDripps = function() {
 
     
     $('.categ').click(function(e){
-        window.articlesReceived = 1;
         var id = $(e.target).parents('.categ').attr("category");
         window.curCategory = $(e.target).parents('.categ').attr("category");
+
+        $('.categ').css("background", "white");
+        $('.categ').css("color", "#6D6E70");
+        $(e.target).parents('.categ').css("background", "#6D6E70");
+        $(e.target).parents('.categ').css("color", "white");
+        
+        $('.white').each(function(){
+            $(this).attr("class", 'catImg white hide');
+        });
+
+        $('.grey').each(function(){
+            $(this).attr("class", 'catImg grey');
+        });
+
+        $(e.target).parents('.categ').find('.grey').attr("class", 'catImg grey hide');
+        $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
 
         if (window.articlesData[id]) {
             if (window.positions[id] > 15) {
                 window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
+                window.positions[id] = 10;
             }else{
                 window.feed = window.articlesData[id].slice(0, 50);
                 
@@ -166,13 +185,14 @@ window.bindDripps = function() {
             articleHTML = template({"articles":window.feed});
             $('#articles').html(articleHTML);
         } else {
+
             $.ajax({
                 url: window.address + 'articles/' + window.curCategory,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
                 success:function(data){
-                    window.articlesReceived = data.length;
+                    window.articlesReceived[window.curCategory] = data.length;
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
@@ -202,21 +222,7 @@ window.bindDripps = function() {
 
         
 
-        $('.categ').css("background", "white");
-        $('.categ').css("color", "#6D6E70");
-        $(e.target).parents('.categ').css("background", "#6D6E70");
-        $(e.target).parents('.categ').css("color", "white");
         
-        $('.white').each(function(){
-            $(this).attr("class", 'catImg white hide');
-        });
-
-        $('.grey').each(function(){
-            $(this).attr("class", 'catImg grey');
-        });
-
-        $(e.target).parents('.categ').find('.grey').attr("class", 'catImg grey hide');
-        $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
     });
     
     $(".like").click(function(){
