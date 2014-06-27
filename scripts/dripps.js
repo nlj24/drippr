@@ -153,6 +153,7 @@ window.bindDripps = function() {
     $('.categ').click(function(e){
         window.articlesReceived = 1;
         var id = $(e.target).parents('.categ').attr("category");
+        window.curCategory = $(e.target).parents('.categ').attr("category");
 
         if (window.articlesData[id]) {
             console.log("bily");
@@ -165,7 +166,7 @@ window.bindDripps = function() {
         } else {
             console.log("jamaes");
             $.ajax({
-                url: window.address + 'articles/weird',
+                url: window.address + 'articles/' + window.curCategory,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
@@ -190,16 +191,16 @@ window.bindDripps = function() {
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
+                    var templateSource = $("#article-template").html(), 
+                    template = Handlebars.compile(templateSource),
+                    articleHTML = template({"articles":window.feed});
+                    $('#articles').html(articleHTML);
                 }
             });
         }
 
-        window.curCategory = $(e.target).parents('.categ').attr("category");
 
-        var templateSource = $("#article-template").html(), 
-        template = Handlebars.compile(templateSource),
-        articleHTML = template({"articles":window.feed});
-        $('#articles').html(articleHTML);
+        
 
         $('.categ').css("background", "white");
         $('.categ').css("color", "#6D6E70");
