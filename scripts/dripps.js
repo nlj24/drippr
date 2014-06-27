@@ -188,7 +188,7 @@ window.bindDripps = function() {
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
-                window.callingback[category] = false;
+                window.callingback["weird"] = false;
                 callback(index, indexInArray);
                 }
             });
