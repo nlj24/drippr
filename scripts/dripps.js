@@ -181,12 +181,10 @@ window.bindDripps = function() {
                         window.article_results.push(data[ii]);
                     }
 
-                    var cat;
+                    var cat = data[0].category;
                     window.articlesData[cat] = [];
-                    
-                    for (var i=0;i<  data.length;i++) {
-                        cat = data[i].category;
-                        
+
+                    for (var i=0;i<  data.length;i++) {                        
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
