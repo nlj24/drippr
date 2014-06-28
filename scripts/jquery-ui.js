@@ -1615,5 +1615,3 @@ $.widget( "ui.autocomplete", {
 		});
 	},
 });
-
-}( jQuery ) );
