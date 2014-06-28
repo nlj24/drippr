@@ -2291,12 +2291,8 @@ $.widget( "ui.autocomplete", {
 					});
 				}
 
-				if ( false !== this._trigger( "select", event, { item: item } ) ) {
-					this._value( item.value );
-				}
 				// reset the term after the select event
 				// this allows custom select handling to work properly
-				this.term = this._value();
 
 				var name = item.value;
 				var groupId = groupListDict[name];
