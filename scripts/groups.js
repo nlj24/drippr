@@ -75,6 +75,10 @@ window.GROUP_METHOD = {
         $("#tags").autocomplete( "option", "minLength", 1);
         $("#tags").autocomplete({ autoFocus: true });
 
+        $(".ui-state-focus").click(function(){
+                                alert($(".ui-state-focus").html());
+                            });
+
         var templateSource = $("#groups-template").html();
         template = Handlebars.compile(templateSource);
         groupHTML = template({"my_groups":window.my_members_dict, "other_groups":window.other_members_dict});

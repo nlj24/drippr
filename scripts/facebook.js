@@ -598,10 +598,6 @@ $(document).keydown(function(e){
 					                }, 3500);
 				                }
 				            });
-
-							$(".ui-state-focus").click(function(){
-								alert($(".ui-state-focus").html());
-							});
 			            }
 
 						window.GROUP_METHOD.loadGroups();
