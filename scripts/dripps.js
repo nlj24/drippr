@@ -112,13 +112,6 @@ window.ARTICLE_METHOD ={
                 callback(index, indexInArray);
                 }
             });
-        } else {
-            if (window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) {
-                $('#noMoreDripps').modal('show');
-                setTimeout(function() {
-                    $('#noMoreDripps').modal('hide');
-                }, 3500);
-            }
         }
     }
 };

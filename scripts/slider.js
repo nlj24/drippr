@@ -9,8 +9,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					// make <ul> as large as all <li>’s
 					this.ul.style.width = (Math.ceil($(window).width() * 7/12) * this.li.length) + 'px';
-					console.log(this.ul.style.width);
-					console.log(this.li.length);
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
 					
@@ -44,7 +42,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					this.currentIndex = index;
 
-					
+					window.curArticle = this.li[this.currentIndex].id;
                 	window.positions[window.curCategory] = index;
 
 
@@ -92,7 +90,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 
 					}
-window.curArticle = this.li[this.currentIndex].id;
+
 					} 
 
 
@@ -103,8 +101,14 @@ window.curArticle = this.li[this.currentIndex].id;
 			    },
 			 
 			    goToNext: function() {
-					this.goTo(this.currentIndex + 1);
-
+			    	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[category] == 0)) {
+		                $('#noMoreDripps').modal('show');
+		                setTimeout(function() {
+		                    $('#noMoreDripps').modal('hide');
+		                }, 3500);
+		            } else {
+						this.goTo(this.currentIndex + 1);
+					}
 				}
 			}
 
