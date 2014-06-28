@@ -8,7 +8,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					this.li = this.ul.children;
 
 					// make <ul> as large as all <li>’s
-					this.ul.style.width = ($(window).width() * 7/12 * this.li.length) + 'px';
+					this.ul.style.width = (Math.ceil($(window).width() * 7/12) * this.li.length) + 'px';
+					console.log(this.ul.style.width);
+					console.log(this.li.length);
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
 					
