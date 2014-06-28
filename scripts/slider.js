@@ -6,8 +6,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    initialize: function(slider) {
 					this.ul = slider.children[0];
 					this.li = this.ul.children;
+					console.log('each');
 
-					// make <ul> as large as all <li>’s
 					this.ul.style.width = (Math.ceil($(window).width() * 7/12) * this.li.length) + 'px';
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
@@ -25,19 +25,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    },
 			 
 			    goTo: function(index) {
-					// filter invalid indices
-
-
-					// if (index == this.li.length) {
-					// 	this.goTo(0);
-					// }
 
 					if (index < 0 || index > this.li.length - 1)
 					return;
-
-					// move <ul> left
 					
-
 					this.ul.style.left = '-' + (100 * index) + '%';
 
 					this.currentIndex = index;
@@ -53,51 +44,43 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					if (this.li.length  - index < 10) {
 						if (!(window.callingback[window.curCategory])) {
 
+							var indexInArray = index;
+							
+							for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
+								if(window.articlesData[window.curCategory][ii].id == window.curArticle){
+									indexInArray = ii;
+									break;
+								}	
+							}
+													
+							var refreshTemplate = function(index, indexInArray2){
 
+								window.positions[window.curCategory] = Math.min(10, index);
+						        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
-						var indexInArray = index;
-						
-						for (var ii = index; ii <  window.articlesData[window.curCategory].length; ii++) {
-							if(window.articlesData[window.curCategory][ii].id == window.curArticle){
-								indexInArray = ii;
-								break;
-							}	
-						}
-												
-						var refreshTemplate = function(index, indexInArray2){
-
-							window.positions[window.curCategory] = Math.min(10, index);
-					        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
-
-					        var templateSource = $("#article-template").html(), 
-					        template = Handlebars.compile(templateSource),
-					        articleHTML = template({"articles":window.feed});
-					        $('#articles').html(articleHTML);
-
-
-						}
-
-						if ( window.articlesData[window.curCategory].length - indexInArray < 40){
-							if (!(window.callingback[window.curCategory])) {
-								window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
-								
+						        var templateSource = $("#article-template").html(), 
+						        template = Handlebars.compile(templateSource),
+						        articleHTML = template({"articles":window.feed});
+						        $('#articles').html(articleHTML);
 							}
 
-						}
-						else{
-							refreshTemplate(index, indexInArray);
-						}
+							if ( window.articlesData[window.curCategory].length - indexInArray < 40){
+								if (!(window.callingback[window.curCategory])) {
+									window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
+									
+								}
 
-
+							}
+							else{
+								refreshTemplate(index, indexInArray);
+							}
+						}
 					}
-
-					} 
-
-
 			    },
 			 	
 			    goToPrev: function() {
 					this.goTo(this.currentIndex - 1);
+					window.last[curCategory] = false;
 			    },
 			 
 			    goToNext: function() {
@@ -106,6 +89,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		                setTimeout(function() {
 		                    $('#noMoreDripps').modal('hide');
 		                }, 3500);
+		                window.last[curCategory] = true;
 		            } else {
 						this.goTo(this.currentIndex + 1);
 					}
