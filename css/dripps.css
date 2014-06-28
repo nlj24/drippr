@@ -354,7 +354,7 @@ body {
 .fbac-suggestion.fbac-selected {
   border-color: #e9eaed !important;
   color: #6D6E70 !important;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .fbac-suggestion-avatar {
