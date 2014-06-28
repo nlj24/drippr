@@ -21,7 +21,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 					$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
 					if (window.last[window.curCategory]){
-						this.goTo(-1);
+						this.goTo(this.li.length-1);
 					} else {
 						this.goTo(window.positions[window.curCategory]);
 					}
