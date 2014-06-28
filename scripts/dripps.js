@@ -32,13 +32,13 @@ window.ARTICLE_METHOD ={
         window.article_results = resJSON;
         var cat;
         window.articlesReceived["All"] = 1;
+        window.positions["All"] = 0;
 
         var categories = [];
         for (var i=0;i<  resJSON.length;i++) {
             cat = resJSON[i].category;
             if(!(cat in window.articlesData)){
                 window.articlesData[cat] = [];
-                categories.push(cat);
                 window.positions[cat] = 0;
             }
             window.articlesReceived[cat] = 1;
