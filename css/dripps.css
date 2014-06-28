@@ -982,7 +982,7 @@ body {
 }
 
 .fbac-suggestion-list {
-  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-family: Helvetica Neue, tahoma, verdana, arial, sans-serif;
   font-size: 11px;
   font-weight: bold;
   font-color: #333;
@@ -1007,9 +1007,7 @@ body {
 }
 
 .fbac-suggestion.fbac-selected {
-  background-color: #6d84b4;
-  border-color: #3b5998;
-  color: #fff;
+  font-weight: bold;
 }
 
 .fbac-suggestion-avatar {
@@ -1032,10 +1030,10 @@ body {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
   border: none;
-  background: #A3DCFF;
   font-weight: bold;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .ui-state-active,
