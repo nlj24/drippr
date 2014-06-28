@@ -336,30 +336,6 @@ $(document).keydown(function(e){
 								}	
 							});
 
-							$("#tags").keypress(function(e) {
-								if (e.keyCode == 13) {
-									var name = window.selectedGroup4;
-									var groupId = groupListDict[name];
-									if((selGroups.indexOf(groupId) == -1) && (window.groupList_ids.indexOf(groupId) != -1)) {
-										window.selGroups.push(groupId);
-										$("#chosen").append("<div class='green_friends' id='group_"+groupId+"'>" + name + " | " + window.groupMemberCounts[groupId] + " people " + "<div id='"+groupId+"' class='rm_group'>X</div></div>");
-							    		$(".rm_group" ).unbind("click", handler3);
-					    				$(".rm_group").bind("click", handler3);
-
-					                    var handler3 = $('.rm_group').click(function(e) {
-					                        var id = $(e.target).attr('id');
-					                        window.selGroups.splice(window.selGroups.indexOf(id),1);
-											$("#group_"+id).remove();
-											window.autoCompleteGroups.push(window.groupListDict2[$(e.target).attr('id')]);
-					                    });
-
-					                    window.autoCompleteGroups.splice(window.autoCompleteGroups.indexOf(name),1);
-					                }
-
-						    		$("#tags").val("");
-						    	}
-
-							});
 
 							$(".send").click(function(){
 

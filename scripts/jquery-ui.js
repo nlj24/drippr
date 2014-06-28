@@ -2310,6 +2310,7 @@ $.widget( "ui.autocomplete", {
                     });
 
                     window.autoCompleteGroups.splice(window.autoCompleteGroups.indexOf(name),1);
+	                $("#tags").val('');
                 }
 
 				this.close( event );
