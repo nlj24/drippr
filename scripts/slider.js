@@ -106,31 +106,31 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			}
 
 window.setDrippLikes = function correctLikes() {
-	if (articlesResults[window.curArticle]['userLiked']) {
+	if (window.articlesData[window.curArticle]['userLiked']) {
         $(".like.grey2").attr("class", 'opinionDripp like grey2 hide')
         $(".like.blue").attr("class", 'opinionDripp like blue');
-        $(".up").html(articlesResults[window.curArticle].numLikes);
+        $(".up").html(window.articlesData[window.curArticle].numLikes);
     }
-    if (articlesResults[window.curArticle]['userLiked'] === false) {
+    if (window.articlesData[window.curArticle]['userLiked'] === false) {
         $(".like.grey2").attr("class", 'opinionDripp like grey2')
         $(".like.blue").attr("class", 'opinionDripp like blue hide');
-        $(".up").html(articlesResults[window.curArticle].numLikes);
+        $(".up").html(window.articlesData[window.curArticle].numLikes);
     }
-    if (articlesResults[window.curArticle]['userDisliked']) {
+    if (window.articlesData[window.curArticle]['userDisliked']) {
         $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2 hide')
         $(".dislike.blue").attr("class", 'opinionDripp dislike blue');
-        $(".down").html(articlesResults[window.curArticle].numDislikes);
+        $(".down").html(window.articlesData[window.curArticle].numDislikes);
     }
-    if (articlesResults[window.curArticle]['userDisliked'] === false) {
+    if (window.articlesData[window.curArticle]['userDisliked'] === false) {
         $(".dislike.grey2").attr("class", 'opinionDripp dislike grey2')
         $(".dislike.blue").attr("class", 'opinionDripp dislike blue hide');
-        $(".down").html(articlesResults[window.curArticle].numDislikes);
+        $(".down").html(window.articlesData[window.curArticle].numDislikes);
     }
-    if (articlesResults[window.curArticle]['userReadItLater']) {
+    if (window.articlesData[window.curArticle]['userReadItLater']) {
         $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2 hide')
         $(".readLater.blue").attr("class", 'opinionDripp readLater blue');
     }
-    if (articlesResults[window.curArticle]['userReadItLater'] === false) {
+    if (window.articlesData[window.curArticle]['userReadItLater'] === false) {
         $(".readLater.grey2").attr("class", 'opinionDripp readLater grey2')
         $(".readLater.blue").attr("class", 'opinionDripp readLater blue hide');
     }
