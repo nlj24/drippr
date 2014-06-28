@@ -44,7 +44,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		            
 		           	window.resetFB();
 
-					if (this.li.length  - index < 10) {
+					if (this.li.length  - index < 1) {
 						if (!(window.callingback[window.curCategory])) {
 
 							var indexInArray = index;
@@ -58,8 +58,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 													
 							var refreshTemplate = function(index, indexInArray2){
 
-								window.positions[window.curCategory] = Math.min(10, index);
-						        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+								window.positions[window.curCategory] = Math.min(1, index);
+						        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -1),indexInArray + 40);
 
 						        var templateSource = $("#article-template").html(), 
 						        template = Handlebars.compile(templateSource),
