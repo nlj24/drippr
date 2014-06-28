@@ -44,7 +44,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					this.currentIndex = index;
 
-					window.curArticle = this.li[this.currentIndex].id;
+					
                 	window.positions[window.curCategory] = index;
 
 
@@ -92,7 +92,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 
 					}
-
+window.curArticle = this.li[this.currentIndex].id;
 					} 
 
 
