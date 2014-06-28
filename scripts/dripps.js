@@ -113,7 +113,7 @@ window.ARTICLE_METHOD ={
                 }
             });
         } else {
-            if (window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) {
+            if (window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length].id) {
                 $('#noMoreDripps').modal('show');
                 setTimeout(function() {
                     $('#noMoreDripps').modal('hide');
