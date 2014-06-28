@@ -211,6 +211,8 @@ window.bindDripps = function() {
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                     }
+                    window.feed = window.articlesData[cat].slice(0, 50);
+                    
                     var templateSource = $("#article-template").html(), 
                     template = Handlebars.compile(templateSource),
                     articleHTML = template({"articles":window.feed});

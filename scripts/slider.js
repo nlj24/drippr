@@ -11,6 +11,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					this.ul.style.width = ($(window).width() * 7/12 * this.li.length) + 'px';
 					this.currentIndex = 0;
 					window.curArticle = this.li[this.currentIndex].id;
+					
 					window.setDrippLikes();
 					window.resetFB();
 					$('#sliderPad').height($(window).height()-230);
