@@ -33,26 +33,22 @@ window.ARTICLE_METHOD ={
         var cat;
         window.articlesReceived["All"] = 1;
 
-
+        var categories = [];
         for (var i=0;i<  resJSON.length;i++) {
             cat = resJSON[i].category;
             if(!(cat in window.articlesData)){
-                window.articlesReceived[cat] = 1;
                 window.articlesData[cat] = [];
+                categories.push(cat);
+                window.positions[cat] = 0;
             }
+            window.articlesReceived[cat] = 1;
             window.articlesData[cat].push(resJSON[i]);
             window.articlesData["All"].push(resJSON[i]);
             window.articlesData[resJSON[i].id] = resJSON[i];
         }
 
         window.articlesResults = window.articlesData;
-        var categories = Object.keys(window.articlesResults);
 
-        for(var ii = 0; ii < categories.length; ii++){
-            if(!(categories[ii] in window.positions)){
-                window.positions[categories[ii]] = 0;
-            }
-        }
 
         window.feed = window.articlesData[window.curCategory].slice(0, 50);
 
@@ -78,6 +74,7 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
+
         if (window.articlesReceived[category] > 0) {
             window.callingback[category] = true;
             var url;
