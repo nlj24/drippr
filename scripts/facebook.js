@@ -338,7 +338,7 @@ $(document).keydown(function(e){
 
 							$("#tags").keypress(function(e) {
 								if (e.keyCode == 13) {
-									var name = $("#tags").val();
+									var name = window.selectedGroup4;
 									var groupId = groupListDict[name];
 									if((selGroups.indexOf(groupId) == -1) && (window.groupList_ids.indexOf(groupId) != -1)) {
 										window.selGroups.push(groupId);
