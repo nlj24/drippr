@@ -23,8 +23,7 @@ $(document).ready(function(){
 	window.addIds = [];
 	window.selGroups = [];
 	window.articlesReceived = {};
-	// window.articlesReceived = 1;
-
+	window.last = {};
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
