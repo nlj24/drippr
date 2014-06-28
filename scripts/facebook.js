@@ -599,9 +599,9 @@ $(document).keydown(function(e){
 				                }
 				            });
 
-							$(".ui-widget-header.ui-state-hover").click(function(){
-								alert($(".ui-state-hover").html());
-							});
+							// $(".ui-widget-header.ui-state-hover").click(function(){
+							// 	alert($(".ui-state-hover").html());
+							// });
 			            }
 
 						window.GROUP_METHOD.loadGroups();
