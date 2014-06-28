@@ -92,7 +92,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		                setTimeout(function() {
 		                    $('#noMoreDripps').modal('hide');
 		                }, 3500);
-		                window.last[window.curCategory] = true;
 		            } else {
 						this.goTo(this.currentIndex + 1);
 					}

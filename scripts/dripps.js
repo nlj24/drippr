@@ -112,6 +112,10 @@ window.ARTICLE_METHOD ={
                 callback(index, indexInArray);
                 }
             });
+        } else {
+            if (window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) {
+                window.last[window.curCategory] = true;
+            }
         }
     }
 };
