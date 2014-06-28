@@ -343,7 +343,8 @@ body {
 }
 
 .ui-menu-item {
-  border-bottom: 3px solid #e9eaed;
+  border-top: 1px solid #e9eaed;
+  border-bottom: 2px solid #e9eaed;
   text-decoration: none;
 }
 
