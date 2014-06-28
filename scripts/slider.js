@@ -101,7 +101,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    },
 			 
 			    goToNext: function() {
-			    	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[category] == 0)) {
+			    	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[window.curCategory] == 0)) {
 		                $('#noMoreDripps').modal('show');
 		                setTimeout(function() {
 		                    $('#noMoreDripps').modal('hide');
