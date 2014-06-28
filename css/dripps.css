@@ -1035,6 +1035,7 @@ body {
   background: #A3DCFF;
   font-weight: bold;
   color: white;
+  text-decoration: none;
 }
 
 .ui-state-active,
