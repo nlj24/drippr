@@ -47,7 +47,6 @@ window.ARTICLE_METHOD ={
             window.articlesData[resJSON[i].id] = resJSON[i];
         }
 
-        window.articlesResults = window.articlesData;
 
 
         window.feed = window.articlesData[window.curCategory].slice(0, 50);
@@ -153,6 +152,8 @@ window.bindDripps = function() {
         var id = $(e.target).parents('.categ').attr("category");
         window.curCategory = $(e.target).parents('.categ').attr("category");
 
+
+
         $('.categ').css("background", "white");
         $('.categ').css("color", "#6D6E70");
         $(e.target).parents('.categ').css("background", "#6D6E70");
@@ -182,13 +183,17 @@ window.bindDripps = function() {
             $('#articles').html(articleHTML);
         } else {
 
+            window.articlesData[window.curCategory] = [];
+            window.positions[window.curCategory] = 0;
+            
             $.ajax({
                 url: window.address + 'articles/' + window.curCategory,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: 1}),
                 dataType: 'json',
                 method:'post',
                 success:function(data){
-                    window.articlesReceived[window.curCategory] = data.length;
+                    var cat = data[0].category;
+                    window.articlesReceived[cat] = data.length;
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
@@ -200,8 +205,7 @@ window.bindDripps = function() {
                         window.article_results.push(data[ii]);
                     }
 
-                    var cat = data[0].category;
-                    window.articlesData[cat] = [];
+                    
 
                     for (var i=0;i<  data.length;i++) {                        
                         window.articlesData[cat].push(data[i]);
