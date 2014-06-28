@@ -6,7 +6,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			    initialize: function(slider) {
 					this.ul = slider.children[0];
 					this.li = this.ul.children;
-					console.log('each');
 
 					this.ul.style.width = (Math.ceil($(window).width() * 7/12) * this.li.length) + 'px';
 					this.currentIndex = 0;
@@ -21,7 +20,11 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 					$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 					$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
-					this.goTo(window.positions[window.curCategory]);
+					if (window.last[window.curCategory]){
+						this.goTo(-1);
+					} else {
+						this.goTo(window.positions[window.curCategory]);
+					}
 			    },
 			 
 			    goTo: function(index) {
@@ -80,7 +83,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			 	
 			    goToPrev: function() {
 					this.goTo(this.currentIndex - 1);
-					window.last[curCategory] = false;
+					window.last[window.curCategory] = false;
 			    },
 			 
 			    goToNext: function() {
@@ -89,7 +92,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		                setTimeout(function() {
 		                    $('#noMoreDripps').modal('hide');
 		                }, 3500);
-		                window.last[curCategory] = true;
+		                window.last[window.curCategory] = true;
 		            } else {
 						this.goTo(this.currentIndex + 1);
 					}
