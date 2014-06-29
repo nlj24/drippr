@@ -36,6 +36,7 @@ $(document).ready(function(){
 	window.curArticlePosition["Science"] = {};
 	window.curArticlePosition["Health"] = {};
 	window.curArticlePosition["Lifestyle"] = {};
+	window.curArticlePosition2 = {};
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
