@@ -29,13 +29,13 @@ $(document).ready(function(){
 	window.curArticlePosition["World"] = {};
 	window.curArticlePosition["Politics"] = {};
 	window.curArticlePosition["Business"] = {};
-	window.curArticlePosition[Sports] = {};
-	window.curArticlePosition[Entertainment] = {};
-	window.curArticlePosition[Tech] = {};
-	window.curArticlePosition[Weird] = {};
-	window.curArticlePosition[Science] = {};
-	window.curArticlePosition[Health] = {};
-	window.curArticlePosition[Lifestyle] = {};
+	window.curArticlePosition["Sports"] = {};
+	window.curArticlePosition["Entertainment"] = {};
+	window.curArticlePosition["Tech"] = {};
+	window.curArticlePosition["Weird"] = {};
+	window.curArticlePosition["Science"] = {};
+	window.curArticlePosition["Health"] = {};
+	window.curArticlePosition["Lifestyle"] = {};
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
