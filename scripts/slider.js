@@ -25,6 +25,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		} else {
 			this.goTo(window.positions[window.curCategory]);
 		}
+		window.curArticlePosition[window.curCategory] = {};
     },
  
     goTo: function(index) {
