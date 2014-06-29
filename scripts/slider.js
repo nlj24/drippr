@@ -21,6 +21,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
 		if (window.curArticlePosition2[window.curCategory] == undefined){
+			console.log("fuck!");
 			window.curArticlePosition2[window.curCategory] = window.curArticle;
 		}
 		var artPosID = window.curArticlePosition2[window.curCategory];
@@ -73,10 +74,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			        template = Handlebars.compile(templateSource),
 			        articleHTML = template({"articles":window.feed});
 			        $('#articles').html(articleHTML);
-			        var artPosID = window.curArticlePosition2[window.curCategory];
-					console.log(artPosID);
-					console.log(window.curArticlePosition[window.curCategory][artPosID]);
-					this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
 				}
 
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
