@@ -24,7 +24,7 @@ $(document).ready(function(){
 	window.selGroups = [];
 	window.articlesReceived = {};
 	window.last = {};
-	window.curArticlePosition = [];
+	window.curArticlePosition = {};
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
