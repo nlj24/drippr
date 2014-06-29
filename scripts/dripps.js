@@ -173,7 +173,7 @@ window.bindDripps = function() {
                 
             }
             for (var ii = 0; ii < feed.length; ii++){
-                window.curArticlePosition[window.curCategory][window.curArticle] = ii;
+                window.curArticlePosition[window.curCategory][feed.id] = ii;
             }
             var templateSource = $("#article-template").html(), 
             template = Handlebars.compile(templateSource),
