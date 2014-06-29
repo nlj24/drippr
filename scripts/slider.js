@@ -20,7 +20,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 		$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
-		//this.goTo(window.curArticlePosition[window.curCategory][[window.curArticlePosition2][window.curCategory]]);
+		var artPosID = [window.curArticlePosition2][window.curCategory];
+		console.log(artPosID);
+		// this.goTo(window.curArticlePosition[window.curCategory]);
     },
  
     goTo: function(index) {
