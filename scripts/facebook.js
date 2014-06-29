@@ -25,6 +25,7 @@ $(document).ready(function(){
 	window.articlesReceived = {};
 	window.curArticlePosition = [];
 	window.curArticlePosition["All"] = {};
+	window.curArticlePosition["USA"] = {};
 	window.curArticlePosition["World"] = {};
 	window.curArticlePosition["Politics"] = {};
 	window.curArticlePosition["Business"] = {};
