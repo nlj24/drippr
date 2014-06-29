@@ -41,7 +41,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     	window.positions[window.curCategory] = index;
     	console.log(window.positions);
     	console.log(window.curCategory);
-    	window.curArticlePosition[window.curCategory][window.curArticle];
+    	window.curArticlePosition[window.curCategory].window.curArticle;
 
     	window.setDrippLikes();
         
