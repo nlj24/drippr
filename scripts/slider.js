@@ -20,11 +20,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 		$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
-		if (window.last[window.curCategory]){
-			this.goTo(this.li.length-1);
-		} else {
-			this.goTo(window.positions[window.curCategory]);
-		}
+		this.goTo(window.positions[window.curCategory]);
     },
  
     goTo: function(index) {
@@ -38,6 +34,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
+    	window.curArticlePosition2[window.curCategory] = window.curArticle;
     	console.log(window.positions);
     	console.log(window.curArticlePosition);
 
@@ -87,7 +84,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
  	
     goToPrev: function() {
 		this.goTo(this.currentIndex - 1);
-		window.last[window.curCategory] = false;
     },
  
     goToNext: function() {

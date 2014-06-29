@@ -23,7 +23,6 @@ $(document).ready(function(){
 	window.addIds = [];
 	window.selGroups = [];
 	window.articlesReceived = {};
-	window.last = {};
 	window.curArticlePosition = [];
 	window.curArticlePosition["All"] = {};
 	window.curArticlePosition["World"] = {};
