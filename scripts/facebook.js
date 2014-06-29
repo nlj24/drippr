@@ -25,10 +25,10 @@ $(document).ready(function(){
 	window.articlesReceived = {};
 	window.last = {};
 	window.curArticlePosition = [];
-	window.curArticlePosition[All] = {};
-	window.curArticlePosition[World] = {};
-	window.curArticlePosition[Politics] = {};
-	window.curArticlePosition[Business] = {};
+	window.curArticlePosition["All"] = {};
+	window.curArticlePosition["World"] = {};
+	window.curArticlePosition["Politics"] = {};
+	window.curArticlePosition["Business"] = {};
 	window.curArticlePosition[Sports] = {};
 	window.curArticlePosition[Entertainment] = {};
 	window.curArticlePosition[Tech] = {};
