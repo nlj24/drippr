@@ -20,17 +20,18 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.imageDivDripp').css('line-height',($(".slider").height()-87)+"px");
 		$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
-		if (window.curArticlePosition2[window.curCategory] == undefined){
+		this.goTo();
+    },
+ 
+    goTo: function() {
+    	if (window.curArticlePosition2[window.curCategory] == undefined){
 			console.log("fuck!");
 			window.curArticlePosition2[window.curCategory] = window.curArticle;
 		}
-		var artPosID = window.curArticlePosition2[window.curCategory];
+    	var artPosID = window.curArticlePosition2[window.curCategory];
 		console.log(artPosID);
 		console.log(window.curArticlePosition[window.curCategory][artPosID]);
-		this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
-    },
- 
-    goTo: function(index) {
+    	index = window.curArticlePosition[window.curCategory][artPosID];
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
