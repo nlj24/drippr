@@ -25,7 +25,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		} else {
 			this.goTo(window.positions[window.curCategory]);
 		}
-		window.curArticlePosition[window.curCategory] = {};
+		window.curArticlePosition.push(window.curCategory);
 		// window.curArticlePosition[window.curCategory][window.curArticle] = window.positions[window.curCategory];
     },
  
@@ -41,7 +41,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
     	console.log(window.positions);
-    	window.curArticlePosition[window.curCategory] = window.curArticle;
     	window.curArticlePosition[window.curCategory][window.curArticle] = window.positions[window.curCategory];
 
 
