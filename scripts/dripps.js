@@ -50,6 +50,9 @@ window.ARTICLE_METHOD ={
 
 
         window.feed = window.articlesData[window.curCategory].slice(0, 50);
+        for (var ii = 0; ii < feed.length; ii++){
+            window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
+        }
 
         var templateSource = $("#article-template").html(),
         template = Handlebars.compile(templateSource),
@@ -210,6 +213,10 @@ window.bindDripps = function() {
                         window.articlesData[data[i].id] = data[i];
                     }
                     window.feed = window.articlesData[cat].slice(0, 50);
+
+                    for (var ii = 0; ii < feed.length; ii++){
+                        window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
+                    }
                     
                     var templateSource = $("#article-template").html(), 
                     template = Handlebars.compile(templateSource),
