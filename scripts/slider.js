@@ -22,6 +22,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
 		window.curArticlePosition2[window.curCategory] = window.curArticle;
 		var artPosID = window.curArticlePosition2[window.curCategory];
+		console.log(artPosID);
+		console.log(window.curArticlePosition[window.curCategory][artPosID]);
 		this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
     },
  
