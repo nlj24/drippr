@@ -30,7 +30,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		this.goTo(window.curArticlePosition[window.curCategory][artPosID], true);
     },
  
-    goTo: function(index, switch) {
+    goTo: function(index, change) {
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
@@ -41,7 +41,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
-    	if (switch) {
+    	if (change) {
     		window.curArticlePosition2[window.curCategory] = window.curArticle;
     	}
     	console.log(window.positions);
