@@ -62,6 +62,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 					window.positions[window.curCategory] = Math.min(10, index);
 			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
 
+			        for (var ii = 0; ii < feed.length; ii++){
+		                window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
+		            }
 			        var templateSource = $("#article-template").html(), 
 			        template = Handlebars.compile(templateSource),
 			        articleHTML = template({"articles":window.feed});
