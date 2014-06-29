@@ -73,6 +73,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			        template = Handlebars.compile(templateSource),
 			        articleHTML = template({"articles":window.feed});
 			        $('#articles').html(articleHTML);
+			        var artPosID = window.curArticlePosition2[window.curCategory];
+					console.log(artPosID);
+					console.log(window.curArticlePosition[window.curCategory][artPosID]);
+					this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
 				}
 
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
