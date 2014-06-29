@@ -24,7 +24,18 @@ $(document).ready(function(){
 	window.selGroups = [];
 	window.articlesReceived = {};
 	window.last = {};
-	window.curArticlePosition = [];
+	var All = {};
+	var World = {};
+	var Politics = {};
+	var Business = {};
+	var Sports = {};
+	var Entertainment = {};
+	var Tech = {};
+	var Weird = {};
+	var Science = {};
+	var Health = {};
+	var Lifestyle = {};
+	window.curArticlePosition = [All, World, Politics, Business, Sports, Entertainment, Tech, Weird, Science, Health, Lifestyle];
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
