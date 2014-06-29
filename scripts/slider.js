@@ -25,12 +25,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		} else {
 			this.goTo(window.positions[window.curCategory]);
 		}
-		if (!(window.curCategory in window.curArticlePosition)) {
-			window.curArticlePosition.push(window.curCategory);
-			window.curArticlePosition[window.curCategory] = {};
-		} else {
-			window.curArticlePosition[window.curCategory] = {};
-		}
+		window.curArticlePosition.push(window.curCategory);
 		console.log(window.curArticlePosition);
     },
  
