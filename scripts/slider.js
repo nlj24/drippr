@@ -23,7 +23,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		this.goTo();
     },
  
-    goTo: function() {
+    goTo: function(index) {
+    	if (!index) {
     	if (window.curArticlePosition2[window.curCategory] == undefined){
 			console.log("fuck!");
 			window.curArticlePosition2[window.curCategory] = window.curArticle;
@@ -32,6 +33,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		console.log(artPosID);
 		console.log(window.curArticlePosition[window.curCategory][artPosID]);
     	index = window.curArticlePosition[window.curCategory][artPosID];
+    }
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
