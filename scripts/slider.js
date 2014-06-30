@@ -21,7 +21,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		$('.fitimageDripp').css('max-width',.9*$(".slider").width());
 		$('.fitimageDripp').css('max-height',.85*($(".slider").height()-67));
 		if (window.curArticlePosition2[window.curCategory] == undefined){
-			console.log("fuck!");
 			window.curArticlePosition2[window.curCategory] = window.curArticle;
 		}
 		var artPosID = window.curArticlePosition2[window.curCategory];
@@ -41,6 +40,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
+    	console.log(window.curArticlePosition2);
     	window.curArticlePosition2[window.curCategory] = window.curArticle;
     	console.log(window.positions);
     	console.log(window.curArticlePosition);
