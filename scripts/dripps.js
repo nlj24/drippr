@@ -166,7 +166,7 @@ window.bindDripps = function() {
             console.log('1');
             if (window.positions[id] > 15) {
                 console.log('2');
-                window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
+                window.feed = window.articlesData[id].slice(window.curArticlePosition[window.curCategory][window.curArticlePosition2] - 10, window.curArticlePosition[window.curCategory][window.curArticlePosition2] + 40);
             }else{
                 console.log('3');
                 window.feed = window.articlesData[id].slice(0, 50);
