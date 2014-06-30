@@ -26,10 +26,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		var artPosID = window.curArticlePosition2[window.curCategory];
 		console.log(artPosID);
 		console.log(window.curArticlePosition[window.curCategory][artPosID]);
-		this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
+		this.goTo(window.curArticlePosition[window.curCategory][artPosID], false);
     },
  
-    goTo: function(index) {
+    goTo: function(index, change) {
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
@@ -41,7 +41,9 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
     	console.log(window.curArticlePosition2);
-    	window.curArticlePosition2[window.curCategory] = window.curArticle;
+    	if (change) {
+    		window.curArticlePosition2[window.curCategory] = window.curArticle;
+    	}
     	console.log(window.positions);
     	console.log(window.curArticlePosition);
     	console.log(window.curArticlePosition2);
@@ -91,7 +93,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  	
     goToPrev: function() {
-		this.goTo(this.currentIndex - 1);
+		this.goTo(this.currentIndex - 1, true);
     },
  
     goToNext: function() {
@@ -101,7 +103,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
                 $('#noMoreDripps').modal('hide');
             }, 3500);
         } else {
-			this.goTo(this.currentIndex + 1);
+			this.goTo(this.currentIndex + 1, true);
 		}
 	}
 }
