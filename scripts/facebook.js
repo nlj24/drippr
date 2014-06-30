@@ -37,6 +37,19 @@ $(document).ready(function(){
 	window.curArticlePosition["Health"] = {};
 	window.curArticlePosition["Lifestyle"] = {};
 	window.curArticlePosition2 = {};
+	window.curArticlePosition3 = {};
+	window.curArticlePosition3["All"] = 0;
+	window.curArticlePosition3["USA"] = 0;
+	window.curArticlePosition3["World"] = 0;
+	window.curArticlePosition3["Politics"] = 0;
+	window.curArticlePosition3["Business"] = 0;
+	window.curArticlePosition3["Sports"] = 0;
+	window.curArticlePosition3["Entertainment"] = 0;
+	window.curArticlePosition3["Tech"] = 0;
+	window.curArticlePosition3["Weird"] = 0;
+	window.curArticlePosition3["Science"] = 0;
+	window.curArticlePosition3["Health"] = 0;
+	window.curArticlePosition3["Lifestyle"] = 0;
 });
 
 $("#dripps").css("height",""+ ($(window).height()-91));
