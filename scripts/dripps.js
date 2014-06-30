@@ -166,7 +166,7 @@ window.bindDripps = function() {
             console.log('1');
             if (window.positions[id] > 15) {
                 console.log('2');
-                window.feed = window.articlesData[id].slice(window.curArticlePosition[window.curCategory][window.curArticlePosition2[window.curCategory]] - 10, window.curArticlePosition[window.curCategory][window.curArticlePosition2] + 40);
+                window.feed = window.articlesData[id].slice(window.curArticlePosition[window.curCategory][window.curArticlePosition2[window.curCategory]] - 10, window.curArticlePosition[window.curCategory][window.curArticlePosition2[window.curCategory]] + 40);
             }else{
                 console.log('3');
                 window.feed = window.articlesData[id].slice(0, 50);
