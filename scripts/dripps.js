@@ -141,8 +141,6 @@ window.bindDripps = function() {
     $('.topCat').css("color", "white");
     $(".topCatImg.grey").attr("class", 'topCatImg catImg grey hide');
     $(".topCatImg.white").attr("class", 'topCatImg catImg white');
-
-
     
     $('.categ').click(function(e){
         var id = $(e.target).parents('.categ').attr("category");
@@ -165,11 +163,13 @@ window.bindDripps = function() {
         $(e.target).parents('.categ').find('.white').attr("class", 'catImg white');
 
         if (window.articlesData[id]) {
+            console.log('1');
             if (window.positions[id] > 15) {
+                console.log('2');
                 window.feed = window.articlesData[id].slice(window.positions[id] - 10, window.positions[id] + 40);
             }else{
+                console.log('3');
                 window.feed = window.articlesData[id].slice(0, 50);
-                
             }
             for (var ii = 0; ii < feed.length; ii++){
                 window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
@@ -179,7 +179,7 @@ window.bindDripps = function() {
             articleHTML = template({"articles":window.feed});
             $('#articles').html(articleHTML);
         } else {
-
+            console.log('4');
             window.articlesData[window.curCategory] = [];
             window.positions[window.curCategory] = 0;
             
@@ -201,8 +201,6 @@ window.bindDripps = function() {
                         }
                         window.article_results.push(data[ii]);
                     }
-
-                    
 
                     for (var i=0;i<  data.length;i++) {                        
                         window.articlesData[cat].push(data[i]);

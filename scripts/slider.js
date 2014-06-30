@@ -74,7 +74,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			        template = Handlebars.compile(templateSource),
 			        articleHTML = template({"articles":window.feed});
 			        $('#articles').html(articleHTML);
-			        console.log(window.curArticlePosition);
 				}
 
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
