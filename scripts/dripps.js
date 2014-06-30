@@ -164,7 +164,7 @@ window.bindDripps = function() {
 
         if (window.articlesData[id]) {
             if (window.positions[id] > 15) {
-                window.feed = window.articlesData[id].slice(window.curArticlePosition3[window.curCategory]] - 10, window.curArticlePosition3[window.curCategory]] + 40);
+                window.feed = window.articlesData[id].slice(window.curArticlePosition3[window.curCategory] - 10, window.curArticlePosition3[window.curCategory] + 40);
             }else{
                 window.feed = window.articlesData[id].slice(0, 50);
             }
