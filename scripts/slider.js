@@ -93,7 +93,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     goToPrev: function() {
 		this.goTo(this.currentIndex - 1);
 		if (window.curArticlePosition3 > 0) {
-			window.curArticlePosition3 -= 1;
+			window.curArticlePosition3[window.curCategory] -= 1;
 		}
     },
  
@@ -105,7 +105,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
             }, 3500);
         } else {
 			this.goTo(this.currentIndex + 1);
-			window.curArticlePosition3 += 1;
+			window.curArticlePosition3[window.curCategory] += 1;
 		}
 	}
 }
