@@ -95,6 +95,7 @@ window.ARTICLE_METHOD ={
                 success:function(data){
                     window.articlesReceived[category] = data.length;
                     console.log(window.articlesReceived[category]);
+                    console.log(data);
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
