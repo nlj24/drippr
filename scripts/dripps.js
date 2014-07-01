@@ -115,7 +115,7 @@ window.ARTICLE_METHOD ={
                         window.articlesData[data[i].id] = data[i];
                     }
                 window.callingback[category] = false;
-                // callback(index, indexInArray);
+                callback(index, indexInArray);
                 }
             });
         }

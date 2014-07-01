@@ -65,7 +65,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				var refreshTemplate = function(index, indexInArray2){
 
 					window.positions[window.curCategory] = Math.min(10, index);
-			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 40);
+			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 50);
 
 			        for (var ii = 0; ii < feed.length; ii++){
 		                window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
