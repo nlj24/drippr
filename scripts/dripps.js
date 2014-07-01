@@ -86,6 +86,7 @@ window.ARTICLE_METHOD ={
             } else{
                 url = window.address + 'articles/' + category;
             }
+            console.log(url);
             $.ajax({
                 url: url,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
@@ -93,6 +94,7 @@ window.ARTICLE_METHOD ={
                 method:'post',
                 success:function(data){
                     window.articlesReceived[category] = data.length;
+                    console.log(window.articlesReceived[category]);
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
