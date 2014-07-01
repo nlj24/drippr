@@ -81,6 +81,7 @@ window.ARTICLE_METHOD ={
             window.callingback[category] = true;
             var url;
             if (category == "All") {
+                console.log("cut");
                 url = window.address + 'articles';
             } else{
                 url = window.address + 'articles/' + category;
