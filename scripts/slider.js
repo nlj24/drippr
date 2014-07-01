@@ -51,6 +51,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
        	window.resetFB();
 
 		if (this.li.length  - index < 10) {
+			console.log(this.li.length);
+			console.log(index);
 			if (!(window.callingback[window.curCategory])) {
 
 				var indexInArray = index;
