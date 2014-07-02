@@ -32,13 +32,11 @@ var connection;
                 articles_dict[rows[ii].id]["userDisliked"] = (rows[ii]['d_user'] != null);
                 articles_dict[rows[ii].id]["userReadItLater"] = (rows[ii]['b_user'] != null);
 
-                articles_list.push( articles_dict[rows[ii].id]);
+                articles_list.push(articles_dict[rows[ii].id]);
             }
             res.send(articles_list);
-
-            
         });
-});
+    });
 });
 
 app.post("/articles/:category", function(req, res) {
