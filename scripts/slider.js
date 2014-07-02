@@ -24,9 +24,8 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 			window.curArticlePosition2[window.curCategory] = window.curArticle;
 		}
 		var artPosID = window.curArticlePosition2[window.curCategory];
-		console.log(artPosID);
-		console.log(window.curArticlePosition[window.curCategory][artPosID]);
 		this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
+		console.log(this.li.length);
     },
  
     goTo: function(index) {
@@ -40,19 +39,13 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 		window.curArticle = this.li[this.currentIndex].id;
     	window.positions[window.curCategory] = index;
-    	console.log(window.curArticlePosition2);
     	window.curArticlePosition2[window.curCategory] = window.curArticle;
-    	console.log(window.positions);
-    	console.log(window.curArticlePosition);
-    	console.log(window.curArticlePosition2);
 
     	window.setDrippLikes();
         
        	window.resetFB();
 
 		if (this.li.length  - index < 10) {
-			console.log(this.li.length);
-			console.log(index);
 			if (!(window.callingback[window.curCategory])) {
 
 				var indexInArray = index;
@@ -100,7 +93,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  
     goToNext: function() {
-    	console.log('next');
     	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[window.curCategory] == 0)) {
             $('#noMoreDripps').modal('show');
             setTimeout(function() {
