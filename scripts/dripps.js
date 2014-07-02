@@ -1,5 +1,5 @@
 var article_results;
-window.chunkSize = 100;
+window.chunkSize = 50;
 window.articlesData = {};
 window.articlesData["All"] = [];
 window.callingback = {};
@@ -58,7 +58,6 @@ window.ARTICLE_METHOD ={
         template = Handlebars.compile(templateSource),
         articleHTML = template({"articles":window.feed});
         $('#articles').html(articleHTML);
-
         $(".dripp").click(function(){
             window.articleSendId = window.curArticle;
             $(".showForm").attr("class", "showForm");
