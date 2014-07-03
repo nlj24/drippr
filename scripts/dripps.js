@@ -110,7 +110,10 @@ window.ARTICLE_METHOD ={
 
                     for (var i=0;i<  data.length;i++) {
                         cat = data[i].category;
-                        console.log(cat);
+                        if(!(cat in window.articlesData)){
+                            window.articlesData[cat] = [];
+                            window.positions[cat] = 0;
+                        }
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
                         if (window.curCategory == "All") {
