@@ -74,11 +74,12 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 					if (!(window.callingback[window.curCategory])) {
 						window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
-						
+						console.log("2");
 					}
 
 				}
 				else{
+					console.log("1");
 					refreshTemplate(index, indexInArray);
 				}
 			}
