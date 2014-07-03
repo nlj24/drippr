@@ -113,6 +113,9 @@ window.ARTICLE_METHOD ={
                         
                         window.articlesData[cat].push(data[i]);
                         window.articlesData[data[i].id] = data[i];
+                        if (window.curCategory == "All") {
+                            window.articlesData["All"].push(data[i]);
+                        }
                     }
                 window.callingback[category] = false;
                 callback(index, indexInArray);
