@@ -25,7 +25,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 		}
 		var artPosID = window.curArticlePosition2[window.curCategory];
 		this.goTo(window.curArticlePosition[window.curCategory][artPosID]);
-		console.log(this.li.length);
     },
  
     goTo: function(index) {
@@ -61,7 +60,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 
 					window.positions[window.curCategory] = Math.min(10, index);
 			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 50);
-			        console.log(window.feed);
 			        for (var ii = 0; ii < feed.length; ii++){
 		                window.curArticlePosition[window.curCategory][feed[ii].id] = ii;
 		            }
@@ -74,12 +72,10 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
 					if (!(window.callingback[window.curCategory])) {
 						window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
-						console.log("2");
 					}
 
 				}
 				else{
-					console.log("1");
 					refreshTemplate(index, indexInArray);
 				}
 			}

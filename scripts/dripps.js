@@ -80,12 +80,10 @@ window.ARTICLE_METHOD ={
             window.callingback[category] = true;
             var url;
             if (category == "All") {
-                console.log("cut");
                 url = window.address + 'articles';
             } else{
                 url = window.address + 'articles/' + category;
             }
-            console.log(url);
             $.ajax({
                 url: url,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
@@ -93,8 +91,6 @@ window.ARTICLE_METHOD ={
                 method:'post',
                 success:function(data){
                     window.articlesReceived[category] = data.length;
-                    console.log(window.articlesReceived[category]);
-                    console.log(data);
 
                     for (var ii = 0; ii < data.length; ii++) {
                         if (Date.create().format('{M}{d}{yy}') == Date.create(data[ii]["date"]).format('{M}{d}{yy}')) {
