@@ -2,7 +2,8 @@
   "manifest_version": 2,
 
   "name": "drippr",
-  "version": "1.0",
+  "short_name": "drippr",
+  "version": "0.0.1",
   "description": "Share articles and entertainment with friends.",
 
   "browser_action": {
