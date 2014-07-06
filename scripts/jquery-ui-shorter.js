@@ -1628,14 +1628,6 @@ $.ui.position = {
                                                                                                                                                                                 this._close( event );
                                                                                                                                                                             },
 
-                                                                                                                                                                            _close: function( event ) {
-                                                                                                                                                                                if ( this.menu.element.is( ":visible" ) ) {
-                                                                                                                                                                                    this.menu.element.hide();
-                                                                                                                                                                                    this.menu.blur();
-                                                                                                                                                                                    this.isNewMenu = true;
-                                                                                                                                                                                    this._trigger( "close", event );
-                                                                                                                                                                                }
-                                                                                                                                                                            },
 
                                                                                                                                                                             _change: function( event ) {
                                                                                                                                                                                 if ( this.previous !== this._value() ) {
