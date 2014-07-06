@@ -1506,18 +1506,6 @@ $.ui.position = {
                                                                                                                                                                             pending: 0,
 
 
-                                                                                                                                                                            _setOption: function( key, value ) {
-                                                                                                                                                                                this._super( key, value );
-                                                                                                                                                                                if ( key === "source" ) {
-                                                                                                                                                                                    this._initSource();
-                                                                                                                                                                                }
-                                                                                                                                                                                if ( key === "appendTo" ) {
-                                                                                                                                                                                    this.menu.element.appendTo( this._appendTo() );
-                                                                                                                                                                                }
-                                                                                                                                                                                if ( key === "disabled" && value && this.xhr ) {
-                                                                                                                                                                                    this.xhr.abort();
-                                                                                                                                                                                }
-                                                                                                                                                                            },
 
                                                                                                                                                                             _appendTo: function() {
                                                                                                                                                                                 var element = this.options.appendTo;
