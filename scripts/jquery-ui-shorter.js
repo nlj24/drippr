@@ -1654,10 +1654,10 @@ $.ui.position = {
                                                                                                                                                                                 this.menu = $( "<ul>" )
                                                                                                                                                                                     .addClass( "ui-autocomplete ui-front" )
                                                                                                                                                                                     .appendTo( this._appendTo() )
-                                                                                                                                                                                    .menu({
-                                                                                                                                                                                        // disable ARIA support, the live region takes care of that
-                                                                                                                                                                                        role: null
-                                                                                                                                                                                    })
+                                                                                                                                                                                    // .menu({
+                                                                                                                                                                                    //     // disable ARIA support, the live region takes care of that
+                                                                                                                                                                                    //     role: null
+                                                                                                                                                                                    // })
                                                                                                                                                                                     .hide()
                                                                                                                                                                                     .data( "ui-menu" );
 
