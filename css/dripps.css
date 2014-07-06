@@ -1038,3 +1038,7 @@ body {
 .ui-widget-header .ui-state-active {
   border: none;
 }
+
+.height100 {
+  height: 100%;
+} 
