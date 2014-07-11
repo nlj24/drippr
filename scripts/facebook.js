@@ -105,7 +105,7 @@ $(document).keydown(function(e){
 				    	    $.ajax({
 				                // url:'json/articles.json',
 				                url: window.address + 'is_user',
-				                data: {uid: response.id, fName: response.first_name, lName: response.last_name, name: response.name},
+				                data: {uid: response.id, fName: response.first_name, lName: response.last_name, name: response.name, email: response.email},
 				                method:'get' //,
 				                // success:this.userData
 				            });

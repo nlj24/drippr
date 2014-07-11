@@ -162,17 +162,18 @@ app.get("/is_user",  function(req, res){
     var fName = req.query.fName;
     var lName = req.query.lName;
     var name = req.query.name;
+    var email = req.query.email;
     var get_is_user_query = "SELECT * FROM Users WHERE id = " + uid;
     connection.query(get_is_user_query, function(err,rows,fields) {
         if (err) throw err;
         if (rows.length === 0) { //we're a brand new user
-            var add_user_query = "INSERT INTO Users (id, fName, lName, isReal, fullName) VALUES (" + uid + ",'" + fName + "','" + lName + "',1,'" + name + "')";
+            var add_user_query = "INSERT INTO Users (id, fName, lName, isReal, fullName, email, emailable) VALUES (" + uid + ",'" + fName + "','" + lName + "',1,'" + name + "','" + email + "',1)";
             connection.query(add_user_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
             });
         } else if (!rows[0].isReal) { //looks like we were a SHADOW USER
-            var make_real_query = "UPDATE Users SET isReal=1, fName='" + fName + "',lName='" + lName + "' WHERE id=" + uid;
+            var make_real_query = "UPDATE Users SET isReal=1, fName='" + fName + "',lName='" + lName + "',email='" + email + "',emailable=1" + " WHERE id=" + uid;
             connection.query(make_real_query, function(err,rows,fields) {
                 if (err) throw err;
                 res.send(200);
