@@ -11,4 +11,4 @@ function getParameterByName( name,href ){
         return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-console.log("id", window.location.href);
+console.log(getParameterByName("id", window.location.href));
