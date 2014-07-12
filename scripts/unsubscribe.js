@@ -14,7 +14,7 @@ function getParameterByName( name,href ){
 var user_id = getParameterByName("id", window.location.href);
 
 $.ajax({
-    url: window.address + 'unsubscribe',
+    url: 'http://drippr.me/unsubscribe',
     data: JSON.stringify({user_id: user_id}),
     dataType: 'json',
     method:'get',
