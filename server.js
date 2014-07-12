@@ -716,6 +716,18 @@ app.get("/removeReadItLater", function(req, res) {
     });
 });
 
+
+app.get("/unsubscribe", function(req, res) {
+    var user_id = req.query.user_id;
+
+    var set_read_query = 'UPDATE Users SET emailable=0 WHERE id =' + user_id + " LIMIT 1";
+    connection.query(set_read_query, function(err,rows,fields) {
+        if (err) throw err;
+        res.send(200);
+
+    });
+});
+
 /* -----------------------------------------------*/
 
  /* serves main page */

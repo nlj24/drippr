@@ -11,4 +11,14 @@ function getParameterByName( name,href ){
         return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-console.log(getParameterByName("id", window.location.href));
+var user_id = getParameterByName("id", window.location.href);
+
+$.ajax({
+    url: window.address + 'unsubscribe',
+    data: JSON.stringify({user_id: user_id}),
+    dataType: 'json',
+    method:'get',
+    success: function() {
+        return;
+    }
+});
