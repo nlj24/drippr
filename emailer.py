@@ -11,7 +11,7 @@ db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
 
 try:
-    sql = "SELECT fName, email, COUNT(unreadDripps) FROM Dripps INNER JOIN Users ON Dripps.recipientUserId=Users.id WHERE unreadDripps=1 AND emailable=1 AND isReal=1 GROUP BY Dripps.recipientUserId"
+    sql = "SELECT fName, email, COUNT(unreadDripps), Users.id FROM Dripps INNER JOIN Users ON Dripps.recipientUserId=Users.id WHERE unreadDripps=1 AND emailable=1 AND isReal=1 GROUP BY Dripps.recipientUserId"
     # sql = "SELECT email, fName FROM Dripps WHERE unreadDripps=1 INNER JOIN Users ON Dripps.recipientId=Users.id GROUP BY Dripps.recipientId"
     cursor.execute(sql)
     email_data = cursor.fetchall()
@@ -27,6 +27,7 @@ for user in email_data:
     fName = user[0]
     strTo = user[1]
     unread_dripps = int(user[2])
+    user_id = int(user[3])
 
     if (not strTo=='') and (unread_dripps > 0):
 
@@ -53,7 +54,7 @@ for user in email_data:
         if unread_dripps==1:
             word="dripp"
 
-        msgText = MIMEText('<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue">Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">you have ' + str(unread_dripps) + ' unread ' + word +'!</div><br>visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to view<br><br><a href="http://drippr.me"><img width="100px" src="cid:image1"></a><br><br><div style="font-size:10px; font-style:italic">copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013</div><a style="font-size:10px; text-decoration:none; color:#6D6E70" href="http://drippr.me/unsubscribe">unsubscribe</a></div>', 'html')
+        msgText = MIMEText('<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue">Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">you have ' + str(unread_dripps) + ' unread ' + word +'!</div><br>visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to view<br><br><a href="http://drippr.me"><img width="100px" src="cid:image1"></a><br><br><div style="font-size:10px; font-style:italic">copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013</div><a style="font-size:10px; text-decoration:none; color:#6D6E70" href="http://drippr.me/unsubscribe?id="' + user_id + '>unsubscribe</a></div>', 'html')
         msgAlternative.attach(msgText)
 
         # This example assumes the image is in the current directory
