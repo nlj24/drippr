@@ -6,6 +6,7 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
 import MySQLdb
+import urllib2
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
@@ -54,16 +55,25 @@ for user in email_data:
         if unread_dripps==1:
             word="dripp"
 
-        msgText = MIMEText('<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td>image</td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">you have ' + str(unread_dripps) + ' unread ' + word +'!</div><br>visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to view<br><br><a href="http://drippr.me"><img width="100px" src="cid:image1"></a><br><br>questions or comments? email info.drippr@gmail.com<div style="font-size:10px; font-style:italic">copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013</div><a style="font-size:10px; text-decoration:none; color:#6D6E70" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '">unsubscribe</a></td></tr></tbody></table></div>', 'html')
+        msgText = MIMEText('<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:8px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">you have ' + str(unread_dripps) + ' unread ' + word +'!</div>visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to view<a style="color:#1C75BB" href="http://drippr.me"></a><br>questions or comments? email info.drippr@gmail.com<br><br>thank you, <br><img height="32px" style="margin-left:8px" src="cid:image2"><br><br><div style="font-size:10px; font-style:italic">this email intended for ' + fName + '<br>copyright &copy; 2014 drippr, all rights reserved<br>320 Greenwich Street, New York, NY 10013<br></div><a style="font-size:10px; text-decoration:none; color:#6D6E70" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '">unsubscribe</a></td></tr></tbody></table></div>', 'html')
         msgAlternative.attach(msgText)
 
         # This example assumes the image is in the current directory
-        fp = open('images/drop.png', 'rb')
+        fp = urllib2.urlopen("http://graph.facebook.com/" + str(user_id) + "/picture?width=400&height=400")
         msgImage = MIMEImage(fp.read())
         fp.close()
 
         # Define the image's ID as referenced above
         msgImage.add_header('Content-ID', '<image1>')
+        msgRoot.attach(msgImage)
+
+        # This example assumes the image is in the current directory
+        fp = open("images/logo.png", 'rb')
+        msgImage = MIMEImage(fp.read())
+        fp.close()
+
+        # Define the image's ID as referenced above
+        msgImage.add_header('Content-ID', '<image2>')
         msgRoot.attach(msgImage)
 
         # Send the email (this example assumes SMTP authentication is required)
