@@ -28,6 +28,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  
     goTo: function(index) {
+    	console.log("go");
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
@@ -90,6 +91,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  
     goToNext: function() {
+    	console.log("next");
     	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[window.curCategory] == 0)) {
             $('#noMoreDripps').modal('show');
             setTimeout(function() {
