@@ -90,6 +90,7 @@ window.ARTICLE_METHOD ={
                 dataType: 'json',
                 method:'post',
                 success:function(data){
+                    console.log(data);
                     window.articlesReceived[category] = data.length;
 
                     for (var ii = 0; ii < data.length; ii++) {
