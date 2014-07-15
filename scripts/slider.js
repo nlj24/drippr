@@ -58,6 +58,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				}
 										
 				var refreshTemplate = function(index, indexInArray2){
+					console.log("refresh");
 
 					window.positions[window.curCategory] = Math.min(10, index);
 			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 50);
@@ -71,6 +72,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				}
 
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
+					console.log("longer");
 					if (!(window.callingback[window.curCategory])) {
 						window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
 					}
