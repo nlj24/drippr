@@ -608,7 +608,6 @@ $(document).keydown(function(e){
 
 
 						    if (location.hash == "#dripp") {
-						    	window.articlesReceived = 1;
 						        window.ARTICLE_METHOD.loadArticleData();
 						        window.setDrippLikes();
 						        $("#buckets").attr("class", "container-fluid hide");
