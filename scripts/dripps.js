@@ -75,7 +75,7 @@ window.ARTICLE_METHOD ={
         });
     },
     loadArticleDataCategory : function(category, lastId, index, indexInArray, callback){
-
+        console.log("load Articles");
         if (window.articlesReceived[category] > 0) {
             window.callingback[category] = true;
             var url;
@@ -84,6 +84,7 @@ window.ARTICLE_METHOD ={
             } else{
                 url = window.address + 'articles/' + category;
             }
+            console.log("greater 0");
             $.ajax({
                 url: url,
                 data: JSON.stringify({user: window.myID, numArticles: window.chunkSize, lastId: lastId}),
