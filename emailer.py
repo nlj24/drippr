@@ -1,7 +1,3 @@
-# SOURCE: http://code.activestate.com/recipes/473810-send-an-html-email-with-embedded-image-and-plain-t/
-# Send an HTML email with an embedded image and a plain text message for
-# email clients that don't want to display the HTML.
-
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
@@ -34,13 +30,13 @@ for user in email_data:
     if (not strTo=='') and (unread_dripps > 0):
 
         # Define these once; use them twice!
-        strFrom = 'info.drippr@gmail.com'
 
         # Create the root message and fill in the from, to, and subject headers
         msgRoot = MIMEMultipart('related')
         msgRoot['Subject'] = 'you have unread dripps!'
-        msgRoot['From'] = strFrom
+        msgRoot['From'] = 'messages-noreply@drippr.me'
         msgRoot['To'] = strTo
+        msgRoot.add_header('Reply-to', 'info.drippr@gmail.com')
         msgRoot.preamble = 'This is a multi-part message in MIME format.'
 
         # Encapsulate the plain and HTML versions of the message body in an
