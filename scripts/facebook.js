@@ -100,7 +100,6 @@ $(document).keydown(function(e){
 			
 						FB.api('/me', function(response) {
 							window.myName = response['name'];
-							console.log(response);
 							$("#user").html("<p id = 'centerWel'>Welcome, " + response.first_name + "!</p> <img class = 'fbPics2' src = http://graph.facebook.com/" + window.myID + "/picture?width=400&height=400>");
 				    	    $.ajax({
 				                // url:'json/articles.json',

@@ -28,7 +28,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  
     goTo: function(index) {
-    	console.log("go");
 
 		if (index < 0 || index > this.li.length - 1)
 		return;
@@ -46,7 +45,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
        	window.resetFB();
 
 		if (this.li.length  - index < 10) {
-			console.log("try");
 			if (!(window.callingback[window.curCategory])) {
 
 				var indexInArray = index;
@@ -59,7 +57,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				}
 										
 				var refreshTemplate = function(index, indexInArray2){
-					console.log("refresh");
 
 					window.positions[window.curCategory] = Math.min(10, index);
 			        window.feed = window.articlesData[window.curCategory].slice(Math.max(0, indexInArray -10),indexInArray + 50);
@@ -73,9 +70,7 @@ var Slider = function() { this.initialize.apply(this, arguments) }
 				}
 
 				if ( window.articlesData[window.curCategory].length - indexInArray < 40){
-					console.log("longer");
 					if (!(window.callingback[window.curCategory])) {
-						console.log("longer 2");
 						window.ARTICLE_METHOD.loadArticleDataCategory(window.curCategory, window.articlesData[window.curCategory][window.articlesData[window.curCategory].length -1].id, index, indexInArray, refreshTemplate);
 					}
 
@@ -95,7 +90,6 @@ var Slider = function() { this.initialize.apply(this, arguments) }
     },
  
     goToNext: function() {
-    	console.log("next");
     	if ((window.curArticle == window.articlesData[window.curCategory][window.articlesData[window.curCategory].length-1].id) && (window.articlesReceived[window.curCategory] == 0)) {
             $('#noMoreDripps').modal('show');
             setTimeout(function() {
