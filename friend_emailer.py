@@ -14,7 +14,7 @@ graph = facebook.GraphAPI(access_token)
 
 
 try:
-    sql = "SELECT fName, lName, Users.id, email, emailable FROM Users"
+    sql = "SELECT fName, lName, Users.id, email, emailable FROM Users;"
     cursor.execute(sql)
     all_users = cursor.fetchall()
     all_users_dict = {}
