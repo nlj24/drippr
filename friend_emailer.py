@@ -45,8 +45,6 @@ try:
 				# When there are no more pages (['paging']['next']), break from the
 				# loop and end the script.
 				break
-	
-	print email_dict
 
 except Exception as e:
     print e
