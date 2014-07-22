@@ -36,7 +36,6 @@ try:
 					candidate_emails[friend['id']] = []
 				candidate_emails[friend['id']].append(user)
 			pass
-	
 	to_send = []
 	for user in candidate_emails:
 		if all_users_dict[user][4] = '1':
