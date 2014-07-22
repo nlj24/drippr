@@ -23,11 +23,11 @@ try:
 
     print all_users_dict
 
-    sql = "SELECT fName, Users.id, lName FROM Users WHERE created>NOW() - INTERVAL 3 DAY"
-    # sql = "SELECT email, fName FROM Dripps WHERE unreadDripps=1 INNER JOIN Users ON Dripps.recipientId=Users.id GROUP BY Dripps.recipientId"
-    cursor.execute(sql)
-    new_users = cursor.fetchall()
-    print new_users
+    # sql = "SELECT fName, Users.id, lName FROM Users WHERE created>NOW() - INTERVAL 3 DAY"
+    # # sql = "SELECT email, fName FROM Dripps WHERE unreadDripps=1 INNER JOIN Users ON Dripps.recipientId=Users.id GROUP BY Dripps.recipientId"
+    # cursor.execute(sql)
+    # new_users = cursor.fetchall()
+    # print new_users
 
     email_dict = {}
     for user in new_users:
