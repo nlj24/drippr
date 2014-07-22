@@ -81,5 +81,6 @@ for user in email_data:
         smtp.starttls()
         smtp.ehlo()
         smtp.login('info.drippr@gmail.com', 'drizzardthelizzard')
+        print "strTo is " + strTo
         smtp.sendmail('info.drippr@gmail.com', strTo, msgRoot.as_string())
         smtp.quit()
