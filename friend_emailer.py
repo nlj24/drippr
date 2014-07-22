@@ -35,6 +35,7 @@ try:
 				if friend['id'] not in candidate_emails:
 					candidate_emails[friend['id']] = []
 				candidate_emails[friend['id']].append(user)
+			pass
 	
 	to_send = []
 	for user in candidate_emails:
