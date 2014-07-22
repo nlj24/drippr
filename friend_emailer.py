@@ -27,7 +27,7 @@ try:
     new_users = cursor.fetchall()
 
     candidate_emails = {}
-	to_send = []
+    to_send=[]
     for user in new_users:
 		print user
 		friends = graph.get_connections(user[1], 'friends')
