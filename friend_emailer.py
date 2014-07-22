@@ -21,12 +21,10 @@ try:
     for user in all_users:
     	all_users_dict[user[2]] = user
 
-    print all_users_dict
 
     sql = "SELECT fName, Users.id, lName FROM Users WHERE created>NOW() - INTERVAL 3 DAY"
     cursor.execute(sql)
     new_users = cursor.fetchall()
-    print new_users
 
     email_dict = {}
     for user in new_users:
@@ -47,6 +45,7 @@ try:
 				# When there are no more pages (['paging']['next']), break from the
 				# loop and end the script.
 				break
+	
 	print email_dict
 
 except Exception as e:
