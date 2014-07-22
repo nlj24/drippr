@@ -27,7 +27,7 @@ for user in email_data:
     user_id = int(user[3])
     lName = user[4]
 
-    if (not strTo=='') and (unread_dripps > 0):
+    if (not strTo=='') and (unread_dripps > 0) and (strTo):
 
         # Define these once; use them twice!
 
