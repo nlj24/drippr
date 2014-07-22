@@ -26,18 +26,21 @@ try:
     cursor.execute(sql)
     new_users = cursor.fetchall()
 
-    email_dict = {}
+    candidate_emails = {}
     for user in new_users:
 		print user
 		friends = graph.get_connections(user[1], 'friends')
 		for friend in friends['data']:
 			if friend['id'] in all_users_dict:
-				if friend['id'] not in email_dict:
-					email_dict[friend['id']] = []
-				email_dict[friend['id']].append(user)
-		print email_dict
-		
-
+				if friend['id'] not in candidate_emails:
+					candidate_emails[friend['id']] = []
+				candidate_emails[friend['id']].append(user)
+	
+	to_send = []
+	for user in candidate_emails:
+		if all_users_dict[user][4] = '1':
+			to_send.append({"fName": all_users_dict[user][0] , "lName": all_users_dict[user][1] , "email": all_users_dict[user][3] , "friends_joined": candidate_emails[user]})
+	print to_send
 except Exception as e:
     print e
     db.rollback()
