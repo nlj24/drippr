@@ -35,7 +35,7 @@ try:
 				if friend['id'] not in email_dict:
 					email_dict[friend['id']] = []
 				email_dict[friend['id']].push(user)
-	print email_dict
+		print email_dict
 		
 
 except Exception as e:
