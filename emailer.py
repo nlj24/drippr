@@ -65,7 +65,7 @@ for user in email_data:
         msgRoot.attach(msgImage)
 
         # This example assumes the image is in the current directory
-        fp = open("images/logo.png", 'rb')
+        fp = open("/home/app/code/images/logo.png", 'rb')
         msgImage = MIMEImage(fp.read())
         fp.close()
 
