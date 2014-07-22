@@ -37,10 +37,10 @@ try:
 				candidate_emails[friend['id']].append(user)
 
 	to_send = []
-	for user in candidate_emails:
-		if all_users_dict[user][4] = '1':
-			to_send.append({"fName": all_users_dict[user][0] , "lName": all_users_dict[user][1] , "email": all_users_dict[user][3] , "friends_joined": candidate_emails[user]})
-	print to_send
+	# for user in candidate_emails:
+	# 	if all_users_dict[user][4] = '1':
+	# 		to_send.append({"fName": all_users_dict[user][0] , "lName": all_users_dict[user][1] , "email": all_users_dict[user][3] , "friends_joined": candidate_emails[user]})
+	# print to_send
 except Exception as e:
     print e
     db.rollback()
