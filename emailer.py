@@ -27,7 +27,7 @@ for user in email_data:
     user_id = int(user[3])
     lName = user[4]
 
-    if (not strTo=='') and (unread_dripps > 0) and (strTo):
+    if (not strTo=='') and (unread_dripps > 0) and (strTo != 'undefined'):
 
         # Define these once; use them twice!
 
@@ -81,6 +81,5 @@ for user in email_data:
         smtp.starttls()
         smtp.ehlo()
         smtp.login('info.drippr@gmail.com', 'drizzardthelizzard')
-        print "strTo is " + strTo
         smtp.sendmail('info.drippr@gmail.com', strTo, msgRoot.as_string())
         smtp.quit()
