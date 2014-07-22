@@ -34,7 +34,7 @@ try:
 			if friend['id'] in all_users_dict:
 				if friend['id'] not in email_dict:
 					email_dict[friend['id']] = []
-				email_dict[friend['id']].push(user)
+				email_dict[friend['id']].append(user)
 		print email_dict
 		
 
