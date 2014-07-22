@@ -30,21 +30,14 @@ try:
     for user in new_users:
 		print user
 		friends = graph.get_connections(user[1], 'friends')
-		while True:
-			try:
-				# Perform some action on each post in the collection we receive from
-				# Facebook.
-				for friend in friends:
-					if friend['id'] in all_users_dict:
-						if friend['id'] not in email_dict:
-							email_dict[friend['id']] = []
-						email_dict[friend['id']].push(user)
-				# Attempt to make a request to the next page of data, if it exists.
-				friends = requests.get(friends['paging']['next']).json()
-			except KeyError:
-				# When there are no more pages (['paging']['next']), break from the
-				# loop and end the script.
-				break
+		print len(friends)
+		# for friend in friends:
+		# 		if friend['id'] in all_users_dict:
+		# 			if friend['id'] not in email_dict:
+		# 				email_dict[friend['id']] = []
+		# 			email_dict[friend['id']].push(user)
+			
+		
 
 except Exception as e:
     print e
