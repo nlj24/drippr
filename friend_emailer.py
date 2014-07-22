@@ -9,7 +9,7 @@ import requests
 
 db = MySQLdb.connect('54.86.82.21','root','drippr','drippr_db')
 cursor = db.cursor()
-access_token = f86fde4992f8be9ff00338040d9a734c
+access_token = "f86fde4992f8be9ff00338040d9a734c"
 graph = facebook.GraphAPI(access_token)
 
 
