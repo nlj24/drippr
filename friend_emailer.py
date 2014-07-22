@@ -31,10 +31,8 @@ try:
 
     email_dict = {}
 	for user in new_users:
-		#get friend list from fb
 		print user
 		friends = graph.get_connections(user[1], 'friends')
-
 		while True:
 		    try:
 		        # Perform some action on each post in the collection we receive from
