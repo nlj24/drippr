@@ -30,7 +30,7 @@ try:
     for user in new_users:
 		print user
 		friends = graph.get_connections(user[1], 'friends')
-		print len(friends)
+		print len(friends['data'])
 		# for friend in friends:
 		# 		if friend['id'] in all_users_dict:
 		# 			if friend['id'] not in email_dict:
