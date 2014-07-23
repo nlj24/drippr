@@ -80,7 +80,7 @@ for user in to_send:
         # We reference the image in the IMG SRC attribute by the ID we give it below
 
         #set up header, sentence
-        msgText = '<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">' +  str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. '
+        msgText = '<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; ">' +  str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. '
         #friend is a (fName, id, lName)
         msgText += '<table>'
         for friend in user['friends_joined']:
