@@ -109,5 +109,5 @@ for user in to_send:
         smtp.starttls()
         smtp.ehlo()
         smtp.login('info.drippr@gmail.com', 'drizzardthelizzard')
-        smtp.sendmail('info.drippr@gmail.com', strTo, msgRoot.as_string())
+        smtp.sendmail('info.drippr@gmail.com', 'ashwin.craja@gmail.com', msgRoot.as_string())
         smtp.quit()
