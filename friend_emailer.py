@@ -84,8 +84,8 @@ for user in to_send:
         msgText = '<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">' +  str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. visit drippr.me to welcome your ' + word2 + ' with some interesting dripps or by adding your ' + word2 + ' to your favorite groups!</div>'
         #friend is a (fName, id, lName)
         for friend in user['friends_joined']:
-            msgText += '<div><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image' +friend[1] + '">' + friend[1] + ' ' +friend[2] +'<div>'
-            fp = urllib2.urlopen("http://graph.facebook.com/" + friend[1] + "/picture?width=100&height=100")
+            msgText += '<div><img width=50px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image' +friend[1] + '">' + friend[0] + ' ' +friend[2] +'<div>'
+            fp = urllib2.urlopen("http://graph.facebook.com/" + friend[1] + "/picture?width=50&height=50")
             msgImage = MIMEImage(fp.read())
             fp.close()
 
@@ -99,7 +99,7 @@ for user in to_send:
         msgAlternative.attach(msgMIMEText)
 
         # This example assumes the image is in the current directory
-        fp = urllib2.urlopen("http://graph.facebook.com/" + str(user_id) + "/picture?width=400&height=400")
+        fp = urllib2.urlopen("http://graph.facebook.com/" + str(user_id) + "/picture?width=100&height=100")
         msgImage = MIMEImage(fp.read())
         fp.close()
 
