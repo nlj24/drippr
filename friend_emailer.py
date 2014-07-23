@@ -75,13 +75,12 @@ for user in to_send:
             word = "has"
             word2 = "friend"
 
-        msgText = MIMEText(str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. visit drippr.me to welcome your ' + word2 + ' with some interesting dripps or by adding your ' + word2 + ' to your favorite groups')
-        msgAlternative.attach(msgText)
+        
 
         # We reference the image in the IMG SRC attribute by the ID we give it below
 
         #set up header, sentence
-        msgText = '<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">' +  str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. visit drippr.me to welcome your ' + word2 + ' with some interesting dripps or by adding your ' + word2 + ' to your favorite groups!</div>'
+        msgText = '<div style="font-weight:bold; color: #6D6E70; border:1px solid #1C75BB; background:#e9eaed; padding:8px 8px 8px 8px; font-size:18px; font-family:Helvetica Neue"><table><tbody><tr><td><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image1"></td><td>Hey ' + fName + ',<br><br><div style="font-weight:bolder; color: #1C75BB">' +  str(numFriends) + ' of your friends ' + word + ' joined drippr in the last 3 days. '
         #friend is a (fName, id, lName)
         msgText += '<table>'
         for friend in user['friends_joined']:
@@ -94,7 +93,7 @@ for user in to_send:
             msgImage.add_header('Content-ID', '<image' + friend[1] + '>')
             msgRoot.attach(msgImage)
 
-        msgText += '</table><br>questions or comments? email <a href="mailto:info.drippr@gmail.com" style="text-decoration:none; color:#1C75BB">info.drippr@gmail.com</a><br><br>thank you, <br><img height="32px" style="margin-left:8px" src="cid:image2"><br><br><div style="font-size:10px; font-style:italic">this email intended for ' + fName + " " + lName + ', all rights reserved<br>copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013<br></div><a style="text-decoration:none" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '"><span style="font-size:10px; color:#6D6E70">unsubscribe</span></a></td></tr></tbody></table></div>'
+        msgText += '</table> <br> visit drippr.me to welcome your ' + word2 + ' with some interesting dripps or by adding your ' + word2 + ' to your favorite groups<br>questions or comments? email <a href="mailto:info.drippr@gmail.com" style="text-decoration:none; color:#1C75BB">info.drippr@gmail.com</a><br><br>thank you, <br><img height="32px" style="margin-left:8px" src="cid:image2"><br><br><div style="font-size:10px; font-style:italic">this email intended for ' + fName + " " + lName + ', all rights reserved<br>copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013<br></div><a style="text-decoration:none" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '"><span style="font-size:10px; color:#6D6E70">unsubscribe</span></a></td></tr></tbody></table></div>'
 
         msgMIMEText = MIMEText(msgText, 'html')
         msgAlternative.attach(msgMIMEText)
