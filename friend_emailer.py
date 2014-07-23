@@ -87,8 +87,10 @@ for user in to_send:
         #     msgText += '<div><img width="100px" style="margin-left:6px; margin-right:13px; border-radius:10px; border: 3px solid #1C75BB" src="cid:image' +user['friends_joined'] 1'"><div>'
         print user['friends_joined']
 
-        msgText += MIMEText('visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to start sharing with your friends<br><br>questions or comments? email <a href="mailto:info.drippr@gmail.com" style="text-decoration:none; color:#1C75BB">info.drippr@gmail.com</a><br><br>thank you, <br><img height="32px" style="margin-left:8px" src="cid:image2"><br><br><div style="font-size:10px; font-style:italic">this email intended for ' + fName + " " + lName + ', all rights reserved<br>copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013<br></div><a style="text-decoration:none" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '"><span style="font-size:10px; color:#6D6E70">unsubscribe</span></a></td></tr></tbody></table></div>', 'html')
-        msgAlternative.attach(msgText)
+        msgText += 'visit <a style="text-decoration:none; color:#1C75BB" href="http://drippr.me">drippr.me</a> to start sharing with your friends<br><br>questions or comments? email <a href="mailto:info.drippr@gmail.com" style="text-decoration:none; color:#1C75BB">info.drippr@gmail.com</a><br><br>thank you, <br><img height="32px" style="margin-left:8px" src="cid:image2"><br><br><div style="font-size:10px; font-style:italic">this email intended for ' + fName + " " + lName + ', all rights reserved<br>copyright &copy; 2014 drippr<br>320 Greenwich Street, New York, NY 10013<br></div><a style="text-decoration:none" href="http://drippr.me/unsubscribe.html?id=' + str(user_id) + '"><span style="font-size:10px; color:#6D6E70">unsubscribe</span></a></td></tr></tbody></table></div>'
+
+        msgMIMEText = MIMEText(msgText, 'html')
+        msgAlternative.attach(msgMIMEText)
 
         # This example assumes the image is in the current directory
         fp = urllib2.urlopen("http://graph.facebook.com/" + str(user_id) + "/picture?width=400&height=400")
