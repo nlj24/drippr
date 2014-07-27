@@ -405,8 +405,8 @@ body {
 }
 
 #chromeLogoStyle {
-  max-height: 90%;
-  padding-bottom: 1px;
+  max-height: 18px;
+  padding-bottom: 2px;
 }
 
 .noPadRight {
