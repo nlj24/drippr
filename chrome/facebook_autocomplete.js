@@ -131,7 +131,11 @@ Released under the MIT license
         suggestions = this.getCurrentSuggestions(value);
         for (_i = 0, _len = suggestions.length; _i < _len; _i++) {
           suggestion = suggestions[_i];
-          this.list.append(this.generateSuggestion(suggestion));
+          if ( (window.drippsIds.indexOf(suggestion.id) ==-1) && (window.groupsIds.indexOf(suggestion.id) ==-1)
+             && (window.currentGroupMembers.indexOf(suggestion.id) ==-1) && (window.addIds.indexOf(suggestion.id) == -1) ) {
+            this.list.append(this.generateSuggestion(suggestion));
+ 
+          }
         }
         return this.selected = this.list.children('.fbac-suggestion:first').addClass('fbac-selected');
       }
