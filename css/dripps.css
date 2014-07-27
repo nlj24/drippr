@@ -292,6 +292,7 @@ body {
 
 #leftPad0 {
   padding-left: 0px;
+  padding-right: 20px;
 }
 
 .fb-login-button {
