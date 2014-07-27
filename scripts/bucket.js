@@ -508,10 +508,10 @@ function bindMessages(template, conversation_data){
 function bindButtons(){
     window.setBucketLikes();
     $("#messageSend").click(function(){
-        content = $('#messageInput').val();
+        var content = $('#messageInput').val();
         for (var i = 0; i < content.length; i++) {
             if(content[i] == "\"") {
-                var content = content.substring(0, i) + "'" + content.substring(i+1);
+                content = content.substring(0, i) + "'" + content.substring(i+1);
             }
         }
         
