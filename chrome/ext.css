@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .floatRight {
     font-size: 22px;
     float: right;
