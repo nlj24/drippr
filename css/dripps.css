@@ -711,6 +711,7 @@ body {
   max-width: 35px;
   max-height: 35px;
   display: inline-block;
+  vertical-align: super !important;
 }
 
 .messageItemSender {
