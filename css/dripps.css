@@ -277,7 +277,7 @@ body {
   float: right;
 }
 
-#download {
+.download {
   float: right;
   font-size: 15px;
   background-color: #6D6E70;
