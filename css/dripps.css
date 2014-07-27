@@ -288,6 +288,9 @@ body {
   line-height: 22px;
   margin-top: 10px;
   border-radius: 2px;
+}
+
+#leftPad7 {
   padding-left: 7px;
 }
 
