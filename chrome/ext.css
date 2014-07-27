@@ -23,7 +23,8 @@
     border-radius: 10px;
     display: inline-block;
     padding: 5px;
-    height: 100px;
+    height: 70px;
+    overflow-y: scroll; 
 }
 
 #sendBtn {
