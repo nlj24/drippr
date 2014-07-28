@@ -158,9 +158,16 @@ $("#extContScroll").css("height",windowHeight);
                                                     selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
                                                 }
                                             }
+                                            var content = $('#messageInput3').val();
+                                            for (var i = 0; i < content.length; i++) {
+                                                if(content[i] == "\"") {
+                                                    content = content.substring(0, i) + "'" + content.substring(i+1);
+                                                }
+                                            }
+                                            $('#messageInput3').val('');
                                             $.ajax({
                                                 url: window.address + 'sendDripp/new',
-                                                data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups},
+                                                data: {groupsDict: JSON.stringify(selGroupsDict), headline: $("#title").val(), imgUrl: $("#img").val(), url: $("#link").val(), source: $("#src").val(), category:"null", fromUserId: window.myID, recipientFriendIds: window.drippsIds, recipientGroup: window.selGroups, content: content},
                                                 type:'get'
                                             });
                                             
