@@ -716,7 +716,7 @@ body {
 
 .messageItemSender {
   display: inline-block;
-  width: 33%;
+  width: 35%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
