@@ -376,9 +376,16 @@ $(document).keydown(function(e){
 											selGroupsDict[selGroups[ii]].splice(selGroupsDict[selGroups[ii]].indexOf(window.myID),1);
 										}
 									}
+									var content = $('#messageInput2').val();
+							        for (var i = 0; i < content.length; i++) {
+							            if(content[i] == "\"") {
+							                content = content.substring(0, i) + "'" + content.substring(i+1);
+							            }
+							        }
+							        $('#messageInput2').val('');
 									$.ajax({
 						                url: window.address + 'sendDripp',
-						                data: {groupsDict: JSON.stringify(selGroupsDict), fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId},
+						                data: {groupsDict: JSON.stringify(selGroupsDict), fromUserId: window.myID, recipientGroup: window.selGroups, recipientFriendIds: window.drippsIds, articleId: window.articleSendId, content: content},
 						                type:'get'
 						            });
 									$(".showForm").attr("class", "showForm hide");

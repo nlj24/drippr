@@ -1,3 +1,7 @@
+#scrollhide {
+  overflow: hidden;
+}
+
 .floatRight {
     font-size: 22px;
     float: right;
@@ -23,7 +27,8 @@
     border-radius: 10px;
     display: inline-block;
     padding: 5px;
-    height: 100px;
+    height: 70px;
+    overflow-y: scroll; 
 }
 
 #sendBtn {
@@ -101,4 +106,12 @@
 .opinionButtons {
   height: 55px;
   width: 70px;
+}
+
+#messageInput3 {
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+  height: 70px;
+  border-radius: 5px;
 }

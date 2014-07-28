@@ -277,7 +277,7 @@ body {
   float: right;
 }
 
-#download {
+.download {
   float: right;
   font-size: 15px;
   background-color: #6D6E70;
@@ -288,6 +288,11 @@ body {
   line-height: 22px;
   margin-top: 10px;
   border-radius: 2px;
+}
+
+#leftPad0 {
+  padding-left: 0px;
+  padding-right: 20px;
 }
 
 .fb-login-button {
@@ -405,7 +410,9 @@ body {
 }
 
 #chromeLogoStyle {
-  max-height: 90%;
+  max-height: 18px;
+  max-width: 18px;
+  padding-bottom: 2px;
 }
 
 .noPadRight {
@@ -430,7 +437,6 @@ body {
 
 .fbac-suggestion-list {
   width: 444px !important;
-  margin-left: 78px;
 }
 
 .buttonDrip{
@@ -662,6 +668,15 @@ body {
   border-radius: 5px;
 }
 
+#messageInput2 {
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+  max-height: 70px;
+  border-radius: 5px;
+}
+
 #convoDiv {
   padding-left: 15px;
   padding-right: 15px;
@@ -696,10 +711,15 @@ body {
   max-width: 35px;
   max-height: 35px;
   display: inline-block;
+  vertical-align: super !important;
 }
 
 .messageItemSender {
   display: inline-block;
+  width: 35%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .messageItemTime {
@@ -855,7 +875,6 @@ body {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
-  width: 100px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
@@ -868,7 +887,6 @@ body {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
-  width: 100px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
@@ -881,7 +899,6 @@ body {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
-  width: 100px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
@@ -894,7 +911,6 @@ body {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
-  width: 100px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
@@ -907,7 +923,6 @@ body {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
-  width: 100px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
