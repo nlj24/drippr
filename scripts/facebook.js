@@ -93,12 +93,14 @@ $(document).keydown(function(e){
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
+	    		console.log(response2);
 	      		if (response2 && !response2.error) {
 	      			var my_friends = response2.data;
 					// Here we specify what we do with the response anytime this event occurs. 
 					if (response.status === 'connected') {
 			
 						FB.api('/me', function(response) {
+							console.log(response);
 							window.myName = response['name'];
 							$("#user").html("<p id = 'centerWel'>Welcome, " + response.first_name + "!</p> <img class = 'fbPics2' src = http://graph.facebook.com/" + window.myID + "/picture?width=400&height=400>");
 				    	    $.ajax({
