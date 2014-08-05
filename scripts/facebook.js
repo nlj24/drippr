@@ -90,6 +90,14 @@ $(document).keydown(function(e){
 		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
 		$("#drippsHeader").attr("class", "col-xs-5 headingPad");
+		FB.api({ method: 'fql.query', query: 'SELECT user_status,friends_status,user_photos,friends_photos,user_location,friends_location FROM permissions WHERE uid=me()' }, function(resp) {   
+for(var key in resp[0]) {   
+    if(resp[0][key] === "1")   
+        console.log(key+' is granted');   
+    else   
+        console.log(key+' is not granted');   
+}   
+});
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
