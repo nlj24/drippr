@@ -682,6 +682,7 @@ $(document).keydown(function(e){
 
 			            
 					} else if (response.status === 'not_authorized') {
+						console.log('not');
 						// In this case, the person is logged into Facebook, but not into the app, so we call
 						// FB.login() to prompt them to do so. 
 						// In real-life usage, you wouldn't want to immediately prompt someone to login 
@@ -692,6 +693,7 @@ $(document).keydown(function(e){
 						FB.login(function(response) {
  						}, {scope: 'email'}); 
 					} else {
+						console.log("diff");
 						// In this case, the person is not logged into Facebook, so we call the login() 
 						// function to prompt them to do so. Note that at this stage there is no indication
 						// of whether they are logged into the app. If they aren't then they'll see the Login
