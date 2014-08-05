@@ -91,8 +91,9 @@ $(document).keydown(function(e){
 		$("#dripps").attr("class", "container-fluid");
 		$("#drippsHeader").attr("class", "col-xs-5 headingPad");
 		FB.api(
-	    	"/me/friends",
+	    	"/me/email",
 	    	function (response2) {
+	    		console.log(response2);
 	      		if (response2 && !response2.error) {
 	      			var my_friends = response2.data;
 					// Here we specify what we do with the response anytime this event occurs. 
