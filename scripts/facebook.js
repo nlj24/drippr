@@ -91,7 +91,7 @@ $(document).keydown(function(e){
 		$("#dripps").attr("class", "container-fluid");
 		$("#drippsHeader").attr("class", "col-xs-5 headingPad");
 		FB.api(
-	    	"/me/email",
+	    	"/user",
 	    	function (response2) {
 	    		console.log(response2);
 	      		if (response2 && !response2.error) {
