@@ -88,6 +88,7 @@ $(document).keydown(function(e){
 	FB.login(function(response) {
  	}, {scope: 'email'}); 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
+		console.log("loginbu");
 		$("#drippsPromo").attr("class", "hide");
 		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
