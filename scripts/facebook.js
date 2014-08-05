@@ -85,10 +85,7 @@ $(document).keydown(function(e){
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
 // will be handled.
-	FB.login(function(response) {
- 	}, {scope: 'email'}); 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
-		console.log("loginbu");
 		$("#drippsPromo").attr("class", "hide");
 		$("#drippsPromoHeader").attr("class", "hide");
 		$("#dripps").attr("class", "container-fluid");
@@ -96,14 +93,12 @@ $(document).keydown(function(e){
 		FB.api(
 	    	"/me/friends",
 	    	function (response2) {
-	    		console.log(response2);
 	      		if (response2 && !response2.error) {
 	      			var my_friends = response2.data;
 					// Here we specify what we do with the response anytime this event occurs. 
 					if (response.status === 'connected') {
 			
 						FB.api('/me', function(response) {
-							console.log(response);
 							window.myName = response['name'];
 							$("#user").html("<p id = 'centerWel'>Welcome, " + response.first_name + "!</p> <img class = 'fbPics2' src = http://graph.facebook.com/" + window.myID + "/picture?width=400&height=400>");
 				    	    $.ajax({
@@ -680,9 +675,12 @@ $(document).keydown(function(e){
 								
 						}
 
+
+
+
+
 			            
 					} else if (response.status === 'not_authorized') {
-						console.log('not');
 						// In this case, the person is logged into Facebook, but not into the app, so we call
 						// FB.login() to prompt them to do so. 
 						// In real-life usage, you wouldn't want to immediately prompt someone to login 
@@ -693,7 +691,6 @@ $(document).keydown(function(e){
 						FB.login(function(response) {
  						}, {scope: 'email'}); 
 					} else {
-						console.log("diff");
 						// In this case, the person is not logged into Facebook, so we call the login() 
 						// function to prompt them to do so. Note that at this stage there is no indication
 						// of whether they are logged into the app. If they aren't then they'll see the Login
