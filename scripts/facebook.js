@@ -99,6 +99,7 @@ $(document).keydown(function(e){
 					if (response.status === 'connected') {
 			
 						FB.api('/me', function(response) {
+							console.log(response);
 							window.myName = response['name'];
 							$("#user").html("<p id = 'centerWel'>Welcome, " + response.first_name + "!</p> <img class = 'fbPics2' src = http://graph.facebook.com/" + window.myID + "/picture?width=400&height=400>");
 				    	    $.ajax({
