@@ -84,7 +84,10 @@ $(document).keydown(function(e){
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 // for any authentication related change, such as login, logout or session refresh. This means that
 // whenever someone who was previously logged out tries to log in again, the correct case below 
-// will be handled. 
+// will be handled.
+	FB.login(function(response) {
+   // handle the response
+ }, {scope: 'email'}); 
 	window.FB.Event.subscribe('auth.authResponseChange', function(response) {
 		$("#drippsPromo").attr("class", "hide");
 		$("#drippsPromoHeader").attr("class", "hide");
